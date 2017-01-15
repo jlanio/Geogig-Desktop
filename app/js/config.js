@@ -1,5 +1,5 @@
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
-    $urlRouterProvider.otherwise("/repo/local" /*"/login_two_columns"*/);
+    $urlRouterProvider.otherwise("/repo/local");
 
     $ocLazyLoadProvider.config({
         debug: true

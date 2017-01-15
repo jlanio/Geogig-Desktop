@@ -1,0 +1,51 @@
+
+<div class="wrapper wrapper-content">
+<toaster-container></toaster-container>
+    <div class="row animated fadeInRight">
+        <div class="col-lg-12">
+                <div  id="ibox-content">
+                    <div id="vertical-timeline" class="vertical-container light-timeline" ng-init="load">
+                        <div  ng-repeat="x in load" class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon navy-bg">
+                                <i class="fa fa-briefcase"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>{{x.author.name}}</h2>
+                                <p>{{x.message}} </p>
+                                <a href="#" class="btn btn-sm btn-primary"> saber mais</a>
+                                    <span class="vertical-date">
+                                        {{x.author.email}}<br/>
+                                        <small>ID:{{x.id}}</small>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Local script for demo purpose only
+    $(document).ready(function(){
+        $('#lightVersion').click(function(event) {
+            event.preventDefault()
+            $('#ibox-content').removeClass('ibox-content');
+            $('#vertical-timeline').removeClass('dark-timeline');
+            $('#vertical-timeline').addClass('light-timeline');
+        });
+        $('#darkVersion').click(function(event) {
+            event.preventDefault()
+            $('#ibox-content').addClass('ibox-content');
+            $('#vertical-timeline').removeClass('light-timeline');
+            $('#vertical-timeline').addClass('dark-timeline');
+        });
+        $('#leftVersion').click(function(event) {
+            event.preventDefault()
+            $('#vertical-timeline').toggleClass('center-orientation');
+        });
+    });
+</script>

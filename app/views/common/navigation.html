@@ -1,0 +1,42 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul side-navigation class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="profile-element" uib-dropdown>
+                <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
+                    <!-- <a uib-dropdown-toggle href>
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">{{DataJson().email}}</strong>
+                             </span>
+                                <span class="text-muted text-xs block"><b class="caret"></b>
+                                {{DataJson().roles[0].description}}
+                                </span>
+                            </span>
+                    </a>
+                    <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
+                        <li><a ui-sref="app.profile">Perfil</a></li>
+                        <li><a ui-sref="app.contacts">Contato</a></li>
+                        <li><a ui-sref="mailbox.inbox">Caixa de Mensagem</a></li>
+                        <li class="divider"></li>
+                        <li><a ui-sref="login">Sair</a></li>
+                    </ul> -->
+                </div>
+                <div class="logo-element">
+                    <h3>Geogig</h3>
+                    <h5>Desktop</h5>
+                    <br>
+                </div>
+
+            </li>
+
+            <li ui-sref-active="active">
+                <a ui-sref="repo.local"><i class="fa fa-hdd-o"></i> <span class="nav-label">Repositorio Local</span> </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="repo.remoto"><i class="fa  fa-cloud"></i> <span class="nav-label">Repositorio Remoto</span></a>
+            </li>
+        </ul>
+
+    </div>
+</nav>

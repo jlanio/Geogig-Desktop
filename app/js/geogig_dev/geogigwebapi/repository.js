@@ -13,6 +13,9 @@ function generateBat (command,callback){
 });*/
 
 function repo (utils, $http){
+  var repositoryDir = function(){
+    return utils.setLocaldir();
+  }
   var setLocalRepository = function(_Name){
     return utils.setLocalFile(_Name);
   }
@@ -33,6 +36,7 @@ function repo (utils, $http){
           });
   };
   var _cmdCommit = function (_Name, commit, ressult) {
+    console.log(setLocalRepository(_Name), commit);
       return generateBat(['--repo', setLocalRepository(_Name), 'commit', '-m', commit],function(error, stdout, stderr){
         ressult(stdout);
       });
@@ -48,6 +52,31 @@ function repo (utils, $http){
         ressult(data);
      })
   };
+  var _pull = function(_Name, ressult){
+    generateBat(['--repo',repositoryDir()+_Name, 'pull'],(error, stdout, stderr)=>{
+      console.log(repositoryDir()+_Name);
+      ressult(error, stdout, stderr);
+    })
+  }
+   var _push = function(_Name, ressult){
+    console.log(repositoryDir()+_Name);
+    generateBat(['--repo',repositoryDir()+_Name, 'push'],(error, stdout, stderr)=>{
+      console.log(repositoryDir()+_Name);
+      ressult(error, stdout, stderr);
+    })
+  }
+  var _ls_tree = function (_Name,ressult){
+    $http.get("http://localhost:8080/geoserver/geogig/repos/"+_Name+"/ls-tree.json").success(function(data){
+      ressult(data);
+    }).error(function(data){
+      ressult(data);
+    })
+  }
+  var _shp_export = function (_Name, camada,localSave, ressult){
+    generateBat(['--repo',repositoryDir()+_Name,'shp','export',camada.nome,localSave+'\\'+camada.nome+'.shp'],(error, stdout, stderr)=>{
+      ressult(error, stdout, stderr);
+    })
+  }
 
 
   return {
@@ -56,7 +85,11 @@ function repo (utils, $http){
     add : _add,
     clone : _clone,
     commit : _cmdCommit,
-    log: _log
+    log: _log,
+    pull : _pull,
+    push : _push,
+    ls : _ls_tree,
+    shp_export : _shp_export
   };
 
 };

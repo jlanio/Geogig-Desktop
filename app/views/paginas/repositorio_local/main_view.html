@@ -4,16 +4,17 @@
         <div class="col-lg-12 animated fadeInRight">
             <div class="mail-box-header">
                 <div class="pull-right tooltip-demo"  ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'local'">
-                    <button class="btn btn-primary " type="button"><i class="fa fa-cloud-upload"></i>
+                    <button class="btn btn-primary " type="button" ng-click="publicarRepo()">
+                    <i class="fa fa-cloud-upload"></i>
                     publicar
                     </button>
                 </div>
-                <div class="pull-right tooltip-demo"  >
+                <div class="pull-right tooltip-demo" ng-controller="repositorio_remoto" >
                    <!--  <a ui-sref="repo.local" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Reply"><i class="fa fa-reply"></i> Voltar</a> -->
 
-                    <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Baixar ultima versão" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'"><i class="fa fa-cloud-download"> Pull</i> </a>
+                    <a ng-click="pull()" href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Baixar ultima versão" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'"><i class="fa fa-cloud-download"> Pull</i> </a>
 
-                    <a ui-sref="repo.email_compose" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Enviar suas alterações" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'"><i class="fa fa-cloud-upload"> Push</i> </a>
+                    <a ng-click="push()"  class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Enviar suas alterações" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'"><i class="fa fa-cloud-upload"> Push</i> </a>
 
                     <!-- <a ui-sref="repo.issue" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Questões"><i class="fa fa fa-comment-o" > Issue track</i> </a> -->
                 </div>
@@ -58,8 +59,8 @@
                             </div>
 
                         </div>
-                        <div class="file-box"  ng-repeat=" shp in mydb.infoRepositorios.local[currentRepoId()].arquivos ">
-                            <div class="file">
+                        <div class="file-box"  ng-repeat="(key, value) in mydb.infoRepositorios.local[currentRepoId()].arquivos ">
+                            <div class="file" ng-controller= "repositorio_remoto" ng-click="baixar_shp(mydb.infoRepositorios.local[currentRepoId()].nome, value, key)">
                                 <a href="">
                                     <span class="corner"></span>
 
@@ -67,9 +68,9 @@
                                         <i class="fa fa-file-archive-o"></i>
                                     </div>
                                     <div class="file-name">
-                                        {{shp.nome}}
+                                        <small>{{value.nome}}</small>
                                         <br/>
-                                        <small>adicioado em: Jan 6, 2014</small>
+                                        <small>{{value.localDir}}</small>
                                     </div>
                                 </a>
 
@@ -79,7 +80,7 @@
                     </div>
                 </div>
                 <div class="mail-body text-right tooltip-demo">
-                    <a ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remoto'"  ng-click= "log()" title="" data-placement="top" data-toggle="tooltip"  data-original-title="Print" class="btn btn-sm btn-white">
+                    <a ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'"  ng-click= "log()" title="" data-placement="top" data-toggle="tooltip"  data-original-title="Print" class="btn btn-sm btn-white">
                         <i class="fa fa-tencent-weibo"></i> Ultimas Atividades </a>
 
                          <button title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="analisar()"><i class="fa fa-exchange"></i> <strong>Analisar<strong></strong></button>

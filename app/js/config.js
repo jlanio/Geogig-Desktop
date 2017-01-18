@@ -33,39 +33,39 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('repo.local', {
         url: "/local",
         templateUrl: "views/paginas/repositorio_local/main.html",
-        data: { pageTitle: 'Mail Inbox' }
+        data: { pageTitle: 'Repositório Local' }
     })
     .state('repo.view', {
         url: "/view",
         templateUrl: "views/paginas/repositorio_local/main_view.html",
-        data: { pageTitle: 'Mail detail' }
+        data: { pageTitle: 'Repositório View' }
 
     })
     .state('repo.historico', {
         url: "/historico",
         templateUrl: "views/paginas/timeline.html",
-        data: { pageTitle: 'Mail detail' }
+        data: { pageTitle: 'Repositório Historico' }
     })
     .state('repo.issue', {
         url: "/issue",
         templateUrl: "views/paginas/issue_tracker.html",
-        data: { pageTitle: 'Mail detail' },
+        data: { pageTitle: 'Repositório Issue' },
 
     })
     .state('repo.remoto', {
         url: "/remoto",
         templateUrl: "views/paginas/repositorio_remoto/main.html",
-        data: { pageTitle: 'Mail Inbox' }
+        data: { pageTitle: 'Servidor Remoto' }
     })
     .state('repo.view_remoto', {
         url: "/view_remoto",
         templateUrl: "views/paginas/repositorio_remoto/main_repositorios.html",
-        data: { pageTitle: 'Mail Inbox' }
+        data: { pageTitle: 'Repositório Remoto' }
     })
     .state('repo.remoto_repo', {
         url: "/remoto_repo",
         templateUrl: "views/paginas/repositorio_remoto/main_repositorio_view.html",
-        data: { pageTitle: 'Mail Inbox' }
+        data: { pageTitle: 'Repositório Remoto View' }
     })
 }
 angular

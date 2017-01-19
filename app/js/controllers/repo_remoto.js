@@ -37,6 +37,7 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 					"href":data.repos.repo[x].href
 				});
 				db.set(b);
+				$scope.cancel();
 			}
 		}).error(function(){
 			toaster.pop({
@@ -46,7 +47,7 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 				showCloseButton: true
 			});
 		});
-	}
+	} 
 	$scope.log = function (){
 		repo.log($scope.currentRepoData().remote,function(data){
 			$location.path('/repo/historico');
@@ -54,9 +55,20 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 		});
 	}
 	var Openlog = function(){
-		return angular.fromJson(window.localStorage['commit']).response.commit
+		if(typeof angular.fromJson(window.localStorage['commit']).response.commit[1] === 'undefined'){
+			const umCommit = angular.fromJson(window.localStorage['commit']).response.commit;
+			const a = [];
+			a.push(umCommit)
+			console.log(a);
+			return a;
+		}else{
+			return angular.fromJson(window.localStorage['commit']).response.commit;
+		}
+		
+
 	}
 	$scope.load = Openlog();
+
 	$scope.push = function(){
 		repo.push($scope.currentRepoData().nome,(error, stdout, stderr)=>{
 			console.log(error, stdout, stderr);
@@ -109,7 +121,7 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 				}
 				ressult(df)
 			}else{
-				ressult({"nome": data.response.node.path,"localDir":""})
+				ressult([{"nome": data.response.node.path,"localDir":""}])
 			}
 
 		});

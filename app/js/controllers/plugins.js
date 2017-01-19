@@ -157,10 +157,12 @@ function ModalInstanceCtrl ($scope, $uibModalInstance) {
 
     $scope.ok = function () {
         $uibModalInstance.close();
+        console.log("modal_OK");
     };
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
+        console.log("modal_cancel");
     };
 
 };

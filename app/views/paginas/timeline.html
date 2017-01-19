@@ -1,7 +1,7 @@
 
 <div class="wrapper wrapper-content">
 <toaster-container></toaster-container>
-    <div class="row animated fadeInRight">
+    <div class="row animated fadeInRight" ng-controller="repositorio_remoto">
         <div class="col-lg-12">
                 <div  id="ibox-content">
                     <div id="vertical-timeline" class="vertical-container light-timeline" ng-init="load">
@@ -13,7 +13,7 @@
                             <div class="vertical-timeline-content">
                                 <h2>{{x.author.name}}</h2>
                                 <p>{{x.message}} </p>
-                                <a href="#" class="btn btn-sm btn-primary"> saber mais</a>
+                                <a href="#" class="btn btn-sm btn-primary">ações></a>
                                     <span class="vertical-date">
                                         {{x.author.email}}<br/>
                                         <small>ID:{{x.id}}</small>

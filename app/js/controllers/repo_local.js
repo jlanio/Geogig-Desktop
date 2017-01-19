@@ -10,7 +10,7 @@ function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
 		return db.OpenItem('repoLocalAtivo'); 
 	};
 	$scope.currentRepoData = function() {
-		return $scope.mydb.infoRepositorios.local[$scope.currentRepoId()]; 
+		return $scope.mydb.infoRepositorios.local[$scope.currentRepoId()];
 	};
 	/*INI END*/
 	function NewRepoCrl (inputValue){
@@ -35,6 +35,18 @@ function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
 			});
 		}
 	}
+	function NewCommitRemote(inputValue){
+		if (inputValue === false) return false;
+
+		if (inputValue === "") {
+			swal.showInputError("Vai com calma, o campo esta vazio!");
+			return false
+		}else{     
+			repo.commitRemoto($scope.currentRepoData().nome, inputValue,function(data){
+				swal("", data +" ", "success"); 
+			});
+		}
+	};
 	function NewCommitCtrl(inputValue){
 		if (inputValue === false) return false;
 
@@ -81,6 +93,16 @@ function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
 			NewCommitCtrl
 			)
 	};
+	
+	$scope.NewCommitRemote = function(){
+		alert.open(
+			"Novo Commit",
+			"Blz! Agora adicione um comentario:",
+			"input",
+			"...",
+			NewCommitRemote
+			)
+	};
 
 	$scope.NewShp = function(localShp){
 		alert.open(
@@ -117,10 +139,30 @@ function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
 			swal("", stdout +" ");
 		});
 	};
+	$scope.addRemoto = function (){
+		console.log("Acionado "+$scope.currentRepoData().nome);
+		repo.addRemoto($scope.currentRepoData().nome, function(code, stdout, stderr){
+			swal("", stdout +" ");
+		});
+	};
 	$scope.analisar = function(){
 		var shapefile = $scope.currentRepoData().arquivos;
 		for (cada in shapefile){
 			repo.shpImport(
+				$scope.currentRepoData().nome,
+				$scope.currentRepoData().arquivos[cada].localDir,
+				function(code, stdout, stderr){
+					console.log("code:"+code, "strdout: "+stdout, "stderr: "+stderr);
+					swal("", code +"");
+				}
+				)
+			console.log($scope.currentRepoData().arquivos[cada].localDir);
+		}
+	}
+	$scope.analisar_ = function(){
+		var shapefile = $scope.currentRepoData().arquivos;
+		for (cada in shapefile){
+			repo.shpImportRemote(
 				$scope.currentRepoData().nome,
 				$scope.currentRepoData().arquivos[cada].localDir,
 				function(code, stdout, stderr){
@@ -145,10 +187,19 @@ function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
 	$scope.deleteRepo = function(){
 		console.log("PARA DELETAR: ",$scope.arrayCheked );
 	}
-	$scope.publicarRepo = function (){
+	$scope.publicarRepo = function (id){
+		repo.initRemote($scope.currentRepoData().nome, (data,url)=>{
+			if (data.response.error){
+				console.log("ERROR");
+			}else{
+				console.log("publicado com sucesso");
+				const tmp = db.open();
+				tmp.infoRepositorios.local[id].remote = url;
+				db.set(tmp);
 
+			}
+		});
 	}
-
 
 
 }

@@ -8,36 +8,68 @@ function generateBat (command,callback){
       callback(error,stdout, stderr)
     })
 }
-/*generateBat(['--repo', '/Users/jlanio/Desktop/electron-quick-start-master/app/tmp/local/mkoasdasot', 'init'], function(error, stdout, stderr){
-  console.log(error, stdout, stderr)
-});*/
 
 function repo (utils, $http){
-  var repositoryDir = function(){
-    return utils.setLocaldir();
+  var remoteDir = function(_Name){
+    return utils.setRemote(_Name);
   }
-  var setLocalRepository = function(_Name){
-    return utils.setLocalFile(_Name);
+  var localDir = function(_Name){
+    return utils.setLocal(_Name);
   }
 
+
   var _init = function (_Name, ressult) {
-    generateBat(['--repo', setLocalRepository(_Name),'init'],(error, stdout, stderr)=>{
+    generateBat(['--repo', localDir(_Name),'init'],(error, stdout, stderr)=>{
       ressult(error, stdout, stderr);
     })
   };
-    var _shpImport = function (_Name, localShp, ressult) {
-      generateBat(['--repo', setLocalRepository(_Name), 'shp', 'import', localShp], function(error, stdout, stderr){
-        ressult(stdout);
-      });
+  function addRemote (_Name, url_repo){
+  generateBat(['--repo', localDir(_Name), 'remote', 'add', 'origin',url_repo],(error, stdout, stderr)=>{
+    console.log(error, stdout, stderr);
+    console.log('--repo '+_Name+' remote add origin'+ url_repo+ 'adicionado com sucesso!');
+  })
+  }
+  var _initRemote = function (_Name, ressult) {
+    const toServer = "http://localhost:8080/geoserver/geogig/repos/"+_Name+"/init.json";
+    const config = {headers: {'content-type':'application/json'}};
+    $http.put(toServer,{},config).success(function(data){
+      const url1 = data.response.repo.href;
+      const url2 = url1.replace(".json","");
+      ressult(data,url2)
+      addRemote(_Name,url2)
+    }).error(function(data){
+      ressult(data)
+    })
+  };
+  var _shpImport = function (_Name, localShp, ressult) {
+    generateBat(['--repo', localDir(_Name), 'shp', 'import', localShp], function(error, stdout, stderr){
+      ressult(stdout);
+    });
+  };
+  var _shpImportRemote = function (_Name, localShp, ressult) {
+    console.log(remoteDir(_Name));
+    generateBat(['--repo', remoteDir(_Name), 'shp', 'import', localShp], function(error, stdout, stderr){
+      ressult(stdout);
+    });
   };
   var _add = function (_Name, ressult) {
-      generateBat(['--repo', setLocalRepository(_Name), 'add'], function(error, stdout, stderr){
+      generateBat(['--repo', localDir(_Name), 'add'], function(error, stdout, stderr){
             ressult(error, stdout, stderr)
           });
   };
+   var _addRemoto = function (_Name, ressult) {
+      console.log(remoteDir(_Name));
+      generateBat(['--repo', remoteDir(_Name), 'add'], function(error, stdout, stderr){
+            ressult(error, stdout, stderr)
+          });
+  };
+  var _commitRemoto = function (_Name, commit, ressult) {
+      return generateBat(['--repo', remoteDir(_Name), 'commit', '-m', commit],function(error, stdout, stderr){
+        ressult(stdout);
+      });
+  };
   var _cmdCommit = function (_Name, commit, ressult) {
-    console.log(setLocalRepository(_Name), commit);
-      return generateBat(['--repo', setLocalRepository(_Name), 'commit', '-m', commit],function(error, stdout, stderr){
+      return generateBat(['--repo', localDir(_Name), 'commit', '-m', commit],function(error, stdout, stderr){
         ressult(stdout);
       });
   };
@@ -53,15 +85,12 @@ function repo (utils, $http){
      })
   };
   var _pull = function(_Name, ressult){
-    generateBat(['--repo',repositoryDir()+_Name, 'pull'],(error, stdout, stderr)=>{
-      console.log(repositoryDir()+_Name);
+    generateBat(['--repo',remoteDir(_Name), 'pull'],(error, stdout, stderr)=>{
       ressult(error, stdout, stderr);
     })
   }
    var _push = function(_Name, ressult){
-    console.log(repositoryDir()+_Name);
-    generateBat(['--repo',repositoryDir()+_Name, 'push'],(error, stdout, stderr)=>{
-      console.log(repositoryDir()+_Name);
+    generateBat(['--repo',remoteDir(_Name), 'push'],(error, stdout, stderr)=>{
       ressult(error, stdout, stderr);
     })
   }
@@ -73,7 +102,7 @@ function repo (utils, $http){
     })
   }
   var _shp_export = function (_Name, camada,localSave, ressult){
-    generateBat(['--repo',repositoryDir()+_Name,'shp','export',camada.nome,localSave+'\\'+camada.nome+'.shp'],(error, stdout, stderr)=>{
+    generateBat(['--repo',remoteDir(_Name),'shp','export',camada.nome,localSave+'\\'+camada.nome+'.shp'],(error, stdout, stderr)=>{
       ressult(error, stdout, stderr);
     })
   }
@@ -81,10 +110,14 @@ function repo (utils, $http){
 
   return {
     init: _init,
+    initRemote : _initRemote,
     shpImport: _shpImport,
+    shpImportRemote : _shpImportRemote,
     add : _add,
+    addRemoto : _addRemoto,
     clone : _clone,
     commit : _cmdCommit,
+    commitRemoto :_commitRemoto,
     log: _log,
     pull : _pull,
     push : _push,
@@ -119,7 +152,7 @@ var request = require("request");
 function repo (_Name) {
 	var name = _Name;
 	var setLocalDir = utils.setLocaldir(); //Retorna o caminho da pasta raiz que contem os repositorios.
-	var setLocalRepository = utils.setLocalFile(_Name); // Retorna o caminho da pasta raiz com o nome do Repositorio.
+	var localDir = utils.setLocalFile(_Name); // Retorna o caminho da pasta raiz com o nome do Repositorio.
 	var localServe = 'http://localhost:8182/repos/'+ _Name;
 
 

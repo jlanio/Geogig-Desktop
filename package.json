@@ -18,5 +18,10 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^1.4.1"
+  },
+  "dependencies": {
+    "pouchdb": "^6.1.1",
+    "pouchdb-auth": "^2.1.1",
+    "pouchdb-authentication": "^0.5.5"
   }
 }

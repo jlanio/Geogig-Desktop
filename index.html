@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<script type="text/javascript">
+    var PouchDB = require("pouchdb");
+var Auth = require('pouchdb-auth')
+PouchDB.plugin(Auth)
+
+var db = new PouchDB('_users')
+
+db.hashAdminPasswords({ 'admin': 'secret' }
+.then(function (hashed) {
+  // hashed.admin now looks like '-pbkdf2-243ba92f8f575c70d3d607b408…21731411301c11cb1d81481f51d1108,10'
+})
+</script>
+</body>
+</html>

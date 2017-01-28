@@ -73,7 +73,6 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 		repo.push($scope.currentRepoData().nome,(error, stdout, stderr)=>{
 			console.log(error, stdout, stderr);
 		})
-
 	}
 	$scope.pull = function(){
 		repo.pull($scope.currentRepoData().nome,(error, stdout, stderr)=>{

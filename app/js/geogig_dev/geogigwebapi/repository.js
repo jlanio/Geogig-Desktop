@@ -31,7 +31,7 @@ function repo (utils, $http){
   })
   }
   var _initRemote = function (_Name, ressult) {
-    const toServer = "http://35.184.10.167:8080/geoserver/geogig/repos/"+_Name+"/init.json";
+    const toServer = "http://35.184.15.202:8080/geoserver/geogig/repos/"+_Name+"/init.json";
     const config = {headers: {'content-type':'application/json'}};
     $http.put(toServer,{},config).success(function(data){
       const url1 = data.response.repo.href;
@@ -96,7 +96,7 @@ function repo (utils, $http){
     })
   }
   var _ls_tree = function (_Name,ressult){
-    $http.get("http://35.184.10.167:8080/geoserver/geogig/repos/"+_Name+"/ls-tree.json").success(function(data){
+    $http.get("http://35.184.15.202:8080/geoserver/geogig/repos/"+_Name+"/ls-tree.json").success(function(data){
       ressult(data);
     }).error(function(data){
       ressult(data);

@@ -1,5 +1,7 @@
-function repositorio_remoto($scope,db,$location,$http,repo){
+function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 
+	$scope.mydb = mydb;
+	console.log(mydb);
 	$scope.selectServeRemote = function(selectedFild){
 		db.SetItem('serveRemoteAtivo',selectedFild);
 		$location.path('/repo/view_remoto');
@@ -18,9 +20,10 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 	$scope.currentRepoRemoteId = function(){
 		return db.OpenItem('repoRemoteAtivo'); 
 	};
+	
 	$scope.addReporemoto = function (remoto) {
 		$http.get(remoto.url+"geoserver/geogig/repos.json").success(function(data){
-			const a  = db.open();
+			const a  = $scope.mydb;
 			a.infoRepositorios.remoto.push(
 			{
 				"nome":remoto.titulo,
@@ -28,7 +31,7 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 				"repos":[]
 			});
 			db.set(a);
-			const b = db.open();
+			const b = $scope.mydb;
 			for (x in data.repos.repo){
 				b.infoRepositorios.remoto[b.infoRepositorios.remoto.length - 1].repos.push(
 				{
@@ -39,6 +42,7 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 				db.set(b);
 				$scope.cancel();
 			}
+			console.log(data);
 		}).error(function(){
 			toaster.pop({
 				type: 'error',
@@ -67,7 +71,7 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 		
 
 	}
-	$scope.load = Openlog();
+	/*$scope.load = Openlog();*/
 
 	$scope.push = function(){
 		repo.push($scope.currentRepoData().nome,(error, stdout, stderr)=>{
@@ -82,7 +86,7 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 
 	$scope.clone = function(id, nome, url){
 		repo.clone(url, nome ,function(error, stdout, stderr){
-			var a = db.open();
+			var a = $scope.mydb;
 			a.infoRepositorios.local.push(
 			{
 				"nome":nome,
@@ -93,7 +97,7 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 			});
 
 			db.set(a);
-			var b = db.open();
+			var b = $scope.mydb;
 			swal("", stdout +"");
 			console.log(error, stdout, stderr);
 
@@ -137,7 +141,7 @@ function repositorio_remoto($scope,db,$location,$http,repo){
 	  		properties: [ 'openFile', 'openDirectory'] }, function (filename) {
 	    		var localSave = filename.toString();
 	    		shp_export(_Name, objeto, localSave)
-	    		const tmp = db.open();
+	    		const tmp = $scope.mydb;
 	    		tmp.infoRepositorios.local[$scope.currentRepoId()].arquivos[key].localDir = localSave+'\\'+objeto.nome+'.shp';
 	    		db.set(tmp);
 	  		}

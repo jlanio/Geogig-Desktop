@@ -10,8 +10,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         abstract: true,
         url: "/repo",
         templateUrl: "views/common/content.html",
-        controller: "repositorio",
         resolve: {
+            data:  function(db){
+                        return db.open().then(function (data) {
+                            return data;
+                        });
+            },
             loadPlugin: function ($ocLazyLoad) {
                 return $ocLazyLoad.load([
                 {
@@ -28,6 +32,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                 }
                 ]);
             }
+        },
+        controller: function(data){
+          mydb = data;
         }
     })
     .state('repo.local', {
@@ -71,6 +78,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
 angular
 .module('gitgeo')
 .config(config)
-.run(function($rootScope, $state) {
+.run(function($rootScope, $state, db) {
     $rootScope.$state = $state;
 });

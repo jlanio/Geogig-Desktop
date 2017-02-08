@@ -1,8 +1,12 @@
-function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
+function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	/*INIT*/
-	$scope.mydb = db.open();	
+	/*$scope.mydb = $scope.mydb;	*/
+	
+	$scope.mydb = mydb;
+	console.log(mydb.infoRepositorios);
 
 	$scope.selectRepo = function(selectedFild){
+		console.log(selectedFild)
 		db.SetItem('repoLocalAtivo',selectedFild);
 		return $location.path('/repo/view');
 	};
@@ -19,7 +23,7 @@ function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
 			swal.showInputError("Calma aê, o campo esta vazio!");
 			return false
 		}else{
-			const tmp  = db.open();
+			const tmp  = $scope.mydb;
 			tmp.infoRepositorios.local.push(
 			{
 				"nome":inputValue,
@@ -29,7 +33,6 @@ function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
 				"remote":""
 			});
 			db.set(tmp);
-			$scope.mydb = db.open();
 			repo.init(inputValue, function  (code, stdout, stderr){
 				swal("Muito bem!", stdout +" criado.", "success");
 			});
@@ -66,10 +69,10 @@ function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
 			swal.showInputError("Vai com calma, o campo esta vazio!");
 			return false
 		}else{
-			const tmp  = db.open();
+			const tmp  = $scope.mydb;
 			tmp.infoRepositorios.local[db.OpenItem('repoLocalAtivo')].arquivos.push({'nome':inputValue,'localDir':$scope.localShp});
 			db.set(tmp);
-			$scope.mydb = db.open();
+			$scope.mydb = $scope.mydb;
 			repo.shpImport($scope.currentRepoData().nome,$scope.localShp, function(data){
 				swal("Shapefile", inputValue +" importado com sucesso", "success");     
 			}); 
@@ -193,7 +196,7 @@ function repositorio($scope,$location,db,SweetAlert,repo,toaster,alert){
 				console.log("ERROR");
 			}else{
 				console.log("publicado com sucesso");
-				const tmp = db.open();
+				const tmp = $scope.mydb;
 				tmp.infoRepositorios.local[id].remote = url;
 				db.set(tmp);
 

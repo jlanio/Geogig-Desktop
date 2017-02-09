@@ -83,17 +83,15 @@
                     <a ng-controller="repositorio_remoto" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'"  ng-click= "log()" title="" data-placement="top" data-toggle="tooltip"  data-original-title="Print" class="btn btn-sm btn-white">
                         <i class="fa fa-tencent-weibo"></i> Ultimas Atividades </a>
 
-                         <button ng-hide="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'" title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="analisar()"><i class="fa fa-exchange"></i> <strong>Analisar<strong></strong></button>
-
-
-
-                        <button ng-hide="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'" title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="add()"><i class="fa fa-plus"></i> <strong>Add<strong></strong></button>
-
-                        <button ng-hide="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote' "title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="NewCommit()"><i class="fa fa-cubes"></i> <strong>Commit<strong></strong></button>
+                         <button ng-hide="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'" title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="analisar('local')"><i class="fa fa-exchange"></i> <strong>Analisar<strong></strong></button>
 
                          <button ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'" title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="analisar_()"><i class="fa fa-exchange"></i> <strong>Analisar_<strong></strong></button>
 
+                        <button ng-hide="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'" title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="add('local')"><i class="fa fa-plus"></i> <strong>Add<strong></strong></button>
+
                         <button ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'" title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="addRemoto()"><i class="fa fa-plus"></i> <strong>Add_<strong></strong></button>
+
+                        <button ng-hide="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote' "title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="NewCommit()"><i class="fa fa-cubes"></i> <strong>Commit<strong></strong></button>               
 
                         <button ng-show="mydb.infoRepositorios.local[currentRepoId()].origin == 'remote'" title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white" ng-click="NewCommitRemote()"><i class="fa fa-cubes"></i> <strong>Commit_<strong></strong></button>
                     </div>

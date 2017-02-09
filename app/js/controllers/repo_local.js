@@ -33,12 +33,12 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 				"remote":""
 			});
 			db.set(tmp);
-			repo.init(inputValue, function  (code, stdout, stderr){
+			repo.init(inputValue, 'local',function  (code, stdout, stderr){
 				swal("Muito bem!", stdout +" criado.", "success");
 			});
 		}
 	}
-	function NewCommitRemote(inputValue){
+/*	function NewCommitRemote(inputValue){
 		if (inputValue === false) return false;
 
 		if (inputValue === "") {
@@ -49,7 +49,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 				swal("", data +" ", "success"); 
 			});
 		}
-	};
+	};*/
 	function NewCommitCtrl(inputValue){
 		if (inputValue === false) return false;
 
@@ -57,7 +57,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			swal.showInputError("Vai com calma, o campo esta vazio!");
 			return false
 		}else{     
-			repo.commit($scope.currentRepoData().nome, inputValue,function(data){
+			repo.commit($scope.currentRepoData().nome, 'local', inputValue,function(data){
 				swal("", data +" ", "success"); 
 			});
 		}
@@ -73,7 +73,8 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			tmp.infoRepositorios.local[db.OpenItem('repoLocalAtivo')].arquivos.push({'nome':inputValue,'localDir':$scope.localShp});
 			db.set(tmp);
 			$scope.mydb = $scope.mydb;
-			repo.shpImport($scope.currentRepoData().nome,$scope.localShp, function(data){
+			console.log("currentRepoData "+$scope.currentRepoData().nome, $scope.type, $scope.localShp);
+			repo.shpImport($scope.currentRepoData().nome,'local', $scope.localShp, function(data){
 				swal("Shapefile", inputValue +" importado com sucesso", "success");     
 			}); 
 		}
@@ -87,7 +88,8 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			NewRepoCrl)
 	};
 
-	$scope.NewCommit = function(){
+	$scope.NewCommit = function(type){
+		$scope.type = type
 		alert.open(
 			"Novo Commit",
 			"Blz! Agora adicione um comentario:",
@@ -97,7 +99,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			)
 	};
 	
-	$scope.NewCommitRemote = function(){
+/*	$scope.NewCommitRemote = function(){
 		alert.open(
 			"Novo Commit",
 			"Blz! Agora adicione um comentario:",
@@ -105,7 +107,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			"...",
 			NewCommitRemote
 			)
-	};
+	};*/
 
 	$scope.NewShp = function(localShp){
 		alert.open(
@@ -137,22 +139,23 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 		})
 	};
 
-	$scope.add = function (){
-		repo.add($scope.currentRepoData().nome, function(code, stdout, stderr){
+	$scope.add = function (type){
+		repo.add($scope.currentRepoData().nome, type, function(code, stdout, stderr){
 			swal("", stdout +" ");
 		});
 	};
-	$scope.addRemoto = function (){
+/*	$scope.addRemoto = function (){
 		console.log("Acionado "+$scope.currentRepoData().nome);
 		repo.addRemoto($scope.currentRepoData().nome, function(code, stdout, stderr){
 			swal("", stdout +" ");
 		});
-	};
-	$scope.analisar = function(){
+	};*/
+	$scope.analisar = function(type){
 		var shapefile = $scope.currentRepoData().arquivos;
 		for (cada in shapefile){
 			repo.shpImport(
 				$scope.currentRepoData().nome,
+				type,
 				$scope.currentRepoData().arquivos[cada].localDir,
 				function(code, stdout, stderr){
 					console.log("code:"+code, "strdout: "+stdout, "stderr: "+stderr);
@@ -162,7 +165,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			console.log($scope.currentRepoData().arquivos[cada].localDir);
 		}
 	}
-	$scope.analisar_ = function(){
+	/*$scope.analisar_ = function(){
 		var shapefile = $scope.currentRepoData().arquivos;
 		for (cada in shapefile){
 			repo.shpImportRemote(
@@ -175,20 +178,21 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 				)
 			console.log($scope.currentRepoData().arquivos[cada].localDir);
 		}
-	}
+	}*/
 
-	$scope.arrayCheked = [];
+	arrayCheked = [];
+
 	$scope.checkbox = function(key){
-		var index = $scope.arrayCheked.indexOf(key);
+		var index = arrayCheked.indexOf(key);
 		if (index > -1){
-			$scope.arrayCheked.splice(index, 1);
+			arrayCheked.splice(index, 1);
 		}else{
-			$scope.arrayCheked.push(key);
+			arrayCheked.push(key);
 		}
 	};
 
 	$scope.deleteRepo = function(){
-		console.log("PARA DELETAR: ",$scope.arrayCheked );
+		console.log("PARA DELETAR: ",arrayCheked );
 	}
 	$scope.publicarRepo = function (id){
 		repo.initRemote($scope.currentRepoData().nome, (data,url)=>{

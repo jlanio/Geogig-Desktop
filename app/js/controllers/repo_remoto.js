@@ -71,16 +71,28 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		
 
 	}
-	/*$scope.load = Openlog();*/
+	$scope.load = Openlog();
 
 	$scope.push = function(){
-		repo.push($scope.currentRepoData().nome,(error, stdout, stderr)=>{
-			console.log(error, stdout, stderr);
+		repo.push($scope.currentRepoData().nome,'local',(error, stdout, stderr)=>{
+			console.log(stdout);
+			toaster.pop({
+				type: 'error',
+				title: 'Deu ruim!',
+				body: "Push",
+				showCloseButton: true
+			});
 		})
 	}
 	$scope.pull = function(){
-		repo.pull($scope.currentRepoData().nome,(error, stdout, stderr)=>{
-			console.log(error, stdout, stderr);
+		repo.pull($scope.currentRepoData().nome,'local',(error, stdout, stderr)=>{
+			console.log(stdout);
+			toaster.pop({
+				type: 'error',
+				title: 'Deu ruim!',
+				body: "pull" ,
+				showCloseButton: true
+			});
 		})	
 	}
 

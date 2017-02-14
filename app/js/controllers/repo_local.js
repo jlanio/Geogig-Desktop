@@ -1,10 +1,15 @@
 function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
-	/*INIT*/
-	/*$scope.mydb = $scope.mydb;	*/
-	
+	/*INIT*/	
 	$scope.mydb = mydb;
-	console.log(mydb.infoRepositorios);
-
+	repo.initLocal();
+	$scope.saveConfig = function(config){
+		let dir = config.geogig;
+		let dir_new = dir.replace(/\\/g,'/')+'/bin/geogig.bat';
+		db.SetItem('dir_geogig', dir_new);
+		db.SetItem('user_name', config.username);
+		db.SetItem('email', config.email);
+		repo.config(db.OpenItem('user_name'),db.OpenItem('email'));
+	}
 	$scope.selectRepo = function(selectedFild){
 		console.log(selectedFild)
 		db.SetItem('repoLocalAtivo',selectedFild);
@@ -38,18 +43,6 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			});
 		}
 	}
-/*	function NewCommitRemote(inputValue){
-		if (inputValue === false) return false;
-
-		if (inputValue === "") {
-			swal.showInputError("Vai com calma, o campo esta vazio!");
-			return false
-		}else{     
-			repo.commitRemoto($scope.currentRepoData().nome, inputValue,function(data){
-				swal("", data +" ", "success"); 
-			});
-		}
-	};*/
 	function NewCommitCtrl(inputValue){
 		if (inputValue === false) return false;
 
@@ -98,17 +91,6 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			NewCommitCtrl
 			)
 	};
-	
-/*	$scope.NewCommitRemote = function(){
-		alert.open(
-			"Novo Commit",
-			"Blz! Agora adicione um comentario:",
-			"input",
-			"...",
-			NewCommitRemote
-			)
-	};*/
-
 	$scope.NewShp = function(localShp){
 		alert.open(
 			"Novo Shapefile",
@@ -144,12 +126,6 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			swal("", stdout +" ");
 		});
 	};
-/*	$scope.addRemoto = function (){
-		console.log("Acionado "+$scope.currentRepoData().nome);
-		repo.addRemoto($scope.currentRepoData().nome, function(code, stdout, stderr){
-			swal("", stdout +" ");
-		});
-	};*/
 	$scope.analisar = function(type){
 		var shapefile = $scope.currentRepoData().arquivos;
 		for (cada in shapefile){
@@ -165,20 +141,6 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			console.log($scope.currentRepoData().arquivos[cada].localDir);
 		}
 	}
-	/*$scope.analisar_ = function(){
-		var shapefile = $scope.currentRepoData().arquivos;
-		for (cada in shapefile){
-			repo.shpImportRemote(
-				$scope.currentRepoData().nome,
-				$scope.currentRepoData().arquivos[cada].localDir,
-				function(code, stdout, stderr){
-					console.log("code:"+code, "strdout: "+stdout, "stderr: "+stderr);
-					swal("", code +"");
-				}
-				)
-			console.log($scope.currentRepoData().arquivos[cada].localDir);
-		}
-	}*/
 
 	arrayCheked = [];
 

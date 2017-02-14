@@ -2,7 +2,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     $urlRouterProvider.otherwise("/repo/local");
 
     $ocLazyLoadProvider.config({
-        debug: true
+        debug: false
     });
 
     $stateProvider
@@ -73,6 +73,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         url: "/remoto_repo",
         templateUrl: "views/paginas/repositorio_remoto/main_repositorio_view.html",
         data: { pageTitle: 'Repositório Remoto View' }
+    })
+    .state('repo.config', {
+        url: "/config_user",
+        templateUrl: "views/paginas/config.html",
+        data: { pageTitle: 'Página para Configuração' }
     })
 }
 angular

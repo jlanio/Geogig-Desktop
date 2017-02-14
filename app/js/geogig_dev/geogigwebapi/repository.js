@@ -1,5 +1,13 @@
 function repo (utils, $http){
 
+  function _config (name,email){
+    utils.geogig (['config', '--global','user.name',name],(error, stdout, stderr)=>{
+      utils.geogig (['config', '--global','user.email',email],(error, stdout, stderr)=>{
+          console.log(error, stdout, stderr);
+      })
+    })
+  }
+
   function addRemote (_Name, type, url_repo){
   utils.geogig(['--repo', utils.pwd(_Name, type), 'remote', 'add', 'origin',url_repo],(error, stdout, stderr)=>{
     console.log(error, stdout, stderr);
@@ -9,6 +17,12 @@ function repo (utils, $http){
     utils.geogig(['--repo', utils.pwd(_Name, type),'init'],(error, stdout, stderr)=>{
       ressult(error, stdout, stderr);
     })
+  };
+  var _initLocal = function () {
+    console.log(utils.pwd(undefined, 'local'));
+    utils.geogig(['serve','--multirepo'], {cwd: utils.pwd(undefined, 'local')}, function (error, stdout, stderr) {
+      console.log(error, stdout, stderr);
+    });
   };
   var _initRemote = function (_Name, ressult) {
     const toServer = "http://35.184.15.202:8080/geoserver/geogig/repos/"+_Name+"/init.json";
@@ -23,40 +37,23 @@ function repo (utils, $http){
       ressult(data)
     })
   };
+
   var _shpImport = function (_Name, type, localShp, ressult) {
     utils.geogig(['--repo', utils.pwd(_Name, type), 'shp', 'import', localShp], function(error, stdout, stderr){
       ressult(stdout);
     });
   };
-  /*var _shpImportRemote = function (_Name, localShp, ressult) {
-    console.log(utils.pwd(local));
-    geogig(['--repo', utils.pwd(local), 'shp', 'import', localShp], function(error, stdout, stderr){
-      ressult(stdout);
-    });
-  };*/
   var _add = function (_Name, type, ressult) {
       utils.geogig(['--repo', utils.pwd(_Name, type), 'add'], function(error, stdout, stderr){
             ressult(error, stdout, stderr)
           });
   };
-/*   var _addRemoto = function (_Name, type, ressult) {
-      console.log(utils.pwd(_Name, type));
-      geogig(['--repo', utils.pwd(_Name, type), 'add'], function(error, stdout, stderr){
-            ressult(error, stdout, stderr)
-          });
-  };*/
-
-/*  var _commitRemoto = function (_Name, commit, ressult) {
-      return geogig(['--repo', utils.pwd(local), 'commit', '-m', commit],function(error, stdout, stderr){
-        ressult(stdout);
-      });
-  };*/
   var _commit = function (_Name, type, commit, ressult) {
       utils.geogig(['--repo', utils.pwd(_Name, type), 'commit', '-m', commit],function(error, stdout, stderr){
         ressult(stdout);
       });
   };
-  var _clone = function (url, _Name, type, ressult) {
+  var _clone = function (url, _Name, ressult) {
       url2 = url.replace(".json","");
       utils.geogig(['clone', url2, 'app/tmp/remote/'+_Name], function(error, stdout, stderr){
         ressult(error, stdout, stderr)
@@ -77,14 +74,14 @@ function repo (utils, $http){
       ressult(error, stdout, stderr);
     })
   }
-  var _ls_tree = function (_Name, type,ressult){
+  var _ls_tree = function (_Name, ressult){
     $http.get("http://35.184.15.202:8080/geoserver/geogig/repos/"+_Name+"/ls-tree.json").success(function(data){
       ressult(data);
     }).error(function(data){
       ressult(data);
     })
   }
-  var _shp_export = function (_Name, type, camada,localSave, ressult){
+  var _shp_export = function (_Name, type, camada, localSave, ressult){
     utils.geogig(['--repo',utils.pwd(_Name, type),'shp','export',camada.nome,localSave+'\\'+camada.nome+'.shp'],(error, stdout, stderr)=>{
       ressult(error, stdout, stderr);
     })
@@ -92,6 +89,7 @@ function repo (utils, $http){
 
 
   return {
+    config : _config,
     init: _init,
     initRemote : _initRemote,
     shpImport: _shpImport,
@@ -102,7 +100,8 @@ function repo (utils, $http){
     pull : _pull,
     push : _push,
     ls : _ls_tree,
-    shp_export : _shp_export
+    shp_export : _shp_export,
+    initLocal: _initLocal
   };
 
 };

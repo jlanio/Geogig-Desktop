@@ -1,7 +1,6 @@
 function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 
 	$scope.mydb = mydb;
-	console.log(mydb);
 	$scope.selectServeRemote = function(selectedFild){
 		db.SetItem('serveRemoteAtivo',selectedFild);
 		$location.path('/repo/view_remoto');
@@ -142,8 +141,8 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		});
 
 	}
-	function shp_export(_Name, objeto, localSave){
-		repo.shp_export(_Name, objeto, localSave, function(error, stdout, stderr){
+	function shp_export(_Name, type, objeto, localSave){
+		repo.shp_export(_Name, type, objeto, localSave, function(error, stdout, stderr){
 			console.log(error, stdout, stderr);	
 		})
 	}
@@ -152,7 +151,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		dialog.showOpenDialog({ 
 	  		properties: [ 'openFile', 'openDirectory'] }, function (filename) {
 	    		var localSave = filename.toString();
-	    		shp_export(_Name, objeto, localSave)
+	    		shp_export(_Name, 'remoto',objeto, localSave)
 	    		const tmp = $scope.mydb;
 	    		tmp.infoRepositorios.local[$scope.currentRepoId()].arquivos[key].localDir = localSave+'\\'+objeto.nome+'.shp';
 	    		db.set(tmp);

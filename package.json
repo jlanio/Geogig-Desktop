@@ -19,5 +19,7 @@
   "devDependencies": {
     "electron": "^1.4.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "cloudant": "^1.7.1"
+  }
 }

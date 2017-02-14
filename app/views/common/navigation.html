@@ -3,24 +3,20 @@
         <ul side-navigation class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="profile-element" uib-dropdown>
-                <img alt="image" class="img-circle" src="img/profile_small.jpg"/>
-                    <!-- <a uib-dropdown-toggle href>
+                <!-- <img alt="image" class="img-circle" src="img/profile_small.png"/> -->
+                    <a uib-dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">{{DataJson().email}}</strong>
+                                    <strong class="font-bold">Opções:</strong>
                              </span>
                                 <span class="text-muted text-xs block"><b class="caret"></b>
-                                {{DataJson().roles[0].description}}
+                               Menus
                                 </span>
                             </span>
                     </a>
                     <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
-                        <li><a ui-sref="app.profile">Perfil</a></li>
-                        <li><a ui-sref="app.contacts">Contato</a></li>
-                        <li><a ui-sref="mailbox.inbox">Caixa de Mensagem</a></li>
-                        <li class="divider"></li>
-                        <li><a ui-sref="login">Sair</a></li>
-                    </ul> -->
+                        <li><a ui-sref="repo.config">Configuração</a></li>
+                    </ul>
                 </div>
                 <div class="logo-element">
                     <h3>Geogig</h3>

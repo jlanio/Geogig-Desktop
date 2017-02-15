@@ -1,17 +1,20 @@
 function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	/*INIT*/	
 	$scope.mydb = mydb;
-	repo.initLocal();
+	console.table($scope.mydb.infoRepositorios.local);
+	
+	if (db.OpenItem('SERVER')=='true'){
+		console.info('Servidor Local ja Iniciado')
+	}else{
+		db.SetItem('SERVER','true');
+		repo.initLocal();
+	}
 	$scope.saveConfig = function(config){
-		let dir = config.geogig;
-		let dir_new = dir.replace(/\\/g,'/')+'/bin/geogig.bat';
-		db.SetItem('dir_geogig', dir_new);
 		db.SetItem('user_name', config.username);
 		db.SetItem('email', config.email);
 		repo.config(db.OpenItem('user_name'),db.OpenItem('email'));
 	}
 	$scope.selectRepo = function(selectedFild){
-		console.log(selectedFild)
 		db.SetItem('repoLocalAtivo',selectedFild);
 		return $location.path('/repo/view');
 	};
@@ -50,7 +53,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			swal.showInputError("Vai com calma, o campo esta vazio!");
 			return false
 		}else{     
-			repo.commit($scope.currentRepoData().nome, 'local', inputValue,function(data){
+			repo.commit($scope.currentRepoData().nome, $scope.type, inputValue,function(data){
 				swal("", data +" ", "success"); 
 			});
 		}
@@ -66,7 +69,6 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			tmp.infoRepositorios.local[db.OpenItem('repoLocalAtivo')].arquivos.push({'nome':inputValue,'localDir':$scope.localShp});
 			db.set(tmp);
 			$scope.mydb = $scope.mydb;
-			console.log("currentRepoData "+$scope.currentRepoData().nome, $scope.type, $scope.localShp);
 			repo.shpImport($scope.currentRepoData().nome,'local', $scope.localShp, function(data){
 				swal("Shapefile", inputValue +" importado com sucesso", "success");     
 			}); 

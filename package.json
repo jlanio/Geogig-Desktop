@@ -20,6 +20,5 @@
     "electron": "^1.4.1"
   },
   "dependencies": {
-    "cloudant": "^1.7.1"
   }
 }

@@ -1,3 +1,3 @@
 node_modules
-app/tmp/local/
-app/tmp/remote/
+app/tmp/*
+app/geogig/*

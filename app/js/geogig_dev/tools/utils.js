@@ -1,11 +1,16 @@
 var path = require("path");
 var cmd = require('child_process').execFile;
 var rep_local = path.dirname(require.main.filename);
-
 function utils(db){
 	var _pwd = function (Nome, tipo) {
 		if (typeof Nome === 'undefined'){
-			return rep_local.slice(2).replace(/\\/g,'/')+'/tmp/local/'
+			if (tipo === 'local'){
+				return rep_local.slice(2).replace(/\\/g,'/')+'/tmp/local/'
+			}else if(tipo === 'remoto'){
+				return rep_local.slice(2).replace(/\\/g,'/')+'/tmp/remote/'
+			}		
+		}else if (typeof Nome === 'null'){
+			return rep_local.slice(2).replace(/\\/g,'/')+'/tmp/remote/'
 		}else{
 			if (tipo === 'local'){
 				return rep_local.slice(2).replace(/\\/g,'/')+'/tmp/local/'+Nome;
@@ -18,8 +23,8 @@ function utils(db){
 		}
 	}
 	var _generateBat = function (command,options,callback){
-	  cmd(
-	  	db.OpenItem('dir_geogig'), 
+	  return cmd(
+	  	rep_local.replace(/\\/g,'/')+'/geogig/bin/geogig.bat', 
 	    command,
 	    options,
 	    (error, stdout, stderr) => {

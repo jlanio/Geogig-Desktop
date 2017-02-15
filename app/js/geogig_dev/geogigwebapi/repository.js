@@ -1,3 +1,4 @@
+var fs = require('fs-extra');
 
 function repo (utils, $http){
   function _config (name,email){
@@ -32,7 +33,7 @@ function repo (utils, $http){
       const url2 = url1.replace(".json","");
       console.log(data,"URL: "+url2);
       ressult(data, url2);
-      addRemote(_Name, 'local',url2)
+      addRemote(_Name, 'remoto',url2)
     }).error(function(data){
       ressult(data)
     })
@@ -71,7 +72,8 @@ function repo (utils, $http){
     })
   }
    var _push = function(_Name, type, ressult){
-    utils.geogig(['--repo',utils.pwd(_Name, type), 'push'],(error, stdout, stderr)=>{
+    console.log(utils.pwd(_Name, type));
+    utils.geogig(['--repo', utils.pwd(_Name, type), 'push'],(error, stdout, stderr)=>{
       ressult(error, stdout, stderr);
     })
   }
@@ -89,6 +91,9 @@ function repo (utils, $http){
       ressult(error, stdout, stderr);
     })
   }
+  var _copy_to_folder = function(_Name){
+    fs.copy(utils.pwd(_Name, 'local'), utils.pwd(_Name, 'remoto'));
+  }
 
 
   return {
@@ -104,7 +109,8 @@ function repo (utils, $http){
     push : _push,
     ls : _ls_tree,
     shp_export : _shp_export,
-    initLocal: _initLocal
+    initLocal: _initLocal,
+    copy_to_folder: _copy_to_folder
   };
 
 };

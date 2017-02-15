@@ -116,7 +116,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 	$scope.load = Openlog();
 
 	$scope.push = function(type){
-		repo.push($scope.currentRepoData().nome,type,(error, stdout, stderr)=>{
+		repo.push($scope.currentRepoData().nome, type,(error, stdout, stderr)=>{
 			console.log(stdout);
 			toaster.pop({
 				type: 'error',
@@ -145,7 +145,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 				"nome":nome,
 				"arquivos":[],
 				"descricao":"",
-				"origin":"remote",
+				"origin":{"de":"remote","em":""},
 				"remote": url.replace(".json","")
 			});
 

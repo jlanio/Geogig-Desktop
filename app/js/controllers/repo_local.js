@@ -1,5 +1,6 @@
 function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
-	/*INIT*/	
+	/*INIT*/
+	
 	$scope.mydb = mydb;
 	console.table($scope.mydb.infoRepositorios.local);
 	
@@ -37,7 +38,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 				"nome":inputValue,
 				"arquivos":[],
 				"descricao":"",
-				"origin":"local",
+				"origin":{"de":"local","em":""},
 				"remote":""
 			});
 			db.set(tmp);
@@ -166,13 +167,13 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 				console.log("publicado com sucesso");
 				const tmp = $scope.mydb;
 				tmp.infoRepositorios.local[id].remote = url;
+				tmp.infoRepositorios.local[id].origin.de = 'remote'
 				db.set(tmp);
+				repo.copy_to_folder($scope.currentRepoData().nome);
 
 			}
 		});
 	}
-
-
 }
 angular
 .module('gitgeo')

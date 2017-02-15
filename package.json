@@ -20,5 +20,6 @@
     "electron": "^1.4.1"
   },
   "dependencies": {
+    "fs-extra": "^2.0.0"
   }
 }

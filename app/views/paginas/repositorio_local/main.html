@@ -42,8 +42,8 @@
                     ng-checked="arrayCheked.indexOf(key) > -1">
                 </td>
                 <td class="mail-ontact"><a ng-click="selectRepo(key)" >{{value.nome}}</a> 
-                    <span ng-show="value.origin == 'local'" class="label label-warning pull-right">{{value.origin}}</span>
-                    <span ng-show="value.origin != 'local'" class="label label-danger pull-right">{{value.origin}}</span>
+                    <span ng-show="value.origin.de == 'local'" class="label label-warning pull-right">{{value.origin.de}}</span>
+                    <span ng-show="value.origin.de != 'local'" class="label label-danger pull-right">{{value.origin.de}}</span>
                     </td>
                     <td class="mail-subject"><a ui-sref="repo.email_view">{{value.descricao}}</a></td>
                     <td  class="text-right mail-date"><a ng-hide="value.remote == ''" href=""><i class="fa fa-tag"></i> publicado</a></td>

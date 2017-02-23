@@ -27,6 +27,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                     files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
                 },
                 {
+                    files: ['js/plugins/leaflet/plugins/wkt_to_geojson/wicket.js', 'js/plugins/leaflet/plugins/wkt_to_geojson/wicket-leaflet.js']
+                },
+                {
                     name: 'oitozero.ngSweetAlert',
                     files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
                 }
@@ -47,11 +50,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         templateUrl: "views/paginas/repositorio_local/main_view.html",
         data: { pageTitle: 'Repositório View' }
 
-    })
-    .state('repo.historico', {
-        url: "/historico",
-        templateUrl: "views/paginas/timeline.html",
-        data: { pageTitle: 'Repositório Historico' }
     })
     .state('repo.issue', {
         url: "/issue",
@@ -78,6 +76,16 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         url: "/config_user",
         templateUrl: "views/paginas/config.html",
         data: { pageTitle: 'Página para Configuração' }
+    })
+    .state('repo.historico', {
+        url: "/historico",
+        templateUrl: "views/paginas/timeline.html",
+        data: { pageTitle: 'Repositório Historico' }
+    })
+    .state('repo.map', {
+        url: "/map",
+        templateUrl: "views/map.html",
+        data: { pageTitle: 'map' }
     })
 }
 angular

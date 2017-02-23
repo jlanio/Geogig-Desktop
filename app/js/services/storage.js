@@ -1,12 +1,11 @@
 
 function db($location){
-	var db = new PouchDB('db1');
-
-	var db_init = {"_id":"geogig","infoRepositorios":{"local":[],"remoto":[]}}
+	var db = new PouchDB('db');
+	/*var db_init = {"_id":"geogig","infoRepositorios":{"local":[],"remoto":[]}}*/
 	
-	/*new PouchDB('db5').destroy().then(function () {
+	new PouchDB('db7').destroy().then(function () {
 		}).catch(function (err) {
-	})*/
+	})
 
 	db.get('geogig').catch(function (err) {
 	  if (err.name === 'not_found') {

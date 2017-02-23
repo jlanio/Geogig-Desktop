@@ -88,13 +88,13 @@
                 </ul>
             </li> -->
             <li>
-                <a ui-sref="repo.local" >
+                <a ui-sref="repo.remoto" >
                     <!-- <i class="fa fa-sign-out" ></i> Sair -->
-                    <button  class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="" data-original-title="Refresh inbox"><i class="fa fa-refresh" ></i> Atualizar</button>
+                    <button  ng-controller="repositorio_remoto" ng-click="remoteAtualize()" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="" data-original-title="Refresh inbox"><i class="fa fa-refresh" ></i>Get remote info</button>
 
                     <!-- <button  ng-controller="repositorio"   ng-click="initServerLocal('init')" class="btn btn-w-m btn-info btn-sm" ><i class="fa fa-database" ></i> Iniciar Server Local</button> -->
 
-                    <button ng-controller="repositorio"  ng-click="teste()"  class="btn btn-white btn-sm" ><i class="fa fa-database" ></i>Desativar Servidor Local</button>
+                    <!-- <button ng-controller="repositorio"  ng-click="teste()"  class="btn btn-white btn-sm" ><i class="fa fa-database" ></i>Desativar Servidor Local</button> -->
                     
 
 

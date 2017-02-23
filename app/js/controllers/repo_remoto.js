@@ -1,5 +1,5 @@
 function repositorio_remoto($scope, db, $location, $http, repo, toaster){
-
+	
 	$scope.mydb = mydb;
 	$scope.selectServeRemote = function(selectedFild){
 		db.SetItem('serveRemoteAtivo',selectedFild);
@@ -16,77 +16,52 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		db.SetItem('repoRemoteAtivo',selectedFild);
 		return $location.path('/repo/remoto_repo');
 	};
-	$scope.currentRepoRemoteId = function(){
+	/*$scope.currentRepoRemoteId = function(){
 		return db.OpenItem('repoRemoteAtivo'); 
-	};
-	
+	};*/
+	getRepositorio_remote = function (data, z){
+		let b = $scope.mydb;
+		b.infoRepositorios.remoto[z].repos = [];
+		for (x in data.repos.repo){
+			b.infoRepositorios.remoto[z].repos.push(
+			{
+				"nome":data.repos.repo[x].name,
+				"id":data.repos.repo[x].id,
+				"href":data.repos.repo[x].href
+			});
+		}
+		db.set(b);
+	}
 	$scope.addReporemoto = function (remoto) {
-		console.log(remoto);
 		if (remoto.origin === 'rede_local'){
-			$http.get(remoto.url+"repos.json").success(function(data){
-			const a  = $scope.mydb;
-			a.infoRepositorios.remoto.push(
-			{
-				"nome":remoto.titulo,
-				"url":remoto.url,
-				"repos":[]
-			});
-			db.set(a);
-			const b = $scope.mydb;
-			for (x in data.repos.repo){
-				b.infoRepositorios.remoto[b.infoRepositorios.remoto.length - 1].repos.push(
-				{
-					"nome":data.repos.repo[x].name,
-					"id":data.repos.repo[x].id,
-					"href":data.repos.repo[x].href
-				});
-				db.set(b);
-				$scope.cancel();
-			}
-			console.log(data);
-			}).error(function(){
-				toaster.pop({
-					type: 'error',
-					title: 'Deu ruim!',
-					body: 'Servidor não encontrado ou URL inválida.',
-					showCloseButton: true
-				});
-			});
+			url = remoto.url+"repos.json";
 		}else if (remoto.origin === 'geoserver'){
-			$http.get(remoto.url+"geoserver/geogig/repos.json").success(function(data){
-			const a  = $scope.mydb;
-			a.infoRepositorios.remoto.push(
-			{
-				"nome":remoto.titulo,
-				"url":remoto.url,
-				"repos":[]
-			});
-			db.set(a);
-			const b = $scope.mydb;
-			for (x in data.repos.repo){
-				b.infoRepositorios.remoto[b.infoRepositorios.remoto.length - 1].repos.push(
-				{
-					"nome":data.repos.repo[x].name,
-					"id":data.repos.repo[x].id,
-					"href":data.repos.repo[x].href
-				});
-				db.set(b);
-				$scope.cancel();
-			}
-			console.log(data);
-			}).error(function(){
-				toaster.pop({
-					type: 'error',
-					title: 'Deu ruim!',
-					body: 'Servidor não encontrado ou URL inválida.',
-					showCloseButton: true
-				});
-			});
+			url = remoto.url+"geoserver/geogig/repos.json";
 		}else if (remoto.origin === 'postgresql'){
-			console.log('executa postgresql');
+			console.log("postgresql");
 		}else {
 			console.log('Nao existe metodo');
 		}
+		$http.get(url).success(function(data){
+		const a  = $scope.mydb;
+		a.infoRepositorios.remoto.push(
+		{
+			"nome":remoto.titulo,
+			"url":url,
+			"repos":[],
+			"origin":remoto.origin
+		});
+		db.set(a);
+		$scope.remoteAtualize ();
+		$scope.cancel();//close Modal
+		}).error(function(){
+			toaster.pop({
+				type: 'error',
+				title: 'Deu ruim!',
+				body: 'Servidor não encontrado ou URL inválida.',
+				showCloseButton: true
+			});
+		});
 	} 
 	$scope.log = function (){
 		if ($scope.currentRepoData().remote == ''){
@@ -102,22 +77,27 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		}
 	}
 	var Openlog = function(){
-		if(typeof angular.fromJson(window.localStorage['commit']).response.commit[1] === 'undefined'){
-			const umCommit = angular.fromJson(window.localStorage['commit']).response.commit;
-			const a = [];
-			a.push(umCommit)
-			return a;
+		if (window.localStorage['commit']){
+			if(typeof angular.fromJson(window.localStorage['commit']).response.commit[1] === 'undefined'){
+				const umCommit = angular.fromJson(window.localStorage['commit']).response.commit;
+				const a = [];
+				a.push(umCommit)
+				return a;
+			}else{
+				return angular.fromJson(window.localStorage['commit']).response.commit;
+			}
 		}else{
-			return angular.fromJson(window.localStorage['commit']).response.commit;
+			console.error('Local Storage commit is not defined');
 		}
+		
 		
 
 	}
 	$scope.load = Openlog();
 
 	$scope.push = function(type){
-		repo.push($scope.currentRepoData().nome, type,(error, stdout, stderr)=>{
-			console.log(stdout);
+		repo.push($scope.currentRepoData().nome, type,function(error, stdout, stderr){
+			console.log("OK");
 			toaster.pop({
 				type: 'error',
 				title: 'Deu ruim!',
@@ -128,7 +108,6 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 	}
 	$scope.pull = function(type){
 		repo.pull($scope.currentRepoData().nome, type,(error, stdout, stderr)=>{
-			console.log(stdout);
 			toaster.pop({
 				type: 'error',
 				title: 'Deu ruim!',
@@ -138,7 +117,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		})	
 	}
 	$scope.clone = function(id, nome, url){
-		repo.clone(url, nome ,function(error, stdout, stderr){
+		repo.clone(url, nome , function(error, stdout, stderr){
 			var a = $scope.mydb;
 			a.infoRepositorios.local.push(
 			{
@@ -200,6 +179,90 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 	  		}
 		);
 	}
+	function get (url, id){
+			$http.get(url).success((data)=>{
+				getRepositorio_remote(data, id);
+			}).error(()=>{
+				toaster.pop({
+					type: 'error',
+					title: 'Servidor Offline',
+					body: url,
+					showCloseButton: true
+				});
+			})			
+		}
+	$scope.remoteAtualize = function (){
+		for (conexao in $scope.mydb.infoRepositorios.remoto){
+			get($scope.mydb.infoRepositorios.remoto[conexao].url, conexao);
+		}
+
+	}
+	$scope.compareCommit = function (load){
+		var commidId = []
+		for (x in load){
+			if(load[x].activate){
+				/*console.log(load[x].id ,load[x].activate);*/
+				commidId.push(load[x].id)
+				
+			}
+		}
+		geojsonGenerate = {
+			"type": "FeatureCollection",
+			"features":[]
+		}
+		geojsonGenerateDiff = {
+			"type": "FeatureCollection",
+			"features":[]
+		}
+		console.log(commidId[0],commidId[1]);
+		repo.diffCommit(commidId[0],commidId[1],(data)=>{
+				var wkt = new Wkt.Wkt();
+			for (x in data.response.Feature){
+		        var wkt_geom = (data.response.Feature[x].geometry);
+				geometry = wkt_geom[0].replace('MULTIPOLYGON (((', 'POLYGON ((')
+									  .replace(')))', '))');
+				type_change = data.response.Feature[x].change;
+				feature_id = data.response.Feature[x].id;
+
+		        wkt.read(geometry);
+				wkt.toObject();
+				geojsonGenerate.features.push({"type":"Feature","properties":{
+												"feature_id":feature_id,
+												"type_change":type_change
+											},
+											"geometry":wkt.toJson()
+											});
+
+		      }
+			localStorage.setItem("geojson", JSON.stringify(geojsonGenerate));
+			$location.path('/repo/map');
+			for (x in geojsonGenerate.features){
+				if(geojsonGenerate.features[x].properties.type_change == "MODIFIED"){
+					repo.diffFeature(geojsonGenerate.features[x].properties.feature_id,commidId[0],commidId[1],(data)=>{
+						for (y in ad = data.response.diff){
+							newvalue = data.response.diff[y].newvalue.replace('MULTIPOLYGON (((', 'POLYGON ((')
+									  .replace(')))', '))');
+							oldvalue = data.response.diff[y].oldvalue.replace('MULTIPOLYGON (((', 'POLYGON ((')
+									  .replace(')))', '))');
+							wkt.read(newvalue);
+							wkt.toObject();
+							console.log(JSON.stringify(wkt.toJson()));
+							geojsonGenerateDiff.features.push({"type":"Feature","properties":{
+														"feature_id":'feature_id',
+														"type_change":'type_change'
+													},
+													"geometry":wkt.toJson()
+													});
+						};
+						localStorage.setItem("geojsonfeature", JSON.stringify(geojsonGenerateDiff));
+			
+					});
+				}
+			}
+		})
+
+	}
+
 
 
 }

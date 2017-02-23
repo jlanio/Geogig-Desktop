@@ -1,8 +1,6 @@
 function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	/*INIT*/
-	
 	$scope.mydb = mydb;
-	console.table($scope.mydb.infoRepositorios.local);
 	
 	if (db.OpenItem('SERVER')=='true'){
 		console.info('Servidor Local ja Iniciado')
@@ -13,7 +11,9 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	$scope.saveConfig = function(config){
 		db.SetItem('user_name', config.username);
 		db.SetItem('email', config.email);
-		repo.config(db.OpenItem('user_name'),db.OpenItem('email'));
+		repo.config(db.OpenItem('user_name'),db.OpenItem('email'),(error, stdout, stderr)=>{
+			console.log('usuario configurado com sucesso');
+		});
 	}
 	$scope.selectRepo = function(selectedFild){
 		db.SetItem('repoLocalAtivo',selectedFild);

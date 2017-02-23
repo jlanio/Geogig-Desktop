@@ -1,10 +1,10 @@
 var fs = require('fs-extra');
 
 function repo (utils, $http){
-  function _config (name,email){
-    utils.geogig (['config', '--global','user.name',name],(error, stdout, stderr)=>{
-      utils.geogig (['config', '--global','user.email',email],(error, stdout, stderr)=>{
-          console.log(error, stdout, stderr);
+  function _config (name, email){
+    utils.geogig (['config', '--global','user.name', name],(error, stdout, stderr)=>{
+      utils.geogig (['config', '--global','user.email', email],(error, stdout, stderr)=>{
+          console.log('usuario configurado com sucesso');
       })
     })
   }
@@ -94,8 +94,19 @@ function repo (utils, $http){
   var _copy_to_folder = function(_Name){
     fs.copy(utils.pwd(_Name, 'local'), utils.pwd(_Name, 'remoto'));
   }
-
-
+  var _diffCommit = function (commit1,commit2, ressult){
+    $http.get("http://localhost:8182/repos/app/diff.json?oldRefSpec="+commit2+"&newRefSpec="+commit1+"&showGeometryChanges=true")
+    .success(function(data){
+        ressult (data);
+    })
+  }
+  var _diffFeature = function (feature,commit1,commit2, ressult){
+    $http.get("http://localhost:8182/repos/app/featurediff.json?path="+feature+"&newTreeish="+commit2+"&oldTreeish="+commit1)
+    .success(function(data){
+        ressult (data);
+    })
+  }
+  
   return {
     config : _config,
     init: _init,
@@ -110,7 +121,9 @@ function repo (utils, $http){
     ls : _ls_tree,
     shp_export : _shp_export,
     initLocal: _initLocal,
-    copy_to_folder: _copy_to_folder
+    copy_to_folder: _copy_to_folder,
+    diffCommit: _diffCommit,
+    diffFeature: _diffFeature
   };
 
 };

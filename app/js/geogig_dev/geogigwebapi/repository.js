@@ -95,16 +95,22 @@ function repo (utils, $http){
     fs.copy(utils.pwd(_Name, 'local'), utils.pwd(_Name, 'remoto'));
   }
   var _diffCommit = function (commit1,commit2, ressult){
-    $http.get("http://localhost:8182/repos/app/diff.json?oldRefSpec="+commit2+"&newRefSpec="+commit1+"&showGeometryChanges=true")
+    $http.get("http://localhost:8182/repos/Acre/diff.json?oldRefSpec="+commit2+"&newRefSpec="+commit1+"&showGeometryChanges=true")
     .success(function(data){
         ressult (data);
     })
   }
   var _diffFeature = function (feature,commit1,commit2, ressult){
-    $http.get("http://localhost:8182/repos/app/featurediff.json?path="+feature+"&newTreeish="+commit2+"&oldTreeish="+commit1)
+    $http.get("http://localhost:8182/repos/Acre/featurediff.json?path="+feature+"&newTreeish="+commit2+"&oldTreeish="+commit1)
     .success(function(data){
         ressult (data);
     })
+  }
+  var _postgres = function (ressult){
+    var a = ['--repo','"postgresql://localhost/postgres/public/dsssdnd?user=postgres\&#38;password=adminmaster"', 'init']
+    utils.geogig(a,(error, stdout, stderr)=>{
+        ressult(error, stdout, stderr);
+      })
   }
   
   return {
@@ -123,7 +129,8 @@ function repo (utils, $http){
     initLocal: _initLocal,
     copy_to_folder: _copy_to_folder,
     diffCommit: _diffCommit,
-    diffFeature: _diffFeature
+    diffFeature: _diffFeature,
+    postgres: _postgres
   };
 
 };

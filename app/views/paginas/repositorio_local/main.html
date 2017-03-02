@@ -5,10 +5,10 @@
 
                 <form method="get" action="index.html" class="pull-right mail-search">
                     <div class="input-group">
-                        <input type="text" class="form-control input-sm" name="search" placeholder="Filtra repositório">
+                        <input type="text" class="form-control input-sm disable" name="search" placeholder="Filter repository">
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-sm btn-primary">
-                                Buscar
+                                Search
                             </button>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                         <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
 
                     </div>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as read" ng-click="NewRepo()"><i class="fa fa-plus" ></i> Novo </button>
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as read" ng-click="NewRepo()"><i class="fa fa-plus" ></i> New </button>
                     <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash" ng-click="deleteRepo()"><i class="fa fa-trash-o"></i></button>
 
                 </div>
@@ -45,7 +45,7 @@
                     <span ng-show="value.origin.de != 'local'" class="label label-danger pull-right">{{value.origin.de}}</span>
                     </td>
                     <td class="mail-subject"><a ui-sref="repo.email_view">{{value.descricao}}</a></td>
-                    <td  class="text-right mail-date"><a ng-hide="value.remote == ''" href=""><i class="fa fa-tag"></i> publicado</a></td>
+                    <td  class="text-right mail-date"><a ng-hide="value.remote == ''" href=""><i class="fa fa-tag"></i> published</a></td>
                 </tr>
             </tbody>
         </table>

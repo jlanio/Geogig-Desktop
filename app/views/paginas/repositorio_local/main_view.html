@@ -5,7 +5,7 @@
                 <div class="pull-right tooltip-demo" >
                     <button ng-show="mydb.infoRepositorios.local[currentRepoId()].origin.de === 'local'" class="btn btn-primary " type="button" ng-click="publicarRepo(currentRepoId())">
                     <i class="fa fa-cloud-upload"></i>
-                    publicar
+                    Publish
                     </button>
                 </div>
                 <div class="pull-right tooltip-demo" ng-controller="repositorio_remoto" >
@@ -15,9 +15,9 @@
 
                     <a ng-click="push('local')"  class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Enviar suas alterações" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin.de ==='local'"><i class="fa fa-cloud-upload"> Push</i> </a> -->
 
-                    <a ng-click="pull('remoto')" href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Baixar ultima versão" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin.de === 'remote'"><i class="fa fa-cloud-download"> Pull_</i> </a>
+                    <a ng-click="pull('remoto')" href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Baixar ultima versão" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin.de === 'remote'"><i class="fa fa-cloud-download"> Pull</i> </a>
 
-                    <a ng-click="push('remoto')"  class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Enviar suas alterações" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin.de === 'remote'"><i class="fa fa-cloud-upload"> Push_</i> </a>
+                    <a ng-click="push('remoto')"  class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Enviar suas alterações" ng-show="mydb.infoRepositorios.local[currentRepoId()].origin.de === 'remote'"><i class="fa fa-cloud-upload"> Push</i> </a>
 
                     <!-- <a ui-sref="repo.issue" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Questões"><i class="fa fa fa-comment-o" > Issue track</i> </a> -->
                 </div>
@@ -28,7 +28,7 @@
 
 
                     <h3>
-                        <span class="font-noraml">De: </span>@ac.gov
+                        <!-- <span class="font-noraml">De: </span>@ac.gov -->
                     </h3>
                 </div>
             </div>

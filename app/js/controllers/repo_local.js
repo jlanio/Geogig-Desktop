@@ -1,5 +1,8 @@
 function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	/*INIT*/
+	repo.postgres(function (code, stdout, stderr){
+		console.log(code, stdout, stderr);
+	})
 	$scope.mydb = mydb;
 	
 	if (db.OpenItem('SERVER')=='true'){
@@ -29,7 +32,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	function NewRepoCrl (inputValue){
 		if (inputValue === false) return false;
 		if (inputValue === "") {
-			swal.showInputError("Calma aê, o campo esta vazio!");
+			swal.showInputError("the field is empty!");
 			return false
 		}else{
 			const tmp  = $scope.mydb;
@@ -43,7 +46,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			});
 			db.set(tmp);
 			repo.init(inputValue, 'local',function  (code, stdout, stderr){
-				swal("Muito bem!", stdout +" criado.", "success");
+				swal("Success", stdout +" created.", "success");
 			});
 		}
 	}
@@ -51,7 +54,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 		if (inputValue === false) return false;
 
 		if (inputValue === "") {
-			swal.showInputError("Vai com calma, o campo esta vazio!");
+			swal.showInputError("the field is empty!");
 			return false
 		}else{     
 			repo.commit($scope.currentRepoData().nome, $scope.type, inputValue,function(data){
@@ -63,7 +66,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 		if (inputValue === false) return false;
 
 		if (inputValue === "") {
-			swal.showInputError("Vai com calma, o campo esta vazio!");
+			swal.showInputError("the field is empty!");
 			return false
 		}else{
 			const tmp  = $scope.mydb;
@@ -71,14 +74,14 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			db.set(tmp);
 			$scope.mydb = $scope.mydb;
 			repo.shpImport($scope.currentRepoData().nome,'local', $scope.localShp, function(data){
-				swal("Shapefile", inputValue +" importado com sucesso", "success");     
+				swal("Shapefile", inputValue +" Importing successfully", "success");     
 			}); 
 		}
 	};
 	$scope.NewRepo = function(){
 		alert.open(
-			"Novo Repositório",
-			"Dê o nome:",
+			"New Repository",
+			"Name:",
 			"input",
 			"...",
 			NewRepoCrl)
@@ -87,8 +90,8 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	$scope.NewCommit = function(type){
 		$scope.type = type
 		alert.open(
-			"Novo Commit",
-			"Blz! Agora adicione um comentario:",
+			"New Commit",
+			"Now add a comment:",
 			"input",
 			"...",
 			NewCommitCtrl
@@ -96,8 +99,8 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	};
 	$scope.NewShp = function(localShp){
 		alert.open(
-			"Novo Shapefile",
-			"Blz! Agora adicione o nome:",
+			"New Shapefile",
+			"Now add a name:",
 			"input",
 			"...",
 			NewShpCtrl)
@@ -144,7 +147,6 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			console.log($scope.currentRepoData().arquivos[cada].localDir);
 		}
 	}
-
 	arrayCheked = [];
 
 	$scope.checkbox = function(key){

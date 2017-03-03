@@ -9,6 +9,9 @@ more information [geogig](http://geogig.org/)
 ###Geogig for Desktop Users
 > My contribution to the community.
 Desktop interface Simple with geogig engine in backend
+### License
+
+* Source code is distributed under an GPL-3.0, [more information](https://github.com/jlanio/Geogig-Desktop/blob/master/LICENSE)
 
 # Download 
 #### Pré-release v-0.9

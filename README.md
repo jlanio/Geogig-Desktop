@@ -15,6 +15,8 @@ Desktop interface Simple with geogig engine in backend
  https://github.com/jlanio/Geogig-Desktop/releases/download/v0.9/geogig-win32-x64.rar
 #### Requirements for installation / use
 install a [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+
+:heavy_exclamation_mark: You do not need geogig installed to use Geogig-Desktop. 
 # Functions available 
 # Local:
 - [x] Create new repository.

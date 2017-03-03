@@ -4,12 +4,12 @@ function db($location){
 	/*
 	db.destroy().then(function () {
 		}).catch(function (err) {
-	})*/
-
+	})
+*/
 	db.get('geogig').catch(function (err) {
 	  if (err.name === 'not_found') {
-	  	$location.path('/repo/view');
 	    db.put({"_id":"geogig","infoRepositorios":{"local":[],"remoto":[]}})
+	  	$location.path('/repo/view');
 	  }
 	})
 		

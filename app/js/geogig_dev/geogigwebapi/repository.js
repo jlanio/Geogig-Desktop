@@ -94,14 +94,14 @@ function repo (utils, $http){
   var _copy_to_folder = function(_Name){
     fs.copy(utils.pwd(_Name, 'local'), utils.pwd(_Name, 'remoto'));
   }
-  var _diffCommit = function (commit1,commit2, ressult){
-    $http.get("http://localhost:8182/repos/oooooooooooooop/diff.json?oldRefSpec="+commit2+"&newRefSpec="+commit1+"&showGeometryChanges=true")
+  var _diffCommit = function (url, commit1, commit2, ressult){
+    $http.get(url+"/diff.json?oldRefSpec="+commit2+"&newRefSpec="+commit1+"&showGeometryChanges=true")
     .success(function(data){
         ressult (data);
     })
   }
-  var _diffFeature = function (feature,commit1,commit2, ressult){
-    $http.get("http://localhost:8182/repos/oooooooooooooop/featurediff.json?path="+feature+"&newTreeish="+commit2+"&oldTreeish="+commit1)
+  var _diffFeature = function (url, feature, commit1, commit2, ressult){
+    $http.get(url+"/featurediff.json?path="+feature+"&newTreeish="+commit2+"&oldTreeish="+commit1)
     .success(function(data){
         ressult (data);
     })

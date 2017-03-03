@@ -1,6 +1,10 @@
 function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 	
 	$scope.mydb = mydb;
+
+	$scope.currentRepoData = function() {
+		return $scope.mydb.infoRepositorios.local[db.OpenItem('repoLocalAtivo')];
+	};
 	$scope.selectServeRemote = function(selectedFild){
 		db.SetItem('serveRemoteAtivo',selectedFild);
 		$location.path('/repo/view_remoto');
@@ -64,7 +68,6 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		});
 	} 
 	$scope.log = function (){
-		console.log($scope.currentRepoData());
 		if ($scope.currentRepoData().remote == ''){
 			repo.log($scope.currentRepoData().remote,function(data){
 				$location.path('/repo/historico');
@@ -215,8 +218,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 			"type": "FeatureCollection",
 			"features":[]
 		}
-		console.log(commidId[0],commidId[1]);
-		repo.diffCommit(commidId[0],commidId[1],(data)=>{
+		repo.diffCommit($scope.currentRepoData().remote, commidId[0],commidId[1],(data)=>{
 				var wkt = new Wkt.Wkt();
 			for (x in data.response.Feature){
 		        var wkt_geom = (data.response.Feature[x].geometry);
@@ -239,7 +241,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 			$location.path('/repo/map');
 			for (x in geojsonGenerate.features){
 				if(geojsonGenerate.features[x].properties.type_change == "MODIFIED"){
-					repo.diffFeature(geojsonGenerate.features[x].properties.feature_id,commidId[0],commidId[1],(data)=>{
+					repo.diffFeature($scope.currentRepoData().remote, geojsonGenerate.features[x].properties.feature_id,commidId[0],commidId[1],(data)=>{
 						for (y in ad = data.response.diff){
 							newvalue = data.response.diff[y].newvalue.replace('MULTIPOLYGON (((', 'POLYGON ((')
 									  .replace(')))', '))');

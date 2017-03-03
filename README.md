@@ -1,37 +1,31 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/jlanio/Geogig-Desktop/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+![gif](https://cloud.githubusercontent.com/assets/10765588/23560594/067aa1b4-0009-11e7-9d21-5ee64efa3d76.gif)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Geogig is:
+> "GeoGig is an open source tool that draws inspiration from Git, but adapts its core concepts to handle distributed versioning of geospatial data." 
 
-### Markdown
+more information [geogig](http://geogig.org/)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+> My simple contribution to the community.
+Desktop interface with geogig engine in backend
 
-```markdown
-Syntax highlighted code block
+# Download 
+ https://github.com/jlanio/Geogig-Desktop/releases/download/v0.9/geogig-win32-x64.rar
+# Functions available 
+# Local:
+- [x] Create new repository.
+- [x] Import shapefile to the repository.
+- [x] Analyze and add modifications.
+- [x] Commit.
 
-# Header 1
-## Header 2
-### Header 3
+# Remote:
+Make connections with:
+- [x] Geoserver
+- [x] Geogig Server on local drive.
 
-- Bulleted
-- List
+Clone:
+- [x] Pull
+- [x] Push
+- [x] Modification history and commit comparison :boom:
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jlanio/Geogig-Desktop/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+> Feedback or suggestions: lanio.morais@gmail.com

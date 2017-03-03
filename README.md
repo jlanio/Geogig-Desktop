@@ -6,11 +6,15 @@
 
 more information [geogig](http://geogig.org/)
 
-> My simple contribution to the community.
-Desktop interface with geogig engine in backend
+###Geogig for Desktop Users
+> My contribution to the community.
+Desktop interface Simple with geogig engine in backend
 
 # Download 
+#### Pré-release v-0.9
  https://github.com/jlanio/Geogig-Desktop/releases/download/v0.9/geogig-win32-x64.rar
+#### Requirements for installation / use
+install a [Java JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 # Functions available 
 # Local:
 - [x] Create new repository.

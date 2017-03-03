@@ -64,6 +64,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		});
 	} 
 	$scope.log = function (){
+		console.log($scope.currentRepoData());
 		if ($scope.currentRepoData().remote == ''){
 			repo.log($scope.currentRepoData().remote,function(data){
 				$location.path('/repo/historico');

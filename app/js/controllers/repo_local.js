@@ -1,8 +1,8 @@
 function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	/*INIT*/
-	repo.postgres(function (code, stdout, stderr){
+	/*repo.postgres(function (code, stdout, stderr){
 		console.log(code, stdout, stderr);
-	})
+	})*/
 	$scope.mydb = mydb;
 	
 	if (db.OpenItem('SERVER')=='true'){
@@ -42,7 +42,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 				"arquivos":[],
 				"descricao":"",
 				"origin":{"de":"local","em":""},
-				"remote":""
+				"remote":"http://localhost:8182/repos/"+inputValue
 			});
 			db.set(tmp);
 			repo.init(inputValue, 'local',function  (code, stdout, stderr){

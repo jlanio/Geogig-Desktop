@@ -95,13 +95,13 @@ function repo (utils, $http){
     fs.copy(utils.pwd(_Name, 'local'), utils.pwd(_Name, 'remoto'));
   }
   var _diffCommit = function (commit1,commit2, ressult){
-    $http.get("http://localhost:8182/repos/Acre/diff.json?oldRefSpec="+commit2+"&newRefSpec="+commit1+"&showGeometryChanges=true")
+    $http.get("http://localhost:8182/repos/oooooooooooooop/diff.json?oldRefSpec="+commit2+"&newRefSpec="+commit1+"&showGeometryChanges=true")
     .success(function(data){
         ressult (data);
     })
   }
   var _diffFeature = function (feature,commit1,commit2, ressult){
-    $http.get("http://localhost:8182/repos/Acre/featurediff.json?path="+feature+"&newTreeish="+commit2+"&oldTreeish="+commit1)
+    $http.get("http://localhost:8182/repos/oooooooooooooop/featurediff.json?path="+feature+"&newTreeish="+commit2+"&oldTreeish="+commit1)
     .success(function(data){
         ressult (data);
     })

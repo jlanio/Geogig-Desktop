@@ -20,5 +20,5 @@ function API($http,config,db){
 };
 
 angular
-.module("gitgeo")
+.module("geogig-desktop")
 .factory("API", API)

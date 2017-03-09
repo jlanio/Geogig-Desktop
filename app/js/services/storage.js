@@ -12,7 +12,7 @@ function db($location){
 	  	$location.path('/repo/view');
 	  }
 	})
-		
+
 	//LocalStorage
 	var _open = function(){
 		return db.get('geogig');
@@ -24,7 +24,7 @@ function db($location){
 		   	db.put(data);
 		})
 	};
-	
+
 	//SessionStorage
 	var _SetItem = function(key,value){
 		return window.sessionStorage.setItem(key, value);
@@ -42,5 +42,5 @@ function db($location){
 };
 
 angular
-.module("gitgeo")
+.module("geogig-desktop")
 .factory("db", db)

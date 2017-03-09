@@ -1,5 +1,5 @@
 function repositorio_remoto($scope, db, $location, $http, repo, toaster){
-	
+
 	$scope.mydb = mydb;
 
 	$scope.currentRepoData = function() {
@@ -10,10 +10,10 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		$location.path('/repo/view_remoto');
 	};
 	$scope.currentServeRemoteId = function(){
-		return db.OpenItem('serveRemoteAtivo'); 
+		return db.OpenItem('serveRemoteAtivo');
 	};
 	$scope.currentRepoRemoteData = function(){
-		return $scope.mydb.infoRepositorios.remoto[$scope.currentServeRemoteId()]; 
+		return $scope.mydb.infoRepositorios.remoto[$scope.currentServeRemoteId()];
 	};
 
 	$scope.selectRepoRemote = function(selectedFild){
@@ -21,7 +21,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		return $location.path('/repo/remoto_repo');
 	};
 	/*$scope.currentRepoRemoteId = function(){
-		return db.OpenItem('repoRemoteAtivo'); 
+		return db.OpenItem('repoRemoteAtivo');
 	};*/
 	getRepositorio_remote = function (data, z){
 		let b = $scope.mydb;
@@ -66,7 +66,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 				showCloseButton: true
 			});
 		});
-	} 
+	}
 	$scope.log = function (){
 		if ($scope.currentRepoData().remote == ''){
 			repo.log($scope.currentRepoData().remote,function(data){
@@ -77,7 +77,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 			repo.log($scope.currentRepoData().remote,function(data){
 				$location.path('/repo/historico');
 				window.localStorage['commit'] = angular.toJson(data);
-			});			
+			});
 		}
 	}
 	var Openlog = function(){
@@ -93,8 +93,8 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 		}else{
 			console.error('Local Storage commit is not defined');
 		}
-		
-		
+
+
 
 	}
 	$scope.load = Openlog();
@@ -118,7 +118,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 				body: "pull" ,
 				showCloseButton: true
 			});
-		})	
+		})
 	}
 	$scope.clone = function(id, nome, url){
 		repo.clone(url, nome , function(error, stdout, stderr){
@@ -145,7 +145,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 				db.set(b);
 			});
 
-			
+
 		})
 	}
 	function ls (_Name, ressult){
@@ -168,12 +168,12 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 	}
 	function shp_export(_Name, type, objeto, localSave){
 		repo.shp_export(_Name, type, objeto, localSave, function(error, stdout, stderr){
-			console.log(error, stdout, stderr);	
+			console.log(error, stdout, stderr);
 		})
 	}
 	$scope.baixar_shp = function (_Name, objeto, key){
 		const {dialog} = require('electron').remote;
-		dialog.showOpenDialog({ 
+		dialog.showOpenDialog({
 	  		properties: [ 'openFile', 'openDirectory'] }, function (filename) {
 	    		var localSave = filename.toString();
 	    		shp_export(_Name, 'remoto',objeto, localSave)
@@ -193,7 +193,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 					body: url,
 					showCloseButton: true
 				});
-			})			
+			})
 		}
 	$scope.remoteAtualize = function (){
 		for (conexao in $scope.mydb.infoRepositorios.remoto){
@@ -207,7 +207,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 			if(load[x].activate){
 				/*console.log(load[x].id ,load[x].activate);*/
 				commidId.push(load[x].id)
-				
+
 			}
 		}
 		geojsonGenerate = {
@@ -258,7 +258,7 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 													});
 						};
 						localStorage.setItem("geojsonfeature", JSON.stringify(geojsonGenerateDiff));
-			
+
 					});
 				}
 			}
@@ -270,5 +270,5 @@ function repositorio_remoto($scope, db, $location, $http, repo, toaster){
 
 }
 angular
-.module('gitgeo')
+.module('geogig-desktop')
 .controller('repositorio_remoto', repositorio_remoto)

@@ -112,7 +112,7 @@ function repo (utils, $http){
         ressult(error, stdout, stderr);
       })
   }
-  
+
   return {
     config : _config,
     init: _init,
@@ -135,5 +135,5 @@ function repo (utils, $http){
 
 };
 angular
-.module("gitgeo")
+.module("geogig-desktop")
 .factory("repo", repo)

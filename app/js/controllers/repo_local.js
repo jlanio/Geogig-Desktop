@@ -4,7 +4,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 		console.log(code, stdout, stderr);
 	})*/
 	$scope.mydb = mydb;
-	
+
 	if (db.OpenItem('SERVER')=='true'){
 		console.info('Servidor Local ja Iniciado')
 	}else{
@@ -23,7 +23,7 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 		return $location.path('/repo/view');
 	};
 	$scope.currentRepoId = function(){
-		return db.OpenItem('repoLocalAtivo'); 
+		return db.OpenItem('repoLocalAtivo');
 	};
 	$scope.currentRepoData = function() {
 		return $scope.mydb.infoRepositorios.local[$scope.currentRepoId()];
@@ -56,9 +56,9 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 		if (inputValue === "") {
 			swal.showInputError("the field is empty!");
 			return false
-		}else{     
+		}else{
 			repo.commit($scope.currentRepoData().nome, $scope.type, inputValue,function(data){
-				swal("", data +" ", "success"); 
+				swal("", data +" ", "success");
 			});
 		}
 	};
@@ -74,8 +74,8 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 			db.set(tmp);
 			$scope.mydb = $scope.mydb;
 			repo.shpImport($scope.currentRepoData().nome,'local', $scope.localShp, function(data){
-				swal("Shapefile", inputValue +" Importing successfully", "success");     
-			}); 
+				swal("Shapefile", inputValue +" Importing successfully", "success");
+			});
 		}
 	};
 	$scope.NewRepo = function(){
@@ -178,5 +178,5 @@ function repositorio($scope, $location, db, SweetAlert, repo, toaster, alert ){
 	}
 }
 angular
-.module('gitgeo')
+.module('geogig-desktop')
 .controller('repositorio', repositorio)

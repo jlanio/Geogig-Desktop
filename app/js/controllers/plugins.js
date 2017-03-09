@@ -16,12 +16,12 @@ function sweetAlertCtrl($scope, SweetAlert) {
             },
             function(inputValue){
               if (inputValue === false) return false;
-              
+
               if (inputValue === "") {
                 swal.showInputError("Calma aê, o campo esta vazio!");
                 return false
               }
-              
+
               swal("Muito bem!", inputValue +" criado.", "success");
               db.set("{'name':'teste'}");
             });
@@ -46,7 +46,7 @@ function sweetAlertCtrl($scope, SweetAlert) {
                 closeOnConfirm: false
             }, function () {
                 swal("Deleted!", "Your imaginary file has been deleted.", "success");
-            }); 
+            });
     }
 
     $scope.demo4 = function () {
@@ -169,7 +169,7 @@ function ModalInstanceCtrl ($scope, $uibModalInstance) {
 
 
 angular
-    .module('gitgeo')
+    .module('geogig-desktop')
     .controller('sweetAlertCtrl',sweetAlertCtrl)
     .controller('toastrCtrl',toastrCtrl)
     .controller('modalDemoCtrl',modalDemoCtrl)

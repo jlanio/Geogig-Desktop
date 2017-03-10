@@ -18,5 +18,5 @@ function alert (SweetAlert){
 
 };
 angular
-.module("gitgeo")
+.module("geogig-desktop")
 .factory("alert", alert)

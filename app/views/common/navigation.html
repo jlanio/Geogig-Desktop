@@ -7,7 +7,7 @@
                     <a uib-dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
-                                    <strong class="font-bold">Opções:</strong>
+                                    <strong class="font-bold">{{ 'OPTIONS' | translate }}:</strong>
                              </span>
                                 <span class="text-muted text-xs block"><b class="caret"></b>
                                Menus
@@ -15,7 +15,7 @@
                             </span>
                     </a>
                     <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
-                        <li><a ui-sref="repo.config">Configuração</a></li>
+                        <li><a ui-sref="repo.config">{{ 'CONFIGURATION' | translate }}</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -27,10 +27,10 @@
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="repo.local"><i class="fa fa-hdd-o"></i> <span class="nav-label">Repositorio Local</span> </a>
+                <a ui-sref="repo.local"><i class="fa fa-hdd-o"></i> <span class="nav-label">{{ 'LOCAL_REPOSITORIES' | translate }}</span> </a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="repo.remoto"><i class="fa  fa-cloud"></i> <span class="nav-label">Repositorio Remoto</span></a>
+                <a ui-sref="repo.remoto"><i class="fa  fa-cloud"></i> <span class="nav-label">{{ 'REMOTE_REPOSITORIES' | translate}}</span></a>
             </li>
         </ul>
 

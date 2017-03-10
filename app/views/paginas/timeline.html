@@ -4,9 +4,9 @@
         <div class="col-lg-12">
     <div class="text-center">
         <div class="btn-group text-center">
-          <button  type="button" class="btn btn-primary " ng-click='compareCommit(load)'>Difference</button>
-          <button  type="button" class="btn btn-primary disabled" ng-click='compareCommit(load)'>Analyze</button>
-          <button  type="button" class="btn btn-primary disabled" ng-click='compareCommit(load)'>Donwload</button>
+          <button  type="button" class="btn btn-primary " ng-click='compareCommit(load)'>{{ 'DIFFERENCE' | translate }}</button>
+          <button  type="button" class="btn btn-primary disabled" ng-click='compareCommit(load)'>{{ 'ANALYZE' | translate }}</button>
+          <button  type="button" class="btn btn-primary disabled" ng-click='compareCommit(load)'>{{ 'DOWNLOAD' | translate }}</button>
         </div>
     </div>
 
@@ -20,12 +20,12 @@
                             <div class="vertical-timeline-content">
                                 <h2>{{x.author.name}}</h2>
                                 <p>{{x.message}} </p>
-                                <button type="button" class="btn btn-info disabled">Actions</button>
+                                <button type="button" class="btn btn-info disabled">{{ 'ACTIONS' | translate }}</button>
                                     <span class="vertical-date">
                                         {{x.author.email}}<br/>
                                         <label>
                                         <input ng-model="x.activate" type="checkbox" value="{{x.id}}" checked=''/><small> ID:{{x.id}}</small></label>
-                                    </span>   
+                                    </span>
                             </div>
                         </div>
                     </div>

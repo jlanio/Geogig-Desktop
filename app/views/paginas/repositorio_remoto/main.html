@@ -9,14 +9,14 @@
                         <input type="text" class="form-control input-sm disable" name="search" placeholder="Filter repository">
                         <div class="input-group-btn">
                             <button type="submit" class="btn btn-sm btn-primary">
-                                Search
+                                {{ 'SEARCH' | translate }}
                             </button>
                         </div>
                     </div>
                 </form>
                 <h2>
                 <span class="fa fa-cloud"></span>
-                     Connected in:
+                     {{ 'CONNECTED_IN' | translate }}:
                 </h2>
                 <div >
                 </div>
@@ -28,7 +28,7 @@
 
                     </div>
                     <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as read"   ng-controller="modalDemoCtrl" ng-click="open3()">
-                    <i class="fa fa-plus" ></i> New </button>
+                    <i class="fa fa-plus" ></i> {{ 'NEW' | translate }} </button>
                     <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i  class="fa fa-trash-o"></i></button>
 
                 </div>
@@ -41,7 +41,7 @@
                 <td class="check-mail">
                     <input icheck type="checkbox" ng-model="check3">
                 </td>
-                <td class="mail-ontact"><a ng-click="selectServeRemote(key)" >{{value.nome}}</a> 
+                <td class="mail-ontact"><a ng-click="selectServeRemote(key)" >{{value.nome}}</a>
                     <span class="label label-warning pull-right">local</span></td>
                     <td class="mail-subject"><a ui-sref="repo.email_view">{{value.url}}</a></td>
                     <td class=""></td>

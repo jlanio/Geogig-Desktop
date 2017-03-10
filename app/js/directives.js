@@ -144,7 +144,7 @@ function pageTitle($rootScope, $timeout) {
  * Pass all functions into module
  */
  angular
- .module('gitgeo')
+ .module('geogig-desktop')
  .directive('pageTitle', pageTitle)
  .directive('sideNavigation', sideNavigation)
  .directive('iboxTools', iboxTools)

@@ -8,7 +8,7 @@ function utils(db){
 				return rep_local.slice(2).replace(/\\/g,'/')+'/tmp/local/'
 			}else if(tipo === 'remoto'){
 				return rep_local.slice(2).replace(/\\/g,'/')+'/tmp/remote/'
-			}		
+			}
 		}else if (typeof Nome === 'null'){
 			return rep_local.slice(2).replace(/\\/g,'/')+'/tmp/remote/'
 		}else{
@@ -24,7 +24,7 @@ function utils(db){
 	}
 	var _generateBat = function (command,options,callback){
 	  return cmd(
-	  	rep_local.replace(/\\/g,'/')+'/geogig/bin/geogig.bat', 
+	  	rep_local.replace(/\\/g,'/')+'/geogig/bin/geogig.bat',
 	    command,
 	    options,
 	    (error, stdout, stderr) => {
@@ -39,6 +39,5 @@ function utils(db){
 };
 
 angular
-.module("gitgeo")
+.module("geogig-desktop")
 .factory("utils", utils)
-

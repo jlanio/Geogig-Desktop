@@ -1,3 +1,5 @@
+const languages = require('../translation/laguages')
+
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     $urlRouterProvider.otherwise("/repo/local");
 
@@ -92,7 +94,7 @@ angular
 .module('geogig-desktop')
 .config(config)
 .config(['$translateProvider', function ($translateProvider) {
-  $translateProvider.translations('en', {
+  $translateProvider.translations('en-us', {
     'OPTIONS': 'Options',
     'ADD_REPOSITORIES': 'Add Repositories',
     'LOCAL_REPOSITORIES': 'Local Repositories',
@@ -118,7 +120,7 @@ angular
     'ADDED': 'Added',
     'BUG': 'Bug',
     'FIXED': 'Fixed',
-    'COMMIT': 'Commit'
+    'COMMIT': 'Commit',
     'NEW': 'New',
     'FOUND': 'Found',
     'ISSUES_LC': 'issues',
@@ -184,7 +186,7 @@ angular
     'NAME': 'Nombre'
   });
 
-  $translateProvider.preferredLanguage('en');
+  $translateProvider.preferredLanguage('en-us');
 }])
 .run(function($rootScope, $state, db) {
     $rootScope.$state = $state;

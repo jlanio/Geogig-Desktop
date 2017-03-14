@@ -11,7 +11,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         url: "/repo",
         templateUrl: "views/common/content.html",
         resolve: {
-            data:  function(db){
+            data:  function(){
                         return db.open().then(function (data) {
                             return data;
                         });
@@ -191,6 +191,6 @@ angular
 
   $translateProvider.preferredLanguage('en');
 }])
-.run(function($rootScope, $state, db) {
+.run(function($rootScope, $state) {
     $rootScope.$state = $state;
 });

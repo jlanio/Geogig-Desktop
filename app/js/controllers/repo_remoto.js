@@ -1,4 +1,4 @@
-function repositorio_remoto($scope, $location, db, $http, repo, toaster){
+function repositorio_remoto($scope, $location, $http, repo, toaster){
 
 
 	getRepositorio_remote = function (data, z){

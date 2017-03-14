@@ -24,12 +24,6 @@ class Commit {
             callback (data);
         })
     }
-    add(callback){
-        utils.geogig(['--repo',  this.dir, 'add'], 
-            (error, stdout, stderr)=>{
-                callback(error, stdout, stderr)
-        });
-    }
 
 }
 

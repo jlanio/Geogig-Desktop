@@ -29,6 +29,13 @@ class Repository {
                 callback(error, stdout, stderr);
             })
     }
+    add(callback){
+        utils.geogig(['--repo', this.dir, 'add'],
+            (error, stdout, stderr)=>{
+                callback(stdout);
+            }
+        );
+    };
     addRemote(){
         utils.geogig(['--repo', this.dir, 'remote', 'add', 'origin', this.remoteAdress],
             (error, stdout, stderr)=>{

@@ -9,12 +9,18 @@ class Local extends Repository {
         let new_data = this.mydb;
             new_data.infoRepositorios.local.push({
                 "name":this.name,
-                "arquivos":this.shpfile,
-                "descricao":this.description,
+                "shpfile":this.shpfile,
+                "description":this.description,
                 "origin":{"in":this.origin,"into":this.dir},
                 "remote":"http://localhost:8182/repos/"+this.remoteAdress
             });
-        _db.set(new_data);
+        db.set(new_data);
         return "Sucess!";
+    }
+    updateFile(id, name, localShp) {
+        let new_data = this.mydb;
+            new_data.infoRepositorios.local[id].shpfile.push({'name':name,'localDir':localShp});
+        db.set(new_data);
+        return "Updade Sucess!";
     }
 }

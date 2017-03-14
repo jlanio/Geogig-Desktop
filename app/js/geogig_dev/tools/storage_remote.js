@@ -1,5 +1,4 @@
-class remote {
-    /*infoRepositorios.local*/
+/*class remote {
     constructor(name, remoteAdress, repos, origin, mydb) {
         this.name = name;
         this.remoteAdress = remoteAdress;
@@ -17,4 +16,4 @@ class remote {
         });
     return new_data
     }
-}
+}*/

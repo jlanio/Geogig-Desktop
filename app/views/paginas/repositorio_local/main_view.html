@@ -62,8 +62,8 @@
                             </div>
 
                         </div>
-                        <div class="file-box"  ng-repeat="(key, value) in mydb.infoRepositorios.local[currentRepoId()].arquivos ">
-                            <div class="file" ng-controller= "repositorio_remoto" ng-click="baixar_shp(mydb.infoRepositorios.local[currentRepoId()].nome, value, key)">
+                        <div class="file-box"  ng-repeat="(key, value) in mydb.infoRepositorios.local[currentRepoId()].shpfile ">
+                            <div class="file" ng-controller= "repositorio_remoto" ng-click="baixar_shp(mydb.infoRepositorios.local[currentRepoId()].name, value, key)">
                                 <a href="">
                                     <span class="corner"></span>
 
@@ -71,7 +71,7 @@
                                         <i class="fa fa-file-archive-o"></i>
                                     </div>
                                     <div class="file-name">
-                                        <small>{{value.nome}}</small>
+                                        <small>{{value.name}}</small>
                                         <br/>
                                         <small>{{value.localDir}}</small>
                                     </div>

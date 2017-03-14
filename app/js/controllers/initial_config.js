@@ -1,41 +1,41 @@
-function initial_config($scope, $location, db){
+function initial_config($scope, $location){
 
 	$scope.mydb = mydb;
 
-	if (db.OpenItem('SERVER')=='true'){
+	if (db.openItem('SERVER')=='true'){
 		console.info('Local Server Already Started')
 	}else{
-		db.SetItem('SERVER','true');
+		db.setItem('SERVER','true');
 		repo.initLocal();
 	}
 	$scope.selectRepo = function(selectedFild){
-		db.SetItem('repoLocalAtivo',selectedFild);
+		db.setItem('repoLocalAtivo',selectedFild);
 		return $location.path('/repo/view');
 	};
 	$scope.currentRepoId = function(){
-		return db.OpenItem('repoLocalAtivo');
+		return db.openItem('repoLocalAtivo');
 	};
 
 	$scope.currentRepoData = function() {
 		return $scope.mydb.infoRepositorios.local[$scope.currentRepoId()];
 	};
 	$scope.selectServeRemote = function(selectedFild){
-		db.SetItem('serveRemoteAtivo',selectedFild);
+		db.setItem('serveRemoteAtivo',selectedFild);
 		$location.path('/repo/view_remoto');
 	};
 	$scope.currentServeRemoteId = function(){
-		return db.OpenItem('serveRemoteAtivo');
+		return db.openItem('serveRemoteAtivo');
 	};
 	$scope.currentRepoRemoteData = function(){
 		return $scope.mydb.infoRepositorios.remoto[$scope.currentServeRemoteId()];
 	};
 /*	$scope.selectRepoRemote = function(selectedFild){
-		db.SetItem('repoRemoteAtivo',selectedFild);
+		db.setItem('repoRemoteAtivo',selectedFild);
 		return $location.path('/repo/remoto_repo');
 	};*/
-	
-
 }
+
+
 function repo_view($scope, alert){
 	function NewRepoCrl (inputValue){
 		if (inputValue === false) return false;
@@ -43,7 +43,7 @@ function repo_view($scope, alert){
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
-			new Local(inputValue, [], "local", inputValue, "descricao", $scope.mydb ).save()
+			new Local(inputValue, [], 'local', inputValue, 'descricao', $scope.mydb ).save();
 			new Repository(inputValue, [],'local', 'http://localhost:8182/repos/imovel')
 			.init(function  (code, stdout, stderr){
 				swal("Success", stdout +" created.", "success");

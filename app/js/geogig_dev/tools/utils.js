@@ -1,7 +1,8 @@
 var path = require("path");
 var cmd = require('child_process').execFile;
 var rep_local = path.dirname(require.main.filename);
-function utils(db){
+
+var utils = (function (){
 	var _pwd = function (Nome, tipo) {
 		if (typeof Nome === 'undefined'){
 			if (tipo === 'local'){
@@ -36,8 +37,4 @@ function utils(db){
 		geogig: _generateBat
 
 	};
-};
-
-angular
-.module("geogig-desktop")
-.factory("utils", utils)
+})()

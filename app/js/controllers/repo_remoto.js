@@ -1,28 +1,6 @@
-function repositorio_remoto($scope, db, $location, $http, repo, toaster){
+function repositorio_remoto($scope, $location, db, $http, repo, toaster){
 
-	$scope.mydb = mydb;
 
-	$scope.currentRepoData = function() {
-		return $scope.mydb.infoRepositorios.local[db.OpenItem('repoLocalAtivo')];
-	};
-	$scope.selectServeRemote = function(selectedFild){
-		db.SetItem('serveRemoteAtivo',selectedFild);
-		$location.path('/repo/view_remoto');
-	};
-	$scope.currentServeRemoteId = function(){
-		return db.OpenItem('serveRemoteAtivo');
-	};
-	$scope.currentRepoRemoteData = function(){
-		return $scope.mydb.infoRepositorios.remoto[$scope.currentServeRemoteId()];
-	};
-
-	$scope.selectRepoRemote = function(selectedFild){
-		db.SetItem('repoRemoteAtivo',selectedFild);
-		return $location.path('/repo/remoto_repo');
-	};
-	/*$scope.currentRepoRemoteId = function(){
-		return db.OpenItem('repoRemoteAtivo');
-	};*/
 	getRepositorio_remote = function (data, z){
 		let b = $scope.mydb;
 		b.infoRepositorios.remoto[z].repos = [];

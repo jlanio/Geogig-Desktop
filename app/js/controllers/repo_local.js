@@ -1,18 +1,17 @@
 function repositorio($scope, $location, repo, alert ){
-	var rpObj = new Local(
-		$scope.currentRepoData().name,
-		$scope.currentRepoData().shpfile,
-		$scope.currentRepoData().origin.in,
-		$scope.currentRepoData().remote,
-		$scope.currentRepoData().description,
-		$scope.mydb
-		)
 	var rp = new Repository(
 		$scope.currentRepoData().name,
-		$scope.currentRepoData().shpfile,
-		$scope.currentRepoData().origin.in,
-		$scope.currentRepoData().remote
+		$scope.currentRepoData().origin,
+		$scope.currentRepoData().serverAdress
 		)
+	var rpObj = new Local(
+		$scope.currentRepoData().name,
+		$scope.currentRepoData().origin,
+		$scope.currentRepoData().serverAdress,
+		$scope.mydb,
+		$scope.currentRepoData().shpfile
+		)
+	console.log(rpObj, rp);
 	$scope.NewShp = function(localShp){
 		alert.open(
 			"New Shapefile",
@@ -28,7 +27,7 @@ function repositorio($scope, $location, repo, alert ){
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
-			rpObj.updateFile($scope.currentRepoId(), inputValue, $scope.localShp);
+			rpObj.shpFile($scope.currentRepoId(), inputValue, $scope.localShp);
 			rp.importShapefile($scope.localShp, function(data){
 				swal("Shapefile", inputValue +" Importing successfully", "success");
 			});
@@ -61,7 +60,8 @@ function repositorio($scope, $location, repo, alert ){
 	};
 	$scope.analisar = function(type){
 		for (each in rpObj.shpfile){
-			rp.importShapefile(rp.shpfile[each].localDir, function(data){
+			console.log(each);
+			rp.importShapefile(rpObj.shpfile[each].localDir, function(data){
 				swal("Shapefile", data +" Importing successfully", "success");
 			});
 			

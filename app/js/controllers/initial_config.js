@@ -1,12 +1,15 @@
 function initial_config($scope, $location){
 
 	$scope.mydb = mydb;
-
-	if (db.openItem('SERVER')=='true'){
+	
+	if (db.openItem('SERVER')==true){
 		console.info('Local Server Already Started')
 	}else{
-		db.setItem('SERVER','true');
-		repo.initLocal();
+		db.setItem('SERVER',true);
+		new Repository.initServer((a,b,c)=>{
+			console.log(a,b,c);
+		});
+		
 	}
 	$scope.selectRepo = function(selectedFild){
 		db.setItem('repoLocalAtivo',selectedFild);
@@ -43,8 +46,9 @@ function repo_view($scope, alert){
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
-			new Local(inputValue, [], 'local', inputValue, 'descricao', $scope.mydb ).save();
-			new Repository(inputValue, [],'local', 'http://localhost:8182/repos/imovel')
+			new Local(inputValue, 'local', 'http://localhost:8182/repos/imovel', $scope.mydb, [])
+			.new();
+			new Repository(inputValue,'local', 'http://localhost:8182/repos/imovel')
 			.init(function  (code, stdout, stderr){
 				swal("Success", stdout +" created.", "success");
 			})

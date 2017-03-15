@@ -1,12 +1,16 @@
 var request = require('request');
 
 class Repository {
-    constructor(name, shpfile, origin, remoteAdress) {
+    constructor(name, origin, serverAdress) {
         this.name = name;
-        this.shpfile = shpfile;
         this.origin = origin;
-        this.remoteAdress = remoteAdress;
+        this.serverAdress = serverAdress;
         this.dir = utils.pwd(this.name, this.origin);
+    }
+    static initServer(){
+        utils.geogig(['serve','--multirepo'], {cwd: utils.pwd(undefined, 'local'), detached: true}, function (error, stdout, stderr) {
+            console.log(error, stdout, stderr);
+        });
     }
 
     init(callback) {
@@ -37,21 +41,21 @@ class Repository {
         );
     };
     addRemote(){
-        utils.geogig(['--repo', this.dir, 'remote', 'add', 'origin', this.remoteAdress],
+        utils.geogig(['--repo', this.dir, 'remote', 'add', 'origin', this.serverAdress],
             (error, stdout, stderr)=>{
                 console.log(error, stdout, stderr);
             }
         )
     }
     ls(callback){
-        request.get(this.remoteAdress+"/ls-tree.json").success(function(data){
+        request.get(this.serverAdress+"/ls-tree.json").success(function(data){
             callback(data);
         }).error(function(data){
             callback(data);
         })
     };
     log(callback) {
-        request.get(this.remoteAdress+"/log.json").success(function(data){
+        request.get(this.serverAdress+"/log.json").success(function(data){
             callback(data);
         })
     };

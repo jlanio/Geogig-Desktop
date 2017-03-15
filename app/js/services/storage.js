@@ -7,7 +7,7 @@ var db = (function (){
 
 	db.get('geogig').catch(function (err) {
 	  if (err.name === 'not_found') {
-	    db.put({"_id":"geogig","infoRepositorios":{"local":[],"remoto":[]}})
+	    db.put({"_id":"geogig","infoRepositorios":{"local":[],"conectedIn":[]}})
 	  }
 	})
 

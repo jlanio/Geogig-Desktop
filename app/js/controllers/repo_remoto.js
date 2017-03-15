@@ -1,5 +1,6 @@
 function repositorio_remoto($scope, $location, $http, repo, toaster){
 
+	var mydb = $scope.mydb;
 
 	getRepositorio_remote = function (data, z){
 		let b = $scope.mydb;
@@ -14,6 +15,8 @@ function repositorio_remoto($scope, $location, $http, repo, toaster){
 		}
 		db.set(b);
 	}
+
+			
 	$scope.addReporemoto = function (remoto) {
 		if (remoto.origin === 'rede_local'){
 			url = remoto.url+"repos.json";
@@ -25,16 +28,9 @@ function repositorio_remoto($scope, $location, $http, repo, toaster){
 			console.log('Nao existe metodo');
 		}
 		$http.get(url).success(function(data){
-		const a  = $scope.mydb;
-		a.infoRepositorios.remoto.push(
-		{
-			"nome":remoto.titulo,
-			"url":url,
-			"repos":[],
-			"origin":remoto.origin
-		});
-		db.set(a);
-		$scope.remoteAtualize ();
+		var a = new Remote(remoto.titulo, url, [], remoto.origin, mydb);
+		console.log(a);
+		/*$scope.remoteAtualize ();*/
 		$scope.cancel();//close Modal
 		}).error(function(){
 			toaster.pop({

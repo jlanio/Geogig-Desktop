@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "fs-extra": "^2.0.0",
-    "leaflet": "^1.0.3"
+    "leaflet": "^1.0.3",
+    "request": "^2.81.0"
   }
 }

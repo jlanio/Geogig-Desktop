@@ -1,17 +1,18 @@
 function repositorio($scope, $location, repo, alert ){
+	console.log(mydb);
 	var rp = new Repository(
 		$scope.currentRepoData().name,
 		$scope.currentRepoData().origin,
-		$scope.currentRepoData().serverAdress
+		$scope.currentRepoData().serverAddress
 		)
 	var rpObj = new Local(
 		$scope.currentRepoData().name,
 		$scope.currentRepoData().origin,
-		$scope.currentRepoData().serverAdress,
+		$scope.currentRepoData().serverAddress,
 		$scope.mydb,
 		$scope.currentRepoData().shpfile
 		)
-	console.log(rpObj, rp);
+
 	$scope.NewShp = function(localShp){
 		alert.open(
 			"New Shapefile",

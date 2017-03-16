@@ -18,7 +18,9 @@ function initial_config($scope, $location){
 	$scope.currentRepoId = function(){
 		return db.openItem('repoLocalAtivo');
 	};
-
+	$scope.lastRepoId = function(){
+		return $scope.mydb.infoRepositorios.local.length - 1;
+	};
 	$scope.currentRepoData = function() {
 		return $scope.mydb.infoRepositorios.local[$scope.currentRepoId()];
 	};
@@ -32,10 +34,6 @@ function initial_config($scope, $location){
 	$scope.currentRepoRemoteData = function(){
 		return $scope.mydb.infoRepositorios.remoto[$scope.currentServeRemoteId()];
 	};
-/*	$scope.selectRepoRemote = function(selectedFild){
-		db.setItem('repoRemoteAtivo',selectedFild);
-		return $location.path('/repo/remoto_repo');
-	};*/
 }
 
 

@@ -1,6 +1,6 @@
 class CtrlRepository extends Repository {
-    constructor(name, origin, serverAdress, mydb) {
-        super(name, origin, serverAdress);
+    constructor(name, origin, serverAddress, mydb) {
+        super(name, origin, serverAddress);
         this.mydb = mydb;
     }
     saveConexao(newObj){
@@ -20,8 +20,8 @@ class CtrlRepository extends Repository {
     }
 }
 class Local extends CtrlRepository {
-    constructor(name, origin, serverAdress, mydb, shpfile){
-        super(name, origin, serverAdress, mydb);
+    constructor(name, origin, serverAddress, mydb, shpfile){
+        super(name, origin, serverAddress, mydb);
         this.shpfile = shpfile;
     }
     new() {
@@ -29,26 +29,26 @@ class Local extends CtrlRepository {
                 "name":this.name,
                 "shpfile":this.shpfile,
                 "origin":this.origin,
-                "serverAdress":"http://localhost:8182/repos/"+this.serverAdress
+                "serverAddress":"http://localhost:8182/repos/"+this.serverAddress
             };
         super.saveLocal(obj);
     }
     shpFile(id, name, localShp) {
-        let obj ={'name':name,'localDir':localShp};
+        let obj ={'name':name,'shpfile':localShp};
         super.saveshpFile(id, obj);
     }
 }
 
 class ConectedIn extends CtrlRepository {
-    constructor(name, origin, serverAdress, mydb, repos) {
-        super(name, origin, serverAdress, mydb);
+    constructor(name, origin, serverAddress, mydb, repos) {
+        super(name, origin, serverAddress, mydb);
         this.repos = repos;
     }
     new(){
         let obj = {
             "name":this.name,
             "origin":this.origin,
-            "serverAdress":this.serverAdress,
+            "serverAddress":this.serverAddress,
             "repos":this.repos}
         super.saveConexao(obj)
     }
@@ -72,18 +72,18 @@ class ConectedIn extends CtrlRepository {
 
 
 
-/*var repository = new Repository ("name", "origin", "serverAdress");
-var ctrl =  new CtrlRepository("name", "origin", "serverAdress", "mydb");
-var local = new Local("name", "origin", "serverAdress", "mydb", "shpfile");
-var conectedIn = new ConectedIn("name", "origin", "serverAdress", "mydb", "repos");
-var ax = conectedIn.new();
+/*var repository = new Repository ("name", "origin", "serverAddress");
+var ctrl =  new CtrlRepository("name", "origin", "serverAddress", "mydb");
+var local = new Local("name", "origin", "serverAddress", "mydb", "shpfile");
+var conectedIn = new ConectedIn("remoto.titulo", "remoto.origin", "url", "$scope.mydb", []);*/
+/*var ax = conectedIn.new();
 var az = local.new();
 var shp = local.shpFile(0,'guanabara','c:/imovel/aksodads/alaska')
-console.log(ax, az, shp);
-console.log(repository, ctrl, local, conectedIn);
+console.log(ax, az, shp);*/
+/*console.log(repository, ctrl, local, conectedIn);*/
 
 
-*/
+
 
 
 

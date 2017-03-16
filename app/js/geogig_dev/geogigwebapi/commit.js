@@ -19,7 +19,7 @@ class Commit {
         })
     }
     diffFeature(callback){
-        request.get(this.serverAdress+"/featurediff.json?path="+this.feature+"&newTreeish="+this.commit+"&oldTreeish="+this.toCompare)
+        request.get(this.serverAddress+"/featurediff.json?path="+this.feature+"&newTreeish="+this.commit+"&oldTreeish="+this.toCompare)
         .success(function(data){
             callback (data);
         })

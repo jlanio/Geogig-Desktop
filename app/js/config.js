@@ -9,6 +9,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('repo', {
         abstract: true,
         url: "/repo",
+        data: { pageTitle: 'Geodig' },
         templateUrl: "views/common/content.html",
         resolve: {
             data:  function(){
@@ -43,54 +44,45 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('repo.local', {
         url: "/local",
         templateUrl: "views/paginas/repositorio_local/main.html",
-        data: { pageTitle: 'Repositório Local' },
         controller: 'repo_view'
     })
     .state('repo.view', {
         url: "/view",
         templateUrl: "views/paginas/repositorio_local/main_view.html",
-        data: { pageTitle: 'Repositório View' },
         controller: 'repositorio'
 
     })
     .state('repo.issue', {
         url: "/issue",
         templateUrl: "views/paginas/issue_tracker.html",
-        data: { pageTitle: 'Repositório Issue' },
 
     })
     .state('repo.remoto', {
         url: "/remoto",
         templateUrl: "views/paginas/repositorio_remoto/main.html",
-        data: { pageTitle: 'Servidor Remoto' },
         controller: 'repositorio_remoto'
     })
     .state('repo.view_remoto', {
         url: "/view_remoto",
         templateUrl: "views/paginas/repositorio_remoto/main_repositorios.html",
-        data: { pageTitle: 'Repositório Remoto' },
         controller: 'repositorio_remoto'
     })
     .state('repo.remoto_repo', {
         url: "/remoto_repo",
         templateUrl: "views/paginas/repositorio_remoto/main_repositorio_view.html",
-        data: { pageTitle: 'Repositório Remoto View' },
         controller: 'repositorio_remoto'
     })
     .state('repo.config', {
         url: "/config_user",
         templateUrl: "views/paginas/config.html",
-        data: { pageTitle: 'Página para Configuração' }
     })
     .state('repo.historico', {
         url: "/historico",
         templateUrl: "views/paginas/timeline.html",
-        data: { pageTitle: 'Repositório Historico' }
     })
     .state('repo.map', {
         url: "/map",
         templateUrl: "views/map.html",
-        data: { pageTitle: 'map' }
     })
 }
 angular

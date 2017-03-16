@@ -11,8 +11,8 @@
                     </h3>
                     <h5>
                         <span class="font-noraml">From: </span>
-                        {{mydb.infoRepositorios.remoto[currentServeRemoteId()].url}} :
-                        {{mydb.infoRepositorios.remoto[currentServeRemoteId()].nome}}
+                        {{mydb.infoRepositorios.conectedIn[currentServeRemoteId()].url}} :
+                        {{mydb.infoRepositorios.conectedIn[currentServeRemoteId()].name}}
                     </h5>
                 </div>
                 <div >
@@ -20,31 +20,28 @@
 
                 <div class="mail-tools tooltip-demo m-t-md" >
                     <div class="btn-group pull-right">
-                        <span class="label label-info pull-right">{{mydb.infoRepositorios.remoto[currentServeRemoteId()].repos.length}} - {{ 'REPOSITORY' }}
+                        <span class="label label-info pull-right">{{mydb.infoRepositorios.conectedIn[currentServeRemoteId()].repos.length}} - {{ 'REPOSITORY' }}
                         </span>
                     </div>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="{{ 'MARK_AS_READ' | translate }}"   ng-controller="modalDemoCtrl" ng-click="open3()">
-                        <i class="fa fa-plus" ></i> {{ 'NEW' | translate }} </button>
-                        <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="{{ 'MOVE_TO_TRASH' | translate }}"><i  class="fa fa-trash-o"></i></button>
-
-
+                        <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="{{ 'MOVE_TO_TRASH' | translate }}"><i  class="fa fa-trash-o"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="mail-box">
 
                     <table class="table table-hover table-mail" ng-init="mydb">
                         <tbody>
-                            <tr class="read" ng-repeat=" (key, value) in mydb.infoRepositorios.remoto[currentServeRemoteId()].repos">
+                            <tr class="read" ng-repeat=" (key, value) in mydb.infoRepositorios.conectedIn[currentServeRemoteId()].repos">
                                 <td class="check-mail">
                                     <input icheck type="checkbox" ng-model="check3">
                                 </td>
                                  <!-- <td class="mail-ontact"><a ng-click="selectRepoRemote(key)" >{{value.nome}}</a>  -->
-                                <td class="mail-ontact"><a >{{value.nome}}</a>
+                                <td class="mail-ontact"><a >{{value.name}}</a>
                                     <span class="label label-danger pull-right">{{ 'REMOTE' | translate }}</span></td>
-                                    <td class="mail-subject"><a ui-sref="repo.email_view">{{value.id}}</a></td>
+                                    <td class="mail-subject"><a >{{value.href}}</a></td>
                                     <td class=""></td>
                                     <td class="text-right mail-date">
-                                        <button ng-click="clone(value.id,value.nome,value.href)" type="button" class="btn btn-primary btn-xs fa fa-cloud-download">
+                                        <button ng-click="clone(value.name, value.href)" type="button" class="btn btn-primary btn-xs fa fa-cloud-download">
                                         {{ 'CLONE' | translate }}</button>
                                     </td>
                                 </tr>

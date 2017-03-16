@@ -1,7 +1,20 @@
 function repositorio_remoto($scope, $location, $http, repo, toaster){
+	$scope.clone = function(name, repoAddress){	
+		repoAddress = repoAddress.replace('.json','');
+		let rp = new Repository(name,'remote', repoAddress);
+		let rpObj =new Local(name,'remote', repoAddress, $scope.mydb,[]);
 
-	var mydb = $scope.mydb;
+		rp.clone((error, stdout, stderr)=>{
+			rpObj.new();
+			rp.ls((data)=>{
+				data.response.node.forEach(function(entry) {
+					rpObj.shpFile($scope.lastRepoId(), entry.path, '')
 
+	            });
+			});
+			swal("", stdout +"");
+		});
+	}
 	getRepositorio_remote = function (data, z){
 		let b = $scope.mydb;
 		b.infoRepositorios.remoto[z].repos = [];
@@ -16,31 +29,6 @@ function repositorio_remoto($scope, $location, $http, repo, toaster){
 		db.set(b);
 	}
 
-			
-	$scope.addReporemoto = function (remoto) {
-		if (remoto.origin === 'rede_local'){
-			url = remoto.url+"repos.json";
-		}else if (remoto.origin === 'geoserver'){
-			url = remoto.url+"geoserver/geogig/repos.json";
-		}else if (remoto.origin === 'postgresql'){
-			console.log("postgresql");
-		}else {
-			console.log('Nao existe metodo');
-		}
-		$http.get(url).success(function(data){
-		var a = new Remote(remoto.titulo, url, [], remoto.origin, mydb);
-		console.log(a);
-		/*$scope.remoteAtualize ();*/
-		$scope.cancel();//close Modal
-		}).error(function(){
-			toaster.pop({
-				type: 'error',
-				title: 'Deu ruim!',
-				body: 'Servidor não encontrado ou URL inválida.',
-				showCloseButton: true
-			});
-		});
-	}
 	$scope.log = function (){
 		if ($scope.currentRepoData().remote == ''){
 			repo.log($scope.currentRepoData().remote,function(data){
@@ -93,52 +81,6 @@ function repositorio_remoto($scope, $location, $http, repo, toaster){
 				showCloseButton: true
 			});
 		})
-	}
-	$scope.clone = function(id, nome, url){
-		repo.clone(url, nome , function(error, stdout, stderr){
-			var a = $scope.mydb;
-			a.infoRepositorios.local.push(
-			{
-				"nome":nome,
-				"arquivos":[],
-				"descricao":"",
-				"origin":{"de":"remote","em":""},
-				"remote": url.replace(".json","")
-			});
-
-			db.set(a);
-			var b = $scope.mydb;
-			swal("", stdout +"");
-			console.log(error, stdout, stderr);
-
-			ls(url, (data)=>{
-				for (x in data){
-					b.infoRepositorios.local[b.infoRepositorios.local.length - 1]
-					.arquivos.push(data[x]);
-				}
-				db.set(b);
-			});
-
-
-		})
-	}
-	function ls (_Name, ressult){
-		repo.ls(_Name, function(data){
-			if (typeof data.response.node === 'undefined'){
-				ressult(undefined)
-			}else if (typeof data.response.node.path === 'undefined'){
-				//Vário Objetos
-				var df = [];
-				for (x in data.response.node){
-					df.push({"nome":data.response.node[x].path,"localDir":""})
-				}
-				ressult(df)
-			}else{
-				ressult([{"nome": data.response.node.path,"localDir":""}])
-			}
-
-		});
-
 	}
 	function shp_export(_Name, type, objeto, localSave){
 		repo.shp_export(_Name, type, objeto, localSave, function(error, stdout, stderr){

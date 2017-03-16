@@ -10,7 +10,7 @@
                 <label class="col-sm-1 control-label">{{ 'ORIGIN' | translate }}</label>
                 <div class="col-sm-10">
                     <select ng-model="remoto.origin" class="selectpicker">
-                      <option value="rede_local">{{ 'LOCAL_NETWORK' | translate }}</option>
+                      <option value="local_network">{{ 'LOCAL_NETWORK' | translate }}</option>
                       <option value="geoserver" >Geoserver</option>
                       <option value="postgresql">PostgreSQL</option>
                     </select>
@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label class="col-sm-1 control-label">{{ 'ADDRESS' | translate }}</label>
                 <div class="col-sm-10">
-                    <input placeholder="Ex: http://localhost:8182/"ng-model="remoto.url" class="form-control" type="text">
+                    <input placeholder="Ex: http://localhost:8182/" ng-model="remoto.url" class="form-control" type="text">
                 </div>
             </div>
             <div class="form-group">
@@ -33,7 +33,7 @@
 
     <div class="modal-footer">
         <button type="button" class="btn btn-white" ng-click="cancel()">{{ 'CLOSE' | translate }}</button>
-        <button type="button"  ng-controller="repositorio_remoto" class="btn btn-primary" ng-click="addReporemoto(remoto)">{{ 'SUBMIT' | translate }}</button>
+        <button type="button" class="btn btn-primary" ng-click="ok(remoto)">{{ 'SUBMIT' | translate }}</button>
     </div>
 
 </div>

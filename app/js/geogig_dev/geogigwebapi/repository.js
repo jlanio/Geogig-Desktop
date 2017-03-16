@@ -1,11 +1,10 @@
 var request = require('request');
 
 class Repository {
-    constructor(name, origin, serverAdress) {
+    constructor(name, origin, serverAddress) {
         this.name = name;
         this.origin = origin;
-        this.serverAdress = serverAdress;
-        this.dir = utils.pwd(this.name, this.origin);
+        this.serverAddress = serverAddress;
     }
     static initServer(){
         utils.geogig(['serve','--multirepo'], {cwd: utils.pwd(undefined, 'local'), detached: true}, function (error, stdout, stderr) {
@@ -14,60 +13,63 @@ class Repository {
     }
 
     init(callback) {
-        utils.geogig(['--repo',  this.dir,'init'],
+        utils.geogig(['--repo',  utils.pwd(this.name, this.origin),'init'],
             (error, stdout, stderr)=>{
                 callback(error, stdout, stderr);
             }
         )
     }
     importShapefile(shpAdress, callback){
-        utils.geogig(['--repo',  this.dir, 'shp', 'import', shpAdress],
+        utils.geogig(['--repo',  utils.pwd(this.name, this.origin), 'shp', 'import', shpAdress],
             (error, stdout, stderr)=>{
                 callback(stdout);
             }
         );
     }
     exportShapefile(camada, localSave, callback){
-        utils.geogig(['--repo', this.dir,'shp','export', camada.nome, localSave+'\\'+camada.nome+'.shp'],
+        utils.geogig(['--repo', utils.pwd(this.name, this.origin),'shp','export', camada.nome, localSave+'\\'+camada.nome+'.shp'],
             (error, stdout, stderr)=>{
                 callback(error, stdout, stderr);
             })
     }
     add(callback){
-        utils.geogig(['--repo', this.dir, 'add'],
+        utils.geogig(['--repo', utils.pwd(this.name, this.origin), 'add'],
             (error, stdout, stderr)=>{
                 callback(stdout);
             }
         );
     };
     addRemote(){
-        utils.geogig(['--repo', this.dir, 'remote', 'add', 'origin', this.serverAdress],
+        utils.geogig(['--repo', utils.pwd(this.name, this.origin), 'remote', 'add', 'origin', this.serverAddress],
             (error, stdout, stderr)=>{
                 console.log(error, stdout, stderr);
             }
         )
     }
     ls(callback){
-        request.get(this.serverAdress+"/ls-tree.json").success(function(data){
-            callback(data);
-        }).error(function(data){
-            callback(data);
-        })
+        request(this.serverAddress+'/ls-tree.json', (error, response, body)=> {
+            callback(JSON.parse(body));
+        });
     };
     log(callback) {
-        request.get(this.serverAdress+"/log.json").success(function(data){
-            callback(data);
-        })
+        request(this.serverAddress+'/log.json', (error, response, body)=> {
+            callback(body);
+        });
     };
     pull(callback){
-        utils.geogig(['--repo', this.dir, 'pull'],(error, stdout, stderr)=>{
+        utils.geogig(['--repo', utils.pwd(this.name, this.origin), 'pull'],(error, stdout, stderr)=>{
             callback(error, stdout, stderr);
         })
     };
     push(callback){
-        utils.geogig(['--repo', this.dir , 'push'],(error, stdout, stderr)=>{
+        utils.geogig(['--repo', utils.pwd(this.name, this.origin) , 'push'],(error, stdout, stderr)=>{
             callback(error, stdout, stderr);
         })
+    }
+    clone(callback){
+        utils.geogig(['clone', this.serverAddress, this.name],{cwd: utils.pwd(undefined, 'remoto')}, function(error, stdout, stderr){
+        callback(error, stdout, stderr)
+      });
     }
 
 }

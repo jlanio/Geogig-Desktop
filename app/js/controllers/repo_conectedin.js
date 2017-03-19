@@ -1,4 +1,4 @@
-function repositorio_remoto($scope, $location, $http, repo, toaster){
+function repositorio_remoto($scope, $location, $http, toaster){
 	$scope.clone = function(name, repoAddress){	
 		repoAddress = repoAddress.replace('.json','');
 		let rp = new Repository(name,'remote', repoAddress);

@@ -1,5 +1,5 @@
 function repositorio($scope, $location, repo, alert ){
-	console.log(mydb);
+	console.log($scope.currentRepoData().name);
 	var rp = new Repository(
 		$scope.currentRepoData().name,
 		$scope.currentRepoData().origin,
@@ -51,20 +51,17 @@ function repositorio($scope, $location, repo, alert ){
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
-			new Commit (rp,'ola_mundo').commit((data)=>{swal("", data +" ", "success")})
+			new Commit (rp,'ola_mundo').commit(data=>swal("", data +" ", "success"))
 		}
 	};
 	$scope.add = function (type){
-		rp.add(function(stdout){
-			swal(" ", stdout +" add successfully", "success");
-		});
+		rp.add(stdout => swal(" ", stdout +" add successfully", "success"));
 	};
 	$scope.analisar = function(type){
 		for (each in rpObj.shpfile){
-			console.log(each);
-			rp.importShapefile(rpObj.shpfile[each].localDir, function(data){
-				swal("Shapefile", data +" Importing successfully", "success");
-			});
+			rp.importShapefile(rpObj.shpfile[each].localDir,
+				(data)=>swal("Shapefile", data +" Importing successfully", "success")
+			);
 			
 		}
 	}

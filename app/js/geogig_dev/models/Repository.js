@@ -6,14 +6,15 @@ class Repository {
         this.serverAddress = serverAddress;
     }
     static initServer(){
-        Utils.geogig(['serve','--multirepo'], {cwd: Utils.pwd('local', ''), detached: true},
-            (error, stdout, stderr)=>console.log(error, stdout, stderr)
-        );
+        let child = Utils.geogig(['serve','--multirepo'], {cwd: Utils.pwd(undefined, 'local'),detached: true}, function (error, stdout, stderr) {
+            console.log(error, stdout, stderr);
+        });
+    return child.pid;
     }
 
     init(callback) {
         Utils.geogig(['--repo',  Utils.pwd(this.origin, this.name),'init'],
-            (error, stdout, stderr)=>callback(error, stdout, stderr)
+            (error, stdout, stderr)=>callback(stdout)
         )
     }
     importShapefile(shpAdress, callback){

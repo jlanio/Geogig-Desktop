@@ -1,6 +1,6 @@
 class ConectedIn extends CtrlRepository {
-    constructor(name, origin, serverAddress, mydb, repos) {
-        super(name, origin, serverAddress, mydb);
+    constructor(name, origin, serverAddress, repos) {
+        super(name, origin, serverAddress);
         this.repos = repos;
     }
     new(){

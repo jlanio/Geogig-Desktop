@@ -1,9 +1,6 @@
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     $urlRouterProvider.otherwise("/repo/local");
-
-    $ocLazyLoadProvider.config({
-        debug: false
-    });
+    $ocLazyLoadProvider.config({debug: false});
 
     $stateProvider
     .state('repo', {
@@ -12,7 +9,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         data: { pageTitle: 'Geodig' },
         templateUrl: "views/common/content.html",
         resolve: {
-            data:  function(){
+            dbGeogig:  function(){
                         return db.open().then(function (data) {
                             return data;
                         });
@@ -37,8 +34,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                 ]);
             }
         },
-        controller: function(data){
-          mydb = data;
+        controller: function(dbGeogig){
+          mydb = dbGeogig;
         }
     })
     .state('repo.local', {

@@ -1,10 +1,10 @@
 var db = (function (){
 	var db = new PouchDB('db');
-	/*
+/*	
 	db.destroy().then(function () {
 		}).catch(function (err) {
-	})*/
-
+	})
+*/
 	db.get('geogig').catch(function (err) {
 	  if (err.name === 'not_found') {
 	    db.put({"_id":"geogig","infoRepositorios":{"local":[],"conectedIn":[]}})

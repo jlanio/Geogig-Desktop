@@ -2,15 +2,14 @@ function repositorio_remoto($scope, $location, $http, toaster){
 	$scope.clone = function(name, repoAddress){	
 		repoAddress = repoAddress.replace('.json','');
 		let rp = new Repository(name,'remote', repoAddress);
-		let rpObj =new Local(name,'remote', repoAddress, $scope.mydb,[]);
+		let rpObj = new Local(name,'remote', repoAddress, $scope.mydb, []);
 
 		rp.clone((error, stdout, stderr)=>{
 			rpObj.new();
-			rp.ls((data)=>{
-				data.response.node.forEach(function(entry) {
+			rp.ls(data=>{
+				data.response.node.forEach(entry=>
 					rpObj.shpFile($scope.lastRepoId(), entry.path, '')
-
-	            });
+	            );
 			});
 			swal("", stdout +"");
 		});

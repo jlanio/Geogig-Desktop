@@ -1,13 +1,12 @@
 function initial_config($scope, $location){
-	Repository.initServer((a,b,c)=>console.log(a,b,c));
 	$s = $scope;
-	$s.mydb = mydb;	
+	$s.mydb = mydb;
 	if (db.openItem('SERVER')==true){
 		console.info('Local Server Already Started')
 	}else{
 		db.setItem('SERVER',true);
-		new Repository.initServer((a,b,c)=>console.log(a,b,c));
-		
+		Repository.initServer((a,b,c)=>console.log(a,b,c));
+
 	}
 	$s.selectRepo = (selectedFild)=> {
 		db.setItem('repoLocalAtivo',selectedFild)
@@ -32,12 +31,12 @@ function repo_view($scope, alert){
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
-			new Local(inputValue, 'local', 'http://localhost:8182/repos/imovel', mydb).new();
+			new Local(inputValue, 'remote', 'http://localhost:8182/repos/imovel').new();
 			new Repository(inputValue,'local', 'http://localhost:8182/repos/imovel')
 			.init(stdout=>swal("Success", stdout +" created.", "success"))
 		}
 	}
-	$scope.NewRepo = function(){
+	$s.NewRepo = function(){
 		alert.open(
 			"New Repository",
 			"Name:",
@@ -45,9 +44,9 @@ function repo_view($scope, alert){
 			"...",
 			NewRepoCrl)
 	};
-	arrayCheked = [];
+	arrayCheked = []
 
-	$scope.checkbox = function(key){
+	$s.checkbox = function(key){
 		arrayCheked.indexOf(key);
 		if (index > -1){
 			arrayCheked.splice(index, 1);
@@ -56,7 +55,7 @@ function repo_view($scope, alert){
 		}
 	};
 
-	$scope.deleteRepo = function(){
+	$s.deleteRepo = function(){
 		console.log("PARA DELETAR: ",arrayCheked );
 	}
 

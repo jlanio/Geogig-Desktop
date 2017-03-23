@@ -1,10 +1,9 @@
 class Local extends CtrlRepository {
-    constructor(name, origin, serverAddress, mydb, shpfile = []){
-        super(name, origin, serverAddress, mydb);
+    constructor(name, origin, serverAddress, shpfile = []){
+        super(name, origin, serverAddress);
         this.shpfile = shpfile;
     }
     new() {
-        console.log( GeneratorJson.local(this.name, this.shpfile, this.origin, this.serverAddress));
         super.saveLocal(
             GeneratorJson.local(this.name, this.shpfile, this.origin, this.serverAddress)
         );

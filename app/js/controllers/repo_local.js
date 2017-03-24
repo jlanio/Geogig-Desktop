@@ -1,10 +1,7 @@
 function repositorio($scope, $location, alert ){
 	let current = $scope.currentRepoData();
 	var rp = new Repository(current.name,current.origin,current.serverAddress)
-	var rpObj = new Local(current.name,current.origin,current.serverAddress,
-		$scope.mydb,
-		current.shpfile
-		)
+	var rpObj = new Local(current.name,current.origin,current.serverAddress)
 
 	$scope.NewShp = function(localShp){
 		alert.open(

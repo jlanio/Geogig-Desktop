@@ -1,3 +1,5 @@
 node_modules
 app/tmp/*
 app/geogig/*
+*.3653094775
+.vscode/launch.json

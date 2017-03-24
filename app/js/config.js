@@ -41,7 +41,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('repo.local', {
         url: "/local",
         templateUrl: "views/paginas/repositorio_local/main.html",
-        controller: 'repo_view'
+        controller: 'listLocal'
     })
     .state('repo.view', {
         url: "/view",

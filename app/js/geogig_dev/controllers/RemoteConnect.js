@@ -1,12 +1,12 @@
-class ConectedIn extends CtrlRepository {
+class RemoteConnect extends CtrlRepository {
     constructor(name, origin, serverAddress, repos) {
         super(name, origin, serverAddress);
         this.repos = repos;
     }
-    new(){
+    new() {
         super.saveConexao(
             GeneratorJson.remote(this.name, this.origin, this.serverAddress, this.repos)
-            );
+        );
     }
     updateRepos(){
 

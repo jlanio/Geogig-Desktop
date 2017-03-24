@@ -28,6 +28,24 @@ function repositorio_remoto($scope, $location, $http, toaster){
 		db.set(b);
 	}
 
+	function get (url, id){
+			$http.get(url).success((data)=>{
+				getRepositorio_remote(data, id);
+			}).error(()=>{
+				toaster.pop({
+					type: 'error',
+					title: 'Servidor Offline',
+					body: url,
+					showCloseButton: true
+				});
+			})
+		}
+	$scope.remoteAtualize = function (){
+		for (conexao in $scope.mydb.infoRepositorios.remoto){
+			get($scope.mydb.infoRepositorios.remoto[conexao].url, conexao);
+		}
+
+	}
 	$scope.log = function (){
 		if ($scope.currentRepoData().remote == ''){
 			repo.log($scope.currentRepoData().remote,function(data){
@@ -61,7 +79,7 @@ function repositorio_remoto($scope, $location, $http, toaster){
 	$scope.load = Openlog();
 
 	$scope.push = function(type){
-		repo.push($scope.currentRepoData().nome, type,function(error, stdout, stderr){
+		repo.push($scope.currentRepoData().nome, type, function(error, stdout, stderr){
 			console.log("OK");
 			toaster.pop({
 				type: 'error',
@@ -97,24 +115,6 @@ function repositorio_remoto($scope, $location, $http, toaster){
 	    		db.set(tmp);
 	  		}
 		);
-	}
-	function get (url, id){
-			$http.get(url).success((data)=>{
-				getRepositorio_remote(data, id);
-			}).error(()=>{
-				toaster.pop({
-					type: 'error',
-					title: 'Servidor Offline',
-					body: url,
-					showCloseButton: true
-				});
-			})
-		}
-	$scope.remoteAtualize = function (){
-		for (conexao in $scope.mydb.infoRepositorios.remoto){
-			get($scope.mydb.infoRepositorios.remoto[conexao].url, conexao);
-		}
-
 	}
 	$scope.compareCommit = function (load){
 		var commidId = []

@@ -22,45 +22,6 @@ function initial_config($scope, $location){
 	$s.currentRepoData = ()=>$s.mydb.infoRepositorios.local[$s.currentRepoId()];
 	$s.currentRepoRemoteData = ()=>$scope.mydb.infoRepositorios.remoto[$scope.currentServeRemoteId()];
 }
-
-
-function repo_view($scope, alert){
-	function NewRepoCrl (inputValue){
-		if (inputValue === false) return false;
-		if (inputValue === "") {
-			swal.showInputError("the field is empty!");
-			return false
-		}else{
-			new Local(inputValue, 'remote', 'http://localhost:8182/repos/imovel').new();
-			new Repository(inputValue,'local', 'http://localhost:8182/repos/imovel')
-			.init(stdout=>swal("Success", stdout +" created.", "success"))
-		}
-	}
-	$s.NewRepo = function(){
-		alert.open(
-			"New Repository",
-			"Name:",
-			"input",
-			"...",
-			NewRepoCrl)
-	};
-	arrayCheked = []
-
-	$s.checkbox = function(key){
-		arrayCheked.indexOf(key);
-		if (index > -1){
-			arrayCheked.splice(index, 1);
-		}else{
-			arrayCheked.push(key);
-		}
-	};
-
-	$s.deleteRepo = function(){
-		console.log("PARA DELETAR: ",arrayCheked );
-	}
-
-}
 angular
 .module('geogig-desktop')
 .controller('initial_config', initial_config)
-.controller('repo_view', repo_view)

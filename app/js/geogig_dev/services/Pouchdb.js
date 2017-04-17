@@ -1,20 +1,24 @@
 class Database{
 	constructor(){
-		this.db = new PouchDB('db');
+		this._db = new PouchDB('db');
 	}
 	open(){
-		this.db.get('geogig').catch(err=> {
+		this._db.get('geogig').catch(err=> {
 		  if (err.name === 'not_found') {
-		    this.db.put(GeneratorJson.init())
+		    this._db.put(GeneratorJson.init())
 		  }
 		})
-		return this.db.get('geogig');
+		return this._db.get('geogig');
 	}
 	set(new_record){
 		this.open().then(data=>{
 			data.infoRepositorios = new_record.infoRepositorios;
-			this.db.put(data)
+			this._db.put(data);
 		})
 	}
 
 }
+/*a = new Database()
+a.open().then(function (doc) {
+  console.log(doc);
+});*/

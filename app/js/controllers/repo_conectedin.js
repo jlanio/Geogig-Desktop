@@ -1,21 +1,21 @@
 function repositorio_remoto($scope, $location, $http, toaster){
-	$scope.clone = function(name, repoAddress){	
+	$s.clone = function(name, repoAddress){	
 		repoAddress = repoAddress.replace('.json','');
 		let rp = new Repository(name,'remote', repoAddress);
-		let rpObj = new Local(name,'remote', repoAddress, $scope.mydb, []);
+		let rpObj = new Local(name,'remote', repoAddress, $s.mydb, []);
 
 		rp.clone((error, stdout, stderr)=>{
 			rpObj.new();
 			rp.ls(data=>{
 				data.response.node.forEach(entry=>
-					rpObj.shpFile($scope.lastRepoId(), entry.path, '')
-	            );
+					rpObj.shpFile($s.lastRepoId(), entry.path, '')
+				);
 			});
 			swal("", stdout +"");
 		});
 	}
 	getRepositorio_remote = function (data, z){
-		let b = $scope.mydb;
+		let b = $s.mydb;
 		b.infoRepositorios.remoto[z].repos = [];
 		for (x in data.repos.repo){
 			b.infoRepositorios.remoto[z].repos.push(
@@ -40,20 +40,20 @@ function repositorio_remoto($scope, $location, $http, toaster){
 				});
 			})
 		}
-	$scope.remoteAtualize = function (){
-		for (conexao in $scope.mydb.infoRepositorios.remoto){
-			get($scope.mydb.infoRepositorios.remoto[conexao].url, conexao);
+	$s.remoteAtualize = function (){
+		for (conexao in $s.mydb.infoRepositorios.remoto){
+			get($s.mydb.infoRepositorios.remoto[conexao].url, conexao);
 		}
 
 	}
-	$scope.log = function (){
-		if ($scope.currentRepoData().remote == ''){
-			repo.log($scope.currentRepoData().remote,function(data){
+	$s.log = function (){
+		if ($s.currentRepoData().remote == ''){
+			repo.log($s.currentRepoData().remote,function(data){
 				$location.path('/repo/historico');
 				window.localStorage['commit'] = angular.toJson(data);
 			});
 		}else{
-			repo.log($scope.currentRepoData().remote,function(data){
+			repo.log($s.currentRepoData().remote,function(data){
 				$location.path('/repo/historico');
 				window.localStorage['commit'] = angular.toJson(data);
 			});
@@ -76,10 +76,10 @@ function repositorio_remoto($scope, $location, $http, toaster){
 
 
 	}
-	$scope.load = Openlog();
+	$s.load = Openlog();
 
-	$scope.push = function(type){
-		repo.push($scope.currentRepoData().nome, type, function(error, stdout, stderr){
+	$s.push = function(type){
+		repo.push($s.currentRepoData().nome, type, function(error, stdout, stderr){
 			console.log("OK");
 			toaster.pop({
 				type: 'error',
@@ -89,8 +89,8 @@ function repositorio_remoto($scope, $location, $http, toaster){
 			});
 		})
 	}
-	$scope.pull = function(type){
-		repo.pull($scope.currentRepoData().nome, type,(error, stdout, stderr)=>{
+	$s.pull = function(type){
+		repo.pull($s.currentRepoData().nome, type,(error, stdout, stderr)=>{
 			toaster.pop({
 				type: 'error',
 				title: 'Deu ruim!',
@@ -104,19 +104,19 @@ function repositorio_remoto($scope, $location, $http, toaster){
 			console.log(error, stdout, stderr);
 		})
 	}
-	$scope.baixar_shp = function (_Name, objeto, key){
+	$s.baixar_shp = function (_Name, objeto, key){
 		const {dialog} = require('electron').remote;
 		dialog.showOpenDialog({
 	  		properties: [ 'openFile', 'openDirectory'] }, function (filename) {
 	    		var localSave = filename.toString();
 	    		shp_export(_Name, 'remoto',objeto, localSave)
-	    		const tmp = $scope.mydb;
-	    		tmp.infoRepositorios.local[$scope.currentRepoId()].arquivos[key].localDir = localSave+'\\'+objeto.nome+'.shp';
+	    		const tmp = $s.mydb;
+	    		tmp.infoRepositorios.local[$s.currentRepoId()].arquivos[key].localDir = localSave+'\\'+objeto.nome+'.shp';
 	    		db.set(tmp);
 	  		}
 		);
 	}
-	$scope.compareCommit = function (load){
+	$s.compareCommit = function (load){
 		var commidId = []
 		for (x in load){
 			if(load[x].activate){
@@ -133,7 +133,7 @@ function repositorio_remoto($scope, $location, $http, toaster){
 			"type": "FeatureCollection",
 			"features":[]
 		}
-		repo.diffCommit($scope.currentRepoData().remote, commidId[0],commidId[1],(data)=>{
+		repo.diffCommit($s.currentRepoData().remote, commidId[0],commidId[1],(data)=>{
 				var wkt = new Wkt.Wkt();
 			for (x in data.response.Feature){
 		        var wkt_geom = (data.response.Feature[x].geometry);
@@ -156,7 +156,7 @@ function repositorio_remoto($scope, $location, $http, toaster){
 			$location.path('/repo/map');
 			for (x in geojsonGenerate.features){
 				if(geojsonGenerate.features[x].properties.type_change == "MODIFIED"){
-					repo.diffFeature($scope.currentRepoData().remote, geojsonGenerate.features[x].properties.feature_id,commidId[0],commidId[1],(data)=>{
+					repo.diffFeature($s.currentRepoData().remote, geojsonGenerate.features[x].properties.feature_id,commidId[0],commidId[1],(data)=>{
 						for (y in ad = data.response.diff){
 							newvalue = data.response.diff[y].newvalue.replace('MULTIPOLYGON (((', 'POLYGON ((')
 									  .replace(')))', '))');

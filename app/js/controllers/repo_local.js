@@ -1,76 +1,36 @@
 function repositorio($scope, $location, alert ){
-	let current = $scope.currentRepoData();
+	let current = $s.currentRepoData();
 	var rp = new Repository(current.name,current.origin,current.serverAddress)
-	var rpObj = new Local(current.name,current.origin,current.serverAddress)
-
-	$scope.NewShp = function(localShp){
-		alert.open(
-			"New Shapefile",
-			"Now add a name:",
-			"input",
-			"...",
-			NewShpCtrl)
-	};
-	function NewShpCtrl (inputValue){
-		if (inputValue === false) return false;
-
-		if (inputValue === "") {
-			swal.showInputError("the field is empty!");
-			return false
-		}else{
-			rpObj.shpFile($scope.currentRepoId(), inputValue, $scope.localShp);
-			rp.importShapefile($scope.localShp, function(data){
-				swal("Shapefile", inputValue +" Importing successfully", "success");
-			});
-		}
-	};
-	$scope.NewCommit = function(type){
-		$scope.type = type
-		alert.open(
-			"New Commit",
-			"Now add a comment:",
-			"input",
-			"...",
-			NewCommitCtrl
-			)
-	};
-	function NewCommitCtrl(inputValue){
-		if (inputValue === false) return false;
-
-		if (inputValue === "") {
-			swal.showInputError("the field is empty!");
-			return false
-		}else{
-			new Commit (rp,'ola_mundo').commit(data=>swal("", data +" ", "success"))
-		}
-	};
-	$scope.add = function (type){
-		rp.add(stdout => swal(" ", stdout +" add successfully", "success"));
-	};
-	$scope.analisar = function(type){
-		for (each in rpObj.shpfile){
-			rp.importShapefile(rpObj.shpfile[each].localDir,
-				(data)=>swal("Shapefile", data +" Importing successfully", "success")
-			);
-			
-		}
+	var rpObj = new RepositoryLocal(current.name, current.origin, current.serverAddress, current.shpfile)
+	console.log(rp);
+	console.log(rpObj);
+	$s.NewShp = localShp=>alert.open("New Shapefile1","Now add a name:","input","...",NewShpCtrl);
+	$s.NewCommit = type=>alert.open("New Commit","Now add a comment:","input","...",NewCommitCtrl);
+	$s.add = (type)=>rp.add(stdout => swal(" ", stdout +" add successfully", "success"));
+	$s.analisar = (type)=>{
+		rpObj.ShpFile.forEach((index)=>{
+				rp.importShapefile(rpObj.ShpFile[index].shpfile,
+					(data)=>swal("Shapefile", data +" Importing successfully", "success")
+				)	
+			}
+		);
 	}
-	$scope.publicarRepo = function (id){
-	/*repo.initRemote($scope.currentRepoData().nome, (data,url)=>{
+	$s.publicarRepo = function (id){
+	/*repo.initRemote($s.currentRepoData().nome, (data,url)=>{
 		if (data.response.error){
 			console.log("ERROR");
 		}else{
 			console.log("publicado com sucesso");
-			const tmp = $scope.mydb;
+			const tmp = $s.mydb;
 			tmp.infoRepositorios.local[id].remote = url;
 			tmp.infoRepositorios.local[id].origin.de = 'remote'
 			db.set(tmp);
-			repo.copy_to_folder($scope.currentRepoData().nome);
+			repo.copy_to_folder($s.currentRepoData().nome);
 
 		}
 	});*/
 	}
-	$scope.dialog = function(){
+	$s.dialog = function(){
 		const {dialog} = require('electron').remote;
 		dialog.showOpenDialog(
 		{
@@ -81,14 +41,32 @@ function repositorio($scope, $location, alert ){
 			],
 			properties: ['openFile']
 		},
-		function (fileName) {
-			if (fileName === undefined){
-				return;
-			}else{
-				$scope.NewShp(fileName[0]);
-				$scope.localShp = fileName[0];
-			}
+		fileName => {
+			fileName === undefined ? false : $s.NewShp(fileName[0]), $s.localShp = fileName[0];
 		})
+	};
+	function NewShpCtrl (inputValue){
+		if (inputValue === false) return false;
+
+		if (inputValue === "") {
+			swal.showInputError("the field is empty!");
+			return false
+		}else{
+			rpObj.newShpFile($s.currentRepoId(), inputValue, $s.localShp);
+			rp.importShapefile($s.localShp, function(data){
+				swal("Shapefile", inputValue +" Importing successfully", "success");
+			});
+		}
+	};
+	function NewCommitCtrl(inputValue){
+		if (inputValue === false) return false;
+
+		if (inputValue === "") {
+			swal.showInputError("the field is empty!");
+			return false
+		}else{
+			new Commit (rp,'ola_mundo').commit(data=>swal("", data +" ", "success"))
+		}
 	};
 }
 angular

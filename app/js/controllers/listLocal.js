@@ -1,25 +1,19 @@
 function listLocal($scope, alert){
-	function NewRepoCrl (inputValue){
+	arrayCheked = []
+
+	$s.NewRepo = ()=>alert.open("New Repository","Name:","input","...",NewRepoCrl);
+
+	NewRepoCrl = (inputValue)=>{
 		if (inputValue === false) return false;
 		if (inputValue === "") {
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
 			new Ctrl(inputValue).new(stdout=>swal("Success", stdout +" created.", "success"))
-			
 		}
 	}
-	$s.NewRepo = function(){
-		alert.open(
-			"New Repository",
-			"Name:",
-			"input",
-			"...",
-			NewRepoCrl)
-	};
 	
-	arrayCheked = []
-	$s.checkbox = function(key){
+	$s.checkbox = (key)=>{
 		arrayCheked.indexOf(key);
 		if (index > -1){
 			arrayCheked.splice(index, 1);
@@ -28,9 +22,7 @@ function listLocal($scope, alert){
 		}
 	};
 
-	$s.deleteRepo = function(){
-		console.log("PARA DELETAR: ",arrayCheked );
-	}
+	$s.deleteRepo = ()=>console.log("PARA DELETAR: ",arrayCheked)
 
 }
 angular

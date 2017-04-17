@@ -4,7 +4,7 @@ var cmd = require('child_process').execFile;
 class Utils {
 
 	static pwd(type, name) {
-		return type ? `${path}/tmp/${type}/${name}` : false;
+		return name ? `${path}/tmp/${type}/${name}` : `${path}/tmp/${type}`;
 	}
 	
 	static geogig (command, options, callback){

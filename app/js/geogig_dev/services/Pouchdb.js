@@ -18,7 +18,8 @@ class Database{
 	}
 
 }
-/*a = new Database()
-a.open().then(function (doc) {
-  console.log(doc);
-});*/
+
+/*new Database().open().then(doc => console.log(doc));*/
+/*new PouchDB('db').destroy().then(function () {
+		}).catch(function (err) {
+})*/

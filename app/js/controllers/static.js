@@ -1,14 +1,15 @@
 class Ctrl {
-	constructor(name, origin = 'local',  address = `http://localhost:8182/repos/${name}`){
-		this._Repository = new Repository(name, origin, address);
-		this._Local = new RepositoryLocal(name, origin, address);
+	constructor(name, origin = 'local',  serverAddress = `http://localhost:8182/reposs/${name}`){
+		this._Repository = new Repository(name, origin, serverAddress);
+		this._RepositoryLocal = new RepositoryLocal(name, origin, serverAddress);
 	}
-	new(callback){
-		this._Repository.init(q=>callback(q))
-		this._Local.new();
+	new(){
+		this._Repository.init()
+		.then(this._RepositoryLocal.new());
+		
 	}
 	update(id, name, localShp){
-		this._Local.newShpFile(id, name, localShp);
+		this._RepositoryLocal.newShpFile(id, name, localShp);
 	}
 	delete(){
 
@@ -16,13 +17,12 @@ class Ctrl {
 	get Repository(){
 		return this._Repository
 	}
+	get RepositoryLocal(){
+		return this._RepositoryLocal
+	}
 
 
 }
-
-let ctrl = new Ctrl('xzzXzzzz','remote');
-ctrl.Repository.init(q=>console.log(q));
-
 
 
 

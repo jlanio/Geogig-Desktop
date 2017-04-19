@@ -1,17 +1,16 @@
 function repositorio($scope, $location, alert ){
 	let current = $s.currentRepoData();
-	var rp = new Repository(current.name,current.origin,current.serverAddress)
-	var rpObj = new RepositoryLocal(current.name, current.origin, current.serverAddress, current.shpfile)
-	console.log(rp);
-	console.log(rpObj);
+	console.log(current);
+	let ctrl = new Ctrl(current.name, current.origin, current.serverAddress, current.shpfile);
+		console.log(ctrl);
 	$s.NewShp = localShp=>alert.open("New Shapefile1","Now add a name:","input","...",NewShpCtrl);
 	$s.NewCommit = type=>alert.open("New Commit","Now add a comment:","input","...",NewCommitCtrl);
-	$s.add = (type)=>rp.add(stdout => swal(" ", stdout +" add successfully", "success"));
+	$s.add = (type)=>ctrl.Repository.add().then(q=>swal(" ", q +" add successfully", "success"));
 	$s.analisar = (type)=>{
-		rpObj.ShpFile.forEach((index)=>{
-				rp.importShapefile(rpObj.ShpFile[index].shpfile,
-					(data)=>swal("Shapefile", data +" Importing successfully", "success")
-				)	
+		ctrl.RepositoryLocal.ShpFile.forEach((element, index, array)=>{
+				console.log(element, index, array);
+				ctrl.Repository.importShapefile(ctrl.RepositoryLocal.ShpFile[index].shpfile)
+				.then(data=>swal("Shapefile", data +" Importing successfully", "success"));	
 			}
 		);
 	}
@@ -52,10 +51,9 @@ function repositorio($scope, $location, alert ){
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
-			rpObj.newShpFile($s.currentRepoId(), inputValue, $s.localShp);
-			rp.importShapefile($s.localShp, function(data){
-				swal("Shapefile", inputValue +" Importing successfully", "success");
-			});
+			ctrl.update($s.currentRepoId(), inputValue, $s.localShp);
+			ctrl.Repository.importShapefile($s.localShp)
+			.then(q=>swal("Shapefile", q +" Importing successfully", "success"));
 		}
 	};
 	function NewCommitCtrl(inputValue){
@@ -65,7 +63,7 @@ function repositorio($scope, $location, alert ){
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
-			new Commit (rp,'ola_mundo').commit(data=>swal("", data +" ", "success"))
+			new Commit (ctrl.Repository,'ola_mundo').commit(data=>swal("", data +" ", "success"))
 		}
 	};
 }

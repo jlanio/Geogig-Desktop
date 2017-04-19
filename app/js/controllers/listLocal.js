@@ -9,20 +9,17 @@ function listLocal($scope, alert){
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
-			new Ctrl(inputValue).new(stdout=>swal("Success", stdout +" created.", "success"))
+			new Ctrl(inputValue).new()
+			.then(q=>swal("Success", q +" created.", "success"))
+			
 		}
 	}
-	
-	$s.checkbox = (key)=>{
-		arrayCheked.indexOf(key);
-		if (index > -1){
-			arrayCheked.splice(index, 1);
-		}else{
-			arrayCheked.push(key);
-		}
+	idForDelete = [];
+	$s.checkbox = (id)=>{
+		idForDelete.indexOf(id)> -1 ? idForDelete.splice(-1, 1) : idForDelete.push(id);
 	};
 
-	$s.deleteRepo = ()=>console.log("PARA DELETAR: ",arrayCheked)
+	$s.deleteRepo = ()=>console.log("PARA DELETAR: ",idForDelete)
 
 }
 angular

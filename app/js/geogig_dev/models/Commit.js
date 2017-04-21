@@ -6,20 +6,26 @@ class Commit {
         this._toCompare = toCompare;
         this._feature = feature;
     }
-    commit(callback){
-        Utils.geogig(['--repo',  this._repository.dir, 'commit', '-m', this._comment],
-            (error, stdout, stderr)=>callback(stdout)
-        );
+    commit(){
+        return new Promise((resolve, reject) => {
+            Utils.geogig(['--repo',  this._repository, 'commit', '-m', this._comment],
+                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
+            )            
+        })
     }
-    diffCommit(callback){
-        request.get(`${url}/diff.json?oldRefSpec=${this.commit}&newRefSpec=${this._toCompare}&showGeometryChanges=true{}`)
-        .success(data=> callback(data)
-        )
+    diffCommit(){
+        return new Promise((resolve, reject) => {
+            request(`${this._repository._serverAddress}/diff.json?oldRefSpec=${this._thisCommit}&newRefSpec=${this._toCompare}&showGeometryChanges=true`, 
+                (error, response, body)=>{error ? reject(error) : resolve(JSON.parse(body))}
+            )   
+        })
     }
     diffFeature(callback){
-        request.get(`${this.serverAddress}/featurediff.json?path=${this._feature}&newTreeish=${this.commit}&oldTreeish=${this.toCompare}`)
-        .success(data => callback (data)
-        )
+        return new Promise((resolve, reject) => {
+            request(`${this.serverAddress}/featurediff.json?path=${this._feature}&newTreeish=${this.commit}&oldTreeish=${this.toCompare}`,
+                (error, response, body)=>{error ? reject(error) : resolve(JSON.parse(body))}    
+            ) 
+        })
     }
 
 }

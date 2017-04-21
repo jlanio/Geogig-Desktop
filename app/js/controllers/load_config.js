@@ -3,10 +3,12 @@ function initial_config($scope, $location){
 	$s.mydb = mydb;
 	db.openItem('SERVER') ? console.info('Local Server Already Started') : 
 	db.setItem('SERVER', true), Repository.initServer((a,b,c)=>console.log(a,b,c));
-	$s.selectRepo = (selectedFild)=> {db.setItem('repoLocalAtivo',selectedFild)
+	$s.selectRepo = (selectedFild)=> {
+		db.setItem('repoLocalAtivo',selectedFild)
 		return $location.path('/repo/view')
 	}
-	$s.selectServeRemote = (selectedFild)=>{db.setItem('serveRemoteAtivo',selectedFild);
+	$s.selectServeRemote = (selectedFild)=>{
+		db.setItem('serveRemoteAtivo',selectedFild);
 		$location.path('/repo/view_remoto');
 	};
 	$s.currentRepoId = ()=> db.openItem('repoLocalAtivo');

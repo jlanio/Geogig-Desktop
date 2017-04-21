@@ -1,4 +1,18 @@
 function repositorio_remoto($scope, $location, $http, toaster){
+	let current = $s.currentRepoData();
+	let ctrl = new Ctrl(current.name, current.origin, current.serverAddress, current.shpfile);
+	
+	$s.log = ()=>{
+		ctrl.Repository.log(ctrl.Repository._serverAddress)
+		.then(q=>{
+			/*Criar uma condição para quando resultado for vazio*/
+			LocalStorage.set('commit', q),
+			$location.path('/repo/historico')
+		}).catch(q=>console.error(q))
+	}
+	$s.loadlogCommit = ()=>{
+		return angular.fromJson(LocalStorage.get('commit')).response.commit;
+	}
 	$s.clone = function(name, repoAddress){	
 		repoAddress = repoAddress.replace('.json','');
 		let rp = new Repository(name,'remote', repoAddress);
@@ -46,37 +60,7 @@ function repositorio_remoto($scope, $location, $http, toaster){
 		}
 
 	}
-	$s.log = function (){
-		if ($s.currentRepoData().remote == ''){
-			repo.log($s.currentRepoData().remote,function(data){
-				$location.path('/repo/historico');
-				window.localStorage['commit'] = angular.toJson(data);
-			});
-		}else{
-			repo.log($s.currentRepoData().remote,function(data){
-				$location.path('/repo/historico');
-				window.localStorage['commit'] = angular.toJson(data);
-			});
-		}
-	}
-	var Openlog = function(){
-		if (window.localStorage['commit']){
-			if(typeof angular.fromJson(window.localStorage['commit']).response.commit[1] === 'undefined'){
-				const umCommit = angular.fromJson(window.localStorage['commit']).response.commit;
-				const a = [];
-				a.push(umCommit)
-				return a;
-			}else{
-				return angular.fromJson(window.localStorage['commit']).response.commit;
-			}
-		}else{
-			console.error('Local Storage commit is not defined');
-		}
-
-
-
-	}
-	$s.load = Openlog();
+	
 
 	$s.push = function(type){
 		repo.push($s.currentRepoData().nome, type, function(error, stdout, stderr){
@@ -117,14 +101,8 @@ function repositorio_remoto($scope, $location, $http, toaster){
 		);
 	}
 	$s.compareCommit = function (load){
-		var commidId = []
-		for (x in load){
-			if(load[x].activate){
-				/*console.log(load[x].id ,load[x].activate);*/
-				commidId.push(load[x].id)
-
-			}
-		}
+		var commidId = [];
+		load.forEach(element=>element.activate ? commidId.push(element.id) : false);
 		geojsonGenerate = {
 			"type": "FeatureCollection",
 			"features":[]
@@ -133,7 +111,12 @@ function repositorio_remoto($scope, $location, $http, toaster){
 			"type": "FeatureCollection",
 			"features":[]
 		}
-		repo.diffCommit($s.currentRepoData().remote, commidId[0],commidId[1],(data)=>{
+		new Commit(ctrl.Repository, null, commidId[1], commidId[0])
+		.diffCommit()
+		.then(q=>{
+			console.log(WKTtoGeojson.init(q));
+		}).catch(q=>console.log(q))
+		/*repo.diffCommit($s.currentRepoData().remote, commidId[0],commidId[1],(data)=>{
 				var wkt = new Wkt.Wkt();
 			for (x in data.response.Feature){
 		        var wkt_geom = (data.response.Feature[x].geometry);
@@ -177,7 +160,7 @@ function repositorio_remoto($scope, $location, $http, toaster){
 					});
 				}
 			}
-		})
+		})*/
 
 	}
 

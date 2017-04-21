@@ -10,7 +10,7 @@ class GeneratorJson{
             	'name':name,
             	'shpfile':shpfile,
             	'origin':origin,
-            	'serverAddress':`http://localhost:8182/repos/${serverAddress}`
+            	'serverAddress':serverAddress
             	};
 	}
 	static remote (name, origin, serverAddress, repos){
@@ -25,5 +25,11 @@ class GeneratorJson{
 		return {
 				'name':name,'shpfile':localShp
 				}
+	}
+	static geojson (){
+		return {
+			"type": "FeatureCollection",
+			"features":[]
+		}
 	}
 }

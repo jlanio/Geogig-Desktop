@@ -1,11 +1,15 @@
 class Ctrl {
-	constructor(name, origin = 'local',  serverAddress = `http://localhost:8182/reposs/${name}`, shpfile = []){
+	constructor(name, origin = 'local',  serverAddress = `http://localhost:8182/repos/${name}`, shpfile = []){
 		this._Repository = new Repository(name, origin, serverAddress);
 		this._RepositoryLocal = new RepositoryLocal(name, origin, serverAddress, shpfile);
 	}
 	new(){
 		return new Promise((resolve, reject) => {
-			this._Repository.init().then(q=>resolve(q)).catch(q=>reject(q))
+			this._Repository.init()
+			.then(q=>
+				resolve(q),
+				this._RepositoryLocal.new())
+			.catch(q=>reject(q))
 		})
 	}
 	update(id, name, localShp){

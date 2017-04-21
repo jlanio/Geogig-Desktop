@@ -1,19 +1,45 @@
 function repositorio($scope, $location, alert ){
 	let current = $s.currentRepoData();
-	console.log(current);
 	let ctrl = new Ctrl(current.name, current.origin, current.serverAddress, current.shpfile);
-		console.log(ctrl);
-	$s.NewShp = localShp=>alert.open("New Shapefile1","Now add a name:","input","...",NewShpCtrl);
-	$s.NewCommit = type=>alert.open("New Commit","Now add a comment:","input","...",NewCommitCtrl);
-	$s.add = (type)=>ctrl.Repository.add().then(q=>swal(" ", q +" add successfully", "success"));
+
+	$s.NewShp = localShp=>alert.open("New Shapefile1","Now add a name:","input","...",
+		(inputValue)=>{
+		if (inputValue === false) return false;
+
+		if (inputValue === "") {
+			swal.showInputError("the field is empty!");
+			return false
+		}else{
+			ctrl.update($s.currentRepoId(), inputValue, $s.localShp);
+			ctrl.Repository.importShapefile($s.localShp)
+			.then(q=>swal("Shapefile", q +" Importing successfully", "success"));
+		}
+	});
+	$s.NewCommit = type=>alert.open("New Commit","Now add a comment:","input","...",
+		(inputValue)=>{
+		if (inputValue === false) return false;
+
+		if (inputValue === "") {
+			swal.showInputError("the field is empty!");
+			return false
+		}else{
+			new Commit (Utils.pwd('local',ctrl.Repository._name),'ola_mundo').commit()
+			.then(q=>swal("", q +" ", "success"))
+			.catch(q=>swal("", q +" ", "error"))
+		}
+	});
+	
 	$s.analisar = (type)=>{
-		ctrl.RepositoryLocal.ShpFile.forEach((element, index, array)=>{
-				console.log(element, index, array);
+		ctrl.RepositoryLocal.ShpFile.forEach((element, index)=>{
 				ctrl.Repository.importShapefile(ctrl.RepositoryLocal.ShpFile[index].shpfile)
 				.then(data=>swal("Shapefile", data +" Importing successfully", "success"));	
 			}
-		);
-	}
+		)
+	};
+	$s.add = (type)=>{
+		ctrl.Repository.add()
+		.then(q=>swal(" ", q +" add successfully", "success"))
+	};
 	$s.publicarRepo = function (id){
 	/*repo.initRemote($s.currentRepoData().nome, (data,url)=>{
 		if (data.response.error){
@@ -44,29 +70,10 @@ function repositorio($scope, $location, alert ){
 			fileName === undefined ? false : $s.NewShp(fileName[0]), $s.localShp = fileName[0];
 		})
 	};
-	function NewShpCtrl (inputValue){
-		if (inputValue === false) return false;
-
-		if (inputValue === "") {
-			swal.showInputError("the field is empty!");
-			return false
-		}else{
-			ctrl.update($s.currentRepoId(), inputValue, $s.localShp);
-			ctrl.Repository.importShapefile($s.localShp)
-			.then(q=>swal("Shapefile", q +" Importing successfully", "success"));
-		}
-	};
-	function NewCommitCtrl(inputValue){
-		if (inputValue === false) return false;
-
-		if (inputValue === "") {
-			swal.showInputError("the field is empty!");
-			return false
-		}else{
-			new Commit (ctrl.Repository,'ola_mundo').commit(data=>swal("", data +" ", "success"))
-		}
-	};
+	
+	
 }
 angular
 .module('geogig-desktop')
 .controller('repositorio', repositorio)
+	

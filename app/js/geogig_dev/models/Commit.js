@@ -20,7 +20,7 @@ class Commit {
             )   
         })
     }
-    diffFeature(callback){
+    diffFeature(){
         return new Promise((resolve, reject) => {
             request(`${this.serverAddress}/featurediff.json?path=${this._feature}&newTreeish=${this.commit}&oldTreeish=${this.toCompare}`,
                 (error, response, body)=>{error ? reject(error) : resolve(JSON.parse(body))}    

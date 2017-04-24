@@ -103,40 +103,19 @@ function repositorio_remoto($scope, $location, $http, toaster){
 	$s.compareCommit = function (load){
 		var commidId = [];
 		load.forEach(element=>element.activate ? commidId.push(element.id) : false);
-		geojsonGenerate = {
-			"type": "FeatureCollection",
-			"features":[]
-		}
-		geojsonGenerateDiff = {
-			"type": "FeatureCollection",
-			"features":[]
-		}
+		
 		new Commit(ctrl.Repository, null, commidId[1], commidId[0])
 		.diffCommit()
 		.then(q=>{
-			console.log(WKTtoGeojson.init(q));
-		}).catch(q=>console.log(q))
-		/*repo.diffCommit($s.currentRepoData().remote, commidId[0],commidId[1],(data)=>{
-				var wkt = new Wkt.Wkt();
-			for (x in data.response.Feature){
-		        var wkt_geom = (data.response.Feature[x].geometry);
-				geometry = wkt_geom[0].replace('MULTIPOLYGON (((', 'POLYGON ((')
-									  .replace(')))', '))');
-				type_change = data.response.Feature[x].change;
-				feature_id = data.response.Feature[x].id;
-
-		        wkt.read(geometry);
-				wkt.toObject();
-				geojsonGenerate.features.push({"type":"Feature","properties":{
-												"feature_id":feature_id,
-												"type_change":type_change
-											},
-											"geometry":wkt.toJson()
-											});
-
-		      }
-			localStorage.setItem("geojson", JSON.stringify(geojsonGenerate));
+			LocalStorage.set("geojson", WKTtoGeojson.init(q));
 			$location.path('/repo/map');
+			WKTtoGeojson.init(q).features.forEach((element, index)=>{
+				element.properties.type_change == "MODIFIED" 
+				? console.log(element.properties.feature_id) 
+				: console.log('nao é');
+			})
+		}).catch(q=>console.log(q))
+		/*	$location.path('/repo/map');
 			for (x in geojsonGenerate.features){
 				if(geojsonGenerate.features[x].properties.type_change == "MODIFIED"){
 					repo.diffFeature($s.currentRepoData().remote, geojsonGenerate.features[x].properties.feature_id,commidId[0],commidId[1],(data)=>{

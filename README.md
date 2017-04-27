@@ -36,5 +36,6 @@ Clone:
 - [x] Pull
 - [x] Push
 - [x] Modification history and commit comparison :boom:
-
+# Developing
+See [CONTRIBUTING](https://github.com/jlanio/Geogig-Desktop/blob/master/CONTRIBUTING.md) for details on making GitHub pull request.
 > Feedback or suggestions: lanio.morais@gmail.com

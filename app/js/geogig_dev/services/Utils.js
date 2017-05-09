@@ -1,5 +1,5 @@
-var path = require("path").dirname(require.main.filename).slice(2).replace(/\\/g,'/');
-var cmd = require('child_process').execFile;
+var path = require("path").dirname(require.main.filename);
+var spawn = require('child_process').spawn;
 
 class Utils {
 
@@ -7,8 +7,15 @@ class Utils {
 		return name ? `${path}/tmp/${type}/${name}` : `${path}/tmp/${type}`;
 	}
 	
-	static geogig (command, options, callback){
-		return cmd(`${path}/geogig/bin/geogig.bat`, command , options,
-				(error, stdout, stderr) => callback(error,stdout, stderr));
+	static geogig (args){
+		return new Promise((resolve, reject) => {
+			let processObject = spawn(`${path}/geogig/bin/geogig.bat`, 
+				args, 
+				{cwd: this.pwd('local')}
+			);
+			processObject.stdout.setEncoding('utf8');
+			processObject.stdout.on('data', data => resolve(data));
+			processObject.stderr.on('data', data => reject(data));           
+		})
 	}
 }

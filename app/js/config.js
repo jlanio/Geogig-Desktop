@@ -1,19 +1,16 @@
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
-    $urlRouterProvider.otherwise("/repo/local");
+    $urlRouterProvider.otherwise("/main/local");
     $ocLazyLoadProvider.config({debug: false});
 
     $stateProvider
-    .state('repo', {
+    .state('main', {
         abstract: true,
-        url: "/repo",
+        url: "/main",
         data: { pageTitle: 'Geodig' },
         templateUrl: "views/common/content.html",
         resolve: {
-            dbGeogig:  function(){
-                        return db.open().then(function (data) {
-                            return data;
-                        });
-            },
+            dbGeogig:  () => db.open().then((data) =>  data),
+            controller: function(dbGeogig){mydb = dbGeogig},
             loadPlugin: function ($ocLazyLoad) {
                 return $ocLazyLoad.load([
                 {
@@ -33,53 +30,50 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                 }
                 ]);
             }
-        },
-        controller: function(dbGeogig){
-          mydb = dbGeogig;
         }
     })
-    .state('repo.local', {
+    .state('main.local', {
         url: "/local",
         templateUrl: "views/paginas/repositorio_local/main.html",
         controller: 'listLocal'
     })
-    .state('repo.view', {
+    .state('main.view', {
         url: "/view",
         templateUrl: "views/paginas/repositorio_local/main_view.html",
-        controller: 'repositorio'
+        controller: 'repositorio_remoto'
 
     })
-    .state('repo.issue', {
+    .state('main.issue', {
         url: "/issue",
         templateUrl: "views/paginas/issue_tracker.html",
 
     })
-    .state('repo.remoto', {
+    .state('main.remoto', {
         url: "/remoto",
         templateUrl: "views/paginas/repositorio_remoto/main.html",
         controller: 'repositorio_remoto'
     })
-    .state('repo.view_remoto', {
+    .state('main.view_remoto', {
         url: "/view_remoto",
         templateUrl: "views/paginas/repositorio_remoto/main_repositorios.html",
         controller: 'repositorio_remoto'
     })
-    .state('repo.remoto_repo', {
+    .state('main.remoto_repo', {
         url: "/remoto_repo",
         templateUrl: "views/paginas/repositorio_remoto/main_repositorio_view.html",
         controller: 'repositorio_remoto'
     })
-    .state('repo.config', {
+    .state('main.config', {
         url: "/config_user",
         templateUrl: "views/paginas/config.html",
     })
-    .state('repo.historico', {
+    .state('main.historico', {
         url: "/historico",
         templateUrl: "views/paginas/timeline.html",
     })
-    .state('repo.map', {
+    .state('main.map', {
         url: "/map",
-        templateUrl: "views/map.html",
+        templateUrl: "views/map.html"
     })
 }
 angular

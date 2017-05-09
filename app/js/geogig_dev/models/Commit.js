@@ -22,7 +22,7 @@ class Commit {
     }
     diffFeature(){
         return new Promise((resolve, reject) => {
-            request(`${this.serverAddress}/featurediff.json?path=${this._feature}&newTreeish=${this.commit}&oldTreeish=${this.toCompare}`,
+            request(`${this._repository._serverAddress}/featurediff.json?path=${this._feature}&newTreeish=${this._thisCommit}&oldTreeish=${this._toCompare}`,
                 (error, response, body)=>{error ? reject(error) : resolve(JSON.parse(body))}    
             ) 
         })

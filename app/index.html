@@ -10,7 +10,7 @@
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <!-- Bootstrap and Fonts -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Main Inspinia CSS files -->
+    <!-- Main theme CSS files -->
     <link href="css/animate.css" rel="stylesheet">
     <link id="loadBefore" href="css/style.css" rel="stylesheet">
     <!-- Plugin chosen -->
@@ -18,7 +18,7 @@
     <link href="js/plugins/leaflet/leaflet.css" rel="stylesheet">
 </head>
 <!-- ControllerAs syntax -->
-<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+<!-- Main controller with serveral data used in  theme on diferent view -->
 <!-- <body class="{{$state.current.data.specialClass}}" > -->
 <body  class="pace-done mini-navbar">
     <!-- Main view  -->
@@ -42,7 +42,7 @@
     <script src="js/plugins/chosen/chosen.jquery.js"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
+    <script src="js/theme.js"></script>
 
 
     <!-- Pouchdb -->
@@ -50,6 +50,7 @@
 
     <!-- Main Angular scripts-->
     <script src="js/angular/angular.min.js"></script>
+    <script src="js/plugins/angularLeaflet/angular-leaflet-directive.min.js"></script>
     <script src="js/plugins/oclazyload/dist/ocLazyLoad.min.js"></script>
     <script src="js/ui-router/angular-ui-router.min.js"></script>
     <script src="js/angular-translate/angular-translate.min.js"></script>
@@ -64,24 +65,25 @@
     <script src="js/config.js"></script>
     <script src="js/directives.js"></script>
     <!-- Meus Controllers -->
-    <script src="js/controllers/load_config.js"></script>
+    <script src="js/controllers/initConfig.js"></script>
     <script src="js/controllers/repo_local.js"></script>
     <script src="js/controllers/repo_conectedin.js"></script>
     <script src="js/controllers/listLocal.js"></script>
 
     <!-- For GEOGIG-DESKTOP SCRIPT -->
+    <script src="js/geogig_dev/services/Utils.js"></script>
     <script src="js/geogig_dev/models/Repository.js"></script>
     <script src="js/geogig_dev/models/Commit.js"></script>
-    <script src="js/geogig_dev/services/Utils.js"></script>
     <script src="js/geogig_dev/services/Pouchdb.js"></script>
+    <script src="js/geogig_dev/helpers/pingServer.js"></script>
     <script src="js/geogig_dev/helpers/GeneratorJson.js"></script>
     <script src="js/geogig_dev/helpers/LocalStorage.js"></script>
     <script src="js/geogig_dev/helpers/RepositorySave.js"></script>
     <script src="js/geogig_dev/helpers/WKTtoGeojson.js"></script>
     <script src="js/geogig_dev/controllers/RepositoryLocal.js"></script>
     <script src="js/geogig_dev/controllers/RepositoryRemote.js"></script>
-    <script src="js/geogig_dev/controllers/Ctrl.js"></script>
-    
+    <script src="js/geogig_dev/controllers/MainCtrl.js"></script>
+
     <script src="js/services/plugins.js"></script>
     <script src="js/services/storage.js"></script>
 </body>

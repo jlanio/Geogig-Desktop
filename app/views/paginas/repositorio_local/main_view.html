@@ -1,14 +1,14 @@
-<div ng-controller="repositorio_remoto" class="wrapper wrapper-content">
+<div  class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-12 animated fadeInRight">
             <div class="mail-tools tooltip-demo m-t-md">
-                <a ui-sref="repo.local" class="btn btn-white btn-xs">
+                <a ui-sref="main.local" class="btn btn-white btn-xs">
                     <i class="fa fa-reply"></i> Voltar
                 </a>
                 <a ng-click= "log()" class="btn btn-white btn-xs">
                     <i class="fa fa-tencent-weibo"></i> {{ 'HISTORY' | translate }} 
                 </a>
-                <a ui-sref="repo.issue" class="btn btn-white btn-xs">
+                <a ui-sref="main.issue" class="btn btn-white btn-xs">
                     <i class="fa fa fa-comment-o"></i> Issue track
                 </a>
                 <a  class="btn btn-white btn-xs disabled" ng-click="publicarRepo(currentRepoId())">

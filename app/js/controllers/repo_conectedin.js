@@ -4,11 +4,12 @@ function repositorio_remoto($scope, $location, $http, toaster){
 	
 	$s.log = ()=>{
 		ctrl.Repository.log(ctrl.Repository._serverAddress)
+		/*Criar uma condição para quando resultado for vazio*/
 		.then(q=>{
-			/*Criar uma condição para quando resultado for vazio*/
+			console.log(q);
 			LocalStorage.set('commit', q),
-			$location.path('/repo/historico')
-		}).catch(q=>console.error(q))
+			$location.path('/main/historico')
+			}).catch(q=>console.error(q))
 	}
 	$s.loadlogCommit = ()=>{
 		return angular.fromJson(LocalStorage.get('commit')).response.commit;
@@ -106,42 +107,14 @@ function repositorio_remoto($scope, $location, $http, toaster){
 		
 		new Commit(ctrl.Repository, null, commidId[1], commidId[0])
 		.diffCommit()
-		.then(q=>{
+		.then(q => {
 			LocalStorage.set("geojson", WKTtoGeojson.init(q));
-			$location.path('/repo/map');
-			WKTtoGeojson.init(q).features.forEach((element, index)=>{
-				element.properties.type_change == "MODIFIED" 
-				? console.log(element.properties.feature_id) 
-				: console.log('nao é');
-			})
-		}).catch(q=>console.log(q))
-		/*	$location.path('/repo/map');
-			for (x in geojsonGenerate.features){
-				if(geojsonGenerate.features[x].properties.type_change == "MODIFIED"){
-					repo.diffFeature($s.currentRepoData().remote, geojsonGenerate.features[x].properties.feature_id,commidId[0],commidId[1],(data)=>{
-						for (y in ad = data.response.diff){
-							newvalue = data.response.diff[y].newvalue.replace('MULTIPOLYGON (((', 'POLYGON ((')
-									  .replace(')))', '))');
-							oldvalue = data.response.diff[y].oldvalue.replace('MULTIPOLYGON (((', 'POLYGON ((')
-									  .replace(')))', '))');
-							wkt.read(newvalue);
-							wkt.toObject();
-							console.log(JSON.stringify(wkt.toJson()));
-							geojsonGenerateDiff.features.push({"type":"Feature","properties":{
-														"feature_id":'feature_id',
-														"type_change":'type_change'
-													},
-													"geometry":wkt.toJson()
-													});
-						};
-						localStorage.setItem("geojsonfeature", JSON.stringify(geojsonGenerateDiff));
-
-					});
-				}
-			}
-		})*/
-
+			$location.path('/main/map');
+		}).catch(q => console.log(q))
 	}
+
+
+	
 
 
 

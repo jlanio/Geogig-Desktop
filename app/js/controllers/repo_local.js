@@ -2,7 +2,7 @@ function repositorio($scope, $location, alert ){
 	let current = $s.currentRepoData();
 	let ctrl = new Ctrl(current.name, current.origin, current.serverAddress, current.shpfile);
 
-	$s.NewShp = localShp=>alert.open("New Shapefile1","Now add a name:","input","...",
+	$s.NewShp = localShp => alert.open("New Shapefile1","Now add a name:","input","...",
 		(inputValue)=>{
 		if (inputValue === false) return false;
 
@@ -23,7 +23,7 @@ function repositorio($scope, $location, alert ){
 			swal.showInputError("the field is empty!");
 			return false
 		}else{
-			new Commit (Utils.pwd('local',ctrl.Repository._name),'ola_mundo').commit()
+			new Commit (Utils.pwd('local',ctrl.Repository._name),inputValue).commit()
 			.then(q=>swal("", q +" ", "success"))
 			.catch(q=>swal("", q +" ", "error"))
 		}

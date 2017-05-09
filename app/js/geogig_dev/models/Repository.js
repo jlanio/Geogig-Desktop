@@ -7,46 +7,34 @@ class Repository {
         this._serverAddress = serverAddress;
     }
     static initServer(){
-        let child = Utils.geogig(['serve','--multirepo'], {cwd: Utils.pwd('local'),detached: true}, function (error, stdout, stderr) {
-            console.log(error, stdout, stderr);
-        });
-    return child.pid;
+        Utils.geogig(['serve','--multirepo'])
+            .then(response  => console.log(response))
+            .catch(error => console.log(error));   
     }
-
     init() {
-        return new Promise((resolve, reject) => {
-            Utils.geogig(['--repo',  Utils.pwd(this._origin, this._name),'init'],
-                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
-            )  
-        });
+        Utils.geogig(['init' , this._name])
+            .then(response  => console.log(response))
+            .catch(error => console.log(error));    
     }
     importShapefile(shpAdress){
-        return new Promise((resolve, reject) => {
-            Utils.geogig(['--repo',  Utils.pwd(this._origin, this._name), 'shp', 'import', shpAdress],
-                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
-            )      
-        });
+        Utils.geogig(['shp', 'import', shpAdress])
+            .then(response  => console.log(response))
+            .catch(error => console.log(error));   
     }
-    exportShapefile(camada, localSave){
-        return new Promise((resolve, reject) => {
-            Utils.geogig(['--repo', Utils.pwd(this._origin, this._name),'shp','export', camada.nome, `${localSave}\${camada.nome}.shp`],
-                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
-            )           
-        });
+    exportShapefile(layer, localSave){
+        Utils.geogig(['shp','export', layer.nome, `${localSave}\${layer.nome}.shp`])
+            .then(response  => console.log(response))
+            .catch(error => console.log(error)); 
     }
     add(){
-        return new Promise((resolve, reject) => {
-            Utils.geogig(['--repo', Utils.pwd(this._origin, this._name), 'add'],
-                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
-            )            
-        });
+        Utils.geogig(['add'])
+            .then(response  => console.log(response))
+            .catch(error => console.log(error)); 
     };
     addRemote(){
-        return new Promise((resolve, reject) => {
-            Utils.geogig(['--repo', Utils.pwd(this._origin, this._name), 'remote', 'add', 'origin', this._serverAddress],
-                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
-            )   
-        });
+        Utils.geogig(['remote', 'add', 'origin', this._serverAddress])
+            .then(response  => console.log(response))
+            .catch(error => console.log(error)); 
     }
     ls(){
         return new Promise((resolve, reject) => {
@@ -63,25 +51,26 @@ class Repository {
         });
     };
     pull(){
-        return new Promise((resolve, reject) => {
-            Utils.geogig(['--repo', Utils.pwd(this._origin, this._name), 'pull'],
-                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
-            )            
-        });
+        Utils.geogig(['pull'])            
+            .then(response  => console.log(response))
+            .catch(error => console.log(error)); 
     };
     push(){
-        return new Promise((resolve, reject) => {
-            Utils.geogig(['--repo', Utils.pwd(this._name, this._origin) , 'push'],
-                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
-            )   
-        });
+        Utils.geogig(['push'])
+            .then(response  => console.log(response))
+            .catch(error => console.log(error)); 
     }
-    clone(callback){
+    /*clone(callback){
         return new Promise((resolve, reject) => {
             Utils.geogig(['clone', this._serverAddress, this._name],{cwd: Utils.pwd('remote','')},
                 (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
             )     
         });
     }
-
+*/
 }
+
+Repository.initServer
+/*ls.on('close', (code) => {
+  console.log(`child process exited with code ${code}`);
+});*/

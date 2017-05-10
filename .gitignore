@@ -3,3 +3,4 @@ app/tmp/*
 app/geogig/*
 *.3653094775
 .vscode/launch.json
+npm-debug.log*

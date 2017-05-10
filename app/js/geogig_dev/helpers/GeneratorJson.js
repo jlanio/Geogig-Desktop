@@ -5,18 +5,16 @@ class GeneratorJson{
 				'infoRepositorios':{'local':[],'conectedIn':[]}
 				}
 	}
-	static local(name, shpfile, origin, serverAddress){
+	static local(name, shpfile, serverAddress){
 		return {
             	'name':name,
             	'shpfile':shpfile,
-            	'origin':origin,
             	'serverAddress':serverAddress
             	};
 	}
-	static remote (name, origin, serverAddress, repos){
+	static remote (name, serverAddress, repos){
 		return {
 	            'name': name,
-	            'origin': origin,
 	            'serverAddress': serverAddress,
 	            'repos': repos
         		}

@@ -1,15 +1,15 @@
 function repositorio_remoto($scope, $location, $http, toaster){
 	let current = $s.currentRepoData();
-	let ctrl = new Ctrl(current.name, current.origin, current.serverAddress, current.shpfile);
+	let $geogig = new MainCtrl(current.name, current.origin, current.serverAddress, current.shpfile);
 	
 	$s.log = ()=>{
-		ctrl.Repository.log(ctrl.Repository._serverAddress)
+		$geogig.Repository.log($geogig.Repository._serverAddress)
 		/*Criar uma condição para quando resultado for vazio*/
 		.then(q=>{
 			console.log(q);
 			LocalStorage.set('commit', q),
 			$location.path('/main/historico')
-			}).catch(q=>console.error(q))
+		}).catch(q=>console.error(q))
 	}
 	$s.loadlogCommit = ()=>{
 		return angular.fromJson(LocalStorage.get('commit')).response.commit;
@@ -105,7 +105,7 @@ function repositorio_remoto($scope, $location, $http, toaster){
 		var commidId = [];
 		load.forEach(element=>element.activate ? commidId.push(element.id) : false);
 		
-		new Commit(ctrl.Repository, null, commidId[1], commidId[0])
+		new Commit($geogig.Repository, null, commidId[1], commidId[0])
 		.diffCommit()
 		.then(q => {
 			LocalStorage.set("geojson", WKTtoGeojson.init(q));

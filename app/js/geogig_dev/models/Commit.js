@@ -7,11 +7,10 @@ class Commit {
         this._feature = feature;
     }
     commit(){
-        return new Promise((resolve, reject) => {
-            Utils.geogig(['--repo',  this._repository, 'commit', '-m', this._comment],
-                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
-            )            
-        })
+        console.log();
+        return Utils.geogig(['commit', '-m', this._comment], this._repository._name)
+                .then(response  => {return response})
+                .catch(error => {return error});
     }
     diffCommit(){
         return new Promise((resolve, reject) => {

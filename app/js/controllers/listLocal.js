@@ -6,7 +6,7 @@ function listLocal($scope, alert){
 				swal.showInputError("the field is empty!");
 				return false
 			}else{
-				new Ctrl(inputValue).new()
+				new MainCtrl(inputValue).new()
 				.then(q=>swal("Success", q +" created.", "success"))
 				
 			}

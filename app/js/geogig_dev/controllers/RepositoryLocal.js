@@ -1,11 +1,11 @@
 class RepositoryLocal extends SaveRepository {
-    constructor(name, origin, serverAddress, shpfile = []){
-        super(name, origin, serverAddress);
+    constructor(name, serverAddress, shpfile = []){
+        super(name, serverAddress);
         this._shpfile = shpfile;
     }
     new() {
         return super.saveLocal(
-            GeneratorJson.local(this._name, this._shpfile, this._origin, this._serverAddress)
+            GeneratorJson.local(this._name, this._shpfile, this._serverAddress)
         );
     }
     newShpFile(id, name, localShp) {

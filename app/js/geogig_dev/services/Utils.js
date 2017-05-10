@@ -3,19 +3,20 @@ var spawn = require('child_process').spawn;
 
 class Utils {
 
-	static pwd(type, name) {
-		return name ? `${path}/tmp/${type}/${name}` : `${path}/tmp/${type}`;
+	static pwd(name) {
+		return `${path}\\tmp\\${name}`;
 	}
 	
-	static geogig (args){
+	static geogig (args, name=''){
+		let child = spawn(`${path}\\geogig\\bin\\geogig.bat`, args,{cwd: this.pwd(name)});
+		child.stdout.setEncoding('utf8');
+		let stdoutData = '';
+        let stderrData = '';
+		child.stdout.on('data', data => {stdoutData += data});
+		child.stderr.on('data', data => {stderrData += data});
 		return new Promise((resolve, reject) => {
-			let processObject = spawn(`${path}/geogig/bin/geogig.bat`, 
-				args, 
-				{cwd: this.pwd('local')}
-			);
-			processObject.stdout.setEncoding('utf8');
-			processObject.stdout.on('data', data => resolve(data));
-			processObject.stderr.on('data', data => reject(data));           
-		})
+			child.on('close', code => stderrData ? reject(stderrData) : resolve(stdoutData));
+	        child.on('error', err => reject(err));
+        });
 	}
 }

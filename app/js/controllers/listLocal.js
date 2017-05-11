@@ -1,4 +1,4 @@
-function listLocal($scope, alert){
+function listLocal($scope, alert, $translate){
 	$s.NewRepo = () => alert.open("New Repository","Name:","input","...",
 		(inputValue) => {
 			if (inputValue === false) return false;
@@ -16,7 +16,11 @@ function listLocal($scope, alert){
 		idForDelete.indexOf(id)> -1 ? idForDelete.splice(-1, 1) : idForDelete.push(id);
 	};
 
-	$s.deleteRepo = () => console.log("PARA DELETAR: ",idForDelete)
+	$s.deleteRepo = () => console.log("PARA DELETAR: ",idForDelete);
+	
+	$scope.changeLanguage = function (langKey) {
+	    $translate.use(langKey);
+	  };
 
 }
 angular

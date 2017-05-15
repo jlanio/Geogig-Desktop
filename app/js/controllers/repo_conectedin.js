@@ -27,20 +27,16 @@ function repositorio_remoto($scope, $location, $http, toaster){
 	}
 
 
-	$s.clone = function(name, repoAddress){	
-		repoAddress = repoAddress.replace('.json','');
-		let rp = new Repository(name,'remote', repoAddress);
-		let rpObj = new Local(name,'remote', repoAddress, $s.mydb, []);
-
-		rp.clone((error, stdout, stderr)=>{
-			rpObj.new();
-			rp.ls(data=>{
-				data.response.node.forEach(entry=>
-					rpObj.shpFile($s.lastRepoId(), entry.path, '')
-				);
-			});
-			swal("", stdout +"");
-		});
+	$s.clone = (name, repoAddress) => {
+		let ls_tree = repoAddress.replace(".json","/ls-tree.json");
+		/*let $geogig = new MainCtrl(name, repoAddress);
+		$geogig.Repository.clone();*/
+		$http.get(ls_tree).success(data => {
+			data.response.node.forEach(feature =>{
+				$geogig.RepositoryRemote.afterCloningGetFeatures(feature);
+			})
+		})
+		.error(data => console.log(error))
 	}
 	getRepositorio_remote = (id, repositories) => {
 		$geogig.updateRemoteRepositories(id, repositories)

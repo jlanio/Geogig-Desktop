@@ -61,14 +61,12 @@ class Repository {
             .then(response  => console.log(response))
             .catch(error => console.log(error)); 
     }
-    /*clone(callback){
-        return new Promise((resolve, reject) => {
-            Utils.geogig(['clone', this._serverAddress, this._name],{cwd: Utils.pwd('remote','')},
-                (error, stdout, stderr)=>{error ? reject(error) : resolve(stdout)}
-            )     
-        });
+    clone(){
+        Utils.geogig(['clone', this._serverAddress, `remote_${this._name}`])
+        .then(response  => console.log(response))
+        .catch(error => console.log(error)); 
     }
-*/
+
 }
 
 /*ls.on('close', (code) => {

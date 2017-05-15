@@ -1,7 +1,6 @@
 function initial_config($scope, $location){
 	$s = $scope;
 	$s.mydb = mydb;
-	console.log($s.mydb)
 	ping.server('http://localhost:8182/repos')
 	.then(q=>console.log(q))
 	.catch(q=>{

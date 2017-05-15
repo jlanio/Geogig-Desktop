@@ -10,4 +10,13 @@ class RepositoryRemote extends SaveRepository {
     updateRemoteRepositories(id, repositories){
         super.updateRemoteRepositories(id, repositories);
     }
+    afterCloningGetFeatures(repoAddress){
+        super.saveLocal(
+            GeneratorJson.local(this._name, this._shpfile, this._serverAddress, 'remote')
+        )
+        /*console.log(repoAddress);
+        repoAddress.forEach(element =>{
+            console.log(GeneratorJson.shpfile(element.path))
+        })*/
+    }
 }

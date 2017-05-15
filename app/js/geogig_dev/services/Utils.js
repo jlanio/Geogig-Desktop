@@ -8,8 +8,7 @@ class Utils {
 	}
 	
 	static geogig (args, name=''){
-		let stdoutData = '';
-        let stderrData = '';
+		let stdoutData, stderrData = '';
 		let child = spawn(`${path}\\geogig\\bin\\geogig.bat`, args,{cwd: this.pwd(name)});
 		child.stdout.setEncoding('utf8');
 		child.stdout.on('data', data => {stdoutData += data});

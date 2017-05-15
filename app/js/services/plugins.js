@@ -141,20 +141,20 @@ function modalDemoCtrl($scope, $uibModal) {
 };
 
 function ModalInstanceCtrl ($scope, $http, $uibModalInstance, toaster) {
-    $scope.ok = function (remoto) {
+    $scope.send = function (remote) {
         $uibModalInstance.close();
-        if (remoto.origin === 'local_network'){
-            url = remoto.url+"repos.json";
-        }else if (remoto.origin === 'geoserver'){
-            url = remoto.url+"geoserver/geogig/repos.json";
-        }else if (remoto.origin === 'postgresql'){
+        if (remote.origin === 'local_network'){
+            url = remote.url+"repos.json";
+        }else if (remote.origin === 'geoserver'){
+            url = remote.url+"geoserver/geogig/repos.json";
+        }else if (remote.origin === 'postgresql'){
             console.log("postgresql");
         }else {
             console.log('type is not defined');
         }
-        $http.get(url).success(function(data){            
-            new ConectedIn(remoto.titulo, remoto.origin, url, mydb, data.repos.repo).new();
-            toaster.success(remoto.titulo + ' added successfully!', 'We found '+ data.repos.repo.length +' repositories')
+        $http.get(url).success(function(data){       
+            new MainCtrl(remote.name, remote.url).newRemoteConnection(data);
+            toaster.success(remote.titulo + ' added successfully!', 'We found '+ data.repos.repo.length +' repositories')
         }).error(function(){
             toaster.pop({
                 type: 'error',
@@ -165,11 +165,7 @@ function ModalInstanceCtrl ($scope, $http, $uibModalInstance, toaster) {
         });
     };
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-        console.log("modal_cancel");
-    };
-
+    $scope.cancel = () => $uibModalInstance.dismiss('cancel');
 };
 
 

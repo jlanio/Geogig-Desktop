@@ -1,19 +1,32 @@
 function repositorio_remoto($scope, $location, $http, toaster){
-	let current = $s.currentRepoData();
-	let $geogig = new MainCtrl(current.name, current.origin, current.serverAddress, current.shpfile);
+	
+	let current = $s.currentRepoData() ? $s.currentRepoData() : '';
+	let $geogig = new MainCtrl(current.name, current.serverAddress, current.shpfile);
 	
 	$s.log = ()=>{
 		$geogig.Repository.log($geogig.Repository._serverAddress)
 		/*Criar uma condição para quando resultado for vazio*/
 		.then(q=>{
-			console.log(q);
 			LocalStorage.set('commit', q),
 			$location.path('/main/historico')
 		}).catch(q=>console.error(q))
 	}
-	$s.loadlogCommit = ()=>{
+	$s.loadlogCommit = () => {
 		return angular.fromJson(LocalStorage.get('commit')).response.commit;
 	}
+	$s.compareCommit = (load) => {
+		var commidId = [];
+		load.forEach(element=>element.activate ? commidId.push(element.id) : false);
+		
+		new Commit($geogig.Repository, null, commidId[1], commidId[0])
+		.diffCommit()
+		.then(q => {
+			LocalStorage.set("geojson", WKTtoGeojson.init(q));
+			$location.path('/main/map');
+		}).catch(q => console.log(q))
+	}
+
+
 	$s.clone = function(name, repoAddress){	
 		repoAddress = repoAddress.replace('.json','');
 		let rp = new Repository(name,'remote', repoAddress);
@@ -29,24 +42,13 @@ function repositorio_remoto($scope, $location, $http, toaster){
 			swal("", stdout +"");
 		});
 	}
-	getRepositorio_remote = function (data, z){
-		let b = $s.mydb;
-		b.infoRepositorios.remoto[z].repos = [];
-		for (x in data.repos.repo){
-			b.infoRepositorios.remoto[z].repos.push(
-			{
-				"nome":data.repos.repo[x].name,
-				"id":data.repos.repo[x].id,
-				"href":data.repos.repo[x].href
-			});
-		}
-		db.set(b);
-	}
-
-	function get (url, id){
-			$http.get(url).success((data)=>{
-				getRepositorio_remote(data, id);
-			}).error(()=>{
+	getRepositorio_remote = (id, repositories) => {
+		$geogig.updateRemoteRepositories(id, repositories)
+	};
+	function get (url, index){
+			$http.get(`${url}repos.json`).success(data=>{
+				getRepositorio_remote(index, data.repos.repo);
+			}).error(data=>{
 				toaster.pop({
 					type: 'error',
 					title: 'Servidor Offline',
@@ -55,11 +57,10 @@ function repositorio_remoto($scope, $location, $http, toaster){
 				});
 			})
 		}
-	$s.remoteAtualize = function (){
-		for (conexao in $s.mydb.infoRepositorios.remoto){
-			get($s.mydb.infoRepositorios.remoto[conexao].url, conexao);
-		}
-
+	$s.remoteUpdateRepos = () => {
+		$s.mydb.infoRepositorios.conectedIn.forEach((conexao, index) =>{
+		get(conexao.serverAddress, index)
+		})	
 	}
 	
 
@@ -101,19 +102,6 @@ function repositorio_remoto($scope, $location, $http, toaster){
 	  		}
 		);
 	}
-	$s.compareCommit = function (load){
-		var commidId = [];
-		load.forEach(element=>element.activate ? commidId.push(element.id) : false);
-		
-		new Commit($geogig.Repository, null, commidId[1], commidId[0])
-		.diffCommit()
-		.then(q => {
-			LocalStorage.set("geojson", WKTtoGeojson.init(q));
-			$location.path('/main/map');
-		}).catch(q => console.log(q))
-	}
-
-
 	
 
 

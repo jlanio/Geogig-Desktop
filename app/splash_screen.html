@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+        <script type="text/javascript">
+            $('#splash').ready() 
+            {
+                $('#main').load('file.html');
+                setTimeout(function() {
+                    $('#main').ready(function() {
+                        $('#splash').remove();
+                        window.location.href = "file.html";
+                    });
+                }, 2000);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="splash" style="position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px; z-index: 10;">
+            <!--Put splash here-->
+        </div>
+        <div id="main">
+            <!-- keep empty -->
+        </div>
+    </body>
+</html>

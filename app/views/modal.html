@@ -7,33 +7,75 @@
     <div class="modal-body">
         <form class="form-horizontal ng-pristine ng-valid">
             <div class="form-group">
-                <label class="col-sm-1 control-label">{{ 'ORIGIN' | translate }}</label>
-                <div class="col-sm-10">
-                    <select ng-model="remoto.origin" class="selectpicker">
-                      <option value="local_network">{{ 'LOCAL_NETWORK' | translate }}</option>
-                      <option value="geoserver" >Geoserver</option>
-                      <option value="postgresql">PostgreSQL</option>
+                <label class="col-sm-2 control-label">{{ 'ORIGIN' | translate }}</label>
+                <div class="col-sm-7">
+                    <select ng-model="remote.origin" class="selectpicker">
+                      <option value="local_network" >{{ 'LOCAL_NETWORK' | translate }}</option>
+                      <option value="postgresql" > PostgreSQL</option>
+                      <option value="geoserver" > Geoserver</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-1 control-label">{{ 'ADDRESS' | translate }}</label>
-                <div class="col-sm-10">
-                    <input placeholder="Ex: http://localhost:8182/" ng-model="remoto.url" class="form-control" type="text">
+            <span ng-if="remote.origin == 'local_network'" name="local_network">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'ADDRESS' | translate }}</label>
+                    <div class="col-sm-7">
+                        <input placeholder="Ex: http://localhost:8182/" ng-model="remote.url" class="form-control" type="text">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-1 control-label">{{ 'ALIAS' | translate }}</label>
-                <div class="col-sm-10">
-                    <input placeholder="Ex: Amazonia" ng-model="remoto.titulo" class="form-control" type="text">
-                </div>
-            </div>
-        </form>
-    </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'ALIAS' | translate }}</label>
+                    <div class="col-sm-7">
+                        <input placeholder="Ex: Amazonia" ng-model="remote.name" class="form-control" type="text">
+                    </div>
+                </div> 
+            </span>
 
+            <span ng-if="remote.origin == 'postgresql'" name="postgresql">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" >{{ 'NAME' | translate }}</label>
+                    <div class="col-sm-7">
+                        <input placeholder="Ex: http://localhost:8182/" ng-model="remote.name" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'IP' | translate }}</label>
+                    <div class="col-sm-7">
+                        <input placeholder="Ex: Amazonia" ng-model="remote.ip" class="form-control" type="text">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'PORT' | translate }}</label>
+                    <div class="col-sm-7">
+                        <input placeholder="Ex: Amazonia" ng-model="remote.port" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'DATA BASE' | translate }}</label>
+                    <div class="col-sm-7">
+                        <input placeholder="Ex: Amazonia" ng-model="remote.db" class="form-control" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'USER' | translate }}</label>
+                    <div class="col-sm-7">
+                        <input placeholder="Ex: Amazonia" ng-model="remote.user" class="form-control" type="text">
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'PASSWORD' | translate }}</label>
+                    <div class="col-sm-7">
+                        <input ng-model="remote.password" class="form-control" type="password">
+                    </div>
+                </div> 
+            </span>
+        </form>
+        <h6 ><strong>Atention:</strong> 
+        Connections with PostgreSQL and Geoserver  are in the process of development</h6>
+    </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-white" ng-click="cancel()">{{ 'CLOSE' | translate }}</button>
-        <button type="button" class="btn btn-primary" ng-click="ok(remoto)">{{ 'SUBMIT' | translate }}</button>
+        <button type="button" class="btn btn-primary" ng-click="send(remote)">{{ 'SUBMIT' | translate }}</button>
     </div>
 
 </div>

@@ -1,14 +1,13 @@
 class RepositoryRemote extends SaveRepository {
-    constructor(name, serverAddress, repos) {
+    constructor(name, serverAddress) {
         super(name, serverAddress);
-        this._repos = repos;
     }
-    new() {
-        super.saveConexao(
-            GeneratorJson.remote(this._name, this._serverAddress, this._repos)
+    new(repositories) {
+        super.saveRemoteConnection(
+            GeneratorJson.remote(this._name, this._serverAddress, repositories)
         );
     }
-    updateRepos(){
-
+    updateRemoteRepositories(id, repositories){
+        super.updateRemoteRepositories(id, repositories);
     }
 }

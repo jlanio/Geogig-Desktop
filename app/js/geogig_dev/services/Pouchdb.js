@@ -3,7 +3,7 @@ class Database{
 		this._db = new PouchDB('db');
 	}
 	open(){
-		this._db.get('geogig').catch(err=> {
+		this._db.get('geogig').catch(err => {
 		  if (err.name === 'not_found') {
 		    this._db.put(GeneratorJson.init())
 		  }

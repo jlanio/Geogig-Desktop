@@ -9,7 +9,8 @@ class GeneratorJson{
 		return {
             	'name':name,
             	'shpfile':shpfile,
-            	'serverAddress':serverAddress
+            	'serverAddress':serverAddress,
+            	'origin': 'local'
             	};
 	}
 	static remote (name, serverAddress, repos){

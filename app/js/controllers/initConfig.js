@@ -1,6 +1,7 @@
 function initial_config($scope, $location){
 	$s = $scope;
 	$s.mydb = mydb;
+	console.log($s.mydb)
 	ping.server('http://localhost:8182/repos')
 	.then(q=>console.log(q))
 	.catch(q=>{
@@ -20,6 +21,7 @@ function initial_config($scope, $location){
 	$s.lastRepoId = () => $s.mydb.infoRepositorios.local.length - 1;
 	$s.currentRepoData = () => $s.mydb.infoRepositorios.local[$s.currentRepoId()];
 	$s.currentRepoRemoteData = () => $s.mydb.infoRepositorios.remoto[$s.currentServeRemoteId()];
+	
 }
 angular
 .module('geogig-desktop')

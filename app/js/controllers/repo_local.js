@@ -1,7 +1,8 @@
 function repositorio($scope, $location, alert ){
-	let current = $s.currentRepoData();
-	let $geogig = new MainCtrl(current.name, current.serverAddress, current.shpfile);
 
+	let current = $s.currentRepoData() ? $s.currentRepoData() : '';
+	let $geogig = new MainCtrl(current.name, current.serverAddress, current.shpfile);
+	
 	$s.NewShp = localShp => alert.open("New Shapefile1","Now add a name:","input","...",
 		(inputValue)=>{
 		if (inputValue === false) return false;

@@ -3,13 +3,23 @@ class SaveRepository extends Repository {
         super(name, serverAddress);
         this._mydb = new Database();       
     }
-    saveConexao(newObj){
+    saveRemoteConnection(newObj){
         $s.mydb.infoRepositorios.conectedIn.push(newObj)
         this._mydb.open().then((data) => {
             data.infoRepositorios.conectedIn.push(newObj);
             this._mydb.set(data);
         })
     }
+    updateRemoteRepositories(id, repositories){
+        $s.mydb.infoRepositorios.conectedIn[id].repos = [];
+        $s.mydb.infoRepositorios.conectedIn[id].repos = repositories;
+        this._mydb.open().then((data) => {
+            data.infoRepositorios.conectedIn = $s.mydb.infoRepositorios.conectedIn;
+            this._mydb.set(data);
+        })
+        swal("Update", repositories.length +" Repository successfully imported!", "success")
+    }
+
     saveLocal(newObj){
         $s.mydb.infoRepositorios.local.push(newObj);
         this._mydb.open().then((data) => {

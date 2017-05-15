@@ -8,7 +8,7 @@
                 <a ng-click= "log()" class="btn btn-white btn-xs">
                     <i class="fa fa-tencent-weibo"></i> {{ 'HISTORY' | translate }} 
                 </a>
-                <a ui-sref="main.issue" class="btn btn-white btn-xs">
+                <a ui-sref="main.issue" class="btn btn-white btn-xs disabled">
                     <i class="fa fa fa-comment-o"></i> Issue track
                 </a>
                 <a  class="btn btn-white btn-xs disabled" ng-click="publicarRepo(currentRepoId())">
@@ -16,11 +16,11 @@
                 </a>
             </div>
             <div class="mail-box-header">
-                <div class="pull-right tooltip-demo" >
-                    <a ng-click="pull('remoto')"  class="btn btn-white btn-sm">
+                <div ng-show="currentRepoData().origin == 'remote'" class="pull-right tooltip-demo" >
+                    <a ng-click="pull()"  class="btn btn-white btn-sm">
                         <i class="fa fa-cloud-download"></i> {{ 'PULL' | translate }}
                     </a>
-                    <a ng-click="push('remoto')"  class="btn btn-white btn-sm">
+                    <a ng-click="push()"  class="btn btn-white btn-sm">
                         <i class="fa fa-cloud-upload"></i>  {{ 'PUSH' | translate }}
                     </a>
                 </div>

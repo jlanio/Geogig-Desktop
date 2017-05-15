@@ -62,13 +62,9 @@ class Repository {
             .catch(error => console.log(error)); 
     }
     clone(){
-        Utils.geogig(['clone', this._serverAddress, `remote_${this._name}`])
-        .then(response  => console.log(response))
-        .catch(error => console.log(error)); 
+        return Utils.geogig(['clone', this._serverAddress, `remote_${this._name}`])
+        .then(response  => {return response})
+        .catch(error => {return error}); 
     }
 
 }
-
-/*ls.on('close', (code) => {
-  console.log(`child process exited with code ${code}`);
-});*/

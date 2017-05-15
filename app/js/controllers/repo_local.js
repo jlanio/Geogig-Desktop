@@ -1,6 +1,6 @@
 function repositorio($scope, $location, alert ){
 
-	let current = $s.currentRepoData() ? $s.currentRepoData() : '';
+	let current = $s.currentRepoData();
 	let $geogig = new MainCtrl(current.name, current.serverAddress, current.shpfile);
 	
 	$s.NewShp = localShp => alert.open("New Shapefile1","Now add a name:","input","...",
@@ -13,10 +13,10 @@ function repositorio($scope, $location, alert ){
 		}else{
 			$geogig.update($s.currentRepoId(), inputValue, $s.localShp);
 			$geogig.Repository.importShapefile($s.localShp)
-			.then(q=>swal("Shapefile", q +" Importing successfully", "success"));
+			.then(q => swal("Shapefile", q +" Importing successfully", "success"));
 		}
 	});
-	$s.NewCommit = type=>alert.open("New Commit","Now add a comment:","input","...",
+	$s.NewCommit = () =>alert.open("New Commit","Now add a comment:","input","...",
 		(inputValue)=>{
 		if (inputValue === false) return false;
 
@@ -30,14 +30,14 @@ function repositorio($scope, $location, alert ){
 		}
 	});
 	
-	$s.analisar = (type)=>{
+	$s.analisar = () =>{
 		$geogig.RepositoryLocal.ShpFile.forEach((element, index)=>{
-				$geogig.Repository.importShapefile($geogig.RepositoryLocal.ShpFile[index].shpfile)
-				.then(data=>swal("Shapefile", data +" Importing successfully", "success"));	
+				$geogig.Repository.importShapefile(element.shpfile)
+				.then(data => swal("Shapefile", data +" Importing successfully", "success"));	
 			}
 		)
 	};
-	$s.add = (type)=>{
+	$s.add = () => {
 		$geogig.Repository.add()
 		.then(q=>swal(" ", q +" add successfully", "success"))
 	};

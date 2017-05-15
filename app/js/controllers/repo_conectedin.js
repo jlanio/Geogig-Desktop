@@ -29,12 +29,12 @@ function repositorio_remoto($scope, $location, $http, toaster){
 
 	$s.clone = (name, repoAddress) => {
 		let ls_tree = repoAddress.replace(".json","/ls-tree.json");
-		/*let $geogig = new MainCtrl(name, repoAddress);
-		$geogig.Repository.clone();*/
+		let $geogig = new MainCtrl(name, repoAddress);
+		$geogig.Repository.clone().then(q =>{
+			swal("", q +" ", "")
+		})
 		$http.get(ls_tree).success(data => {
-			data.response.node.forEach(feature =>{
-				$geogig.RepositoryRemote.afterCloningGetFeatures(feature);
-			})
+				$geogig.RepositoryRemote.afterCloningGetFeatures(data);
 		})
 		.error(data => console.log(error))
 	}

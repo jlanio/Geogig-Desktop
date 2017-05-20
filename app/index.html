@@ -15,7 +15,11 @@
     <link id="loadBefore" href="css/style.css" rel="stylesheet">
     <!-- Plugin chosen -->
     <link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
+    <!-- Plugin leaflet -->
     <link href="js/plugins/leaflet/leaflet.css" rel="stylesheet">
+    <!-- Plugin Sweetalert2 -->
+    <link href="css/plugins/sweetalert/sweetalert2.min.css" rel="stylesheet">
+
 </head>
 <!-- ControllerAs syntax -->
 <!-- Main controller with serveral data used in  theme on diferent view -->
@@ -43,6 +47,8 @@
 
     <!-- Custom and plugin javascript -->
     <script src="js/theme.js"></script>
+    <!-- Plugin Sweetalert2 -->
+    <script src="js/plugins/sweetalert/sweetalert2.min.js"></script>
 
 
     <!-- Pouchdb -->
@@ -57,16 +63,18 @@
     <script src="js/plugins/angular-translate/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
     <script src="js/bootstrap/ui-bootstrap-tpls-1.1.2.min.js"></script>
     <script src="js/plugins/leaflet/leaflet.js"></script>
+    <script src="js/plugins/sweetalert/angular-sweetalert.min.js"></script>
 
     <!-- Anglar App Script -->
     <script src="js/app.js"></script>
     <script src="js/config.js"></script>
     <script src="js/directives.js"></script>
-    <!-- Meus Controllers -->
-    <script src="js/controllers/initConfig.js"></script>
-    <script src="js/controllers/repo_local.js"></script>
-    <script src="js/controllers/repo_conectedin.js"></script>
-    <script src="js/controllers/listLocal.js"></script>
+    <!-- APP Controllers -->
+    <script src="js/controllers/initConfigCtrl.js"></script>
+    <script src="js/controllers/DashboardLocal/dashboardLocalCtrl.js"></script>
+    <script src="js/controllers/DashboardLocal/detailRepositoryLocalCtrl.js"></script>
+    <script src="js/controllers/DashboardRemote/dashboardRemoteCtrl.js"></script>
+    <script src="js/controllers/DashboardRemote/detailRepositoryRemoteCtrl.js"></script>
 
     <!-- For GEOGIG-DESKTOP SCRIPT -->
     <script src="js/geogig_dev/services/Utils.js"></script>
@@ -84,6 +92,5 @@
 
     <script src="js/services/plugins.js"></script>
     <script src="js/services/storage.js"></script>
-
 </body>
 </html>

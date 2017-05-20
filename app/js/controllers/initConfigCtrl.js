@@ -1,4 +1,4 @@
-function initial_config($scope, $location){
+function initConfigCtrl($scope, $location){
 	$s = $scope;
 	$s.mydb = mydb;
 	ping.server('http://localhost:8182/repos')
@@ -24,5 +24,5 @@ function initial_config($scope, $location){
 }
 angular
 .module('geogig-desktop')
-.controller('initial_config', initial_config)
+.controller('initConfigCtrl', initConfigCtrl)
 

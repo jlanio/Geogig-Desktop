@@ -5,7 +5,7 @@
                 <a ui-sref="main.local" class="btn btn-white btn-xs">
                     <i class="fa fa-reply"></i> Voltar
                 </a>
-                <a ng-click= "log()" class="btn btn-white btn-xs">
+                <a ng-click= "history()" class="btn btn-white btn-xs">
                     <i class="fa fa-tencent-weibo"></i> {{ 'HISTORY' | translate }} 
                 </a>
                 <a ui-sref="main.issue" class="btn btn-white btn-xs disabled">
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="mail-body text-right tooltip-demo">
-                    <a ng-click="analisar()" class="btn btn-sm btn-white">
+                    <a ng-click="analyze()" class="btn btn-sm btn-white">
                         <i class="fa fa-exchange"></i> {{ 'ANALYZE' | translate }}
                     </a>
                     <a ng-click="add()" class="btn btn-sm btn-white">

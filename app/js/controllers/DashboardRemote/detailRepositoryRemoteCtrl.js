@@ -1,14 +1,17 @@
-function repositorio_remoto($scope, $location, $http, toaster){
+function detailRepositoryRemoteCtrl($scope, $location, $http, toaster){
 	
 	let current = $s.currentRepoData() ? $s.currentRepoData() : '';
 	let $geogig = new MainCtrl(current.name, current.serverAddress, current.shpfile);
-	
+
+	$s.history = () => {
+		$location.path('/main/historico');
+		console.log($s.log());
+		$s.loadlogCommit();
+	}
 	$s.log = ()=>{
-		$geogig.Repository.log($geogig.Repository._serverAddress)
-		/*Criar uma condição para quando resultado for vazio*/
+		return $geogig.Repository.log(current.serverAddress)
 		.then(q=>{
-			LocalStorage.set('commit', q),
-			$location.path('/main/historico')
+			LocalStorage.set('commit', q)
 		}).catch(q=>console.error(q))
 	}
 	$s.loadlogCommit = () => {
@@ -31,7 +34,7 @@ function repositorio_remoto($scope, $location, $http, toaster){
 		let ls_tree = repoAddress.replace(".json","/ls-tree.json");
 		let $geogig = new MainCtrl(name, repoAddress);
 		$geogig.Repository.clone().then(q =>{
-			swal("", q +" ", "")
+			console.log("", q +" ", "")
 		})
 		$http.get(ls_tree).success(data => {
 				$geogig.RepositoryRemote.afterCloningGetFeatures(data);
@@ -105,4 +108,4 @@ function repositorio_remoto($scope, $location, $http, toaster){
 }
 angular
 .module('geogig-desktop')
-.controller('repositorio_remoto', repositorio_remoto)
+.controller('detailRepositoryRemoteCtrl', detailRepositoryRemoteCtrl)

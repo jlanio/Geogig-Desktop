@@ -30,7 +30,7 @@ function createWindow () {
     setTimeout(function(){ 
         splash.close();
         mainWindow.show();
-    }, 7000);
+    }, 100);
 })
   /*mainWindow.webContents.openDevTools()*/
   mainWindow.on('closed', function () {

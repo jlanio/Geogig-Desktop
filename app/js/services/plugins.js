@@ -1,94 +1,3 @@
-function alert (SweetAlert){
-    var _open = function (titulo, text, type, inputPlaceholder, data){
-      return SweetAlert.swal({
-        title: titulo,
-        text: text,
-        type: type,
-        showCancelButton: true,
-        closeOnConfirm: false,
-        animation: "slide-from-top",
-        inputPlaceholder: inputPlaceholder,
-        showLoaderOnConfirm: true
-      },data);
-  }
-
-  return {
-    open: _open
-  };
-
-};
-/**
- * sweetAlertCtrl - Function for Sweet alerts
- */
-function sweetAlertCtrl($scope, SweetAlert) {
-
-
-    $scope.demo1 = function () {
-        SweetAlert.swal({
-              title: "Novo repositorio",
-              text: "OK! Agora adicione o nome:",
-              type: "input",
-              showCancelButton: true,
-              closeOnConfirm: false,
-              animation: "slide-from-top",
-              inputPlaceholder: "Entre aqui com o nome"
-            },
-            function(inputValue){
-              if (inputValue === false) return false;
-
-              if (inputValue === "") {
-                swal.showInputError("Calma aê, o campo esta vazio!");
-                return false
-              }
-
-              swal("Muito bem!", inputValue +" criado.", "success");
-              db.set("{'name':'teste'}");
-            });
-    }
-
-    $scope.demo2 = function () {
-        SweetAlert.swal({
-            title: "Good job!",
-            text: "You clicked the button!",
-            type: "success"
-        });
-    }
-
-    $scope.demo3 = function () {
-        SweetAlert.swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false
-            }, function () {
-                swal("Deleted!", "Your imaginary file has been deleted.", "success");
-            });
-    }
-
-    $scope.demo4 = function () {
-        SweetAlert.swal({
-                title: "Are you sure?",
-                text: "Your will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel plx!",
-                closeOnConfirm: false,
-                closeOnCancel: false },
-            function (isConfirm) {
-                if (isConfirm) {
-                    SweetAlert.swal("Deleted!", "Your imaginary file has been deleted.", "success");
-                } else {
-                    SweetAlert.swal("Cancelled", "Your imaginary file is safe :)", "error");
-                }
-            });
-    }
-
-}
 /**
  * toastrCtrl - Function for toastr
  */
@@ -172,7 +81,6 @@ function ModalInstanceCtrl ($scope, $http, $uibModalInstance, toaster) {
 angular
     .module('geogig-desktop')
     .factory("alert", alert)
-    .controller('sweetAlertCtrl',sweetAlertCtrl)
     .controller('toastrCtrl',toastrCtrl)
     .controller('modalDemoCtrl',modalDemoCtrl)
 

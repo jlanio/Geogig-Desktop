@@ -8,9 +8,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         url: "/main",
         data: { pageTitle: 'Geodig' },
         templateUrl: "views/common/content.html",
+        controller: "initConfigCtrl",
         resolve: {
             dbGeogig:  () => db.open().then((data) =>  data),
-            controller: function(dbGeogig){mydb = dbGeogig},
+            controller: function(dbGeogig){
+                mydb = dbGeogig
+            },
             loadPlugin: function ($ocLazyLoad) {
                 return $ocLazyLoad.load([
                 {
@@ -19,14 +22,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                     files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                 },
                 {
-                    files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
-                },
-                {
                     files: ['js/plugins/leaflet/plugins/wkt_to_geojson/wicket.js', 'js/plugins/leaflet/plugins/wkt_to_geojson/wicket-leaflet.js']
-                },
-                {
-                    name: 'oitozero.ngSweetAlert',
-                    files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
                 }
                 ]);
             }
@@ -34,13 +30,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     })
     .state('main.local', {
         url: "/local",
-        templateUrl: "views/paginas/repositorio_local/main.html",
-        controller: 'listLocal'
+        templateUrl: "views/paginas/DashboardLocal/dashboardLocal.html",
+        controller: 'dashboardLocalCtrl'
     })
     .state('main.view', {
         url: "/view",
-        templateUrl: "views/paginas/repositorio_local/main_view.html",
-        controller: 'repositorio_remoto'
+        templateUrl: "views/paginas/DashboardLocal/detailRepositoryLocal.html",
+        controller: 'detailRepositoryLocalCtrl'
 
     })
     .state('main.issue', {
@@ -50,13 +46,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     })
     .state('main.remoto', {
         url: "/remoto",
-        templateUrl: "views/paginas/repositorio_remoto/main.html",
-        controller: 'repositorio_remoto'
+        templateUrl: "views/paginas/DashboardRemote/dashboardRemote.html",
+        controller: 'detailRepositoryRemoteCtrl'
     })
     .state('main.view_remoto', {
         url: "/view_remoto",
-        templateUrl: "views/paginas/repositorio_remoto/main_repositorios.html",
-        controller: 'repositorio_remoto'
+        templateUrl: "views/paginas/DashboardRemote/detailRepositoryRemote.html",
+        controller: 'detailRepositoryRemoteCtrl'
     })
     .state('main.remoto_repo', {
         url: "/remoto_repo",

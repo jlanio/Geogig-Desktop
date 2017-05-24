@@ -1,7 +1,5 @@
 function detailRepositoryLocalCtrl($scope, $location){
-	let current = $s.currentRepoData();
-	let $geogig = new MainCtrl(current.name, current.serverAddress, current.shpfile);
-	
+	console.log($s.Repository());
 	$s.NewShp = localShp => {
 		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
 		ping.checkServerisOnAndKillProcess();
@@ -16,17 +14,17 @@ function detailRepositoryLocalCtrl($scope, $location){
 					if (!ShpName) {
 						reject('the field is empty!')
 					} else {
-						resolve($geogig.Repository.importShapefile(localShp), 'ShpName')
+						$s.Repository().shpfile.push({'name':ShpName,'shpfile':$s.localShp})
+						resolve(Geogig.importShapefile.call($s.Repository()))
 					}
 				})
 			},
 			allowOutsideClick: false
-		}).then((q, ShpName) => {
-			if(q.match(/Exception /)){
+		}).then(q => {
+			if(q[0].match(/Exception /)){
 				swal({type: 'error',title:`log: <h5> ${q}</h5>`});
 			}else{
-				$geogig.update($s.currentRepoId(), ShpName, $s.localShp);
-				swal({type:'success',title:'Repository success!',html:`log:<h5>${q}</h5>`})
+				swal({type:'success',title:'Repository success!',html:`log:<h5>${q[0]}</h5>`})
 			}
 			
 		})
@@ -46,7 +44,8 @@ function detailRepositoryLocalCtrl($scope, $location){
 					if (!comment) {
 						reject('the field is empty!')
 					} else {
-						resolve(new Commit ($geogig.Repository, comment).commit())
+						/*resolve(new Commit ($geogig.Repository, comment).commit())*/
+						resolve(Commit.new.call($geogig.Local, 'Olá Mundo'));
 					}
 				})
 			},
@@ -62,18 +61,18 @@ function detailRepositoryLocalCtrl($scope, $location){
 	}
 
 	$s.analyze = () => {
-			$geogig.RepositoryLocal.ShpFile.forEach((element, index)=>{
-				$geogig.Repository.importShapefile(element.shpfile)
+			RepositoryObj.shpfile.forEach((element, index)=>{
+				console.log(element, index)
+				Geogig.importShapefile.call(element.shpfile)
 				.then(q => swal({type:'success',title:'',html:`log:<h5>${q}</h5>`}));	
 			})
 	};
 	$s.add = () => {
 		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
-		ping.checkServerisOnAndKillProcess();
-		setTimeout(() => {
-			$geogig.Repository.add()
-			.then(q => swal({type:'success',title:'',html:`log:<h5>${q}</h5>`}))
-		}, 1000);
+		/*ping.checkServerisOnAndKillProcess();*/
+		Geogig.add.call(RepositoryObj)
+			.then(q => swal({type:'success',title:'',html:`log:<h5>${q[0]}</h5>`}))
+
 		
 	};
 	$s.publicarRepo = function (id){

@@ -11,7 +11,8 @@ function dashboardLocalCtrl($scope, $translate){
 					if (!NameRepo) {
 						reject('the field is empty!')
 					} else {
-						resolve(new MainCtrl(NameRepo).new())
+						let newRepository = new Repository(NameRepo);
+						resolve(Geogig.init.call(newRepository))
 					}
 				})
 			},
@@ -20,7 +21,7 @@ function dashboardLocalCtrl($scope, $translate){
 			swal({
 				type: 'success',
 				title: `Repository  success!`,
-				html: `log: <h5> ${q}</h5>`
+				html: `log: <h5> ${q[0]}</h5>`
 			})
 		})
 	}
@@ -31,7 +32,7 @@ function dashboardLocalCtrl($scope, $translate){
 
 	$s.deleteRepo = () => console.log("For Delete: ",idForDelete);
 	
-	$scope.changeLanguage =  langKey =>  $translate.use(langKey);
+	$s.changeLanguage =  langKey =>  $translate.use(langKey);
 
 }
 angular

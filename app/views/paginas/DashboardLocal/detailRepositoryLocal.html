@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="mail-box-header">
-                <div ng-show="currentRepoData().origin == 'remote'" class="pull-right tooltip-demo" >
+                <div ng-show="Repository().origin == 'remote'" class="pull-right tooltip-demo" >
                     <a ng-click="pull()"  class="btn btn-white btn-sm">
                         <i class="fa fa-cloud-download"></i> {{ 'PULL' | translate }}
                     </a>
@@ -24,7 +24,7 @@
                         <i class="fa fa-cloud-upload"></i>  {{ 'PUSH' | translate }}
                     </a>
                 </div>
-                <h2>{{currentRepoData().name}}</h2>
+                <h2>{{Repository().name}}</h2>
             </div>
             <div class="mail-box">
                 <div class="mail-attachment">
@@ -46,7 +46,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="file-box"  ng-repeat="(key, value) in mydb.infoRepositorios.local[currentRepoId()].shpfile ">
+                        <div class="file-box"  ng-repeat="(key, value) in Repository().shpfile ">
                             <div class="file" ng-click="baixar_shp(mydb.infoRepositorios.local[currentRepoId()].name, value, key)">
                                 <a href="">
                                     <span class="corner"></span>

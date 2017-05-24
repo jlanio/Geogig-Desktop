@@ -10,11 +10,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         templateUrl: "views/common/content.html",
         controller: "initConfigCtrl",
         resolve: {
-            dbGeogig:  () => db.open().then((data) =>  data),
-            controller: function(dbGeogig){
-                mydb = dbGeogig
-            },
-            loadPlugin: function ($ocLazyLoad) {
+            dbGeogig:  () => db.open().then(data =>  data),
+            controller: dbGeogig => mydb = dbGeogig,
+            loadPlugin: $ocLazyLoad => {
                 return $ocLazyLoad.load([
                 {
                     insertBefore: '#loadBefore',

@@ -1,16 +1,16 @@
-class GeneratorJson{
+class getJson{
 	static init (){
 		return {
 				'_id':'geogig',
 				'infoRepositorios':{'local':[],'conectedIn':[]}
 				}
 	}
-	static local(name, shpfile=[], serverAddress, local='local'){
+	static local(){
 		return {
-            	'name':name,
-            	'shpfile':shpfile,
-            	'serverAddress':serverAddress,
-            	'origin': local
+            	'name': this._name,
+            	'shpfile': this._shpfile,
+            	'serverAddress': this._serverAddress,
+            	'type': this._type
             	};
 	}
 	static remote (name, serverAddress, repos){
@@ -20,11 +20,11 @@ class GeneratorJson{
 	            'repos': repos
         		}
 	}
-	static shpfile (name, localShp){
+/*	static shpfile (){
 		return {
-				'name':name,'shpfile':localShp
+				'name':this._name,'shpfile':this._shpfile
 				}
-	}
+	}*/
 	static geojson (){
 		return {
 			"type": "FeatureCollection",

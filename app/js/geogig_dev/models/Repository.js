@@ -1,10 +1,25 @@
 var request = require('request');
 
-class Repository {
-    constructor(name, serverAddress) {
+class Repository  {
+    constructor( name, id = [], serverAddress = `http://localhost:8182/repos/${name}`, shpfile = [], type = 'local'){
+        this._id = id;  
         this._name = name;
         this._serverAddress = serverAddress;
+        this._shpfile = shpfile;
+        this._type = type;
     }
+    get id (){return this._id};
+    get name (){return this._name};
+    get serverAddress (){return this._serverAddress};
+    get shpfile (){return this._shpfile};
+    get type (){return this._type};
+    
+    set id (newId){this._id = newId};
+    set name (newName){this._name = newName};
+    set serverAddress (newServerAddress){this._serverAddress = newServerAddress};
+    set shpfile (newShpfile){this._shpfile = newShpfile};
+    set type (newType){this._type = newType};
+
     static initServer(){
         return new Promise((resolve, reject) => {
             Utils.geogig(['serve','--multirepo'])
@@ -17,13 +32,8 @@ class Repository {
             .then(response  => {return response})
             .catch(error => {return error});
     }
-    importShapefile(shpAdress){
-        return Utils.geogig(['shp', 'import', shpAdress],  this._name)
-            .then(response  => {return response})
-            .catch(error => {return error});
-    }
-    exportShapefile(layer, localSave){
-        return  Utils.geogig(['shp','export', layer.nome, `${localSave}\${layer.nome}.shp`])
+    importShapefile(shpfile){
+        return Utils.geogig(['shp', 'import', shpfile], this._name)
             .then(response  => {return response})
             .catch(error => {return error});
     }
@@ -32,10 +42,15 @@ class Repository {
             .then(response  => {return response})
             .catch(error => {return error}); 
     };
+    exportShapefile(layer, localSave){
+        return  Utils.geogig(['shp','export', layer.nome, `${localSave}\${layer.nome}.shp`])
+            .then(response  => {response})
+            .catch(error => {error});
+    }
     addRemote(){
         return Utils.geogig(['remote', 'add', 'origin', this._serverAddress])
-            .then(response  => {return response})
-            .catch(error => {return error});
+            .then(response  => {response})
+            .catch(error => {error});
     }
     ls(){
         return new Promise((resolve, reject) => {
@@ -63,8 +78,8 @@ class Repository {
     }
     clone(){
         return Utils.geogig(['clone', this._serverAddress, `remote_${this._name}`])
-        .then(response  => {return response})
-        .catch(error => {return error}); 
+        .then(response  => {response})
+        .catch(error => {error}); 
     }
 
 }

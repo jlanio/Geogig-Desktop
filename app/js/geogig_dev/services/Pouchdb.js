@@ -1,4 +1,4 @@
-class Database{
+/*class Database{
 	constructor(){
 		this._db = new PouchDB('db');
 	}
@@ -18,7 +18,7 @@ class Database{
 	}
 
 }
-
+*/
 /*new Database().open().then(doc => console.log(doc));*/
 /*new PouchDB('db').destroy().then(function () {
 		}).catch(function (err) {

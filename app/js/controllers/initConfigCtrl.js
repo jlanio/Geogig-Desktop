@@ -5,23 +5,19 @@ function initConfigCtrl($scope, $location){
 		.then(q=>console.log(q))
 		.catch(q=>Repository.initServer())
 
-	generatorRepositoryObj = function (id){
+	generatorRepositoryObj = (id) => {
 		let get = $s.mydb.infoRepositorios.local[id];
 		return new Repository(get.name, id, get.serverAddress, get.shpfile, get.type);
 	}
 	$s.selectRepo = (selectedFild) => {
-		db.setItem('repoLocalAtivo', selectedFild);
-		$location.path('/main/view');
+		LocalStorage.set('repoLocalAtivo', selectedFild);
 	}
 	$s.selectServeRemote = (selectedFild) =>{
-		db.setItem('serveRemoteAtivo', selectedFild);
+		LocalStorage.set('serveRemoteAtivo', selectedFild);
 		$location.path('/main/view_remoto');
 	};
-	$s.currentRepoId = () => db.openItem('repoLocalAtivo');
-	$s.Repository = () => generatorRepositoryObj($s.currentRepoId());
-	$s.currentServeRemoteId = () => db.openItem('serveRemoteAtivo');
-	$s.lastRepoId = () => $s.mydb.infoRepositorios.local.length - 1;
-	$s.currentRepoRemoteData = () => $s.mydb.infoRepositorios.remoto[$s.currentServeRemoteId()];
+	$s.Repository = () => generatorRepositoryObj(LocalStorage.get('repoLocalAtivo'));
+	$s.currentRepoRemoteData = () => $s.mydb.infoRepositorios.remoto[LocalStorage.get('serveRemoteAtivo')];
 	
 }
 angular

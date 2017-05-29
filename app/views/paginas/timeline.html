@@ -4,13 +4,13 @@
             <div class="text-center">
                 <div class="btn-group text-center">
                     <button  type="button" class="btn btn-primary " ng-click='compareCommit(loadlogCommit)'>{{ 'DIFFERENCE' | translate }}</button>
-                    <button  type="button" class="btn btn-primary disabled" ng-click='compareCommit(loadlogCommit)'>{{ 'ANALYZE' | translate }}</button>
-                    <button  type="button" class="btn btn-primary disabled" ng-click='compareCommit(loadlogCommit)'>{{ 'DOWNLOAD' | translate }}</button>
+                    <button type="button" class="btn btn-primary disabled">{{ 'ANALYZE' | translate }}</button>
+                    <button type="button" class="btn btn-primary disabled">{{ 'DOWNLOAD' | translate }}</button>
                 </div>
             </div>
-            <div  id="ibox-content">
-                <div id="vertical-timeline" class="vertical-container light-timeline" ng-init="loadlogCommit = loadlogCommit()">
-                    <div  ng-repeat="x in loadlogCommit" class="vertical-timeline-block">
+            <div  id="ibox-content" ng-init= "a = getCommit()">
+                <div id="vertical-timeline" class="vertical-container light-timeline">
+                    <div  ng-repeat="x in a" class="vertical-timeline-block">
                         <div class="vertical-timeline-icon navy-bg">
                             <i class="fa fa-briefcase"></i>
                         </div>

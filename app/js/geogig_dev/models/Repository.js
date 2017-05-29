@@ -29,23 +29,23 @@ class Repository  {
     }
     init() {
         return Utils.geogig(['init' , this._name])
-            .then(response  => {return response})
-            .catch(error => {return error});
+            .then(response  => response)
+            .catch(error => error);
     }
-    importShapefile(shpfile){
-        return Utils.geogig(['shp', 'import', shpfile], this._name)
-            .then(response  => {return response})
-            .catch(error => {return error});
+    importShapefile(shpDir){
+        return Utils.geogig(['shp', 'import', shpDir.shpfile], this._name)
+            .then(response  => response)
+            .catch(error =>  error);
     }
     add(){
        return Utils.geogig(['add'],  this._name)
-            .then(response  => {return response})
-            .catch(error => {return error}); 
+            .then(response  => response)
+            .catch(error => error); 
     };
     exportShapefile(layer, localSave){
         return  Utils.geogig(['shp','export', layer.nome, `${localSave}\${layer.nome}.shp`])
-            .then(response  => {response})
-            .catch(error => {error});
+            .then(response  => response)
+            .catch(error => error);
     }
     addRemote(){
         return Utils.geogig(['remote', 'add', 'origin', this._serverAddress])

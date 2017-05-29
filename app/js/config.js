@@ -10,7 +10,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         templateUrl: "views/common/content.html",
         controller: "initConfigCtrl",
         resolve: {
-            dbGeogig:  () => db.open().then(data =>  data),
+            dbGeogig:  () => new Database().open().then(data =>  data),
             controller: dbGeogig => mydb = dbGeogig,
             loadPlugin: $ocLazyLoad => {
                 return $ocLazyLoad.load([
@@ -64,7 +64,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     })
     .state('main.historico', {
         url: "/historico",
-        templateUrl: "views/paginas/timeline.html"
+        templateUrl: "views/paginas/timeline.html",
+        controller: 'detailRepositoryRemoteCtrl'/*,
+        resolve:{
+            Acx: () =>  window.localStorage.getItem('commit')
+        }*/
     })
     .state('main.map', {
         url: "/map",

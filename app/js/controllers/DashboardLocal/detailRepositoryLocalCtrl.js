@@ -44,8 +44,7 @@ function detailRepositoryLocalCtrl($scope, $location){
 					if (!comment) {
 						reject('the field is empty!')
 					} else {
-						/*resolve(new Commit ($geogig.Repository, comment).commit())*/
-						resolve(Commit.new.call($geogig.Local, 'Olá Mundo'));
+						resolve(Commit.new.call($s.Repository(), comment));
 					}
 				})
 			},
@@ -61,16 +60,13 @@ function detailRepositoryLocalCtrl($scope, $location){
 	}
 
 	$s.analyze = () => {
-			RepositoryObj.shpfile.forEach((element, index)=>{
-				console.log(element, index)
-				Geogig.importShapefile.call(element.shpfile)
-				.then(q => swal({type:'success',title:'',html:`log:<h5>${q}</h5>`}));	
-			})
+		Geogig.analyze.call($s.Repository())
+			.then(q => swal({type:'success',title:'',html:`log:<h5>${q}</h5>`}));	
 	};
 	$s.add = () => {
 		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
 		/*ping.checkServerisOnAndKillProcess();*/
-		Geogig.add.call(RepositoryObj)
+		Geogig.add.call($s.Repository())
 			.then(q => swal({type:'success',title:'',html:`log:<h5>${q[0]}</h5>`}))
 
 		
@@ -90,20 +86,63 @@ function detailRepositoryLocalCtrl($scope, $location){
 		}
 	});*/
 	}
-	$s.dialog = function(){
-		const {dialog} = require('electron').remote;
-		dialog.showOpenDialog(
-		{
-			defaultPath: 'c:/',
-			filters: [
-			{ name: 'All Files', extensions: ['*'] },
-			{ name: 'Shapefile', extensions: ['shp'] }
-			],
-			properties: ['openFile']
-		},
-		fileName => {
-			fileName === undefined ? false : $s.NewShp(fileName[0]), $s.localShp = fileName[0];
+	$s.push = function(type){
+		repo.push($s.currentRepoData().nome, type, function(error, stdout, stderr){
+			console.log("OK");
+			toaster.pop({
+				type: 'error',
+				title: 'Deu ruim!',
+				body: "Push",
+				showCloseButton: true
+			});
 		})
+	}
+	$s.pull = function(type){
+		repo.pull($s.currentRepoData().nome, type,(error, stdout, stderr)=>{
+			toaster.pop({
+				type: 'error',
+				title: 'Deu ruim!',
+				body: "pull" ,
+				showCloseButton: true
+			});
+		})
+	}
+	function shp_export(_Name, type, objeto, localSave){
+		repo.shp_export(_Name, type, objeto, localSave, function(error, stdout, stderr){
+			console.log(error, stdout, stderr);
+		})
+	}
+	$s.baixar_shp = function (_Name, objeto, key){
+		const {dialog} = require('electron').remote;
+		dialog.showOpenDialog({
+	  		properties: [ 'openFile', 'openDirectory'] }, function (filename) {
+	    		var localSave = filename.toString();
+	    		shp_export(_Name, 'remoto',objeto, localSave)
+	    		const tmp = $s.mydb;
+	    		tmp.infoRepositorios.local[$s.currentRepoId()].arquivos[key].localDir = localSave+'\\'+objeto.nome+'.shp';
+	    		db.set(tmp);
+	  		}
+		);
+	}
+	$s.dialog = function(){
+		if ($s.Repository().shpfile.length >= 1){
+			swal({type: 'error',title:`<h5>Sorry, we currently only support one shp per repository.
+				<br>In the next version will be added support for multiple shapefiles per repository..</h5>`});
+		}else{
+			const {dialog} = require('electron').remote;
+			dialog.showOpenDialog(
+			{
+				defaultPath: 'c:/',
+				filters: [
+				{ name: 'All Files', extensions: ['*'] },
+				{ name: 'Shapefile', extensions: ['shp'] }
+				],
+				properties: ['openFile']
+			},
+			fileName => {
+				fileName === undefined ? false : $s.NewShp(fileName[0]), $s.localShp = fileName[0];
+			})
+		}
 	};
 	
 	

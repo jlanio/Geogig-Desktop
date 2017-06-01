@@ -19,6 +19,6 @@ class Geogig {
     	return Promise.all(actions);
     }
     static log(){
-        return this.log();
+        return this.log()
     }
 }

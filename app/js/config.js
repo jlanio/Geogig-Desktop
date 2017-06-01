@@ -65,10 +65,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('main.historico', {
         url: "/historico",
         templateUrl: "views/paginas/timeline.html",
-        controller: 'detailRepositoryRemoteCtrl'/*,
-        resolve:{
-            Acx: () =>  window.localStorage.getItem('commit')
-        }*/
+        controller : "detailRepositoryRemoteCtrl"
     })
     .state('main.map', {
         url: "/map",

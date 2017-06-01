@@ -12,7 +12,7 @@ function initConfigCtrl($scope, $location){
 	$s.selectRepo = (selectedFild) => {
 		LocalStorage.set('repoLocalAtivo', selectedFild);
 	}
-	$s.selectServeRemote = (selectedFild) =>{
+	$s.selectServeRemote = (selectedFild) => {
 		LocalStorage.set('serveRemoteAtivo', selectedFild);
 		$location.path('/main/view_remoto');
 	};

@@ -10,8 +10,8 @@ function createWindow () {
     titleBarStyle: 'hidden', 
     show: false,
     width: 1224, 
-    height: 600, 
-    resizable: false
+    height: 600/*, 
+    resizable: false*/
   })
   var splash = new BrowserWindow({ 
     backgroundColor: '#2e2c29',

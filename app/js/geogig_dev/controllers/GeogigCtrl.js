@@ -15,10 +15,13 @@ class Geogig {
     	return Promise.all([Commit.new.call(this, comment)])
     }
     static analyze(){
-    	let actions = this.shpfile.map(q=>this.importShapefile(q));
+    	let actions = this.shpfile.map(q => this.importShapefile(q));
     	return Promise.all(actions);
     }
     static log(){
         return this.log()
+    }
+    static diffCommit(thisCommit, toCompare) {
+        return Commit.diffCommit.call(this, thisCommit.id, toCompare.id);
     }
 }

@@ -4,7 +4,9 @@
         'oc.lazyLoad',                  // ocLazyLoad
         'ui.bootstrap',                 // Ui Bootstrap
         'pascalprecht.translate',       // Angular Translate
-        '19degrees.ngSweetAlert2'		//SweetAlert2
+        '19degrees.ngSweetAlert2',		//SweetAlert2
+        'nemLogging',					//Dependence ui-leaflet
+        'ui-leaflet'					//ui-leaflet
 
     ])
 })();

@@ -69,7 +69,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     })
     .state('main.map', {
         url: "/map",
-        templateUrl: "views/map.html"
+        templateUrl: "views/map.html",
+        controller : "detailRepositoryRemoteCtrl"
     })
 }
 angular

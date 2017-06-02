@@ -4,16 +4,16 @@ class Commit {
                 .then(response  => { return response})
                 .catch(error => { return error});
     }
-    static diffCommit(){
+    static diffCommit(thisCommit, toCompare){
         return new Promise((resolve, reject) => {
-            request(`${this._repository._serverAddress}/diff.json?oldRefSpec=${this._thisCommit}&newRefSpec=${this._toCompare}&showGeometryChanges=true`, 
+            request(`${this.serverAddress}/diff.json?oldRefSpec=${thisCommit}&newRefSpec=${toCompare}&showGeometryChanges=true`, 
                 (error, response, body)=>{error ? reject(error) : resolve(JSON.parse(body))}
             )   
         })
     }
-    static diffFeature(){
+    static diffFeature(feature, thisCommit, toCompare){
         return new Promise((resolve, reject) => {
-            request(`${this._repository._serverAddress}/featurediff.json?path=${this._feature}&newTreeish=${this._thisCommit}&oldTreeish=${this._toCompare}`,
+            request(`${this.serverAddress}/featurediff.json?path=${feature}&newTreeish=${thisCommit}&oldTreeish=${toCompare}`,
                 (error, response, body)=>{error ? reject(error) : resolve(JSON.parse(body))}    
             ) 
         })

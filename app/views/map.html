@@ -1,87 +1,25 @@
-<style type="text/css">
-    .info {
-        padding: 6px 8px;
+<style>
+    .legend {
         font: 14px/16px Arial, Helvetica, sans-serif;
-        background: white;
-        background: rgba(255,255,255,0.8);
+        background: rgba(255,255,255, 0.9);
         box-shadow: 0 0 15px rgba(0,0,0,0.2);
         border-radius: 5px;
+        padding: 6px 8px;
+        width: 180px;
+        line-height: 18px;
+        color: #555;
     }
-    .info h4 {
-        margin: 0 0 5px;
-        color: #777;
+    .legend i {
+        width: 16px;
+        height: 16px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
     }
 </style>
-<div class="wrapper wrapper-content">
-    <div id="mapid" style="width: 1024px; height: 350px;"></div>
-</div>
 
-<script type="text/javascript">
-    var geojson = jQuery.parseJSON(window.localStorage.getItem("geojson"));
-    var geojsonfeature = jQuery.parseJSON(window.localStorage.getItem("geojsonfeature"));
-    var mymap = L.map('mapid').setView({lng:-72.5380430577834, lat:-7.854358928848911}, 10);
-
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-        maxZoom: 18,
-        id: 'mapbox.streets'
-    }).addTo(mymap);
-    function getColor(d) {
-        /*console.log(d);*/
-        if (d == "ADDED"){
-            return '#00CED1'
-        }if (d == "MODIFIED"){
-            return '#FF8C00'
-        }if (d == "REMOVED"){
-            return '#DC143C'
-        }
-    }
-    function style(feature) {
-        return {
-            fillColor: getColor(feature.properties.type_change),
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            dashArray: '3',
-            fillOpacity: 0.7
-        };
-    }
-    var legend = L.control({position: 'bottomright'});
-
-    legend.onAdd = function (map) {
-
-        var div = L.DomUtil.create('div', 'info legend');
-
-// loop through our density intervals and generate a label with a colored square for each interval
-
-div.innerHTML =
-'<i style="background:#BD0026"> &nbsp &nbsp  </i>&nbsp REMOVED<br><br>'+
-'<i style="background:#00CED1"> &nbsp &nbsp  </i>&nbsp ADDED<br><br>'+
-'<i style="background:#FF8C00"> &nbsp &nbsp  </i>&nbsp MODIFIED<br><br>'
-
-
-return div;
-};
-
-legend.addTo(mymap);
-L.geoJson(geojsonfeature,{style: function (feature) {
-    return { weight: 2 , dashArray: '3'};
-}}).addTo(mymap);
-L.geoJson(geojson,{style: style,
-    onEachFeature: function (feature, layer) {
-        layer.bindPopup(
-            `<p><strong>Feature ID:</strong>${feature.properties.feature_id}<br>
-            <strong>Change type:</strong>${feature.properties.type_change}</p>
-            <button class='btn btn-white btn-sm' data-toggle='tooltip' ng-click='loaddifference('s')'>
-                <i class='fa fa-plus' ></i> Load the difference </button>`
-                );
-
-    }}).addTo(mymap);
-
-</script>
-
-
-
-<body ng-controller="repositorio_remoto">
-  <leaflet lf-center="london" defaults="defaults" width="100%" height="480px"></leaflet>
-  <h1>Using custom default parameters</h1>
-</body>
+<br>
+    <leaflet defaults="defaults" id="map-geojson" center="japan" width="100%" height="400px" geojson="geojson" legend="legend"></leaflet>
+<br>
+<!-- <leaflet id="mymap"  defaults="defaults" lf-center="japan"  width="100%" height="400px" geojson="geojson"></leaflet> -->
+{{geojson}}

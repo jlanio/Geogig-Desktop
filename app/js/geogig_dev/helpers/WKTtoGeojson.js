@@ -2,7 +2,7 @@ class WKTtoGeojson {
 
 	static init (q){
 		let _wkt = new Wkt.Wkt();
-		let _geojson = GeneratorJson.geojson();
+		let _geojson = getJson.geojson();
 		q.response.Feature.forEach((element, index)=>{
 			let feature_id = element.id;
 			let type_change = element.change;
@@ -22,4 +22,4 @@ class WKTtoGeojson {
 
 	}
 
-}
+} 

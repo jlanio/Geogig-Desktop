@@ -4,7 +4,7 @@ class Commit {
                 .then(response  => { return response})
                 .catch(error => { return error});
     }
-    static diffCommit(thisCommit, toCompare){
+    static diffCommit(toCompare, thisCommit){
         return new Promise((resolve, reject) => {
             request(`${this.serverAddress}/diff.json?oldRefSpec=${thisCommit}&newRefSpec=${toCompare}&showGeometryChanges=true`, 
                 (error, response, body)=>{error ? reject(error) : resolve(JSON.parse(body))}

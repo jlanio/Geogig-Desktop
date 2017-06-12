@@ -1,11 +1,11 @@
 class Geogig {
     static init(){
-        return Promise.all([this.init(), CtrlDB.saveLocal.call(this)])
+        return Promise.all([this.init(), db.saveLocal.call(this)])
     }
     static importShapefile(){
     	return Promise.all([
     		this.importShapefile([...this.shpfile].pop()), 
-    		CtrlDB.saveshpFile.call(this)
+    		db.saveshpFile.call(this)
     		]);
     }
     static add(){
@@ -23,5 +23,14 @@ class Geogig {
     }
     static diffCommit(thisCommit, toCompare) {
         return Commit.diffCommit.call(this, thisCommit.id, toCompare.id);
+    }
+    static ConnectRemote (remoteObj , dataObj){
+        return Promise.all ([db.saveRemoteConnection(remoteObj , dataObj)])
+    }
+    static updateRemoteRepositories(id, dataObj){
+        db.updateRemoteConnection(id, dataObj);
+    }
+    static clone (){
+        return Promise.all([this.clone(), this.ls(), db.saveLocal.call(this)]);
     }
 }

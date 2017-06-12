@@ -1,5 +1,6 @@
-function detailRepositoryLocalCtrl($scope, $location){
+function detailRepositoryLocalCtrl($location){
 	console.log($s.Repository());
+
 	$s.NewShp = localShp => {
 		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
 		ping.checkServerisOnAndKillProcess();
@@ -59,32 +60,34 @@ function detailRepositoryLocalCtrl($scope, $location){
 		}).catch(q => {swal({type: 'error',title:`log: <h5> ${q}</h5>`});})
 	}
 
-	$s.analyze = () => {
-		Geogig.analyze.call($s.Repository())
-			.then(q => swal({type:'success',title:'',html:`log:<h5>${q}</h5>`}));	
+	$s.analyze = () => {			
+		ping.checkServerisOnAndKillProcess().then(q => {
+			Geogig.analyze.call($s.Repository()).then(q => {
+				swal({type:'success',title:'',html:`log:<h5>${q}</h5>`})
+			})
+		}).catch(q => console.log(q));	
 	};
 	$s.add = () => {
-		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
-		/*ping.checkServerisOnAndKillProcess();*/
-		Geogig.add.call($s.Repository())
-			.then(q => swal({type:'success',title:'',html:`log:<h5>${q[0]}</h5>`}))
-
-		
+		ping.checkServerisOnAndKillProcess().then(q => {
+			Geogig.add.call($s.Repository()).then(q => {
+				swal({type:'success',title:'',html:`log:<h5>${q[0]}</h5>`})
+			})
+		}).catch(q => console.log(q))		
 	};
 	$s.publicarRepo = function (id){
-	/*repo.initRemote($s.currentRepoData().nome, (data,url)=>{
-		if (data.response.error){
-			console.log("ERROR");
-		}else{
-			console.log("publicado com sucesso");
-			const tmp = $s.mydb;
-			tmp.infoRepositorios.local[id].remote = url;
-			tmp.infoRepositorios.local[id].origin.de = 'remote'
-			db.set(tmp);
-			repo.copy_to_folder($s.currentRepoData().nome);
+		/*repo.initRemote($s.currentRepoData().nome, (data,url)=>{
+			if (data.response.error){
+				console.log("ERROR");
+			}else{
+				console.log("publicado com sucesso");
+				const tmp = $s.mydb;
+				tmp.infoRepositorios.local[id].remote = url;
+				tmp.infoRepositorios.local[id].origin.de = 'remote'
+				db.set(tmp);
+				repo.copy_to_folder($s.currentRepoData().nome);
 
-		}
-	});*/
+			}
+		});*/
 	}
 	$s.push = function(type){
 		repo.push($s.currentRepoData().nome, type, function(error, stdout, stderr){

@@ -46,8 +46,7 @@ class ping {
     }
     static checkServerisOnAndKillProcess (){
         return this.server('http://localhost:8182/repos')
-            .then(Utils.killServer())
-            .catch(q=> q)
+            .then(Utils.killServer()).catch(q=> q)
     }
 }
 

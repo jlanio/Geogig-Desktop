@@ -53,12 +53,13 @@ class Repository  {
             .catch(error => {error});
     }
     ls(){
-        return new Promise((resolve, reject) => {
-            request(`${this._serverAddress}/ls-tree.json`, 
-                (error, response, body)=>{error ? reject(error) : resolve(JSON.parse(body))}
-            )
-        });
-    };
+        let ad = new Promise((resolve, reject) => {
+            request(`${this._serverAddress}/ls-tree.json`, (error, response, body) => {
+                resolve(JSON.parse(body).response.node.map(shp => getJson.shpfile(shp.path)));
+            })
+        })
+        ad.then(q => this.shpfile = q)
+    }
     log() {
         return new Promise((resolve, reject) => {
             request(`${this._serverAddress}/log.json`, 
@@ -77,9 +78,11 @@ class Repository  {
             .catch(error => console.log(error)); 
     }
     clone(){
-        return Utils.geogig(['clone', this._serverAddress, `remote_${this._name}`])
-        .then(response  => {response})
-        .catch(error => {error}); 
+        return Utils.geogig(['clone', this._serverAddress, `${this._name}.remote`])
+        .then(response  => response)
+        .catch(error => error); 
     }
 
 }
+let ad = new Repository('XxxxxX', undefined, 'http://localhost:8182/repos/XxxxxX', undefined, 'remote').ls()
+console.log(ad);

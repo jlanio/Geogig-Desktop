@@ -13,18 +13,19 @@ class getJson{
             	'type': this._type
             	};
 	}
-	static remote (name, serverAddress, repos){
+	static remote (repos){
 		return {
-	            'name': name,
-	            'serverAddress': serverAddress,
-	            'repos': repos
+	            'name': this.name,
+	            'origin': this.origin,
+	            'serverAddress': this.url,
+	            'repos': repos.repos
         		}
 	}
-/*	static shpfile (){
+	static shpfile (name, shpfile){
 		return {
-				'name':this._name,'shpfile':this._shpfile
+				'name':name,'shpfile':shpfile
 				}
-	}*/
+	}
 	static geojson (){
 		return {
 			"type": "FeatureCollection",

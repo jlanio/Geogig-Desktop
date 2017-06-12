@@ -1,4 +1,4 @@
-function dashboardLocalCtrl($scope, $translate){
+function dashboardLocalCtrl($translate){
 	$s.NewRepo = () => {
 		swal({
 			title: 'New Repository',

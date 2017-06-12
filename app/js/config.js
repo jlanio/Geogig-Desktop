@@ -45,7 +45,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('main.remoto', {
         url: "/remoto",
         templateUrl: "views/paginas/DashboardRemote/dashboardRemote.html",
-        controller: 'detailRepositoryRemoteCtrl'
+        controller: 'dashboardRemoteCtrl'
     })
     .state('main.view_remoto', {
         url: "/view_remoto",
@@ -65,12 +65,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('main.historico', {
         url: "/historico",
         templateUrl: "views/paginas/timeline.html",
-        controller : "detailRepositoryRemoteCtrl"
+        controller : "historyCtrl"
     })
     .state('main.map', {
         url: "/map",
         templateUrl: "views/map.html",
-        controller : "detailRepositoryRemoteCtrl"
+        controller : "leafletCtrl"
     })
 }
 angular

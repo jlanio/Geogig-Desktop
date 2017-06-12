@@ -5,7 +5,7 @@ class Database{
 	open(){
 		this._db.get('geogig').catch(err => {
 		  if (err.name === 'not_found') {
-		    this._db.put(GeneratorJson.init())
+		    this._db.put(getJson.init())
 		  }
 		})
 		return this._db.get('geogig');

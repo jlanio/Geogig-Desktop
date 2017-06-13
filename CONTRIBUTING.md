@@ -19,7 +19,7 @@ To build Geogig-Desktop from source, follow these steps.\
 
 - Clone the GeoGig source code repository.
   We encourage branch **dev**:\
-  `$git checkout  -b origin/dev`
+  `git clone https://github.com/jlanio/Geogig-Desktop.git -b dev`
 ## To Use After cloning
 
 ```bash

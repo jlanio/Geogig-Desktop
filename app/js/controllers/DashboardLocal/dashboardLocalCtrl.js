@@ -1,4 +1,4 @@
-function dashboardLocalCtrl($translate){
+function dashboardLocalCtrl(){
 	$s.NewRepo = () => {
 		swal({
 			title: 'New Repository',
@@ -31,9 +31,6 @@ function dashboardLocalCtrl($translate){
 	};
 
 	$s.deleteRepo = () => console.log("For Delete: ",idForDelete);
-	
-	$s.changeLanguage =  langKey =>  $translate.use(langKey);
-
 }
 angular
 .module('geogig-desktop')

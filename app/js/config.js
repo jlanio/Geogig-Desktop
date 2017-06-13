@@ -60,7 +60,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('main.config', {
         url: "/config_user",
         templateUrl: "views/paginas/config.html",
-        controller: 'listLocal'
+        controller: 'config'
     })
     .state('main.historico', {
         url: "/historico",

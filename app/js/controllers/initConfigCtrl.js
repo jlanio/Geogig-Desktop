@@ -1,7 +1,12 @@
-function initConfigCtrl($scope, $location){
+function initConfigCtrl($scope, $location, $translate){
 	$s = $scope;
 	$s.mydb = mydb;
-
+	//Seting config user after start app
+	let configUser = LocalStorage.get('configUser');
+	!configUser ? $location.path('/main/config_user') : console.info('User configured');
+	$translate.use(configUser.language);
+	//End Seting config user
+	
 	$s.checkServerisOffAndStart = function() {
 		ping.server('http://localhost:8182/repos')
 			.then(q => console.log(q))
@@ -24,8 +29,19 @@ function initConfigCtrl($scope, $location){
 	$s.currentServeRemoteId = () => LocalStorage.get('serveRemoteAtivo');
 	$s.currentRepoRemoteData = () => $s.mydb.infoRepositorios.conectedIn[$s.currentServeRemoteId()];
 	
+
+}
+function config ($translate, $location){
+	$s.saveConfig = (config) => {
+		$translate.use(config.language);
+		LocalStorage.set('configUser', config);
+		$location.path('/main/local');
+	}
+	$s.getConfig = () => LocalStorage.get('configUser');
 }
 angular
 .module('geogig-desktop')
 .controller('initConfigCtrl', initConfigCtrl)
+.controller('config', config)
+
 

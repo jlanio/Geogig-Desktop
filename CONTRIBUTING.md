@@ -9,4 +9,28 @@ We maintain two branches:
 
 ## Pull Requests
 
-Participation is encouraged using the github fork and pull request workflow:
+Participation is encouraged using the github fork and pull request workflow
+
+Building
+---------
+
+To build Geogig-Desktop from source, follow these steps.\
+  Note: To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+- Clone the GeoGig source code repository.
+
+	`$git clone https://github.com/jlanio/Geogig-Desktop.git`\
+  We encourage branch **dev**:\
+  `$git checkout  -b origin/dev`
+## To Use After cloning
+
+```bash
+# Go into the repository
+cd Geogig-Desktop
+# Install dependencies
+npm install
+# Setting environment (downloa geogig command line)
+node postinstall.js
+# Run the app
+npm start
+```

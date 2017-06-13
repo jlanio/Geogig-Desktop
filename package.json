@@ -18,8 +18,7 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^1.4.1",
-    "electron-inspector": "^0.1.4",
-    "electron-rebuild": "^1.5.7"
+    "unzip":  "^0.1.11"
   },
   "dependencies": {
     "fs-extra": "^2.0.0",

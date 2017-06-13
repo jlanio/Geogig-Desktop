@@ -2,12 +2,11 @@ function detailRepositoryRemoteCtrl($uibModal, toaster, $http){
    
     $s.clone = (name, repoAddress) => {
 		Geogig.clone.call(new Repository(name, undefined, repoAddress, undefined, 'remote')).then(e => {
-			console.log(e)
-			/*swal({
+			swal({
 				type: 'success',
 				title: `Repository  success!`,
-				html: `log: <h5> ${e[0]}</h5>`
-			})*/
+				html: `log: <h5> ${e.name}</h5>`
+			})
 		})
 	}
 	

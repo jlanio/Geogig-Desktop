@@ -31,6 +31,10 @@ class Geogig {
         db.updateRemoteConnection(id, dataObj);
     }
     static clone (){
-        return Promise.all([this.clone(), this.ls(), db.saveLocal.call(this)]);
+        return this.ls().then(shpfile => {
+            this.shpfile = shpfile;
+            db.saveLocal.call(this)
+            return this
+        });
     }
 }

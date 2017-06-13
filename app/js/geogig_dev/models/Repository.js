@@ -53,12 +53,11 @@ class Repository  {
             .catch(error => {error});
     }
     ls(){
-        let ad = new Promise((resolve, reject) => {
-            request(`${this._serverAddress}/ls-tree.json`, (error, response, body) => {
+        return new Promise((resolve, reject) => {
+           request(`${this._serverAddress}/ls-tree.json`, (error, response, body) => {
                 resolve(JSON.parse(body).response.node.map(shp => getJson.shpfile(shp.path)));
             })
         })
-        ad.then(q => this.shpfile = q)
     }
     log() {
         return new Promise((resolve, reject) => {
@@ -84,5 +83,3 @@ class Repository  {
     }
 
 }
-let ad = new Repository('XxxxxX', undefined, 'http://localhost:8182/repos/XxxxxX', undefined, 'remote').ls()
-console.log(ad);

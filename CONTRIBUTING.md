@@ -20,14 +20,14 @@ To build Geogig-Desktop from source, follow these steps.\
 - Clone the GeoGig source code repository.
   We encourage branch **dev**:\
   `git clone https://github.com/jlanio/Geogig-Desktop.git -b dev`
-## To Use After cloning
+## After cloning
 
 ```bash
 # Go into the repository
 cd Geogig-Desktop
 # Install dependencies
 npm install
-# Setting environment (downloa geogig command line)
+# Setting environment (download geogig command line)
 node postinstall.js
 # Run the app
 npm start

@@ -36,6 +36,3 @@ class db {
     }
 
 }
-/*storage.get('geogig').then((data) =>{
-    console.log(data)
-})*/

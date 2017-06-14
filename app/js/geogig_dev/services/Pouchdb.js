@@ -5,7 +5,7 @@ class Database{
 	open(){
 		this._db.get('geogig').catch(err => {
 		  if (err.name === 'not_found') {
-		    this._db.put(getJson.init())
+		    this._db.put(getJson.init());
 		  }
 		})
 		return this._db.get('geogig');
@@ -21,5 +21,6 @@ class Database{
 
 /*new Database().open().then(doc => console.log(doc));*/
 /*new PouchDB('db').destroy().then(function () {
-		}).catch(function (err) {
-})*/
+
+}).catch(function (err) {})
+*/

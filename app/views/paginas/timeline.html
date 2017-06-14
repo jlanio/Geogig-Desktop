@@ -37,7 +37,6 @@
                     <button type="button" class="btn btn-primary disabled">{{ 'DOWNLOAD' | translate }}</button>
                 </div>
             </div>
-
             <div  id="ibox-content">
                 <div id="vertical-timeline" class="vertical-container light-timeline">
                     <div  ng-repeat="commit in commits" class="vertical-timeline-block">
@@ -53,7 +52,8 @@
                             <span class="vertical-date">
                                 {{commit.author.email}}<br/>
                                 <label>
-                                    <input ng-model="commit.activate" type="checkbox" value="{{commit.id}}"  ng-change="checkChanged(commit);" ng-disabled="checked==limit && !commit.activate"/>
+                                    <input ng-model="commit.activate" type="checkbox" value="{{commit.id}}"  
+                                    ng-change="checkChanged(commit);" ng-disabled="checked==limit && !commit.activate"/>
                                     <small> ID:{{commit.id}}</small>
                                 </label>
                             </span>

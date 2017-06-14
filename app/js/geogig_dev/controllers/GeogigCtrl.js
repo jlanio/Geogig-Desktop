@@ -22,7 +22,7 @@ class Geogig {
         return this.log()
     }
     static diffCommit(thisCommit, toCompare) {
-        return Commit.diffCommit.call(this, thisCommit.id, toCompare.id);
+        return Commit.diffCommit.call(this, thisCommit, toCompare);
     }
     static ConnectRemote (remoteObj , dataObj){
         return Promise.all ([db.saveRemoteConnection(remoteObj , dataObj)])

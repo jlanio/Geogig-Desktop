@@ -1,14 +1,17 @@
-function leafletCtrl(leafletData){
+function leafletCtrl(){
  	
-    angular.extend($s, {
-        japan: {
-            lat: 37.26,
-            lng: 138.86,
-            zoom: 4
+    angular.extend(s, {
+        geogigMap: {
+            lat: 0,
+            lng: 0,
+            zoom: 2
+ 
         },
         geojson: {
-        	data: undefined,
-            style: style,
+        	geogigLayer: {
+                data: undefined,
+                style: style
+            }
         },
 	    legend: {
             position: 'bottomleft',
@@ -44,5 +47,3 @@ function leafletCtrl(leafletData){
 angular
 .module('geogig-desktop')
 .controller('leafletCtrl', leafletCtrl)
-
-

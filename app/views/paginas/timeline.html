@@ -15,6 +15,10 @@
     .sk-body-loading {
         position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 2100;
     }
+    .adx {
+        background: #2f4050;
+        color: #FFFFFF;
+    }
 </style>
 <div id="spinner" ng-class="commits ? 'sk-body':'sk-body-loading'">
     <div class="sk-spinner sk-spinner-wave">
@@ -43,7 +47,7 @@
                         <div class="vertical-timeline-icon navy-bg">
                             <i class="fa fa-cube"></i>
                         </div>
-                        <div class="vertical-timeline-content">
+                        <div class="vertical-timeline-content" ng-class="commit.activate ? 'adx' :  ''; " ">
                             <h2>{{commit.author.name}}</h2>
                             <p>{{commit.message}} </p>
                             <button type="button" class="btn btn-info disabled">

@@ -33,8 +33,16 @@ class Geogig {
     static clone (){
         return this.ls().then(shpfile => {
             this.shpfile = shpfile;
-            db.saveLocal.call(this)
+            this.clone();
+            this.addRemote();
+            db.saveLocal.call(this);
             return this
         });
+    }
+    static pull (){
+        return Promise.all ([this.pull()])
+    }
+    static push (){
+        return Promise.all ([this.push()])
     }
 }

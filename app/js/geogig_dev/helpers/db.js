@@ -6,16 +6,16 @@ class db {
         return storage.get('geogig').then((data) => {
             data.infoRepositorios.local.push(getJson.local.call(this));
             storage.put(data);
-            $s.mydb = data;
-            $s.$apply(() => $s.mydb)
+            s.mydb = data;
+            s.$apply(() => s.mydb)
             return data
         }).catch(error => error)
     }
     static saveshpFile(){
         return storage.get('geogig').then((data) =>{
             data.infoRepositorios.local[this.id].shpfile.push([...this.shpfile].pop());
-            $s.mydb = data;
-            $s.$apply(() => $s.mydb)
+            s.mydb = data;
+            s.$apply(() => s.mydb)
             storage.put(data);
             return data;
         }).catch(error => error)

@@ -1,5 +1,5 @@
 function dashboardLocalCtrl(){
-	$s.NewRepo = () => {
+	s.NewRepo = () => {
 		swal({
 			title: 'New Repository',
 			input: 'text',
@@ -26,11 +26,11 @@ function dashboardLocalCtrl(){
 		})
 	}
 	idForDelete = [];
-	$s.checkbox = (id)=>{
+	s.checkbox = (id)=>{
 		idForDelete.indexOf(id)> -1 ? idForDelete.splice(-1, 1) : idForDelete.push(id);
 	};
 
-	$s.deleteRepo = () => console.log("For Delete: ",idForDelete);
+	s.deleteRepo = () => console.log("For Delete: ",idForDelete);
 }
 angular
 .module('geogig-desktop')

@@ -37,11 +37,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         controller: 'detailRepositoryLocalCtrl'
 
     })
-    .state('main.issue', {
-        url: "/issue",
-        templateUrl: "views/paginas/issue_tracker.html",
-
-    })
     .state('main.remoto', {
         url: "/remoto",
         templateUrl: "views/paginas/DashboardRemote/dashboardRemote.html",
@@ -51,11 +46,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         url: "/view_remoto",
         templateUrl: "views/paginas/DashboardRemote/detailRepositoryRemote.html",
         controller: 'detailRepositoryRemoteCtrl'
-    })
-    .state('main.remoto_repo', {
-        url: "/remoto_repo",
-        templateUrl: "views/paginas/repositorio_remoto/main_repositorio_view.html",
-        controller: 'repositorio_remoto'
     })
     .state('main.config', {
         url: "/config_user",
@@ -71,6 +61,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         url: "/map",
         templateUrl: "views/map.html",
         controller : "leafletCtrl"
+    })
+    .state('main.issue', {
+        url: "/issue",
+        templateUrl: "views/paginas/issue_tracker.html",
+
     })
 }
 angular

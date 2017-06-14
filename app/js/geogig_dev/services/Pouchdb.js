@@ -11,7 +11,7 @@ class Database{
 		return this._db.get('geogig');
 	}
 	set(new_record){
-		this.open().then(data=>{
+		this.open().then(data => {
 			data.infoRepositorios = new_record.infoRepositorios;
 			this._db.put(data);
 		})

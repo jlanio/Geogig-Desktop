@@ -67,14 +67,14 @@ class Repository  {
         });
     };
     pull(){
-        Utils.geogig(['pull'])            
-            .then(response  => console.log(response))
-            .catch(error => console.log(error)); 
+        return Utils.geogig(['pull'], this._name)            
+            .then(response  => response)
+            .catch(error => error); 
     };
     push(){
-        Utils.geogig(['push'])
-            .then(response  => console.log(response))
-            .catch(error => console.log(error)); 
+        return Utils.geogig(['push'], this._name)
+            .then(response  => response)
+            .catch(error => error);
     }
     clone(){
         return Utils.geogig(['clone', this._serverAddress, `${this._name}.remote`])

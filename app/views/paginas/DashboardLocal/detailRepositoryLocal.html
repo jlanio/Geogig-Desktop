@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="mail-box-header">
-                <div ng-show="Repository().origin == 'remote'" class="pull-right tooltip-demo" >
+                <div ng-show="Repository().type == 'remote'" class="pull-right tooltip-demo" >
                     <a ng-click="pull()"  class="btn btn-white btn-sm">
                         <i class="fa fa-cloud-download"></i> {{ 'PULL' | translate }}
                     </a>

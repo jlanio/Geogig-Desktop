@@ -1,6 +1,6 @@
 function dashboardRemoteCtrl($uibModal, $http, toaster){
 
-    $s.newConnectionRemote = function (size) {
+    s.newConnectionRemote = function (size) {
         var modalInstance = $uibModal.open({
             templateUrl: 'views/modal.html',
             size: size,
@@ -26,8 +26,8 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
             });
         })
     }
-    $s.remoteUpdateRepos = () => {
-        $s.mydb.infoRepositorios.conectedIn.forEach((conexao, id) => get(conexao.serverAddress, id));
+    s.remoteUpdateRepos = () => {
+        s.mydb.infoRepositorios.conectedIn.forEach((conexao, id) => get(conexao.serverAddress, id));
     }
 }
 angular

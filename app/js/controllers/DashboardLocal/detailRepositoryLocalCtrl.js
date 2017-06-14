@@ -1,7 +1,7 @@
 function detailRepositoryLocalCtrl($location){
-	console.log($s.Repository());
+	console.log(s.Repository());
 
-	$s.NewShp = localShp => {
+	s.NewShp = localShp => {
 		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
 		ping.checkServerisOnAndKillProcess();
 		swal({
@@ -15,8 +15,8 @@ function detailRepositoryLocalCtrl($location){
 					if (!ShpName) {
 						reject('the field is empty!')
 					} else {
-						$s.Repository().shpfile.push({'name':ShpName,'shpfile':$s.localShp})
-						resolve(Geogig.importShapefile.call($s.Repository()))
+						s.Repository().shpfile.push({'name':ShpName,'shpfile':s.localShp})
+						resolve(Geogig.importShapefile.call(s.Repository()))
 					}
 				})
 			},
@@ -31,7 +31,7 @@ function detailRepositoryLocalCtrl($location){
 		})
 	}
 
-	$s.NewCommit = () => {
+	s.NewCommit = () => {
 		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
 		ping.checkServerisOnAndKillProcess();
 		swal({
@@ -45,7 +45,7 @@ function detailRepositoryLocalCtrl($location){
 					if (!comment) {
 						reject('the field is empty!')
 					} else {
-						resolve(Commit.new.call($s.Repository(), comment));
+						resolve(Commit.new.call(s.Repository(), comment));
 					}
 				})
 			},
@@ -60,75 +60,61 @@ function detailRepositoryLocalCtrl($location){
 		}).catch(q => {swal({type: 'error',title:`log: <h5> ${q}</h5>`});})
 	}
 
-	$s.analyze = () => {			
+	s.analyze = () => {			
 		ping.checkServerisOnAndKillProcess().then(q => {
-			Geogig.analyze.call($s.Repository()).then(q => {
+			Geogig.analyze.call(s.Repository()).then(q => {
 				swal({type:'success',title:'',html:`log:<h5>${q}</h5>`})
 			})
 		}).catch(q => console.log(q));	
 	};
-	$s.add = () => {
+	s.add = () => {
 		ping.checkServerisOnAndKillProcess().then(q => {
-			Geogig.add.call($s.Repository()).then(q => {
+			Geogig.add.call(s.Repository()).then(q => {
 				swal({type:'success',title:'',html:`log:<h5>${q[0]}</h5>`})
 			})
 		}).catch(q => console.log(q))		
 	};
-	$s.publicarRepo = function (id){
-		/*repo.initRemote($s.currentRepoData().nome, (data,url)=>{
+	s.push = () => {
+		Geogig.push.call(s.Repository()).then(e => console.log(e))		
+	};
+	s.pull = () => {
+		Geogig.pull.call(s.Repository()).then(e => console.log(e))
+	};
+
+	s.publicarRepo = function (id){
+		/*repo.initRemote(s.currentRepoData().nome, (data,url)=>{
 			if (data.response.error){
 				console.log("ERROR");
 			}else{
 				console.log("publicado com sucesso");
-				const tmp = $s.mydb;
+				const tmp = s.mydb;
 				tmp.infoRepositorios.local[id].remote = url;
 				tmp.infoRepositorios.local[id].origin.de = 'remote'
 				db.set(tmp);
-				repo.copy_to_folder($s.currentRepoData().nome);
+				repo.copy_to_folder(s.currentRepoData().nome);
 
 			}
 		});*/
-	}
-	$s.push = function(type){
-		repo.push($s.currentRepoData().nome, type, function(error, stdout, stderr){
-			console.log("OK");
-			toaster.pop({
-				type: 'error',
-				title: 'Deu ruim!',
-				body: "Push",
-				showCloseButton: true
-			});
-		})
-	}
-	$s.pull = function(type){
-		repo.pull($s.currentRepoData().nome, type,(error, stdout, stderr)=>{
-			toaster.pop({
-				type: 'error',
-				title: 'Deu ruim!',
-				body: "pull" ,
-				showCloseButton: true
-			});
-		})
 	}
 	function shp_export(_Name, type, objeto, localSave){
 		repo.shp_export(_Name, type, objeto, localSave, function(error, stdout, stderr){
 			console.log(error, stdout, stderr);
 		})
 	}
-	$s.baixar_shp = function (_Name, objeto, key){
+	s.baixar_shp = function (_Name, objeto, key){
 		const {dialog} = require('electron').remote;
 		dialog.showOpenDialog({
 	  		properties: [ 'openFile', 'openDirectory'] }, function (filename) {
 	    		var localSave = filename.toString();
 	    		shp_export(_Name, 'remoto',objeto, localSave)
-	    		const tmp = $s.mydb;
-	    		tmp.infoRepositorios.local[$s.currentRepoId()].arquivos[key].localDir = localSave+'\\'+objeto.nome+'.shp';
+	    		const tmp = s.mydb;
+	    		tmp.infoRepositorios.local[s.currentRepoId()].arquivos[key].localDir = localSave+'\\'+objeto.nome+'.shp';
 	    		db.set(tmp);
 	  		}
 		);
 	}
-	$s.dialog = function(){
-		if ($s.Repository().shpfile.length >= 1){
+	s.dialog = function(){
+		if (s.Repository().shpfile.length >= 1){
 			swal({type: 'error',title:`<h5>Sorry, we currently only support one shp per repository.
 				<br>In the next version will be added support for multiple shapefiles per repository..</h5>`});
 		}else{
@@ -143,7 +129,7 @@ function detailRepositoryLocalCtrl($location){
 				properties: ['openFile']
 			},
 			fileName => {
-				fileName === undefined ? false : $s.NewShp(fileName[0]), $s.localShp = fileName[0];
+				fileName === undefined ? false : s.NewShp(fileName[0]), s.localShp = fileName[0];
 			})
 		}
 	};

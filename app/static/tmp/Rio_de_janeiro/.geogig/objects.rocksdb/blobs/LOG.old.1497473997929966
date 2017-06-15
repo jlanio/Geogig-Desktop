@@ -1,0 +1,237 @@
+2017/06/14-15:58:52.945995 19b0 RocksDB version: 4.13.4
+2017/06/14-15:58:52.946075 19b0 Git sha rocksdb_build_git_sha:8e68ffb872f3ead8b0fc3bb6353c04008a049d8d
+2017/06/14-15:58:52.946098 19b0 Compile date Dec 14 2016
+2017/06/14-15:58:52.946111 19b0 DB SUMMARY
+2017/06/14-15:58:52.946259 19b0 SST files in C:\Users\jlanio\Geogig-Desktop\app\tmp\Rio_de_janeiro\.geogig\objects.rocksdb\blobs dir, Total Num: 0, files: 
+2017/06/14-15:58:52.946287 19b0 Write Ahead Log file in C:\Users\jlanio\Geogig-Desktop\app\tmp\Rio_de_janeiro\.geogig\objects.rocksdb\blobs: 
+2017/06/14-15:58:52.946310 19b0                         Options.error_if_exists: 0
+2017/06/14-15:58:52.946328 19b0                       Options.create_if_missing: 1
+2017/06/14-15:58:52.946340 19b0                         Options.paranoid_checks: 1
+2017/06/14-15:58:52.946613 19b0                                     Options.env: 0000000001046970
+2017/06/14-15:58:52.946622 19b0                                Options.info_log: 000000001BE63610
+2017/06/14-15:58:52.946627 19b0                          Options.max_open_files: -1
+2017/06/14-15:58:52.946631 19b0                Options.max_file_opening_threads: 16
+2017/06/14-15:58:52.946636 19b0                      Options.max_total_wal_size: 0
+2017/06/14-15:58:52.946641 19b0                         Options.disableDataSync: 0
+2017/06/14-15:58:52.946645 19b0                               Options.use_fsync: 0
+2017/06/14-15:58:52.946649 19b0                       Options.max_log_file_size: 0
+2017/06/14-15:58:52.946653 19b0                  Options.max_manifest_file_size: 18446744073709551615
+2017/06/14-15:58:52.946658 19b0                   Options.log_file_time_to_roll: 0
+2017/06/14-15:58:52.946662 19b0                       Options.keep_log_file_num: 1000
+2017/06/14-15:58:52.946667 19b0                    Options.recycle_log_file_num: 0
+2017/06/14-15:58:52.946671 19b0                         Options.allow_os_buffer: 1
+2017/06/14-15:58:52.946675 19b0                        Options.allow_mmap_reads: 1
+2017/06/14-15:58:52.946679 19b0                         Options.allow_fallocate: 1
+2017/06/14-15:58:52.946684 19b0                       Options.allow_mmap_writes: 1
+2017/06/14-15:58:52.946688 19b0          Options.create_missing_column_families: 0
+2017/06/14-15:58:52.946693 19b0                              Options.db_log_dir: 
+2017/06/14-15:58:52.946697 19b0                                 Options.wal_dir: C:\Users\jlanio\Geogig-Desktop\app\tmp\Rio_de_janeiro\.geogig\objects.rocksdb\blobs
+2017/06/14-15:58:52.946702 19b0                Options.table_cache_numshardbits: 6
+2017/06/14-15:58:52.946706 19b0     Options.delete_obsolete_files_period_micros: 21600000000
+2017/06/14-15:58:52.946710 19b0                      Options.max_subcompactions: 1
+2017/06/14-15:58:52.946714 19b0                  Options.max_background_flushes: 1
+2017/06/14-15:58:52.946719 19b0                         Options.WAL_ttl_seconds: 0
+2017/06/14-15:58:52.946722 19b0                       Options.WAL_size_limit_MB: 0
+2017/06/14-15:58:52.946727 19b0             Options.manifest_preallocation_size: 4194304
+2017/06/14-15:58:52.946731 19b0                         Options.allow_os_buffer: 1
+2017/06/14-15:58:52.946735 19b0                        Options.allow_mmap_reads: 1
+2017/06/14-15:58:52.946739 19b0                       Options.allow_mmap_writes: 1
+2017/06/14-15:58:52.946744 19b0                     Options.is_fd_close_on_exec: 1
+2017/06/14-15:58:52.946748 19b0                   Options.stats_dump_period_sec: 600
+2017/06/14-15:58:52.946752 19b0                   Options.advise_random_on_open: 1
+2017/06/14-15:58:52.946756 19b0                    Options.db_write_buffer_size: 0
+2017/06/14-15:58:52.946760 19b0         Options.access_hint_on_compaction_start: 1
+2017/06/14-15:58:52.946764 19b0  Options.new_table_reader_for_compaction_inputs: 0
+2017/06/14-15:58:52.946769 19b0               Options.compaction_readahead_size: 0
+2017/06/14-15:58:52.946773 19b0           Options.random_access_max_buffer_size: 1048576
+2017/06/14-15:58:52.946777 19b0           Options.writable_file_max_buffer_size: 1048576
+2017/06/14-15:58:52.946807 19b0                      Options.use_adaptive_mutex: 0
+2017/06/14-15:58:52.946814 19b0                            Options.rate_limiter: 0000000000000000
+2017/06/14-15:58:52.946819 19b0     Options.sst_file_manager.rate_bytes_per_sec: 0
+2017/06/14-15:58:52.946823 19b0                          Options.bytes_per_sync: 67108864
+2017/06/14-15:58:52.946828 19b0                      Options.wal_bytes_per_sync: 0
+2017/06/14-15:58:52.946832 19b0                       Options.wal_recovery_mode: 2
+2017/06/14-15:58:52.946836 19b0                  Options.enable_thread_tracking: 0
+2017/06/14-15:58:52.946840 19b0                     Options.delayed_write_rate : 2097152
+2017/06/14-15:58:52.946844 19b0         Options.allow_concurrent_memtable_write: 0
+2017/06/14-15:58:52.946849 19b0      Options.enable_write_thread_adaptive_yield: 0
+2017/06/14-15:58:52.946853 19b0             Options.write_thread_max_yield_usec: 100
+2017/06/14-15:58:52.946857 19b0            Options.write_thread_slow_yield_usec: 3
+2017/06/14-15:58:52.946861 19b0                               Options.row_cache: None
+2017/06/14-15:58:52.946866 19b0                              Options.wal_filter: None
+2017/06/14-15:58:52.946870 19b0             Options.avoid_flush_during_recovery: 0
+2017/06/14-15:58:52.946874 19b0             Options.base_background_compactions: 1
+2017/06/14-15:58:52.946878 19b0              Options.max_background_compactions: 1
+2017/06/14-15:58:52.946883 19b0 Compression algorithms supported:
+2017/06/14-15:58:52.946887 19b0 	Snappy supported: 0
+2017/06/14-15:58:52.946891 19b0 	Zlib supported: 0
+2017/06/14-15:58:52.946895 19b0 	Bzip supported: 0
+2017/06/14-15:58:52.946899 19b0 	LZ4 supported: 0
+2017/06/14-15:58:52.946903 19b0 Fast CRC32 supported: 0
+2017/06/14-15:58:52.947322 19b0 Creating manifest 1 
+2017/06/14-15:58:52.966253 19b0 Recovering from manifest file: MANIFEST-000001
+2017/06/14-15:58:52.966395 19b0 --------------- Options for column family [default]:
+2017/06/14-15:58:52.966409 19b0               Options.comparator: rocksdb.InternalKeyComparator:leveldb.BytewiseComparator
+2017/06/14-15:58:52.966417 19b0           Options.merge_operator: None
+2017/06/14-15:58:52.966425 19b0        Options.compaction_filter: None
+2017/06/14-15:58:52.966432 19b0        Options.compaction_filter_factory: None
+2017/06/14-15:58:52.966440 19b0         Options.memtable_factory: SkipListFactory
+2017/06/14-15:58:52.966448 19b0            Options.table_factory: BlockBasedTable
+2017/06/14-15:58:52.966476 19b0            table_factory options:   flush_block_policy_factory: FlushBlockBySizePolicyFactory (000000001BE06FE0)
+  cache_index_and_filter_blocks: 0
+  pin_l0_filter_and_index_blocks_in_cache: 0
+  index_type: 0
+  hash_index_allow_collision: 1
+  checksum: 1
+  no_block_cache: 0
+  block_cache: 0000000001060290
+  block_cache_size: 8388608
+  block_cache_compressed: 0000000000000000
+  block_size: 4096
+  block_size_deviation: 10
+  block_restart_interval: 16
+  index_block_restart_interval: 1
+  filter_policy: nullptr
+  whole_key_filtering: 1
+  skip_table_builder_flush: 0
+  format_version: 2
+2017/06/14-15:58:52.966487 19b0        Options.write_buffer_size: 67108864
+2017/06/14-15:58:52.966495 19b0  Options.max_write_buffer_number: 2
+2017/06/14-15:58:52.966503 19b0          Options.compression: NoCompression
+2017/06/14-15:58:52.966511 19b0                  Options.bottommost_compression: Disabled
+2017/06/14-15:58:52.966518 19b0       Options.prefix_extractor: nullptr
+2017/06/14-15:58:52.966525 19b0             Options.num_levels: 7
+2017/06/14-15:58:52.966532 19b0        Options.min_write_buffer_number_to_merge: 1
+2017/06/14-15:58:52.966539 19b0     Options.max_write_buffer_number_to_maintain: 0
+2017/06/14-15:58:52.966546 19b0            Options.compression_opts.window_bits: -14
+2017/06/14-15:58:52.966553 19b0                  Options.compression_opts.level: -1
+2017/06/14-15:58:52.966560 19b0               Options.compression_opts.strategy: 0
+2017/06/14-15:58:52.966567 19b0         Options.compression_opts.max_dict_bytes: 0
+2017/06/14-15:58:52.966574 19b0      Options.level0_file_num_compaction_trigger: 4
+2017/06/14-15:58:52.966630 19b0          Options.level0_slowdown_writes_trigger: 20
+2017/06/14-15:58:52.966641 19b0              Options.level0_stop_writes_trigger: 24
+2017/06/14-15:58:52.966649 19b0                   Options.target_file_size_base: 67108864
+2017/06/14-15:58:52.966656 19b0             Options.target_file_size_multiplier: 1
+2017/06/14-15:58:52.966663 19b0                Options.max_bytes_for_level_base: 268435456
+2017/06/14-15:58:52.966670 19b0 Options.level_compaction_dynamic_level_bytes: 0
+2017/06/14-15:58:52.966677 19b0          Options.max_bytes_for_level_multiplier: 10
+2017/06/14-15:58:52.966684 19b0 Options.max_bytes_for_level_multiplier_addtl[0]: 1
+2017/06/14-15:58:52.966690 19b0 Options.max_bytes_for_level_multiplier_addtl[1]: 1
+2017/06/14-15:58:52.966697 19b0 Options.max_bytes_for_level_multiplier_addtl[2]: 1
+2017/06/14-15:58:52.966705 19b0 Options.max_bytes_for_level_multiplier_addtl[3]: 1
+2017/06/14-15:58:52.966711 19b0 Options.max_bytes_for_level_multiplier_addtl[4]: 1
+2017/06/14-15:58:52.966718 19b0 Options.max_bytes_for_level_multiplier_addtl[5]: 1
+2017/06/14-15:58:52.966726 19b0 Options.max_bytes_for_level_multiplier_addtl[6]: 1
+2017/06/14-15:58:52.966733 19b0       Options.max_sequential_skip_in_iterations: 8
+2017/06/14-15:58:52.966741 19b0                    Options.max_compaction_bytes: 1677721600
+2017/06/14-15:58:52.966749 19b0                        Options.arena_block_size: 8388608
+2017/06/14-15:58:52.966757 19b0   Options.soft_pending_compaction_bytes_limit: 68719476736
+2017/06/14-15:58:52.966764 19b0   Options.hard_pending_compaction_bytes_limit: 274877906944
+2017/06/14-15:58:52.966771 19b0       Options.rate_limit_delay_max_milliseconds: 1000
+2017/06/14-15:58:52.966778 19b0                Options.disable_auto_compactions: 0
+2017/06/14-15:58:52.966785 19b0           Options.verify_checksums_in_compaction: 1
+2017/06/14-15:58:52.966793 19b0                         Options.compaction_style: 0
+2017/06/14-15:58:52.966799 19b0                           Options.compaction_pri: 0
+2017/06/14-15:58:52.966804 19b0  Options.compaction_options_universal.size_ratio: 1
+2017/06/14-15:58:52.966808 19b0 Options.compaction_options_universal.min_merge_width: 2
+2017/06/14-15:58:52.966812 19b0 Options.compaction_options_universal.max_merge_width: 4294967295
+2017/06/14-15:58:52.966817 19b0 Options.compaction_options_universal.max_size_amplification_percent: 200
+2017/06/14-15:58:52.966821 19b0 Options.compaction_options_universal.compression_size_percent: -1
+2017/06/14-15:58:52.966825 19b0 Options.compaction_options_fifo.max_table_files_size: 1073741824
+2017/06/14-15:58:52.966830 19b0                   Options.table_properties_collectors: 
+2017/06/14-15:58:52.966834 19b0                   Options.inplace_update_support: 0
+2017/06/14-15:58:52.966838 19b0                 Options.inplace_update_num_locks: 10000
+2017/06/14-15:58:52.966842 19b0               Options.min_partial_merge_operands: 2
+2017/06/14-15:58:52.966847 19b0               Options.memtable_prefix_bloom_size_ratio: 0.000000
+2017/06/14-15:58:52.966855 19b0   Options.memtable_huge_page_size: 0
+2017/06/14-15:58:52.966862 19b0                           Options.bloom_locality: 0
+2017/06/14-15:58:52.966869 19b0                    Options.max_successive_merges: 0
+2017/06/14-15:58:52.966875 19b0                Options.optimize_filters_for_hits: 0
+2017/06/14-15:58:52.966879 19b0                Options.paranoid_file_checks: 0
+2017/06/14-15:58:52.966883 19b0                Options.force_consistency_checks: 0
+2017/06/14-15:58:52.966888 19b0                Options.report_bg_io_stats: 0
+2017/06/14-15:58:52.968189 19b0 Recovered from manifest file:C:\Users\jlanio\Geogig-Desktop\app\tmp\Rio_de_janeiro\.geogig\objects.rocksdb\blobs/MANIFEST-000001 succeeded,manifest_file_number is 1, next_file_number is 3, last_sequence is 0, log_number is 0,prev_log_number is 0,max_column_family is 0
+2017/06/14-15:58:52.968215 19b0 Column family [default] (ID 0), log number is 0
+2017/06/14-15:58:52.979716 19b0 DB pointer 000000001BF14F90
+2017/06/14-15:58:52.979889 19b0 Creating manifest 6
+2017/06/14-15:58:52.989140 19b0 --------------- Options for column family [metadata]:
+2017/06/14-15:58:52.989162 19b0               Options.comparator: rocksdb.InternalKeyComparator:leveldb.BytewiseComparator
+2017/06/14-15:58:52.989173 19b0           Options.merge_operator: None
+2017/06/14-15:58:52.989181 19b0        Options.compaction_filter: None
+2017/06/14-15:58:52.989188 19b0        Options.compaction_filter_factory: None
+2017/06/14-15:58:52.989196 19b0         Options.memtable_factory: SkipListFactory
+2017/06/14-15:58:52.989205 19b0            Options.table_factory: BlockBasedTable
+2017/06/14-15:58:52.989237 19b0            table_factory options:   flush_block_policy_factory: FlushBlockBySizePolicyFactory (0000000001028960)
+  cache_index_and_filter_blocks: 0
+  pin_l0_filter_and_index_blocks_in_cache: 0
+  index_type: 0
+  hash_index_allow_collision: 1
+  checksum: 1
+  no_block_cache: 0
+  block_cache: 00000000010608D0
+  block_cache_size: 8388608
+  block_cache_compressed: 0000000000000000
+  block_size: 4096
+  block_size_deviation: 10
+  block_restart_interval: 16
+  index_block_restart_interval: 1
+  filter_policy: nullptr
+  whole_key_filtering: 1
+  skip_table_builder_flush: 0
+  format_version: 2
+2017/06/14-15:58:52.989246 19b0        Options.write_buffer_size: 67108864
+2017/06/14-15:58:52.989251 19b0  Options.max_write_buffer_number: 2
+2017/06/14-15:58:52.989256 19b0          Options.compression: NoCompression
+2017/06/14-15:58:52.989260 19b0                  Options.bottommost_compression: Disabled
+2017/06/14-15:58:52.989265 19b0       Options.prefix_extractor: nullptr
+2017/06/14-15:58:52.989269 19b0             Options.num_levels: 7
+2017/06/14-15:58:52.989273 19b0        Options.min_write_buffer_number_to_merge: 1
+2017/06/14-15:58:52.989277 19b0     Options.max_write_buffer_number_to_maintain: 0
+2017/06/14-15:58:52.989282 19b0            Options.compression_opts.window_bits: -14
+2017/06/14-15:58:52.989286 19b0                  Options.compression_opts.level: -1
+2017/06/14-15:58:52.989290 19b0               Options.compression_opts.strategy: 0
+2017/06/14-15:58:52.989294 19b0         Options.compression_opts.max_dict_bytes: 0
+2017/06/14-15:58:52.989299 19b0      Options.level0_file_num_compaction_trigger: 4
+2017/06/14-15:58:52.989303 19b0          Options.level0_slowdown_writes_trigger: 20
+2017/06/14-15:58:52.989307 19b0              Options.level0_stop_writes_trigger: 24
+2017/06/14-15:58:52.989311 19b0                   Options.target_file_size_base: 67108864
+2017/06/14-15:58:52.989316 19b0             Options.target_file_size_multiplier: 1
+2017/06/14-15:58:52.989320 19b0                Options.max_bytes_for_level_base: 268435456
+2017/06/14-15:58:52.989324 19b0 Options.level_compaction_dynamic_level_bytes: 0
+2017/06/14-15:58:52.989328 19b0          Options.max_bytes_for_level_multiplier: 10
+2017/06/14-15:58:52.989332 19b0 Options.max_bytes_for_level_multiplier_addtl[0]: 1
+2017/06/14-15:58:52.989337 19b0 Options.max_bytes_for_level_multiplier_addtl[1]: 1
+2017/06/14-15:58:52.989341 19b0 Options.max_bytes_for_level_multiplier_addtl[2]: 1
+2017/06/14-15:58:52.989348 19b0 Options.max_bytes_for_level_multiplier_addtl[3]: 1
+2017/06/14-15:58:52.989355 19b0 Options.max_bytes_for_level_multiplier_addtl[4]: 1
+2017/06/14-15:58:52.989362 19b0 Options.max_bytes_for_level_multiplier_addtl[5]: 1
+2017/06/14-15:58:52.989369 19b0 Options.max_bytes_for_level_multiplier_addtl[6]: 1
+2017/06/14-15:58:52.989376 19b0       Options.max_sequential_skip_in_iterations: 8
+2017/06/14-15:58:52.989383 19b0                    Options.max_compaction_bytes: 1677721600
+2017/06/14-15:58:52.989390 19b0                        Options.arena_block_size: 8388608
+2017/06/14-15:58:52.989397 19b0   Options.soft_pending_compaction_bytes_limit: 68719476736
+2017/06/14-15:58:52.989404 19b0   Options.hard_pending_compaction_bytes_limit: 274877906944
+2017/06/14-15:58:52.989411 19b0       Options.rate_limit_delay_max_milliseconds: 1000
+2017/06/14-15:58:52.989418 19b0                Options.disable_auto_compactions: 0
+2017/06/14-15:58:52.989482 19b0           Options.verify_checksums_in_compaction: 1
+2017/06/14-15:58:52.989496 19b0                         Options.compaction_style: 0
+2017/06/14-15:58:52.989504 19b0                           Options.compaction_pri: 0
+2017/06/14-15:58:52.989511 19b0  Options.compaction_options_universal.size_ratio: 1
+2017/06/14-15:58:52.989518 19b0 Options.compaction_options_universal.min_merge_width: 2
+2017/06/14-15:58:52.989525 19b0 Options.compaction_options_universal.max_merge_width: 4294967295
+2017/06/14-15:58:52.989532 19b0 Options.compaction_options_universal.max_size_amplification_percent: 200
+2017/06/14-15:58:52.989537 19b0 Options.compaction_options_universal.compression_size_percent: -1
+2017/06/14-15:58:52.989541 19b0 Options.compaction_options_fifo.max_table_files_size: 1073741824
+2017/06/14-15:58:52.989546 19b0                   Options.table_properties_collectors: 
+2017/06/14-15:58:52.989550 19b0                   Options.inplace_update_support: 0
+2017/06/14-15:58:52.989555 19b0                 Options.inplace_update_num_locks: 10000
+2017/06/14-15:58:52.989559 19b0               Options.min_partial_merge_operands: 2
+2017/06/14-15:58:52.989563 19b0               Options.memtable_prefix_bloom_size_ratio: 0.000000
+2017/06/14-15:58:52.989570 19b0   Options.memtable_huge_page_size: 0
+2017/06/14-15:58:52.989574 19b0                           Options.bloom_locality: 0
+2017/06/14-15:58:52.989578 19b0                    Options.max_successive_merges: 0
+2017/06/14-15:58:52.989583 19b0                Options.optimize_filters_for_hits: 0
+2017/06/14-15:58:52.989586 19b0                Options.paranoid_file_checks: 0
+2017/06/14-15:58:52.989590 19b0                Options.force_consistency_checks: 0
+2017/06/14-15:58:52.989595 19b0                Options.report_bg_io_stats: 0
+2017/06/14-15:58:52.997580 19b0 Created column family [metadata] (ID 1)

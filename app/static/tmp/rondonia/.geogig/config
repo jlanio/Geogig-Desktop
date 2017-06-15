@@ -1,0 +1,15 @@
+[file]
+version = 1.0
+[rocksdb]
+version = 1
+[storage]
+graph = rocksdb
+objects = rocksdb
+refs = file
+index = rocksdb
+[remote\serve]
+url = http://localhost:8182/repos/rondonia
+fetch = +refs/heads/*:refs/remotes/serve/*
+[remote\origin]
+url = http://localhost:8182/repos/rondonia
+fetch = +refs/heads/*:refs/remotes/origin/*

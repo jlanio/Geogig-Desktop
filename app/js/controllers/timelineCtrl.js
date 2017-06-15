@@ -4,6 +4,10 @@ function historyCtrl(){
     let commitSelected = [];
 	s.limit = 2; s.checked = 0;
 
+    Geogig.log.call(s.Repository()).then(data => {
+        s.$apply(()=> s.commits = JSON.parse(data).response.commit)
+    });
+
     s.checkChanged = commit => {
         commit.activate ? s.checked++ : s.checked--;
         commit.activate ? commitSelected.push(commit.id) : checkIdAndRemove(commit.id);
@@ -15,18 +19,12 @@ function historyCtrl(){
         }
     }
 
-    Geogig.log.call(s.Repository()).then(data => {
-        s.commits = JSON.parse(data).response.commit;
-        s.$apply(()=> {
-            s.commits;
-        });
-    });
-
 	s.differenceCommit = () => {
         Geogig.diffCommit.call(s.Repository(), ...commitSelected)
             .then(features => {
-                s.geojson.geogigLayer.data = WKTtoGeojson.init(features);
-                s.$apply(() => s.geojson.geogigLayer.data);
+                s.$apply(() => {
+                    s.geojson.geogigLayer.data = WKTtoGeojson.init(features)
+                });
             });
 	};
 }

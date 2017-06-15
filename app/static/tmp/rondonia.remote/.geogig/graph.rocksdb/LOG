@@ -1,0 +1,242 @@
+2017/06/14-15:56:43.637418 a24 RocksDB version: 4.13.4
+2017/06/14-15:56:43.637490 a24 Git sha rocksdb_build_git_sha:8e68ffb872f3ead8b0fc3bb6353c04008a049d8d
+2017/06/14-15:56:43.637511 a24 Compile date Dec 14 2016
+2017/06/14-15:56:43.637525 a24 DB SUMMARY
+2017/06/14-15:56:43.637817 a24 CURRENT file:  CURRENT
+2017/06/14-15:56:43.637841 a24 IDENTITY file:  IDENTITY
+2017/06/14-15:56:43.637893 a24 MANIFEST file:  MANIFEST-000039 size: 206 Bytes
+2017/06/14-15:56:43.637910 a24 SST files in C:\Users\jlanio\Geogig-Desktop\app\tmp\rondonia.remote\.geogig\graph.rocksdb dir, Total Num: 1, files: 000008.sst 
+2017/06/14-15:56:43.637924 a24 Write Ahead Log file in C:\Users\jlanio\Geogig-Desktop\app\tmp\rondonia.remote\.geogig\graph.rocksdb: 000040.log size: 0 ; 
+2017/06/14-15:56:43.638181 a24                         Options.error_if_exists: 0
+2017/06/14-15:56:43.638192 a24                       Options.create_if_missing: 1
+2017/06/14-15:56:43.638197 a24                         Options.paranoid_checks: 1
+2017/06/14-15:56:43.638202 a24                                     Options.env: 0000000001134DB0
+2017/06/14-15:56:43.638207 a24                                Options.info_log: 000000001BD3CE70
+2017/06/14-15:56:43.638212 a24                          Options.max_open_files: -1
+2017/06/14-15:56:43.638216 a24                Options.max_file_opening_threads: 16
+2017/06/14-15:56:43.638221 a24                      Options.max_total_wal_size: 0
+2017/06/14-15:56:43.638225 a24                         Options.disableDataSync: 0
+2017/06/14-15:56:43.638229 a24                               Options.use_fsync: 0
+2017/06/14-15:56:43.638233 a24                       Options.max_log_file_size: 0
+2017/06/14-15:56:43.638237 a24                  Options.max_manifest_file_size: 18446744073709551615
+2017/06/14-15:56:43.638242 a24                   Options.log_file_time_to_roll: 0
+2017/06/14-15:56:43.638246 a24                       Options.keep_log_file_num: 1000
+2017/06/14-15:56:43.638250 a24                    Options.recycle_log_file_num: 0
+2017/06/14-15:56:43.638255 a24                         Options.allow_os_buffer: 1
+2017/06/14-15:56:43.638259 a24                        Options.allow_mmap_reads: 1
+2017/06/14-15:56:43.638263 a24                         Options.allow_fallocate: 1
+2017/06/14-15:56:43.638267 a24                       Options.allow_mmap_writes: 1
+2017/06/14-15:56:43.638271 a24          Options.create_missing_column_families: 0
+2017/06/14-15:56:43.638276 a24                              Options.db_log_dir: 
+2017/06/14-15:56:43.638280 a24                                 Options.wal_dir: C:\Users\jlanio\Geogig-Desktop\app\tmp\rondonia.remote\.geogig\graph.rocksdb
+2017/06/14-15:56:43.638284 a24                Options.table_cache_numshardbits: 6
+2017/06/14-15:56:43.638288 a24     Options.delete_obsolete_files_period_micros: 21600000000
+2017/06/14-15:56:43.638293 a24                      Options.max_subcompactions: 1
+2017/06/14-15:56:43.638297 a24                  Options.max_background_flushes: 1
+2017/06/14-15:56:43.638301 a24                         Options.WAL_ttl_seconds: 0
+2017/06/14-15:56:43.638305 a24                       Options.WAL_size_limit_MB: 0
+2017/06/14-15:56:43.638309 a24             Options.manifest_preallocation_size: 4194304
+2017/06/14-15:56:43.638313 a24                         Options.allow_os_buffer: 1
+2017/06/14-15:56:43.638318 a24                        Options.allow_mmap_reads: 1
+2017/06/14-15:56:43.638322 a24                       Options.allow_mmap_writes: 1
+2017/06/14-15:56:43.638326 a24                     Options.is_fd_close_on_exec: 1
+2017/06/14-15:56:43.638330 a24                   Options.stats_dump_period_sec: 600
+2017/06/14-15:56:43.638334 a24                   Options.advise_random_on_open: 1
+2017/06/14-15:56:43.638338 a24                    Options.db_write_buffer_size: 0
+2017/06/14-15:56:43.638343 a24         Options.access_hint_on_compaction_start: 1
+2017/06/14-15:56:43.638347 a24  Options.new_table_reader_for_compaction_inputs: 0
+2017/06/14-15:56:43.638351 a24               Options.compaction_readahead_size: 0
+2017/06/14-15:56:43.638381 a24           Options.random_access_max_buffer_size: 1048576
+2017/06/14-15:56:43.638390 a24           Options.writable_file_max_buffer_size: 1048576
+2017/06/14-15:56:43.638395 a24                      Options.use_adaptive_mutex: 0
+2017/06/14-15:56:43.638399 a24                            Options.rate_limiter: 0000000000000000
+2017/06/14-15:56:43.638404 a24     Options.sst_file_manager.rate_bytes_per_sec: 0
+2017/06/14-15:56:43.638408 a24                          Options.bytes_per_sync: 67108864
+2017/06/14-15:56:43.638413 a24                      Options.wal_bytes_per_sync: 0
+2017/06/14-15:56:43.638417 a24                       Options.wal_recovery_mode: 2
+2017/06/14-15:56:43.638421 a24                  Options.enable_thread_tracking: 0
+2017/06/14-15:56:43.638425 a24                     Options.delayed_write_rate : 2097152
+2017/06/14-15:56:43.638429 a24         Options.allow_concurrent_memtable_write: 0
+2017/06/14-15:56:43.638433 a24      Options.enable_write_thread_adaptive_yield: 0
+2017/06/14-15:56:43.638437 a24             Options.write_thread_max_yield_usec: 100
+2017/06/14-15:56:43.638442 a24            Options.write_thread_slow_yield_usec: 3
+2017/06/14-15:56:43.638446 a24                               Options.row_cache: None
+2017/06/14-15:56:43.638450 a24                              Options.wal_filter: None
+2017/06/14-15:56:43.638454 a24             Options.avoid_flush_during_recovery: 0
+2017/06/14-15:56:43.638459 a24             Options.base_background_compactions: 1
+2017/06/14-15:56:43.638463 a24              Options.max_background_compactions: 1
+2017/06/14-15:56:43.638467 a24 Compression algorithms supported:
+2017/06/14-15:56:43.638471 a24 	Snappy supported: 0
+2017/06/14-15:56:43.638475 a24 	Zlib supported: 0
+2017/06/14-15:56:43.638479 a24 	Bzip supported: 0
+2017/06/14-15:56:43.638483 a24 	LZ4 supported: 0
+2017/06/14-15:56:43.638487 a24 Fast CRC32 supported: 0
+2017/06/14-15:56:43.638960 a24 Recovering from manifest file: MANIFEST-000039
+2017/06/14-15:56:43.639051 a24 --------------- Options for column family [default]:
+2017/06/14-15:56:43.639060 a24               Options.comparator: rocksdb.InternalKeyComparator:leveldb.BytewiseComparator
+2017/06/14-15:56:43.639064 a24           Options.merge_operator: None
+2017/06/14-15:56:43.639069 a24        Options.compaction_filter: None
+2017/06/14-15:56:43.639073 a24        Options.compaction_filter_factory: None
+2017/06/14-15:56:43.639077 a24         Options.memtable_factory: SkipListFactory
+2017/06/14-15:56:43.639082 a24            Options.table_factory: BlockBasedTable
+2017/06/14-15:56:43.639099 a24            table_factory options:   flush_block_policy_factory: FlushBlockBySizePolicyFactory (000000001BD3A600)
+  cache_index_and_filter_blocks: 0
+  pin_l0_filter_and_index_blocks_in_cache: 0
+  index_type: 0
+  hash_index_allow_collision: 1
+  checksum: 1
+  no_block_cache: 0
+  block_cache: 0000000001162000
+  block_cache_size: 8388608
+  block_cache_compressed: 0000000000000000
+  block_size: 4096
+  block_size_deviation: 10
+  block_restart_interval: 16
+  index_block_restart_interval: 1
+  filter_policy: nullptr
+  whole_key_filtering: 1
+  skip_table_builder_flush: 0
+  format_version: 2
+2017/06/14-15:56:43.639105 a24        Options.write_buffer_size: 67108864
+2017/06/14-15:56:43.639109 a24  Options.max_write_buffer_number: 2
+2017/06/14-15:56:43.639113 a24          Options.compression: NoCompression
+2017/06/14-15:56:43.639118 a24                  Options.bottommost_compression: Disabled
+2017/06/14-15:56:43.639122 a24       Options.prefix_extractor: nullptr
+2017/06/14-15:56:43.639126 a24             Options.num_levels: 7
+2017/06/14-15:56:43.639130 a24        Options.min_write_buffer_number_to_merge: 1
+2017/06/14-15:56:43.639134 a24     Options.max_write_buffer_number_to_maintain: 0
+2017/06/14-15:56:43.639138 a24            Options.compression_opts.window_bits: -14
+2017/06/14-15:56:43.639142 a24                  Options.compression_opts.level: -1
+2017/06/14-15:56:43.639147 a24               Options.compression_opts.strategy: 0
+2017/06/14-15:56:43.639151 a24         Options.compression_opts.max_dict_bytes: 0
+2017/06/14-15:56:43.639188 a24      Options.level0_file_num_compaction_trigger: 4
+2017/06/14-15:56:43.639196 a24          Options.level0_slowdown_writes_trigger: 20
+2017/06/14-15:56:43.639200 a24              Options.level0_stop_writes_trigger: 24
+2017/06/14-15:56:43.639204 a24                   Options.target_file_size_base: 67108864
+2017/06/14-15:56:43.639209 a24             Options.target_file_size_multiplier: 1
+2017/06/14-15:56:43.639213 a24                Options.max_bytes_for_level_base: 268435456
+2017/06/14-15:56:43.639217 a24 Options.level_compaction_dynamic_level_bytes: 0
+2017/06/14-15:56:43.639222 a24          Options.max_bytes_for_level_multiplier: 10
+2017/06/14-15:56:43.639226 a24 Options.max_bytes_for_level_multiplier_addtl[0]: 1
+2017/06/14-15:56:43.639230 a24 Options.max_bytes_for_level_multiplier_addtl[1]: 1
+2017/06/14-15:56:43.639234 a24 Options.max_bytes_for_level_multiplier_addtl[2]: 1
+2017/06/14-15:56:43.639239 a24 Options.max_bytes_for_level_multiplier_addtl[3]: 1
+2017/06/14-15:56:43.639243 a24 Options.max_bytes_for_level_multiplier_addtl[4]: 1
+2017/06/14-15:56:43.639247 a24 Options.max_bytes_for_level_multiplier_addtl[5]: 1
+2017/06/14-15:56:43.639251 a24 Options.max_bytes_for_level_multiplier_addtl[6]: 1
+2017/06/14-15:56:43.639256 a24       Options.max_sequential_skip_in_iterations: 8
+2017/06/14-15:56:43.639260 a24                    Options.max_compaction_bytes: 1677721600
+2017/06/14-15:56:43.639264 a24                        Options.arena_block_size: 8388608
+2017/06/14-15:56:43.639269 a24   Options.soft_pending_compaction_bytes_limit: 68719476736
+2017/06/14-15:56:43.639275 a24   Options.hard_pending_compaction_bytes_limit: 274877906944
+2017/06/14-15:56:43.639282 a24       Options.rate_limit_delay_max_milliseconds: 1000
+2017/06/14-15:56:43.639288 a24                Options.disable_auto_compactions: 0
+2017/06/14-15:56:43.639295 a24           Options.verify_checksums_in_compaction: 1
+2017/06/14-15:56:43.639304 a24                         Options.compaction_style: 0
+2017/06/14-15:56:43.639309 a24                           Options.compaction_pri: 0
+2017/06/14-15:56:43.639313 a24  Options.compaction_options_universal.size_ratio: 1
+2017/06/14-15:56:43.639317 a24 Options.compaction_options_universal.min_merge_width: 2
+2017/06/14-15:56:43.639321 a24 Options.compaction_options_universal.max_merge_width: 4294967295
+2017/06/14-15:56:43.639326 a24 Options.compaction_options_universal.max_size_amplification_percent: 200
+2017/06/14-15:56:43.639330 a24 Options.compaction_options_universal.compression_size_percent: -1
+2017/06/14-15:56:43.639334 a24 Options.compaction_options_fifo.max_table_files_size: 1073741824
+2017/06/14-15:56:43.639339 a24                   Options.table_properties_collectors: 
+2017/06/14-15:56:43.639343 a24                   Options.inplace_update_support: 0
+2017/06/14-15:56:43.639347 a24                 Options.inplace_update_num_locks: 10000
+2017/06/14-15:56:43.639352 a24               Options.min_partial_merge_operands: 2
+2017/06/14-15:56:43.639356 a24               Options.memtable_prefix_bloom_size_ratio: 0.000000
+2017/06/14-15:56:43.639362 a24   Options.memtable_huge_page_size: 0
+2017/06/14-15:56:43.639366 a24                           Options.bloom_locality: 0
+2017/06/14-15:56:43.639371 a24                    Options.max_successive_merges: 0
+2017/06/14-15:56:43.639375 a24                Options.optimize_filters_for_hits: 0
+2017/06/14-15:56:43.639379 a24                Options.paranoid_file_checks: 0
+2017/06/14-15:56:43.639383 a24                Options.force_consistency_checks: 0
+2017/06/14-15:56:43.639387 a24                Options.report_bg_io_stats: 0
+2017/06/14-15:56:43.639444 a24 --------------- Options for column family [metadata]:
+2017/06/14-15:56:43.639452 a24               Options.comparator: rocksdb.InternalKeyComparator:leveldb.BytewiseComparator
+2017/06/14-15:56:43.639456 a24           Options.merge_operator: None
+2017/06/14-15:56:43.639461 a24        Options.compaction_filter: None
+2017/06/14-15:56:43.639465 a24        Options.compaction_filter_factory: None
+2017/06/14-15:56:43.639471 a24         Options.memtable_factory: SkipListFactory
+2017/06/14-15:56:43.639477 a24            Options.table_factory: BlockBasedTable
+2017/06/14-15:56:43.639501 a24            table_factory options:   flush_block_policy_factory: FlushBlockBySizePolicyFactory (000000001BD3A4D0)
+  cache_index_and_filter_blocks: 0
+  pin_l0_filter_and_index_blocks_in_cache: 0
+  index_type: 0
+  hash_index_allow_collision: 1
+  checksum: 1
+  no_block_cache: 0
+  block_cache: 0000000001161BA0
+  block_cache_size: 8388608
+  block_cache_compressed: 0000000000000000
+  block_size: 4096
+  block_size_deviation: 10
+  block_restart_interval: 16
+  index_block_restart_interval: 1
+  filter_policy: nullptr
+  whole_key_filtering: 1
+  skip_table_builder_flush: 0
+  format_version: 2
+2017/06/14-15:56:43.639511 a24        Options.write_buffer_size: 67108864
+2017/06/14-15:56:43.639515 a24  Options.max_write_buffer_number: 2
+2017/06/14-15:56:43.639519 a24          Options.compression: NoCompression
+2017/06/14-15:56:43.639524 a24                  Options.bottommost_compression: Disabled
+2017/06/14-15:56:43.639528 a24       Options.prefix_extractor: nullptr
+2017/06/14-15:56:43.639532 a24             Options.num_levels: 7
+2017/06/14-15:56:43.639536 a24        Options.min_write_buffer_number_to_merge: 1
+2017/06/14-15:56:43.639541 a24     Options.max_write_buffer_number_to_maintain: 0
+2017/06/14-15:56:43.639545 a24            Options.compression_opts.window_bits: -14
+2017/06/14-15:56:43.639549 a24                  Options.compression_opts.level: -1
+2017/06/14-15:56:43.639553 a24               Options.compression_opts.strategy: 0
+2017/06/14-15:56:43.639558 a24         Options.compression_opts.max_dict_bytes: 0
+2017/06/14-15:56:43.639562 a24      Options.level0_file_num_compaction_trigger: 4
+2017/06/14-15:56:43.639566 a24          Options.level0_slowdown_writes_trigger: 20
+2017/06/14-15:56:43.639570 a24              Options.level0_stop_writes_trigger: 24
+2017/06/14-15:56:43.639574 a24                   Options.target_file_size_base: 67108864
+2017/06/14-15:56:43.639579 a24             Options.target_file_size_multiplier: 1
+2017/06/14-15:56:43.639583 a24                Options.max_bytes_for_level_base: 268435456
+2017/06/14-15:56:43.639587 a24 Options.level_compaction_dynamic_level_bytes: 0
+2017/06/14-15:56:43.639591 a24          Options.max_bytes_for_level_multiplier: 10
+2017/06/14-15:56:43.639596 a24 Options.max_bytes_for_level_multiplier_addtl[0]: 1
+2017/06/14-15:56:43.639600 a24 Options.max_bytes_for_level_multiplier_addtl[1]: 1
+2017/06/14-15:56:43.639604 a24 Options.max_bytes_for_level_multiplier_addtl[2]: 1
+2017/06/14-15:56:43.639608 a24 Options.max_bytes_for_level_multiplier_addtl[3]: 1
+2017/06/14-15:56:43.639613 a24 Options.max_bytes_for_level_multiplier_addtl[4]: 1
+2017/06/14-15:56:43.639617 a24 Options.max_bytes_for_level_multiplier_addtl[5]: 1
+2017/06/14-15:56:43.639621 a24 Options.max_bytes_for_level_multiplier_addtl[6]: 1
+2017/06/14-15:56:43.639625 a24       Options.max_sequential_skip_in_iterations: 8
+2017/06/14-15:56:43.639629 a24                    Options.max_compaction_bytes: 1677721600
+2017/06/14-15:56:43.639634 a24                        Options.arena_block_size: 8388608
+2017/06/14-15:56:43.639638 a24   Options.soft_pending_compaction_bytes_limit: 68719476736
+2017/06/14-15:56:43.639642 a24   Options.hard_pending_compaction_bytes_limit: 274877906944
+2017/06/14-15:56:43.639647 a24       Options.rate_limit_delay_max_milliseconds: 1000
+2017/06/14-15:56:43.639651 a24                Options.disable_auto_compactions: 0
+2017/06/14-15:56:43.639655 a24           Options.verify_checksums_in_compaction: 1
+2017/06/14-15:56:43.639659 a24                         Options.compaction_style: 0
+2017/06/14-15:56:43.639663 a24                           Options.compaction_pri: 0
+2017/06/14-15:56:43.639667 a24  Options.compaction_options_universal.size_ratio: 1
+2017/06/14-15:56:43.639671 a24 Options.compaction_options_universal.min_merge_width: 2
+2017/06/14-15:56:43.639676 a24 Options.compaction_options_universal.max_merge_width: 4294967295
+2017/06/14-15:56:43.639706 a24 Options.compaction_options_universal.max_size_amplification_percent: 200
+2017/06/14-15:56:43.639714 a24 Options.compaction_options_universal.compression_size_percent: -1
+2017/06/14-15:56:43.639718 a24 Options.compaction_options_fifo.max_table_files_size: 1073741824
+2017/06/14-15:56:43.639723 a24                   Options.table_properties_collectors: 
+2017/06/14-15:56:43.639727 a24                   Options.inplace_update_support: 0
+2017/06/14-15:56:43.639731 a24                 Options.inplace_update_num_locks: 10000
+2017/06/14-15:56:43.639736 a24               Options.min_partial_merge_operands: 2
+2017/06/14-15:56:43.639740 a24               Options.memtable_prefix_bloom_size_ratio: 0.000000
+2017/06/14-15:56:43.639746 a24   Options.memtable_huge_page_size: 0
+2017/06/14-15:56:43.639751 a24                           Options.bloom_locality: 0
+2017/06/14-15:56:43.639755 a24                    Options.max_successive_merges: 0
+2017/06/14-15:56:43.639759 a24                Options.optimize_filters_for_hits: 0
+2017/06/14-15:56:43.639764 a24                Options.paranoid_file_checks: 0
+2017/06/14-15:56:43.639768 a24                Options.force_consistency_checks: 0
+2017/06/14-15:56:43.639772 a24                Options.report_bg_io_stats: 0
+2017/06/14-15:56:43.642529 a24 Recovered from manifest file:C:\Users\jlanio\Geogig-Desktop\app\tmp\rondonia.remote\.geogig\graph.rocksdb/MANIFEST-000039 succeeded,manifest_file_number is 39, next_file_number is 41, last_sequence is 1, log_number is 0,prev_log_number is 0,max_column_family is 1
+2017/06/14-15:56:43.642558 a24 Column family [default] (ID 0), log number is 38
+2017/06/14-15:56:43.642564 a24 Column family [metadata] (ID 1), log number is 38
+2017/06/14-15:56:43.642914 a24 EVENT_LOG_v1 {"time_micros": 1497473803642900, "job": 1, "event": "recovery_started", "log_files": [40]}
+2017/06/14-15:56:43.642928 a24 Recovering log #40 mode 2
+2017/06/14-15:56:43.643008 a24 Creating manifest 42
+2017/06/14-15:56:43.656274 a24 EVENT_LOG_v1 {"time_micros": 1497473803656256, "job": 1, "event": "recovery_finished"}
+2017/06/14-15:56:43.665153 a24 DB pointer 000000001BD7CE20

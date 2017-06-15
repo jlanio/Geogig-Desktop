@@ -1,4 +1,4 @@
-(function () {
+(() => {
     angular.module('geogig-desktop', [
         'ui.router',                    // Routing
         'oc.lazyLoad',                  // ocLazyLoad

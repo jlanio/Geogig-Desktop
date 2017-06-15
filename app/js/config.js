@@ -74,7 +74,7 @@ angular
 .config(['$translateProvider', $translateProvider => {
     $translateProvider.useSanitizeValueStrategy(null);
     $translateProvider.useStaticFilesLoader({
-        prefix: 'translation\\',
+        prefix: 'static\\translation\\',
         suffix: '.json'
     });
     $translateProvider.preferredLanguage('en-us');

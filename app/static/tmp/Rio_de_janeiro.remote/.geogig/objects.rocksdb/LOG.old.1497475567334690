@@ -1,0 +1,73 @@
+2017/06/14-16:25:43.059538 1ed8 RocksDB version: 4.13.4
+2017/06/14-16:25:43.059659 1ed8 Git sha rocksdb_build_git_sha:8e68ffb872f3ead8b0fc3bb6353c04008a049d8d
+2017/06/14-16:25:43.059698 1ed8 Compile date Dec 14 2016
+2017/06/14-16:25:43.059738 1ed8 DB SUMMARY
+2017/06/14-16:25:43.060170 1ed8 CURRENT file:  CURRENT
+2017/06/14-16:25:43.060191 1ed8 IDENTITY file:  IDENTITY
+2017/06/14-16:25:43.060245 1ed8 MANIFEST file:  MANIFEST-000025 size: 314 Bytes
+2017/06/14-16:25:43.060263 1ed8 SST files in C:\Users\jlanio\Geogig-Desktop\app\tmp\Rio_de_janeiro.remote\.geogig\objects.rocksdb dir, Total Num: 3, files: 000010.sst 000011.sst 000020.sst 
+2017/06/14-16:25:43.060277 1ed8 Write Ahead Log file in C:\Users\jlanio\Geogig-Desktop\app\tmp\Rio_de_janeiro.remote\.geogig\objects.rocksdb: 000026.log size: 0 ; 
+2017/06/14-16:25:43.060564 1ed8                         Options.error_if_exists: 0
+2017/06/14-16:25:43.060582 1ed8                       Options.create_if_missing: 1
+2017/06/14-16:25:43.060587 1ed8                         Options.paranoid_checks: 1
+2017/06/14-16:25:43.060591 1ed8                                     Options.env: 0000000000996A20
+2017/06/14-16:25:43.060596 1ed8                                Options.info_log: 000000001B723590
+2017/06/14-16:25:43.060601 1ed8                          Options.max_open_files: -1
+2017/06/14-16:25:43.060608 1ed8                Options.max_file_opening_threads: 16
+2017/06/14-16:25:43.060613 1ed8                      Options.max_total_wal_size: 0
+2017/06/14-16:25:43.060617 1ed8                         Options.disableDataSync: 0
+2017/06/14-16:25:43.060621 1ed8                               Options.use_fsync: 0
+2017/06/14-16:25:43.060626 1ed8                       Options.max_log_file_size: 0
+2017/06/14-16:25:43.060630 1ed8                  Options.max_manifest_file_size: 18446744073709551615
+2017/06/14-16:25:43.060635 1ed8                   Options.log_file_time_to_roll: 0
+2017/06/14-16:25:43.060639 1ed8                       Options.keep_log_file_num: 1000
+2017/06/14-16:25:43.060643 1ed8                    Options.recycle_log_file_num: 0
+2017/06/14-16:25:43.060648 1ed8                         Options.allow_os_buffer: 1
+2017/06/14-16:25:43.060652 1ed8                        Options.allow_mmap_reads: 1
+2017/06/14-16:25:43.060656 1ed8                         Options.allow_fallocate: 1
+2017/06/14-16:25:43.060660 1ed8                       Options.allow_mmap_writes: 1
+2017/06/14-16:25:43.060665 1ed8          Options.create_missing_column_families: 0
+2017/06/14-16:25:43.060669 1ed8                              Options.db_log_dir: 
+2017/06/14-16:25:43.060673 1ed8                                 Options.wal_dir: C:\Users\jlanio\Geogig-Desktop\app\tmp\Rio_de_janeiro.remote\.geogig\objects.rocksdb
+2017/06/14-16:25:43.060678 1ed8                Options.table_cache_numshardbits: 6
+2017/06/14-16:25:43.060682 1ed8     Options.delete_obsolete_files_period_micros: 21600000000
+2017/06/14-16:25:43.060687 1ed8                      Options.max_subcompactions: 1
+2017/06/14-16:25:43.060691 1ed8                  Options.max_background_flushes: 1
+2017/06/14-16:25:43.060695 1ed8                         Options.WAL_ttl_seconds: 0
+2017/06/14-16:25:43.060699 1ed8                       Options.WAL_size_limit_MB: 0
+2017/06/14-16:25:43.060703 1ed8             Options.manifest_preallocation_size: 4194304
+2017/06/14-16:25:43.060707 1ed8                         Options.allow_os_buffer: 1
+2017/06/14-16:25:43.060711 1ed8                        Options.allow_mmap_reads: 1
+2017/06/14-16:25:43.060716 1ed8                       Options.allow_mmap_writes: 1
+2017/06/14-16:25:43.060720 1ed8                     Options.is_fd_close_on_exec: 1
+2017/06/14-16:25:43.060724 1ed8                   Options.stats_dump_period_sec: 600
+2017/06/14-16:25:43.060728 1ed8                   Options.advise_random_on_open: 1
+2017/06/14-16:25:43.060732 1ed8                    Options.db_write_buffer_size: 0
+2017/06/14-16:25:43.060737 1ed8         Options.access_hint_on_compaction_start: 1
+2017/06/14-16:25:43.060741 1ed8  Options.new_table_reader_for_compaction_inputs: 0
+2017/06/14-16:25:43.060771 1ed8               Options.compaction_readahead_size: 0
+2017/06/14-16:25:43.060779 1ed8           Options.random_access_max_buffer_size: 1048576
+2017/06/14-16:25:43.060784 1ed8           Options.writable_file_max_buffer_size: 1048576
+2017/06/14-16:25:43.060788 1ed8                      Options.use_adaptive_mutex: 0
+2017/06/14-16:25:43.060792 1ed8                            Options.rate_limiter: 0000000000000000
+2017/06/14-16:25:43.060797 1ed8     Options.sst_file_manager.rate_bytes_per_sec: 0
+2017/06/14-16:25:43.060801 1ed8                          Options.bytes_per_sync: 67108864
+2017/06/14-16:25:43.060805 1ed8                      Options.wal_bytes_per_sync: 0
+2017/06/14-16:25:43.060810 1ed8                       Options.wal_recovery_mode: 2
+2017/06/14-16:25:43.060814 1ed8                  Options.enable_thread_tracking: 0
+2017/06/14-16:25:43.060818 1ed8                     Options.delayed_write_rate : 2097152
+2017/06/14-16:25:43.060822 1ed8         Options.allow_concurrent_memtable_write: 0
+2017/06/14-16:25:43.060827 1ed8      Options.enable_write_thread_adaptive_yield: 0
+2017/06/14-16:25:43.060831 1ed8             Options.write_thread_max_yield_usec: 100
+2017/06/14-16:25:43.060835 1ed8            Options.write_thread_slow_yield_usec: 3
+2017/06/14-16:25:43.060839 1ed8                               Options.row_cache: None
+2017/06/14-16:25:43.060844 1ed8                              Options.wal_filter: None
+2017/06/14-16:25:43.060848 1ed8             Options.avoid_flush_during_recovery: 0
+2017/06/14-16:25:43.060852 1ed8             Options.base_background_compactions: 1
+2017/06/14-16:25:43.060857 1ed8              Options.max_background_compactions: 1
+2017/06/14-16:25:43.060861 1ed8 Compression algorithms supported:
+2017/06/14-16:25:43.060873 1ed8 	Snappy supported: 0
+2017/06/14-16:25:43.060878 1ed8 	Zlib supported: 0
+2017/06/14-16:25:43.060882 1ed8 	Bzip supported: 0
+2017/06/14-16:25:43.060891 1ed8 	LZ4 supported: 0
+2017/06/14-16:25:43.060895 1ed8 Fast CRC32 supported: 0

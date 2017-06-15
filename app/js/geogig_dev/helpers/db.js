@@ -6,17 +6,15 @@ class db {
         return storage.get('geogig').then((data) => {
             data.infoRepositorios.local.push(getJson.local.call(this));
             storage.put(data);
-            s.mydb = data;
-            s.$apply(() => s.mydb)
+            s.$apply(() => s.mydb = data)
             return data
         }).catch(error => error)
     }
     static saveshpFile(){
-        return storage.get('geogig').then((data) =>{
+        return storage.get('geogig').then((data) => {
             data.infoRepositorios.local[this.id].shpfile.push([...this.shpfile].pop());
-            s.mydb = data;
-            s.$apply(() => s.mydb)
             storage.put(data);
+            s.$apply(() => s.mydb = data)
             return data;
         }).catch(error => error)
     }
@@ -24,6 +22,7 @@ class db {
         return storage.get('geogig').then((data) => {
             data.infoRepositorios.conectedIn.push(getJson.remote.call(remoteObj, dataObj));
             storage.put(data);
+            s.$apply(() => s.mydb = data)
             return data
         }).catch(error => error)
     }
@@ -31,6 +30,7 @@ class db {
         return storage.get('geogig').then((data) => {
             data.infoRepositorios.conectedIn[id].repos = dataObj.repos;
             storage.put(data);
+            s.$apply(() => s.mydb = data)
             return data;
         }).catch(error => error)
     }

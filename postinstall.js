@@ -19,7 +19,7 @@ get.on('response',  function (res) {
 
 });
 get.on( 'end', function(){
-    fs.createReadStream('./app/tmp/geogig-1.1.0.zip').pipe(unzip.Extract({ path: './app' }));
+    fs.createReadStream('./app/static/tmp/geogig-1.1.0.zip').pipe(unzip.Extract({ path: './app' }));
     console.log('Finalized. GO!');
 });
 get.on( 'error', function(){

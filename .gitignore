@@ -2,3 +2,4 @@ node_modules
 app/static/tmp/*
 app/static/geogig/*
 npm-debug.log*
+*.geogig

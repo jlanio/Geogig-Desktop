@@ -55,7 +55,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('main.historico', {
         url: "/historico",
         templateUrl: "views/paginas/timeline.html",
-        controller : "historyCtrl"
+        controller : "timeliteCtrl"
     })
     .state('main.map', {
         url: "/map",

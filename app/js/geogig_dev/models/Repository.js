@@ -42,8 +42,9 @@ class Repository  {
             .then(response  => response)
             .catch(error => error); 
     };
-    exportShapefile(layer, localSave){
-        return  Utils.geogig(['shp','export', layer.nome, `${localSave}\${layer.nome}.shp`])
+    exportShapefile(newLocal , RepositoryName){
+        console.log(RepositoryName , newLocal)
+        return  Utils.geogig(['shp','export', RepositoryName, newLocal], this._name)
             .then(response  => response)
             .catch(error => error);
     }

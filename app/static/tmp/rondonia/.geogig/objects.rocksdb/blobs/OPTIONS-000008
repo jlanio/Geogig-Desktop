@@ -53,7 +53,7 @@
   manifest_preallocation_size=4194304
   write_thread_slow_yield_usec=3
   db_log_dir=
-  wal_dir=C\:\\Users\\jlanio\\Geogig-Desktop\\app\\tmp\\rondonia\\.geogig\\objects.rocksdb\\blobs
+  wal_dir=C\:\\Users\\jlanio\\Geogig-Desktop\\app\\static\\tmp\\Rondonia\\.geogig\\objects.rocksdb\\blobs
   max_subcompactions=1
   WAL_size_limit_MB=0
   max_total_wal_size=0

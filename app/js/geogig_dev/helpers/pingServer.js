@@ -37,16 +37,17 @@ class ping {
     static server(ip) {
         return new Promise((resolve, reject) => {
             $.Ping(ip)
-            .done((success, url, time, on) =>{
-                resolve('The geogig serve is ON')
-            }).fail((failure, url, time, on) =>{
-                reject('The geogig serve is OFF')
-            })
+                .done((success, url, time, on) => resolve('The geogig serve is ON'))
+                .fail((failure, url, time, on) => reject('The geogig serve is OFF'))
         })
     }
     static checkServerisOnAndKillProcess (){
         return this.server('http://localhost:8182/repos')
-            .then(Utils.killServer()).catch(q=> q)
+            .then(Utils.killServer()).catch(q => q)
+    }
+    static checkServerisOffAndStart (){
+        return this.server('http://localhost:8182/repos')
+            .then(q => q).catch(q => q)
     }
 }
 

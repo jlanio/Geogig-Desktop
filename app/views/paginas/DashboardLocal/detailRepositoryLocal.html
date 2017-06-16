@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="file-box"  ng-repeat="(key, value) in Repository().shpfile ">
-                            <div class="file" ng-click="baixar_shp(mydb.infoRepositorios.local[currentRepoId()].name, value, key)">
+                            <div class="file" ng-click="baixar_shp(key, value)">
                                 <a href="">
                                     <span class="corner"></span>
 

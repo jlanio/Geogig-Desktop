@@ -1,5 +1,5 @@
 function detailRepositoryLocalCtrl($location){
-	console.log(s.Repository());
+	console.info(s.Repository());
 
 	s.NewShp = localShp => {
 		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
@@ -75,10 +75,14 @@ function detailRepositoryLocalCtrl($location){
 		}).catch(q => console.log(q))		
 	};
 	s.push = () => {
-		Geogig.push.call(s.Repository()).then(e => console.log(e))		
+		Geogig.push.call(s.Repository()).then(e => {
+			swal({type:'success',title:'',html:`log:<h5>${e}</h5>`})
+		})			
 	};
 	s.pull = () => {
-		Geogig.pull.call(s.Repository()).then(e => console.log(e))
+		Geogig.pull.call(s.Repository()).then(e => {
+				swal({type:'success',title:'',html:`log:<h5>${e}</h5>`})
+		}).catch(e => console.log(e));
 	};
 
 	s.publicarRepo = function (id){
@@ -96,20 +100,19 @@ function detailRepositoryLocalCtrl($location){
 			}
 		});*/
 	}
-	function shp_export(_Name, type, objeto, localSave){
-		repo.shp_export(_Name, type, objeto, localSave, function(error, stdout, stderr){
-			console.log(error, stdout, stderr);
-		})
-	}
-	s.baixar_shp = function (_Name, objeto, key){
+	s.baixar_shp = function (key, repository){
 		const {dialog} = require('electron').remote;
 		dialog.showOpenDialog({
 	  		properties: [ 'openFile', 'openDirectory'] }, function (filename) {
-	    		var localSave = filename.toString();
-	    		shp_export(_Name, 'remoto',objeto, localSave)
-	    		const tmp = s.mydb;
-	    		tmp.infoRepositorios.local[s.currentRepoId()].arquivos[key].localDir = localSave+'\\'+objeto.nome+'.shp';
-	    		db.set(tmp);
+	  			let currentRepository = s.Repository();
+	    		let newLocal = `${filename.toString()}\\${repository.name}.shp`;
+	    		currentRepository.shpfile[key].shpfile = newLocal;
+	    		db.updateshpFile.call(currentRepository)
+	    		ping.checkServerisOnAndKillProcess().then(q => {
+					s.Repository().exportShapefile(newLocal, repository.name).then(e => 
+	    				swal({type:'success',title:'',html:`log:<h5>${e}</h5>`})
+	    			)
+				}).catch(q => console.log(q))	
 	  		}
 		);
 	}

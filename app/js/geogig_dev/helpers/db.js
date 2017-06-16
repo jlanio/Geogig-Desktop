@@ -34,5 +34,13 @@ class db {
             return data;
         }).catch(error => error)
     }
+    static updateshpFile(){
+        return storage.get('geogig').then((data) => {
+            data.infoRepositorios.local[this.id].shpfile = this.shpfile;
+            storage.put(data);
+            s.$apply(() => s.mydb = data)
+            return data;
+        }).catch(error => error)
+    }
 
 }

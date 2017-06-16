@@ -1,9 +1,0 @@
-[file]
-version = 1.0
-[rocksdb]
-version = 1
-[storage]
-graph = rocksdb
-objects = rocksdb
-refs = file
-index = rocksdb

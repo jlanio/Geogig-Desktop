@@ -1,6 +1,0 @@
-2017-06-14 16:02:30,251 INFO [main] o.l.g.p.CreateDeduplicator [CreateDeduplicator.java:40] No DeduplicationService service found, using default heap based one
-2017-06-14 16:02:30,837 INFO [main] o.l.g.p.CreateDeduplicator [CreateDeduplicator.java:40] No DeduplicationService service found, using default heap based one
-2017-06-14 16:02:31,300 INFO [main] o.l.g.r.HttpRemoteRepo [HttpRemoteRepo.java:463] Processed 4 objects. Inserted: 4. Existing: 0. Time: 74,00 ms. Compressed size: 498 bytes. Uncompressed size: 788 bytes.
-2017-06-14 16:26:07,568 INFO [main] o.l.g.p.CreateDeduplicator [CreateDeduplicator.java:40] No DeduplicationService service found, using default heap based one
-2017-06-14 16:26:09,447 INFO [main] o.l.g.p.CreateDeduplicator [CreateDeduplicator.java:40] No DeduplicationService service found, using default heap based one
-2017-06-14 16:26:09,848 INFO [main] o.l.g.r.HttpRemoteRepo [HttpRemoteRepo.java:463] Processed 4 objects. Inserted: 4. Existing: 0. Time: 73,08 ms. Compressed size: 545 bytes. Uncompressed size: 869 bytes.

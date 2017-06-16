@@ -1,8 +1,7 @@
-function historyCtrl(){
+function timeliteCtrl( $location){
 	/*Get Commit*/
-	s.commits = undefined;
     let commitSelected = [];
-	s.limit = 2; s.checked = 0;
+	s.limit = 2; s.checked = 0; s.commits = undefined;
 
     Geogig.log.call(s.Repository()).then(data => {
         s.$apply(()=> s.commits = JSON.parse(data).response.commit)
@@ -30,4 +29,4 @@ function historyCtrl(){
 }
 angular
 .module('geogig-desktop')
-.controller('historyCtrl', historyCtrl)
+.controller('timeliteCtrl', timeliteCtrl)

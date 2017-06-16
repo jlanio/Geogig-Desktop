@@ -1,4 +1,4 @@
 node_modules
-app/tmp/*
-app/geogig/*
+app/static/tmp/*
+app/static/geogig/*
 npm-debug.log*

@@ -53,7 +53,7 @@ function ModalInstanceCtrl ($scope, $http, $uibModalInstance, toaster) {
     $scope.send = function (remote) {
         $uibModalInstance.close();
         if (remote.origin === 'local_network'){
-            url = "http://"+remote.url+"/8182/repos.json";
+            url = "http://"+remote.url+":8182/repos.json";
         }else if (remote.origin === 'geoserver'){
             url = remote.url+"geoserver/geogig/repos.json";
         }else if (remote.origin === 'postgresql'){

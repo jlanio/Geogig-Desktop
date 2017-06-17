@@ -3,9 +3,16 @@ function timeliteCtrl( $location){
     let commitSelected = [];
 	s.limit = 2; s.checked = 0; s.commits = undefined;
 
-    Geogig.log.call(s.Repository()).then(data => {
-        s.$apply(()=> s.commits = JSON.parse(data).response.commit)
-    });
+    ping.checkServerisOffAndStart()
+        .then(e => {
+            Geogig.log.call(s.Repository()).then(data => {
+                s.$apply(()=> s.commits = JSON.parse(data).response.commit)
+            })})
+        .catch(e => {
+            Geogig.log.call(s.Repository()).then(data => {
+                s.$apply(()=> s.commits = JSON.parse(data).response.commit)
+            });
+        })
 
     s.checkChanged = commit => {
         commit.activate ? s.checked++ : s.checked--;

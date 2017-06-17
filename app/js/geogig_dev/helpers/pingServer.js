@@ -35,11 +35,7 @@ $.extend($, {
 
 class ping {
     static server(ip) {
-        return new Promise((resolve, reject) => {
-            $.Ping(ip)
-                .done((success, url, time, on) => resolve('The geogig serve is ON'))
-                .fail((failure, url, time, on) => reject('The geogig serve is OFF'))
-        })
+           return $.Ping(ip)
     }
     static checkServerisOnAndKillProcess (){
         return this.server('http://localhost:8182/repos')
@@ -47,7 +43,7 @@ class ping {
     }
     static checkServerisOffAndStart (){
         return this.server('http://localhost:8182/repos')
-            .then(q => q).catch(q => q)
+            .then(q => q).catch(Repository.initServer())
     }
 }
 

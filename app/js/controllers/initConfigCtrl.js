@@ -7,10 +7,9 @@ function initConfigCtrl($scope, $location, $translate){
 	
 	//End Seting config user
 	
-	(() => ping.server('http://localhost:8182/repos')
-			.then(q => console.log(q))
-			.catch(q => Repository.initServer())
-	)();
+	ping.checkServerisOffAndStart()
+		.then(e => console.log(e))
+		.catch(e => console.log(e))
 	
 	s.selectRepo = (selectedFild) => {
 		LocalStorage.set('repoLocalAtivo', selectedFild);

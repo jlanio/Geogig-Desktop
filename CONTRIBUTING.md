@@ -1,4 +1,3 @@
-
 ## Repository and Branches
 
 The GeoGig repository is located on GitHub: github.com/jlanio/Geogig-Desktop
@@ -22,6 +21,7 @@ From your command line:
 - Clone the GeoGig source code repository.
   We encourage branch **dev**:\
   `git clone https://github.com/jlanio/Geogig-Desktop.git -b dev`
+
 ## After cloning
 
 ```bash

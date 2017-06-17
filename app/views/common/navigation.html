@@ -3,7 +3,6 @@
         <ul side-navigation class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="profile-element" uib-dropdown>
-                <!-- <img alt="image" class="img-circle" src="img/profile_small.png"/> -->
                     <a uib-dropdown-toggle href>
                             <span class="clear">
                                 <span class="block m-t-xs">
@@ -15,7 +14,7 @@
                             </span>
                     </a>
                     <ul uib-dropdown-menu class="animated fadeInRight m-t-xs">
-                        <li><a ui-sref="repo.config">{{ 'CONFIGURATION' | translate }}</a></li>
+                        <li><a ui-sref="main.config">{{ 'CONFIGURATION' | translate }}</a></li>
                     </ul>
                 </div>
                 <div class="logo-element">
@@ -27,10 +26,10 @@
             </li>
 
             <li ui-sref-active="active">
-                <a ui-sref="repo.local"><i class="fa fa-hdd-o"></i> <span class="nav-label">{{ 'LOCAL_REPOSITORIES' | translate }}</span> </a>
+                <a ui-sref="main.local"><i class="fa fa-hdd-o"></i> <span class="nav-label">{{ 'LOCAL_REPOSITORIES' | translate }}</span> </a>
             </li>
             <li ui-sref-active="active">
-                <a ui-sref="repo.remoto"><i class="fa  fa-cloud"></i> <span class="nav-label">{{ 'REMOTE_REPOSITORIES' | translate}}</span></a>
+                <a ui-sref="main.remoto"><i class="fa  fa-cloud"></i> <span class="nav-label">{{ 'REMOTE_REPOSITORIES' | translate}}</span></a>
             </li>
         </ul>
 

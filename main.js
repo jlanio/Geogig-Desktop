@@ -3,7 +3,6 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
-let mainWindow
 
 function createWindow () {
   mainWindow = new BrowserWindow({width: 1224, height: 600, resizable: false/*, frame: false*/})

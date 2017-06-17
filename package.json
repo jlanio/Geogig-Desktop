@@ -1,6 +1,6 @@
 {
   "name": "Geogig-Desktop",
-  "version": "1.0.0",
+  "version": "0.0.9",
   "description": "Desktop interface for spatial information versioning.",
   "main": "main.js",
   "scripts": {
@@ -15,14 +15,14 @@
     "versioning"
   ],
   "author": "jlanio",
-  "license": "CC0-1.0",
+  "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^1.4.1",
-    "electron-inspector": "^0.1.4",
-    "electron-rebuild": "^1.5.7"
+    "unzip":  "^0.1.11"
   },
   "dependencies": {
     "fs-extra": "^2.0.0",
-    "leaflet": "^1.0.3"
+    "leaflet": "^1.0.3",
+    "request": "^2.81.0"
   }
 }

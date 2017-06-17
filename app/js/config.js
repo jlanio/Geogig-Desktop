@@ -1,22 +1,18 @@
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
-    $urlRouterProvider.otherwise("/repo/local");
-
-    $ocLazyLoadProvider.config({
-        debug: false
-    });
+    $urlRouterProvider.otherwise("/main/local");
+    $ocLazyLoadProvider.config({debug: false});
 
     $stateProvider
-    .state('repo', {
+    .state('main', {
         abstract: true,
-        url: "/repo",
+        url: "/main",
+        data: { pageTitle: 'Geodig' },
         templateUrl: "views/common/content.html",
+        controller: "initConfigCtrl",
         resolve: {
-            data:  function(db){
-                        return db.open().then(function (data) {
-                            return data;
-                        });
-            },
-            loadPlugin: function ($ocLazyLoad) {
+            dbGeogig:  () => new Database().open().then(data =>  data),
+            controller: dbGeogig => mydb = dbGeogig,
+            loadPlugin: $ocLazyLoad => {
                 return $ocLazyLoad.load([
                 {
                     insertBefore: '#loadBefore',
@@ -24,168 +20,63 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
                     files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                 },
                 {
-                    files: ['js/plugins/sweetalert/sweetalert.min.js', 'css/plugins/sweetalert/sweetalert.css']
-                },
-                {
                     files: ['js/plugins/leaflet/plugins/wkt_to_geojson/wicket.js', 'js/plugins/leaflet/plugins/wkt_to_geojson/wicket-leaflet.js']
-                },
-                {
-                    name: 'oitozero.ngSweetAlert',
-                    files: ['js/plugins/sweetalert/angular-sweetalert.min.js']
                 }
                 ]);
             }
-        },
-        controller: function(data){
-          mydb = data;
         }
     })
-    .state('repo.local', {
+    .state('main.local', {
         url: "/local",
-        templateUrl: "views/paginas/repositorio_local/main.html",
-        data: { pageTitle: 'Repositório Local' }
+        templateUrl: "views/paginas/DashboardLocal/dashboardLocal.html",
+        controller: 'dashboardLocalCtrl'
     })
-    .state('repo.view', {
+    .state('main.view', {
         url: "/view",
-        templateUrl: "views/paginas/repositorio_local/main_view.html",
-        data: { pageTitle: 'Repositório View' }
+        templateUrl: "views/paginas/DashboardLocal/detailRepositoryLocal.html",
+        controller: 'detailRepositoryLocalCtrl'
 
     })
-    .state('repo.issue', {
-        url: "/issue",
-        templateUrl: "views/paginas/issue_tracker.html",
-        data: { pageTitle: 'Repositório Issue' },
-
-    })
-    .state('repo.remoto', {
+    .state('main.remoto', {
         url: "/remoto",
-        templateUrl: "views/paginas/repositorio_remoto/main.html",
-        data: { pageTitle: 'Servidor Remoto' }
+        templateUrl: "views/paginas/DashboardRemote/dashboardRemote.html",
+        controller: 'dashboardRemoteCtrl'
     })
-    .state('repo.view_remoto', {
+    .state('main.view_remoto', {
         url: "/view_remoto",
-        templateUrl: "views/paginas/repositorio_remoto/main_repositorios.html",
-        data: { pageTitle: 'Repositório Remoto' }
+        templateUrl: "views/paginas/DashboardRemote/detailRepositoryRemote.html",
+        controller: 'detailRepositoryRemoteCtrl'
     })
-    .state('repo.remoto_repo', {
-        url: "/remoto_repo",
-        templateUrl: "views/paginas/repositorio_remoto/main_repositorio_view.html",
-        data: { pageTitle: 'Repositório Remoto View' }
-    })
-    .state('repo.config', {
+    .state('main.config', {
         url: "/config_user",
         templateUrl: "views/paginas/config.html",
-        data: { pageTitle: 'Página para Configuração' }
+        controller: 'config'
     })
-    .state('repo.historico', {
+    .state('main.historico', {
         url: "/historico",
         templateUrl: "views/paginas/timeline.html",
-        data: { pageTitle: 'Repositório Historico' }
+        controller : "timeliteCtrl"
     })
-    .state('repo.map', {
+    .state('main.map', {
         url: "/map",
         templateUrl: "views/map.html",
-        data: { pageTitle: 'map' }
+        controller : "leafletCtrl"
+    })
+    .state('main.issue', {
+        url: "/issue",
+        templateUrl: "views/paginas/issue_tracker.html",
+
     })
 }
 angular
 .module('geogig-desktop')
 .config(config)
-.config(['$translateProvider', function ($translateProvider) {
-  $translateProvider.translations('en', {
-    'OPTIONS': 'Options',
-    'ADD_REPOSITORIES': 'Add Repositories',
-    'LOCAL_REPOSITORIES': 'Local Repositories',
-    'REMOTE_REPOSITORIES': 'Remote Repositories',
-    'CONFIGURATION': 'Configuration',
-    'REPOSITORY_HISTORY': 'Repository History',
-    'REPOSITORY': 'Repositor(y|ies)',
-    'ORIGIN': 'Origin',
-    'ADDRESS': 'Address',
-    'LAYERS': 'Layers',
-    'PULL': 'Pull',
-    'PUSH': 'Push',
-    'PUBLISH': 'Publish',
-    'DOWNLOAD_ALL': 'Download all',
-    'DOWNLOAD': 'Download',
-    'DIFFERENCE': 'Difference',
-    'ADD_NEW_LAYER': 'Add new layer',
-    'ADD_NEW_ISSUE': 'Add new issue',
-    'HISTORY': 'History',
-    'ANALYZE': 'Analyze',
-    'ACTIONS': 'Actions',
-    'ADD': 'Add',
-    'ADDED': 'Added',
-    'BUG': 'Bug',
-    'FIXED': 'Fixed',
-    'COMMIT': 'Commit'
-    'NEW': 'New',
-    'FOUND': 'Found',
-    'ISSUES_LC': 'issues',
-    'LOCAL': 'Local',
-    'LOCAL_NETWORK': 'Local network',
-    'SEARCH': 'Search',
-    'CLONE': 'Clone',
-    'REMOTE': 'Remote',
-    'CONNECTED': 'Connected',
-    'CONNECTED_IN': 'Connected',
-    'LATEST_ACTIVITY': 'Latest activity',
-    'MOVE_TO_TRASH': 'Move to trash',
-    'MARK_AS_READ': 'Mark as read',
-    'SAVE': 'Save',
-    'SUBMIT': 'Submit',
-    'EMAIL': 'Email',
-    'NAME': 'Name'
-  });
-
-  $translateProvider.translations('es', {
-    'OPTIONS': 'Opções',
-    'ADD_REPOSITORIES': 'Adicionar Repositorio',
-    'LOCAL_REPOSITORIES': 'Repositorio Local',
-    'REMOTE_REPOSITORIES': 'Repositorio Remoto',
-    'CONFIGURATION': 'Configuração',
-    'REPOSITORY_HISTORY': 'Repositório Historico',
-    'REPOSITORY': 'Repositorio(s)',
-    'ORIGIN': 'Origen',
-    'ADDRESS': '',
-    'LAYERS': 'Camadas',
-    'PULL': '',
-    'PUSH': '',
-    'PUBLISH': '',
-    'DOWNLOAD_ALL': 'Descargar todo',
-    'DOWNLOAD': 'Descargar',
-    'DIFFERENCE': 'Diferencia',
-    'ADD_NEW_LAYER': 'Adicionar nova camada',
-    'ADD_NEW_ISSUE': 'Adicionar nova asunto',
-    'HISTORY': '',
-    'ANALYZE': 'Analisar',
-    'ACTIONS': 'Acciones',
-    'ADD': 'Añadir',
-    'ADDED': 'Sumado',
-    'BUG': 'Bug',
-    'FIXED': 'Fijo',
-    'COMMIT': '',
-    'NEW': 'Novo',
-    'FOUND': 'Encontró',
-    'ISSUES_LC': 'asunto',
-    'LOCAL': 'Local',
-    'LOCAL_NETWORK': 'Rede local',
-    'SEARCH': '',
-    'CLONE': '',
-    'REMOTE': 'Remoto',
-    'CONNECTED': 'Conectado',
-    'CONNECTED_IN': 'Conectado en',
-    'LATEST_ACTIVITY': 'Ultimas Atividades',
-    'MOVE_TO_TRASH': 'Move to trash',
-    'MARK_AS_READ': 'Mark as read',
-    'SAVE': 'Salva',
-    'SUBMIT': 'Enviar',
-    'EMAIL': 'Email',
-    'NAME': 'Nombre'
-  });
-
-  $translateProvider.preferredLanguage('en');
+.config(['$translateProvider', $translateProvider => {
+    $translateProvider.useSanitizeValueStrategy(null);
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'static\\translation\\',
+        suffix: '.json'
+    });
+    $translateProvider.preferredLanguage('en-us');
 }])
-.run(function($rootScope, $state, db) {
-    $rootScope.$state = $state;
-});
+.run(($rootScope, $state) => $rootScope.$state = $state);

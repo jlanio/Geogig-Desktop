@@ -1,4 +1,4 @@
-![gif_3](https://cloud.githubusercontent.com/assets/10765588/23562069/ed3e02ee-000e-11e7-8ea4-f1d3640468c7.gif)
+![x5cq6dblle 2](https://user-images.githubusercontent.com/10765588/27269278-4ca76d90-547b-11e7-8002-0d9de593d869.gif)
 
 ##### Geogig is:
 > "GeoGig is an open source tool that draws inspiration from Git, but adapts its core concepts to handle distributed versioning of geospatial data."

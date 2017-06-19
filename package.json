@@ -1,10 +1,11 @@
 {
   "name": "Geogig-Desktop",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "Desktop interface for spatial information versioning.",
   "main": "main.js",
   "scripts": {
-    "start": "electron --debug=5858 ."
+    "start": "electron --debug=5858 .",
+    "toWin32": "electron-packager ./ Geogig-Desktop --arch=x64 --platform=win32"
   },
   "repository": "https://github.com/jlanio/Geogig-Desktop",
   "keywords": [

@@ -3,9 +3,7 @@
 </p>
 
 ## Synopsis:
-"GeoGig is an open source tool that draws inspiration from Git, but adapts its core concepts to handle distributed versioning of geospatial data."
-
-*more information [geogig](http://geogig.org/)*
+"GeoGig is an open source tool that draws inspiration from Git, but adapts its core concepts to handle distributed versioning of geospatial data." *more information [geogig](http://geogig.org/)*
 
 ## Geogig for Desktop Users
 Unofficial Desktop interface for Geogig.

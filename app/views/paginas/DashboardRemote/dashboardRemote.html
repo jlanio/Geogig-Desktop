@@ -26,8 +26,6 @@
                     <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as read"  ng-click="newConnectionRemote()">
                     <i class="fa fa-plus" ></i> {{ 'NEW' | translate }} </button>
                     <button  ng-click="remoteUpdateRepos()" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left" title="" data-original-title="Refresh inbox"><i class="fa fa-refresh" ></i> Update</button>
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i  class="fa fa-trash-o"></i></button>
-
                 </div>
             </div>
 <div class="mail-box">
@@ -42,7 +40,9 @@
                     <span class="label label-danger pull-right">{{value.origin}}</span></td>
                     <td class="mail-subject"><a ui-sref="main.email_view">{{value.serverAddress}}</a></td>
                     <td class=""></td>
-                    <td class="text-right mail-date">Jan 16</td>
+                    <td class="text-right mail-date">
+                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash" ng-click="deleteConexaoRemote(key)"><i  class="fa fa-trash-o"></i></button>
+                    </td>
                 </tr>
             </tbody>
         </table>

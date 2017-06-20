@@ -25,12 +25,29 @@ function dashboardLocalCtrl(){
 			})
 		})
 	}
-	idForDelete = [];
-	s.checkbox = (id)=>{
-		idForDelete.indexOf(id)> -1 ? idForDelete.splice(-1, 1) : idForDelete.push(id);
-	};
 
-	s.deleteRepo = () => console.log("For Delete: ",idForDelete);
+	s.deleteRepository = (idFordelete) => {
+		swal({
+			title: 'Your repository will be deleted, do you want to continue?',
+			text: "You won't be able to revert this!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!',
+			cancelButtonText: 'No, cancel!',
+			confirmButtonClass: 'btn btn-success',
+			cancelButtonClass: 'btn btn-danger',
+			buttonsStyling: false
+		}).then(() => {
+			db.removeLocalRepository(idFordelete)
+			swal('Deleted!', 'Your repository has been deleted.','success')
+		}, (dismiss) => {
+		if (dismiss === 'cancel') 
+			swal('Cancelled','Your repository is safe :)','error')
+		})
+		
+	};
 }
 angular
 .module('geogig-desktop')

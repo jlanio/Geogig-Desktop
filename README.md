@@ -1,45 +1,40 @@
-<p align="center">
- <img src="https://user-images.githubusercontent.com/10765588/27269278-4ca76d90-547b-11e7-8002-0d9de593d869.gif">
-</p>
+![x5cq6dblle 2](https://user-images.githubusercontent.com/10765588/27269278-4ca76d90-547b-11e7-8002-0d9de593d869.gif)
 
-## Synopsis:
-"GeoGig is an open source tool that draws inspiration from Git, but adapts its core concepts to handle distributed versioning of geospatial data." *more information [geogig](http://geogig.org/)*
+##### Geogig is:
+> "GeoGig is an open source tool that draws inspiration from Git, but adapts its core concepts to handle distributed versioning of geospatial data."
+
+*more information [geogig](http://geogig.org/)*
 
 ## Geogig for Desktop Users
-Unofficial Desktop interface for Geogig.
+> Desktop interface Simple with geogig engine in backend
+##### **License**
 
-## **Download**
-https://github.com/jlanio/Geogig-Desktop/releases/download/v1.0.0/Geogig-Desktop-win32-x64.rar
+* Source code is distributed under an GPL-3.0, [more information](https://github.com/jlanio/Geogig-Desktop/blob/master/LICENSE)
 
-#### Pré-release v-1.0.0
-
+# **Download**
+#### Pré-release v-0.9
+ https://github.com/jlanio/Geogig-Desktop/releases/download/v0.9/geogig-win32-x64.rar
 #### Requirements for installation / use
 
-Install a [Java JDK.](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+> install a [Java JDK.](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+> :heavy_exclamation_mark: You do not need geogig installed to use
+> Geogig-Desktop.
 
-:heavy_exclamation_mark: You do not need [geogig installed](http://geogig.org/docs/start/installation.html) to use Geogig-Desktop.
-
-## Instructions for use
-Unzip file and run archive *Geogig-Desktop.exe*
-
-## Features disponible in version 1.0.0
+### Functions available
 #### Local:
 - [x] Create new repository.
 - [x] Import shapefile to the repository.
 - [x] Analyze and add modifications.
 - [x] Commit.
-#### Remote:
+### Remote:
 Make connections with:
-- [x] Geogig Server on local network.
-- [x] Clone.
-- [x] Pull.
-- [x] Push.
-- [x] Modification history and commit comparison.
+- [x] Geoserver
+- [x] Geogig Server on local drive.
 
-## **Developing**
+Clone:
+- [x] Pull
+- [x] Push
+- [x] Modification history and commit comparison :boom:
+# **Developing**
 See [CONTRIBUTING](https://github.com/jlanio/Geogig-Desktop/blob/master/CONTRIBUTING.md) for details on making GitHub pull request.
 > Feedback or suggestions: lanio.morais@gmail.com
-
-## **License**
-
-Source code and software is distributed under an GPL-3.0, [more information](https://github.com/jlanio/Geogig-Desktop/blob/master/LICENSE)

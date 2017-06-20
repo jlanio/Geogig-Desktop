@@ -3,19 +3,19 @@
 </p>
 
 ## Synopsis:
-> "GeoGig is an open source tool that draws inspiration from Git, but adapts its core concepts to handle distributed versioning of geospatial data."
+"GeoGig is an open source tool that draws inspiration from Git, but adapts its core concepts to handle distributed versioning of geospatial data."
 
 *more information [geogig](http://geogig.org/)*
 
 ## Geogig for Desktop Users
-> Unofficial Desktop interface for Geogig.
+Unofficial Desktop interface for Geogig.
 
 ## **Download**
 #### Pré-release v-1.0.0
 
 #### Requirements for installation / use
 
-> Install a [Java JDK.](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+Install a [Java JDK.](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 
 :heavy_exclamation_mark: You do not need [geogig installed](http://geogig.org/docs/start/installation.html) to use Geogig-Desktop.
 

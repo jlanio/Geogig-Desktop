@@ -7,10 +7,12 @@ class getJson{
 	}
 	static local(){
 		return {
+				'_id': new Date().toJSON(),
             	'name': this._name,
             	'shpfile': this._shpfile,
             	'serverAddress': this._serverAddress,
-            	'type': this._type
+            	'type': this._type,
+            	'isActive': true
             	};
 	}
 	static remote (repos){

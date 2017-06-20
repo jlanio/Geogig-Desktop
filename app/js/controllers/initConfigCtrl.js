@@ -31,14 +31,20 @@ function initConfigCtrl($scope, $location, $translate){
 	
 
 }
-function config ($translate, $location){
+function config ($translate, $location, toaster){
 	s.saveConfig = (config) => {
+		console.log(config)
 		$translate.use(config.language);
 		LocalStorage.set('configUser', config);
+		toaster.success({ body:"Configuration saved successfully."});
+        Utils.geogig(['config', '--global','user.name', config.username]).then(
+            Utils.geogig(['config', '--global','user.email', config.email])
+        ).catch(()=> 'error')
 		$location.path('/main/local');
 	}
 	s.getConfig = () => LocalStorage.get('configUser');
 }
+
 angular
 .module('geogig-desktop')
 .controller('initConfigCtrl', initConfigCtrl)

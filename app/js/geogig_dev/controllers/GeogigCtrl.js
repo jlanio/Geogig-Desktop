@@ -1,6 +1,6 @@
 class Geogig {
     static init(){
-        return Promise.all([this.init(), db.saveLocal.call(this)])
+        return Promise.all([this.init(), db.saveLocal.call(this, 1)])
     }
     static importShapefile(){
     	return Promise.all([

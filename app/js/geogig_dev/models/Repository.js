@@ -1,4 +1,4 @@
-var request = require('request');
+const request = require('request');
 
 class Repository  {
     constructor( name, id = [], serverAddress = `http://localhost:8182/repos/${name}`, shpfile = [], type = 'local'){

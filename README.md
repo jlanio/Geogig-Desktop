@@ -17,6 +17,9 @@ Install a [Java JDK.](http://www.oracle.com/technetwork/java/javase/downloads/jd
 
 :heavy_exclamation_mark: You do not need [geogig installed](http://geogig.org/docs/start/installation.html) to use Geogig-Desktop.
 
+## Instructions for use
+Unzip file and run archive *Geogig-Desktop.exe*
+
 ## Features disponible in version 1.0.0
 #### Local:
 - [x] Create new repository.

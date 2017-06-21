@@ -1,4 +1,8 @@
+
 <p align="center">
+ <img src="https://user-images.githubusercontent.com/10765588/27366155-deb91276-5609-11e7-80c4-f81f851adbbf.png">
+ Geogig-Desktop
+ <br>
  <img src="https://user-images.githubusercontent.com/10765588/27269278-4ca76d90-547b-11e7-8002-0d9de593d869.gif">
 </p>
 

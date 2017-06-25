@@ -1,13 +1,18 @@
 {
   "name": "Geogig-Desktop",
+  "productName": "Geogig Desktop",
   "version": "1.0.0",
   "description": "Desktop interface for spatial information versioning.",
   "main": "main.js",
   "scripts": {
     "start": "electron --debug=5858 .",
-    "toWin32": "electron-packager ./ Geogig-Desktop --arch=x64 --platform=win32"
+    "build:win": "electron-packager ./ Geogig-Desktop --arch=x64 --platform=win32 --version-string.ProductName=\"Geogig Desktop\" --icon=./app/static/favicon.ico "
+
   },
-  "repository": "https://github.com/jlanio/Geogig-Desktop",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jlanio/Geogig-Desktop.git"
+  },
   "keywords": [
     "geogig",
     "locationtech",
@@ -19,7 +24,9 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "electron": "^1.4.1",
-    "unzip":  "^0.1.11"
+    "electron-packager": "^8.7.1",
+    "electron-winstaller": "^2.6.3",
+    "unzip": "^0.1.11"
   },
   "dependencies": {
     "fs-extra": "^2.0.0",

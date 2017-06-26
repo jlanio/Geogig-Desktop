@@ -13,7 +13,7 @@
 Unofficial Desktop interface for Geogig.
 
 ## **Download**
-https://github.com/jlanio/Geogig-Desktop/releases/download/v1.0.0/Geogig-Desktop-win32-x64.rar
+https://github.com/jlanio/Geogig-Desktop/releases/download/v1.0.0/GeogigDesktop-1.0.0-win32-setup.exe
 
 #### Pré-release v-1.0.0
 

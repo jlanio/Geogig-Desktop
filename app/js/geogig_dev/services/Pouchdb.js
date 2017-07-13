@@ -19,5 +19,5 @@ class Database{
 
 }
 
-/*new Database().open().then(doc => console.log(doc));*/
-/*new PouchDB('db').destroy().then(() => 'success deleted').catch(() => 'error delete')*/
+// /new Database().open().then(doc => console.log(doc));
+// new PouchDB('db').destroy().then(() => 'success deleted').catch(() => 'error delete')

@@ -45,7 +45,6 @@ function handleSquirrelEvent(application) {
     const rootAtomFolder = path.resolve(appFolder, '..');
     const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
     const exeName = path.basename(process.execPath);
-    console.log(exeName);
     const spawn = function(command, args) {
         let spawnedProcess, error;
 

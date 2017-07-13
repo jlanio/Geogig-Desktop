@@ -1,11 +1,11 @@
 function leafletCtrl(){
- 	
+
     angular.extend(s, {
         geogigMap: {
             lat: 0,
             lng: 0,
             zoom: 2
- 
+
         },
         geojson: {
         	geogigLayer: {
@@ -22,7 +22,7 @@ function leafletCtrl(){
             tileLayer: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         }
     });
-    
+
     function getColor(type_change) {
         if (type_change == "ADDED"){
             return '#00CED1'
@@ -32,7 +32,7 @@ function leafletCtrl(){
             return '#DC143C'
         }
     }
-    
+
     function style(feature) {
         return {
             fillColor: getColor(feature.properties.type_change),

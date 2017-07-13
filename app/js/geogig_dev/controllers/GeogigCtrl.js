@@ -4,7 +4,7 @@ class Geogig {
     }
     static importShapefile(){
     	return Promise.all([
-    		this.importShapefile([...this.shpfile].pop()), 
+    		this.importShapefile([...this.shpfile].pop()),
     		db.saveshpFile.call(this)
     		]);
     }
@@ -15,7 +15,8 @@ class Geogig {
     	return Promise.all([Commit.new.call(this, comment)])
     }
     static analyze(){
-    	let actions = this.shpfile.map(q => this.importShapefile(q));
+      let filterTrueShp = this.shpfile.filter(elem => elem.activate == true)
+    	let actions = filterTrueShp.map(q => this.importShapefile(q));
     	return Promise.all(actions);
     }
     static log(){

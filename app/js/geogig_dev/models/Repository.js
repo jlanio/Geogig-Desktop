@@ -2,7 +2,7 @@ const request = require('request');
 
 class Repository  {
     constructor( name, id = [], serverAddress = `http://localhost:8182/repos/${name}`, shpfile = [], type = 'local'){
-        this._id = id;  
+        this._id = id;
         this._name = name;
         this._serverAddress = serverAddress;
         this._shpfile = shpfile;
@@ -13,7 +13,7 @@ class Repository  {
     get serverAddress (){return this._serverAddress};
     get shpfile (){return this._shpfile};
     get type (){return this._type};
-    
+
     set id (newId){this._id = newId};
     set name (newName){this._name = newName};
     set serverAddress (newServerAddress){this._serverAddress = newServerAddress};
@@ -25,7 +25,7 @@ class Repository  {
             Utils.geogig(['serve','--multirepo'])
                 .then(response  => resolve(response))
                 .catch(error => reject(error));
-        })   
+        })
     }
     init() {
         return Utils.geogig(['init' , this._name])
@@ -40,7 +40,7 @@ class Repository  {
     add(){
        return Utils.geogig(['add'],  this._name)
             .then(response  => response)
-            .catch(error => error); 
+            .catch(error => error);
     };
     exportShapefile(newLocal , RepositoryName){
         console.log(RepositoryName , newLocal)
@@ -62,15 +62,15 @@ class Repository  {
     }
     log() {
         return new Promise((resolve, reject) => {
-            request(`${this._serverAddress}/log.json`, 
+            request(`${this._serverAddress}/log.json`,
                 (error, response, body)=>{error ? reject(error) : resolve(body)}
-            )  
+            )
         });
     };
     pull(){
-        return Utils.geogig(['pull'], this._name)            
+        return Utils.geogig(['pull'], this._name)
             .then(response  => response)
-            .catch(error => error); 
+            .catch(error => error);
     };
     push(){
         return Utils.geogig(['push'], this._name)
@@ -80,7 +80,7 @@ class Repository  {
     clone(){
         return Utils.geogig(['clone', this._serverAddress, `${this._name}.remote`])
         .then(response  => response)
-        .catch(error => error); 
+        .catch(error => error);
     }
 
 }

@@ -35,18 +35,18 @@ function dashboardLocalCtrl(){
 			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',
 			confirmButtonText: 'Yes, delete it!',
-			cancelButtonText: 'No, cancel!',
+			cancelButtonText: 'No, cancel! ',
 			confirmButtonClass: 'btn btn-success',
 			cancelButtonClass: 'btn btn-danger',
-			buttonsStyling: false
+			buttonsStyling: true
 		}).then(() => {
 			db.removeLocalRepository(idFordelete)
 			swal('Deleted!', 'Your repository has been deleted.','success')
 		}, (dismiss) => {
-		if (dismiss === 'cancel') 
+		if (dismiss === 'cancel')
 			swal('Cancelled','Your repository is safe :)','error')
 		})
-		
+
 	};
 }
 angular

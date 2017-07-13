@@ -41,12 +41,12 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
             cancelButtonText: 'No, cancel!',
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: 'btn btn-danger',
-            buttonsStyling: false
-        }).then(() => {  
+            buttonsStyling: true
+        }).then(() => {
             db.removeConexaoRemote(idFordelete)
             swal('Deleted!', 'Your conexao has been deleted.','success')
         }, (dismiss) => {
-        if (dismiss === 'cancel') 
+        if (dismiss === 'cancel')
             swal('Cancelled','Your conexao is safe :)','error')
         })
     }
@@ -54,5 +54,3 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
 angular
 .module('geogig-desktop')
 .controller('dashboardRemoteCtrl', dashboardRemoteCtrl)
-
-

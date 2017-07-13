@@ -29,7 +29,7 @@ function timeliteCtrl( $location){
         Geogig.diffCommit.call(s.Repository(), ...commitSelected)
             .then(features => {
                 s.$apply(() => {
-                    s.geojson.geogigLayer.data = WKTtoGeojson.init(features)
+                    s.geojson.geogigLayer.data = WKTtoGeojson.init(features);
                 });
             });
 	};

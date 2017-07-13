@@ -1,3 +1,35 @@
+<style>
+    /* Additional styles for body sk-spinner */
+    .sk-body-loading:after {
+        content: ''; background-color: rgba(0,0,0,0.5);
+        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    }
+    #spinner.sk-body-loading > .sk-spinner {
+        display: block; position: absolute;
+        top: 40%; left: 0; right: 0;z-index: 2110;
+    }
+    #spinner .sk-spinner {
+        display: none;
+    }
+
+    .sk-body-loading {
+        position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 2100;
+    }
+    .adx {
+        background: #2f4050;
+        color: #FFFFFF;
+    }
+</style>
+<div id="spinner" ng-class="working ? 'sk-body-loading' : 'sk-body'">
+    <div class="sk-spinner sk-spinner-wave">
+        <div class="sk-rect1"></div>
+        <div class="sk-rect2"></div>
+        <div class="sk-rect3"></div>
+        <div class="sk-rect4"></div>
+        <div class="sk-rect5"></div>
+    </div>
+</div>
+
 <div  class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-12 animated fadeInRight">
@@ -6,7 +38,7 @@
                     <i class="fa fa-reply"></i> Voltar
                 </a>
                 <a ui-sref="main.historico" class="btn btn-white btn-xs">
-                    <i class="fa fa-tencent-weibo"></i> {{ 'HISTORY' | translate }} 
+                    <i class="fa fa-tencent-weibo"></i> {{ 'HISTORY' | translate }}
                 </a>
                 <a ui-sref="main.issue" class="btn btn-white btn-xs disabled">
                     <i class="fa fa fa-comment-o"></i> Issue track
@@ -49,6 +81,7 @@
                         <div class="file-box"  ng-repeat="(key, value) in Repository().shpfile ">
                             <div class="file" ng-click="baixar_shp(key, value)">
                                 <a href="">
+                                    <input icheck type="checkbox" ng-model="value.activate">
                                     <span class="corner"></span>
 
                                     <div class="icon" >
@@ -80,4 +113,12 @@
             </div>
         </div>
     </div>
-</div>
+<!-- <script>
+$(document).ready(function(){
+  $('input').iCheck({
+    checkboxClass: 'icheckbox_square-green',
+    radioClass: 'iradio_square-green',
+    increaseArea: '20%' // optional
+  });
+});
+</script> -->

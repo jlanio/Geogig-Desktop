@@ -53,7 +53,8 @@ function ModalInstanceCtrl ($scope, $http, $uibModalInstance, toaster) {
     $scope.send = function (remote) {
         $uibModalInstance.close();
         if (remote.origin === 'local_network'){
-            url = "http://"+remote.url+":8182/repos.json";
+            Adressurl = "http://"+remote.url+":8182/repos.json";
+            remote.url = Adressurl;
         }else if (remote.origin === 'geoserver'){
             url = remote.url+"geoserver/geogig/repos.json";
         }else if (remote.origin === 'postgresql'){
@@ -61,7 +62,7 @@ function ModalInstanceCtrl ($scope, $http, $uibModalInstance, toaster) {
         }else {
             console.log('type is not defined');
         }
-        $http.get(url).success(function(data){
+        $http.get(remote.url).success(function(data){
             Geogig.ConnectRemote(remote, data);
             toaster.success(remote.titulo + ' added successfully!', 'We found '+ data.repos.repo.length +' repositories')
         }).error(function(){
@@ -82,4 +83,3 @@ angular
     .module('geogig-desktop')
     .controller('toastrCtrl',toastrCtrl)
     .controller('modalDemoCtrl',modalDemoCtrl)
-

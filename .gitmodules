@@ -1,0 +1,3 @@
+[submodule "app/js"]
+	path = app/js
+	url = https://github.com/jlanio/geogig-js

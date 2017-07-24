@@ -9,7 +9,7 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
         });
     };
     function get (serverAddress, id){
-        $http.get(`${serverAddress}repos.json`).success(data => {
+        $http.get(`${serverAddress}`).success(data => {
             Geogig.updateRemoteRepositories(id, data);
                 toaster.pop({
                     type: 'success',

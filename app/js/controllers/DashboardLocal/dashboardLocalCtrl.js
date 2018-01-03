@@ -1,4 +1,9 @@
 function dashboardLocalCtrl(){
+
+	s.geogig.repos.findAll().then(repos => {
+		s.$apply(() => s.repos = repos)
+	})
+
 	s.NewRepo = () => {
 		swal({
 			title: 'New Repository',
@@ -43,10 +48,10 @@ function dashboardLocalCtrl(){
 			db.removeLocalRepository(idFordelete)
 			swal('Deleted!', 'Your repository has been deleted.','success')
 		}, (dismiss) => {
-		if (dismiss === 'cancel') 
+		if (dismiss === 'cancel')
 			swal('Cancelled','Your repository is safe :)','error')
 		})
-		
+
 	};
 }
 angular

@@ -6,7 +6,7 @@
                     <i class="fa fa-reply"></i> Voltar
                 </a>
                 <a ui-sref="main.historico" class="btn btn-white btn-xs">
-                    <i class="fa fa-tencent-weibo"></i> {{ 'HISTORY' | translate }} 
+                    <i class="fa fa-tencent-weibo"></i> {{ 'HISTORY' | translate }}
                 </a>
                 <a ui-sref="main.issue" class="btn btn-white btn-xs disabled">
                     <i class="fa fa fa-comment-o"></i> Issue track
@@ -24,7 +24,7 @@
                         <i class="fa fa-cloud-upload"></i>  {{ 'PUSH' | translate }}
                     </a>
                 </div>
-                <h2>{{Repository().name}}</h2>
+                <h2>{{ currentRepoName }}</h2>
             </div>
             <div class="mail-box">
                 <div class="mail-attachment">
@@ -46,7 +46,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="file-box"  ng-repeat="(key, value) in Repository().shpfile ">
+                        <div class="file-box"  ng-repeat="(key, value) in currentlsTree ">
                             <div class="file" ng-click="baixar_shp(key, value)">
                                 <a href="">
                                     <span class="corner"></span>
@@ -55,9 +55,9 @@
                                         <i class="fa fa-file-archive-o"></i>
                                     </div>
                                     <div class="file-name">
-                                        <small>{{value.name}}</small>
+                                        <small>{{value.path}}</small>
                                         <br/>
-                                        <small>{{value.shpfile}}</small>
+                                        <small>asdasd</small>
                                     </div>
                                 </a>
                             </div>

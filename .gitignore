@@ -1,5 +1,6 @@
 [Node]
 node_modules
+geogig-js
 npm-debug.log*
 [geogig]
 app/static/tmp

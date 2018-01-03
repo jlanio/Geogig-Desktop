@@ -1,9 +1,28 @@
-function detailRepositoryLocalCtrl($location){
-	console.info(s.Repository());
+function detailRepositoryLocalCtrl($location, toaster){
+
+	s.currentRepo
+		.then(repo => {
+			repo.lsTree().then(e => {
+				s.$apply(() => s.currentlsTree = e.node)
+			});
+			repo.beginTransaction().then(e => {
+				s.currentTransactionId = e.Transaction.ID
+			})
+	})
+		let cuidaTrasacao = function (name, dir, transactionId) {
+			s.currentRepo.then(e =>
+	 			e.geopackage.import({
+					format: 'gpkg',
+	     		fileUpload: `${dir}`,
+	     		transactionId: `${transactionId}`,
+	     		interchange: true,
+	     		message: name
+	   		})
+			).then(e => console.log(e))
+		}
+
 
 	s.NewShp = localShp => {
-		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
-		ping.checkServerisOnAndKillProcess();
 		swal({
 			title: 'New Shapefile',
 			input: 'text',
@@ -15,8 +34,9 @@ function detailRepositoryLocalCtrl($location){
 					if (!ShpName) {
 						reject('the field is empty!')
 					} else {
-						s.Repository().shpfile.push({'name':ShpName,'shpfile':s.localShp})
-						resolve(Geogig.importShapefile.call(s.Repository()))
+						cuidaTrasacao(ShpName,s.localShp, s.currentTransactionId);
+						// s.Repository().shpfile.push({'name':ShpName,'shpfile':s.localShp})
+						resolve('Geogig.importShapefile.call(s.Repository())')
 					}
 				})
 			},
@@ -27,13 +47,11 @@ function detailRepositoryLocalCtrl($location){
 			}else{
 				swal({type:'success',title:'Repository success!',html:`log:<h5>${q[0]}</h5>`})
 			}
-			
+
 		})
 	}
 
 	s.NewCommit = () => {
-		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
-		ping.checkServerisOnAndKillProcess();
 		swal({
 			title: 'New Commit',
 			input: 'text',
@@ -56,28 +74,29 @@ function detailRepositoryLocalCtrl($location){
 			}else{
 				swal({type:'success',title:'Repository success!',html:`log:<h5>${q}</h5>`})
 			}
-			
+
 		}).catch(q => {swal({type: 'error',title:`log: <h5> ${q}</h5>`});})
 	}
 
-	s.analyze = () => {			
-		ping.checkServerisOnAndKillProcess().then(q => {
-			Geogig.analyze.call(s.Repository()).then(q => {
-				swal({type:'success',title:'',html:`log:<h5>${q}</h5>`})
-			})
-		}).catch(q => console.log(q));	
+	s.analyze = () => {
+		toaster.pop({
+				type: 'error',
+				title: 'Title example',
+				body: 'This is example of Toastr notification box.',
+				showCloseButton: true,
+				timeout: 1000
+		});
 	};
 	s.add = () => {
-		ping.checkServerisOnAndKillProcess().then(q => {
-			Geogig.add.call(s.Repository()).then(q => {
-				swal({type:'success',title:'',html:`log:<h5>${q[0]}</h5>`})
-			})
-		}).catch(q => console.log(q))		
+		s.currentRepo.then(e => e.endTransaction(
+		  {transactionId: s.currentTransactionId},
+		  {cancel: false}
+		));
 	};
 	s.push = () => {
 		Geogig.push.call(s.Repository()).then(e => {
 			swal({type:'success',title:'',html:`log:<h5>${e}</h5>`})
-		})			
+		})
 	};
 	s.pull = () => {
 		Geogig.pull.call(s.Repository()).then(e => {
@@ -100,6 +119,7 @@ function detailRepositoryLocalCtrl($location){
 			}
 		});*/
 	}
+
 	s.baixar_shp = function (key, repository){
 		const {dialog} = require('electron').remote;
 		dialog.showOpenDialog({
@@ -109,18 +129,18 @@ function detailRepositoryLocalCtrl($location){
 	    		currentRepository.shpfile[key].shpfile = newLocal;
 	    		db.updateshpFile.call(currentRepository)
 	    		ping.checkServerisOnAndKillProcess().then(q => {
-					s.Repository().exportShapefile(newLocal, repository.name).then(e => 
+					s.Repository().exportShapefile(newLocal, repository.name).then(e =>
 	    				swal({type:'success',title:'',html:`log:<h5>${e}</h5>`})
 	    			)
-				}).catch(q => console.log(q))	
+				}).catch(q => console.log(q))
 	  		}
 		);
 	}
 	s.dialog = function(){
-		if (s.Repository().shpfile.length >= 1){
-			swal({type: 'error',title:`<h5>Sorry, we currently only support one shp per repository.
-				<br>In the next version will be added support for multiple shapefiles per repository..</h5>`});
-		}else{
+		// if (0 >= 1){
+		// 	swal({type: 'error',title:`<h5>Sorry, we currently only support one shp per repository.
+		// 		<br>In the next version will be added support for multiple shapefiles per repository..</h5>`});
+		// }else{	};
 			const {dialog} = require('electron').remote;
 			dialog.showOpenDialog(
 			{
@@ -135,11 +155,10 @@ function detailRepositoryLocalCtrl($location){
 				fileName === undefined ? false : s.NewShp(fileName[0]), s.localShp = fileName[0];
 			})
 		}
-	};
-	
-	
+
+
+
 }
 angular
 .module('geogig-desktop')
 .controller('detailRepositoryLocalCtrl', detailRepositoryLocalCtrl)
-	

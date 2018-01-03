@@ -25,4 +25,3 @@ get.on( 'end', function(){
 get.on( 'error', function(){
     console.log('Error ocurred on download geogig command line');
 });
-

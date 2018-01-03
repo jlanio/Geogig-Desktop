@@ -25,7 +25,7 @@
                     <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
                 </div>
                 <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Mark as read" ng-click="NewRepo()">
-                    <i class="fa fa-plus" ></i> {{ 'NEW' | translate }} 
+                    <i class="fa fa-plus" ></i> {{ 'NEW' | translate }}
                 </button>
             </div>
         </div>
@@ -33,16 +33,17 @@
             <form>
                 <table class="table table-hover table-mail">
                     <tbody>
-                        <tr class="read" ng-repeat=" (key, value) in mydb.infoRepositorios.local ">
+                        <tr class="read" ng-repeat=" (key, value) in repos.repo ">
                             <td class="check-mail">
                                 <!-- <input ng-model="value.forDelite" type="checkbox" ng-change="checkChanged(value)"/> -->
                             </td>
                             <td class="mail-ontact" ui-sref="main.view">
-                                <a ng-click="selectRepo(key)"  >{{value.name}}</a>
-                                <span ng-class="value.type == 'local' ? 'label-warning pull-right':'label-danger pull-right'" class="label label-warning pull-right">{{value.type}}
+                                <a ng-click="selectRepo(value.name)"  >{{value.name}}</a>
+                                <span ng-class="value.type == 'local' ? 'label-warning pull-right':'label-danger pull-right'" class="label label-warning pull-right">
+                                  remote
                                 </span>
-                                <td class="mail-subject"><a></a></td>
-                                <td  class="text-right mail-date"> 
+                                <td class="mail-subject"><a>{{value.href}}</a></td>
+                                <td  class="text-right mail-date">
                                     <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash" ng-click="deleteRepository(key)">
                                     <i class="fa fa-trash-o"></i>
                                     </button>

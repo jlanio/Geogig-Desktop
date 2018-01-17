@@ -2,25 +2,41 @@ function detailRepositoryLocalCtrl($location, toaster){
 
 	s.currentRepo
 		.then(repo => {
+			s.$apply(() => s.currentUri = repo._api._params)
 			repo.lsTree().then(e => {
 				s.$apply(() => s.currentlsTree = e.node)
 			});
 			repo.beginTransaction().then(e => {
+				console.log(e.Transaction.ID);
 				s.currentTransactionId = e.Transaction.ID
 			})
 	})
-		let cuidaTrasacao = function (name, dir, transactionId) {
-			s.currentRepo.then(e =>
-	 			e.geopackage.import({
-					format: 'gpkg',
-	     		fileUpload: `${dir}`,
-	     		transactionId: `${transactionId}`,
-	     		interchange: true,
-	     		message: name
-	   		})
-			).then(e => console.log(e))
-		}
 
+	let checkTaskAdress =  (taskID) => s.geogigServe.tasks.findOne(taskID);
+
+	let checkTaskIDStatus = async (taskID) => {
+		let data = await checkTaskAdress(taskID)
+		if (data.task.status === 'RUNNING') {
+			toaster.success({ body:data.task.status});
+			console.log(data);
+			setTimeout(() => checkTaskIDStatus(taskID), 2000);
+		}else{
+			toaster.success({ body:data.task.status});
+			console.log(data);
+		}
+	}
+
+	let cuidaTrasacao = function (name, dir, transactionId) {
+		return s.currentRepo.then(e =>
+ 			e.geopackage.import({
+				format: 'gpkg',
+     		fileUpload: `${dir}`,
+     		transactionId: `${transactionId}`,
+     		interchange: true,
+     		message: name
+   		}).then(taskID => checkTaskIDStatus(taskID.task.id))
+		)
+	}
 
 	s.NewShp = localShp => {
 		swal({
@@ -34,20 +50,16 @@ function detailRepositoryLocalCtrl($location, toaster){
 					if (!ShpName) {
 						reject('the field is empty!')
 					} else {
-						cuidaTrasacao(ShpName,s.localShp, s.currentTransactionId);
+
 						// s.Repository().shpfile.push({'name':ShpName,'shpfile':s.localShp})
-						resolve('Geogig.importShapefile.call(s.Repository())')
+						resolve(cuidaTrasacao(ShpName,s.localShp, s.currentTransactionId))
 					}
 				})
 			},
 			allowOutsideClick: false
 		}).then(q => {
-			if(q[0].match(/Exception /)){
-				swal({type: 'error',title:`log: <h5> ${q}</h5>`});
-			}else{
-				swal({type:'success',title:'Repository success!',html:`log:<h5>${q[0]}</h5>`})
-			}
-
+			console.log(s.currentTransactionId);
+				swal({title:'Importando geopackage',html:`log:<h5>${q[0]}</h5>`})
 		})
 	}
 
@@ -63,16 +75,16 @@ function detailRepositoryLocalCtrl($location, toaster){
 					if (!comment) {
 						reject('the field is empty!')
 					} else {
-						resolve(Commit.new.call(s.Repository(), comment));
+						resolve(s.currentRepo.then(e => e.endTransaction({transactionId: s.currentTransactionId},{cancel: false})));
 					}
 				})
 			},
 			allowOutsideClick: false
 		}).then(q => {
-			if(q.match(/Nothing to commit after /)){
-				swal({type: 'error',title:`log: <h5> ${q}</h5>`});
+			if(q.response.success.true){
+				swal({type:'success',title:'Repository success!',html:`log:success`})
 			}else{
-				swal({type:'success',title:'Repository success!',html:`log:<h5>${q}</h5>`})
+				swal({type: 'error',title:`log: error`});
 			}
 
 		}).catch(q => {swal({type: 'error',title:`log: <h5> ${q}</h5>`});})
@@ -88,10 +100,7 @@ function detailRepositoryLocalCtrl($location, toaster){
 		});
 	};
 	s.add = () => {
-		s.currentRepo.then(e => e.endTransaction(
-		  {transactionId: s.currentTransactionId},
-		  {cancel: false}
-		));
+
 	};
 	s.push = () => {
 		Geogig.push.call(s.Repository()).then(e => {
@@ -104,21 +113,7 @@ function detailRepositoryLocalCtrl($location, toaster){
 		}).catch(e => console.log(e));
 	};
 
-	s.publicarRepo = function (id){
-		/*repo.initRemote(s.currentRepoData().nome, (data,url)=>{
-			if (data.response.error){
-				console.log("ERROR");
-			}else{
-				console.log("publicado com sucesso");
-				const tmp = s.mydb;
-				tmp.infoRepositorios.local[id].remote = url;
-				tmp.infoRepositorios.local[id].origin.de = 'remote'
-				db.set(tmp);
-				repo.copy_to_folder(s.currentRepoData().nome);
 
-			}
-		});*/
-	}
 
 	s.baixar_shp = function (key, repository){
 		const {dialog} = require('electron').remote;
@@ -137,17 +132,13 @@ function detailRepositoryLocalCtrl($location, toaster){
 		);
 	}
 	s.dialog = function(){
-		// if (0 >= 1){
-		// 	swal({type: 'error',title:`<h5>Sorry, we currently only support one shp per repository.
-		// 		<br>In the next version will be added support for multiple shapefiles per repository..</h5>`});
-		// }else{	};
 			const {dialog} = require('electron').remote;
 			dialog.showOpenDialog(
 			{
 				defaultPath: 'c:/',
 				filters: [
 				{ name: 'All Files', extensions: ['*'] },
-				{ name: 'Shapefile', extensions: ['shp'] }
+				{ name: 'geopackage', extensions: ['gpkg'] }
 				],
 				properties: ['openFile']
 			},

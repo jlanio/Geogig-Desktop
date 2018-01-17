@@ -62,7 +62,8 @@ function ModalInstanceCtrl ($scope, $http, $uibModalInstance, toaster) {
             console.log('type is not defined');
         }
         $http.get(url).success(function(data){
-            Geogig.ConnectRemote(remote, data);
+
+           LocalStorage.set('ConnectRemote', { conexao: [{remote:remote, data: data}]});
             toaster.success(remote.titulo + ' added successfully!', 'We found '+ data.repos.repo.length +' repositories')
         }).error(function(){
             toaster.pop({
@@ -82,4 +83,3 @@ angular
     .module('geogig-desktop')
     .controller('toastrCtrl',toastrCtrl)
     .controller('modalDemoCtrl',modalDemoCtrl)
-

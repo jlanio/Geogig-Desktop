@@ -1,18 +1,15 @@
 function timeliteCtrl( $location){
 	/*Get Commit*/
     let commitSelected = [];
-	s.limit = 2; s.checked = 0; s.commits = undefined;
+    s.commits = 'teste';
+    s.limit = 2;
+    s.checked = 0;
 
-    ping.checkServerisOffAndStart()
-        .then(e => {
-            Geogig.log.call(s.Repository()).then(data => {
-                s.$apply(()=> s.commits = JSON.parse(data).response.commit)
-            })})
-        .catch(e => {
-            Geogig.log.call(s.Repository()).then(data => {
-                s.$apply(()=> s.commits = JSON.parse(data).response.commit)
-            });
-        })
+
+      s.currentRepo.then(repo => repo.log()).then(response => {
+         s.$apply(()=> s.commits = response.commit)
+      })
+
 
     s.checkChanged = commit => {
         commit.activate ? s.checked++ : s.checked--;
@@ -26,12 +23,14 @@ function timeliteCtrl( $location){
     }
 
 	s.differenceCommit = () => {
-        Geogig.diffCommit.call(s.Repository(), ...commitSelected)
-            .then(features => {
-                s.$apply(() => {
-                    s.geojson.geogigLayer.data = WKTtoGeojson.init(features)
-                });
-            });
+    s.currentRepo.then(repo => repo.Diff({
+      oldRefSpec: commitSelected[0],
+      newRefSpec: commitSelected[1],
+      showGeometryChanges: true
+    }))
+    .then(response => {
+      s.geojson.geogigLayer.data = WKTtoGeojson.init(response)
+    })
 	};
 }
 angular

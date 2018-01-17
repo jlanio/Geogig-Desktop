@@ -1,6 +1,6 @@
 function dashboardLocalCtrl(){
 
-	s.geogig.repos.findAll().then(repos => {
+	s.geogigServe.repos.findAll().then(repos => {
 		s.$apply(() => s.repos = repos)
 	})
 
@@ -16,8 +16,7 @@ function dashboardLocalCtrl(){
 					if (!NameRepo) {
 						reject('the field is empty!')
 					} else {
-						let newRepository = new Repository(NameRepo);
-						resolve(Geogig.init.call(newRepository))
+						resolve(s.geogig.repo({name: NameRepo}).init)
 					}
 				})
 			},

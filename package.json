@@ -9,7 +9,6 @@
     "build:win": "electron-packager ./ Geogig-Desktop --overwrite --arch=x64 --platform=win32 --version-string.ProductName=\"Geogig Desktop\" --icon=./app/static/favicon.ico ",
     "build:mac": "electron-packager ./ Geogig-Desktop --overwrite --arch=x64 --platform=darwin",
     "build:linux": "electron-packager ./Geogig-Desktop --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
-
   },
   "repository": {
     "type": "git",

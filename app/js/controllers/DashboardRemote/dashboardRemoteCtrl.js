@@ -1,5 +1,9 @@
 function dashboardRemoteCtrl($uibModal, $http, toaster){
 
+
+    s.remoteConexaoLoad = LocalStorage.get('ConnectRemote');
+
+    console.log(s.remoteConexaoLoad);
     s.newConnectionRemote = function (size) {
         var modalInstance = $uibModal.open({
             templateUrl: 'views/modal.html',
@@ -9,25 +13,25 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
         });
     };
     function get (serverAddress, id){
-        $http.get(`${serverAddress}repos.json`).success(data => {
-            Geogig.updateRemoteRepositories(id, data);
-                toaster.pop({
-                    type: 'success',
-                    title: serverAddress,
-                    body: `${data.repos.repo.length} existing repositories`,
-                    showCloseButton: true
-                });
-        }).error(data=>{
-            toaster.pop({
-                type: 'error',
-                title: 'Servidor Offline',
-                body: serverAddress,
-                showCloseButton: true
-            });
-        })
+      console.log(serverAddress, id);
+        // $http.get(`${serverAddress}repos.json`).success(data => {
+        //   toaster.pop({
+        //       type: 'success',
+        //       title: serverAddress,
+        //       body: `${data.repos.repo.length} existing repositories`,
+        //       showCloseButton: true
+        //   });
+        // }).error(data=>{
+        //     toaster.pop({
+        //         type: 'error',
+        //         title: 'Servidor Offline',
+        //         body: serverAddress,
+        //         showCloseButton: true
+        //     });
+        // })
     }
     s.remoteUpdateRepos = () => {
-        s.mydb.infoRepositorios.conectedIn.forEach((conexao, id) => get(conexao.serverAddress, id));
+        // s.mydb.infoRepositorios.conectedIn.forEach((conexao, id) => get(conexao.serverAddress, id));
     }
     s.deleteConexaoRemote = (idFordelete) => {
         swal({
@@ -42,11 +46,10 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: 'btn btn-danger',
             buttonsStyling: false
-        }).then(() => {  
-            db.removeConexaoRemote(idFordelete)
+        }).then(() => {
             swal('Deleted!', 'Your conexao has been deleted.','success')
         }, (dismiss) => {
-        if (dismiss === 'cancel') 
+        if (dismiss === 'cancel')
             swal('Cancelled','Your conexao is safe :)','error')
         })
     }
@@ -54,5 +57,3 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
 angular
 .module('geogig-desktop')
 .controller('dashboardRemoteCtrl', dashboardRemoteCtrl)
-
-

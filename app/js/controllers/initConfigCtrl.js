@@ -1,15 +1,15 @@
 const geogigJS = require('./../geogig-js/main')
 
 const geogig = new geogigJS({
-  bin: "/home/jlanio/Documentos/geogig/bin/geogig",
-  cwd: "/home/jlanio/Documentos/patchForRepository"
+  bin: "C:\\geogig\\bin\\geogig.bat",
+  cwd: "C:\\patchForRepository"
 });
 
 function initConfigCtrl($scope, $location, $translate){
 	s = $scope
 	s.mydb = mydb
-  s.geogig = geogig.serve.connect({uri: 'http://localhost:8182'})
-
+  s.geogig = geogig
+  s.geogigServe = geogig.serve.connect({uri: 'http://localhost:8182'})
 	//Seting config user after start app
 	let configUser = LocalStorage.get('configUser');
 	!configUser ? $location.path('/main/config_user') : $translate.use(configUser.language);
@@ -17,7 +17,7 @@ function initConfigCtrl($scope, $location, $translate){
 
 	s.selectRepo = (selectedName) => {
     s.currentRepoName = selectedName
-    s.currentRepo = s.geogig.repos.findOne({name: `${selectedName}`})
+    s.currentRepo = s.geogigServe.repos.findOne({name: `${selectedName}`})
 	}
 
 	s.selectServeRemote = (selectedFild) => {

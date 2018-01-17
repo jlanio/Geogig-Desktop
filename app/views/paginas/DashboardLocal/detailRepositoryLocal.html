@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="mail-box-header">
-                <div ng-show="Repository().type == 'remote'" class="pull-right tooltip-demo" >
+                <div ng-show="'remote' == 'remote'" class="pull-right tooltip-demo" >
                     <a ng-click="pull()"  class="btn btn-white btn-sm">
                         <i class="fa fa-cloud-download"></i> {{ 'PULL' | translate }}
                     </a>
@@ -24,7 +24,7 @@
                         <i class="fa fa-cloud-upload"></i>  {{ 'PUSH' | translate }}
                     </a>
                 </div>
-                <h2>{{ currentRepoName }}</h2>
+                <h2>{{ currentRepoName }} </h2> <h6> {{ currentUri.uri }}</h6>
             </div>
             <div class="mail-box">
                 <div class="mail-attachment">
@@ -66,12 +66,6 @@
                     </div>
                 </div>
                 <div class="mail-body text-right tooltip-demo">
-                    <a ng-click="analyze()" class="btn btn-sm btn-white">
-                        <i class="fa fa-exchange"></i> {{ 'ANALYZE' | translate }}
-                    </a>
-                    <a ng-click="add()" class="btn btn-sm btn-white">
-                        <i class="fa fa-plus"></i> {{ 'ADD' | translate }}
-                    </a>
                     <a  ng-click="NewCommit()" class="btn btn-sm btn-white">
                         <i class="fa fa-cubes"></i> {{ 'COMMIT' | translate }}
                     </a>

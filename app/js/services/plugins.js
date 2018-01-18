@@ -62,8 +62,11 @@ function ModalInstanceCtrl ($scope, $http, $uibModalInstance, toaster) {
             console.log('type is not defined');
         }
         $http.get(url).success(function(data){
-
-           LocalStorage.set('ConnectRemote', { conexao: [{remote:remote, data: data}]});
+          let objeto = LocalStorage.get('ConnectRemote')
+           let newObej = JSON.parse(`{"remote":${JSON.stringify(remote)}, "data":${JSON.stringify(data)}}`);
+           let objeto2 = objeto.conexao.push(newObej)
+           console.log(objeto);
+           LocalStorage.set('ConnectRemote', objeto);
             toaster.success(remote.titulo + ' added successfully!', 'We found '+ data.repos.repo.length +' repositories')
         }).error(function(){
             toaster.pop({

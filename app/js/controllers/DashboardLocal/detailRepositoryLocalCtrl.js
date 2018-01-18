@@ -17,12 +17,12 @@ function detailRepositoryLocalCtrl($location, toaster){
 	let checkTaskIDStatus = async (taskID) => {
 		let data = await checkTaskAdress(taskID)
 		if (data.task.status === 'RUNNING') {
-			toaster.success({ body:data.task.status});
-			console.log(data);
+			swal({title:data.task.status})
+			console.log(data.task.status);
 			setTimeout(() => checkTaskIDStatus(taskID), 2000);
 		}else{
-			toaster.success({ body:data.task.status});
-			console.log(data);
+			swal({title:data.task.status})
+			console.log(data.task.status);
 		}
 	}
 
@@ -50,15 +50,12 @@ function detailRepositoryLocalCtrl($location, toaster){
 					if (!ShpName) {
 						reject('the field is empty!')
 					} else {
-
-						// s.Repository().shpfile.push({'name':ShpName,'shpfile':s.localShp})
 						resolve(cuidaTrasacao(ShpName,s.localShp, s.currentTransactionId))
 					}
 				})
 			},
 			allowOutsideClick: false
 		}).then(q => {
-			console.log(s.currentTransactionId);
 				swal({title:'Importando geopackage',html:`log:<h5>${q[0]}</h5>`})
 		})
 	}

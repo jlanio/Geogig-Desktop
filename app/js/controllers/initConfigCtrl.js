@@ -8,7 +8,6 @@ const geogig = new geogigJS({
 
 function initConfigCtrl($scope, $location, $translate){
 	s = $scope
-	s.mydb = mydb
   s.geogig = geogig
   s.geogigServe = geogig.serve.connect({uri: 'http://localhost:8182'})
 	//Seting config user after start app
@@ -36,9 +35,9 @@ function config ($translate, $location, toaster){
 		$translate.use(config.language);
 		LocalStorage.set('configUser', config);
 		toaster.success({ body:"Configuration saved successfully."});
-        Utils.geogig(['config', '--global','user.name', config.username]).then(
-            Utils.geogig(['config', '--global','user.email', config.email])
-        ).catch(()=> 'error')
+        // Utils.geogig(['config', '--global','user.name', config.username]).then(
+        //     Utils.geogig(['config', '--global','user.email', config.email])
+        // ).catch(()=> 'error')
 		$location.path('/main/local');
 	}
 	s.getConfig = () => LocalStorage.get('configUser');

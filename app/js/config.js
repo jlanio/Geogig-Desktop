@@ -10,8 +10,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         templateUrl: "views/common/content.html",
         controller: "initConfigCtrl",
         resolve: {
-            dbGeogig:  () => new Database().open().then(data =>  data),
-            controller: dbGeogig => mydb = dbGeogig,
             loadPlugin: $ocLazyLoad => {
                 return $ocLazyLoad.load([
                 {

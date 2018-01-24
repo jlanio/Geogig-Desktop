@@ -18,23 +18,26 @@ function detailRepositoryLocalCtrl($location, toaster){
 		let data = await checkTaskAdress(taskID)
 		if (data.task.status === 'RUNNING') {
 			swal({title:data.task.status})
-			console.log(data.task.status);
 			setTimeout(() => checkTaskIDStatus(taskID), 2000);
 		}else{
 			swal({title:data.task.status})
-			console.log(data.task.status);
 		}
 	}
 
 	let cuidaTrasacao = function (name, dir, transactionId) {
-		return s.currentRepo.then(e =>
- 			e.geopackage.import({
-				format: 'gpkg',
-     		fileUpload: `${dir}`,
-     		transactionId: `${transactionId}`,
-     		interchange: true,
-     		message: name
-   		}).then(taskID => checkTaskIDStatus(taskID.task.id))
+		s.currentRepo.then(e =>
+ 			e.geopackage.import(
+				{
+					format: 'gpkg',
+	     		fileUpload: `${dir}`,
+	     		transactionId: `${transactionId}`
+				},
+				{
+					interchange: true,
+	     		message: `${name}`,
+					layer: 'omelete'
+				}
+			).then(taskID => { checkTaskIDStatus(taskID.task.id)})
 		)
 	}
 
@@ -50,54 +53,35 @@ function detailRepositoryLocalCtrl($location, toaster){
 					if (!ShpName) {
 						reject('the field is empty!')
 					} else {
-						resolve(cuidaTrasacao(ShpName,s.localShp, s.currentTransactionId))
+						resolve(cuidaTrasacao(ShpName, s.localShp, s.currentTransactionId))
 					}
 				})
 			},
 			allowOutsideClick: false
 		}).then(q => {
-				swal({title:'Importando geopackage',html:`log:<h5>${q[0]}</h5>`})
+				swal({title:'Importando geopackage',html:`log:<h5>${q}</h5>`})
 		})
 	}
 
 	s.NewCommit = () => {
-		swal({
-			title: 'New Commit',
-			input: 'text',
-			showCancelButton: true,
-			confirmButtonText: 'Submit',
-			showLoaderOnConfirm: true,
-			preConfirm:  comment => {
-				return new Promise((resolve, reject) => {
-					if (!comment) {
-						reject('the field is empty!')
-					} else {
-						resolve(s.currentRepo.then(e => e.endTransaction({transactionId: s.currentTransactionId},{cancel: false})));
-					}
-				})
-			},
-			allowOutsideClick: false
-		}).then(q => {
-			if(q.response.success.true){
-				swal({type:'success',title:'Repository success!',html:`log:success`})
-			}else{
-				swal({type: 'error',title:`log: error`});
-			}
-
-		}).catch(q => {swal({type: 'error',title:`log: <h5> ${q}</h5>`});})
+		commit('comment11111111111')
 	}
 
-	s.analyze = () => {
-		toaster.pop({
-				type: 'error',
-				title: 'Title example',
-				body: 'This is example of Toastr notification box.',
-				showCloseButton: true,
-				timeout: 1000
-		});
+	s.endTransaction = () => {
+		s.currentRepo.then(repo => {
+			repo.endTransaction({transactionId: s.currentTransactionId},{cancel: false})
+		})
 	};
+	let commit = (comment) => {
+		s.currentRepo.then(repo => {
+			repo.commit({transactionId: s.currentTransactionId},{message: 'wwww', all: true})
+			.then(log => console.log(log))
+		})
+	}
 	s.add = () => {
-
+		s.currentRepo.then(repo => {
+				repo.add({transactionId: s.currentTransactionId }).then(e => {console.log(e)})
+		})
 	};
 	s.push = () => {
 		Geogig.push.call(s.Repository()).then(e => {

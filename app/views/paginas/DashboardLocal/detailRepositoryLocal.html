@@ -36,7 +36,6 @@
                         <div class="file-box">
                             <div class="file" ng-click="dialog(currentRepoData())">
                                 <a href="">
-                                  <input icheck type="checkbox" ng-model="value.activate">
                                 <span class="corner"></span>
                                     <div class="icon">
                                         <i class="fa fa-plus-square"></i>
@@ -50,6 +49,7 @@
                         <div class="file-box"  ng-repeat="(key, value) in currentlsTree ">
                             <div class="file" ng-click="baixar_shp(key, value)">
                                 <a href="">
+                                  <input icheck type="checkbox" ng-model="value.activate">
                                     <span class="corner"></span>
 
                                     <div class="icon" >
@@ -67,9 +67,15 @@
                     </div>
                 </div>
                 <div class="mail-body text-right tooltip-demo">
-                    <a  ng-click="NewCommit()" class="btn btn-sm btn-white">
-                        <i class="fa fa-cubes"></i> {{ 'COMMIT' | translate }}
-                    </a>
+                  <a ng-click="add()" class="btn btn-sm btn-white">
+                        <i class="fa fa-plus"></i> {{ 'ADD' | translate }}
+                  </a>
+                  <a  ng-click="NewCommit()" class="btn btn-sm btn-white">
+                      <i class="fa fa-cubes"></i> {{ 'COMMIT' | translate }}
+                  </a>
+                  <a ng-click="endTransaction()" class="btn btn-sm btn-white">
+                        <i class="fa fa-plus"></i> Fechar Transaction
+                  </a>
                 </div>
                 <div class="clearfix"></div>
             </div>

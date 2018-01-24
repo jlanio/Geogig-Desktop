@@ -1,4 +1,5 @@
 const geogigJS = require('./../geogig-js/main')
+const {dialog} = require('electron').remote;
 
 const geogig = new geogigJS({
   bin: "C:\\geogig\\bin\\geogig.bat",

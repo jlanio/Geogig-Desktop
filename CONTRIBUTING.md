@@ -15,7 +15,7 @@ Building
 ---------
 
 To build Geogig-Desktop from source, follow these steps.
-##### *Note: To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer.* 
+##### *Note: To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer.*
 From your command line:
 
 - Clone the GeoGig source code repository.
@@ -30,7 +30,18 @@ cd Geogig-Desktop
 # Install dependencies
 npm install
 # Setting environment (download geogig command line)
-node postinstall.js
+npm run postinstall
 # Run the app
 npm start
+```
+
+## Packing application for distribution
+```bash
+# Go into the repository
+cd Geogig-Desktop
+# Packing
+npm run build:win
+# A folder named release will be created with the application installer (.exe)
+npm run win:exe
+
 ```

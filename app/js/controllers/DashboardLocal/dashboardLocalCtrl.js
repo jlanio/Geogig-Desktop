@@ -4,9 +4,6 @@ function dashboardLocalCtrl(){
 		s.$apply(() => s.repos = repos)
 	})
 
-	
-
-
 	s.NewRepo = () => {
 		swal({
 			title: 'New Repository',

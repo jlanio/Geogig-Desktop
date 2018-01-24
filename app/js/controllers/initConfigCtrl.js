@@ -25,7 +25,6 @@ function initConfigCtrl($scope, $location, $translate){
 		$location.path('/main/view_remoto');
 	};
 	s.currentServeRemoteId = () => LocalStorage.get('serveRemoteAtivo');
-	s.currentRepoRemoteData = () => s.mydb.infoRepositorios.conectedIn[s.currentServeRemoteId()];
 
   s.checkTask =  'asdasdasdasd';
 

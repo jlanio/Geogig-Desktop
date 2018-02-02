@@ -1,18 +1,46 @@
-function initConfigCtrl($scope, $state, $translate){
-	s = $scope;
-	console.log();
-}
-function config ($translate, $state, toaster){
-	s.saveConfig = (config) => {
-		console.log(config)
-		$translate.use(config.language);
-		toaster.success({ body:"Configuration saved successfully."});
-        Utils.geogig(['config', '--global','user.name', config.username]).then(
-            Utils.geogig(['config', '--global','user.email', config.email])
-        ).catch(()=> 'error')
-		$state.go('main.local');
+const geogigJS = require('./../geogig-js/main')
+const {dialog} = require('electron').remote;
+
+const configGEO = JSON.parse(window.localStorage.getItem('configUser'));
+
+const geogig = new geogigJS({
+  bin: configGEO.bin_geogig,
+  cwd: configGEO.patch_geogig
+});
+function initConfigCtrl($scope, $location, $translate){
+	s = $scope
+  s.geogig = geogig
+  s.geogigServe = geogig.serve.connect({uri: 'http://localhost:8182'})
+	//Seting config user after start app
+	let configUser = LocalStorage.get('configUser');
+	!configUser ? $location.path('/main/config_user') : $translate.use(configUser.language);
+	//End Seting config user
+
+	s.selectRepo = (selectedName) => {
+    s.currentRepoName = selectedName
+    s.currentRepo = s.geogigServe.repos.findOne({name: `${selectedName}`})
 	}
-	s.getConfig = () => {};
+
+	s.selectServeRemote = (selectedFild) => {
+		LocalStorage.set('serveRemoteAtivo', selectedFild);
+		$location.path('/main/view_remoto');
+	};
+	s.currentServeRemoteId = () => LocalStorage.get('serveRemoteAtivo');
+
+  s.checkTask =  'asdasdasdasd';
+
+}
+function config ($translate, $location, toaster){
+	s.saveConfig = (config) => {
+		$translate.use(config.language);
+		LocalStorage.set('configUser', config);
+		toaster.success({ body:"Configuration saved successfully."});
+        // Utils.geogig(['config', '--global','user.name', config.username]).then(
+        //     Utils.geogig(['config', '--global','user.email', config.email])
+        // ).catch(()=> 'error')
+		$location.path('/main/local');
+	}
+	s.getConfig = () => LocalStorage.get('configUser');
 }
 
 angular

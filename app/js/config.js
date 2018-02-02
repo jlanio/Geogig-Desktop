@@ -13,12 +13,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
             loadPlugin: $ocLazyLoad => {
                 return $ocLazyLoad.load([
                 {
-                  insertBefore: '#loadBefore',
-                  name: 'toaster',
-                  files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
+                    insertBefore: '#loadBefore',
+                    name: 'toaster',
+                    files: ['js/plugins/toastr/toastr.min.js', 'css/plugins/toastr/toastr.min.css']
                 },
                 {
-                  files: ['js/plugins/leaflet/plugins/wkt_to_geojson/wicket.js', 'js/plugins/leaflet/plugins/wkt_to_geojson/wicket-leaflet.js']
+                    files: ['js/plugins/leaflet/plugins/wkt_to_geojson/wicket.js', 'js/plugins/leaflet/plugins/wkt_to_geojson/wicket-leaflet.js']
                 }
                 ]);
             }

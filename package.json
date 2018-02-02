@@ -6,7 +6,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron --debug=5858 .",
-    "build:win": "electron-packager ./ Geogig-Desktop --arch=x64 --platform=win32 --version-string.ProductName=\"Geogig Desktop\" --icon=./app/static/favicon.ico ",
+    "build:win": "electron-packager ./ Geogig-Desktop --overwrite --arch=x64 --platform=win32 --version-string.ProductName=\"Geogig Desktop\" --icon=./app/static/favicon.ico ",
+    "build:mac": "electron-packager ./ Geogig-Desktop --overwrite --arch=x64 --platform=darwin",
+    "build:linux": "electron-packager ./Geogig-Desktop --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
     "win:exe": "node build",
     "postinstall": "node postinstall.js"
   },
@@ -32,6 +34,7 @@
   "dependencies": {
     "fs-extra": "^2.0.0",
     "leaflet": "^1.0.3",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "sql.js": "^0.5.0"
   }
 }

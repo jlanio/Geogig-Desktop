@@ -1,91 +1,129 @@
-function detailRepositoryLocalCtrl($location, toaster){
-	console.info(s.Repository());
+function detailRepositoryLocalCtrl($location){
 
-	s.NewShp = localShp => {
-		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
-		ping.checkServerisOnAndKillProcess();
-		swal({
-			title: 'New Shapefile',
-			input: 'text',
-			showCancelButton: true,
-			confirmButtonText: 'Submit',
-			showLoaderOnConfirm: true,
-			preConfirm:  ShpName => {
-				return new Promise((resolve, reject) => {
-					if (!ShpName) {
-						reject('the field is empty!')
-					} else {
-						s.Repository().shpfile.push({'name':ShpName,'shpfile':s.localShp})
-						resolve(Geogig.importShapefile.call(s.Repository()))
-					}
-				})
-			},
-			allowOutsideClick: false
-		}).then(q => {
-			if(q[0].match(/Exception /)){
-				swal({type: 'error',title:`log: <h5> ${q}</h5>`});
-			}else{
-				swal({type:'success',title:'Repository success!',html:`log:<h5>${q[0]}</h5>`})
-			}
+	s.currentRepo
+		.then(repo => {
+			s.$apply(() => s.currentUri = repo._api._params)
 
-		})
+			repo.lsTree().then(e => {
+				s.$apply(() => s.currentlsTree = e.node)
+			});
+			repo.beginTransaction().then(e => {
+				console.log(e.Transaction.ID);
+				s.currentTransactionId = e.Transaction.ID
+			})
+	})
+
+	let checkTaskAdress =  (taskID) => s.geogigServe.tasks.findOne(taskID);
+
+	let checkTaskIDStatus = async (taskID, taskIDFinished) => {
+		let data = await checkTaskAdress(taskID)
+		if (data.task.status === 'RUNNING') {
+			swal({title:data.task.status})
+			setTimeout(() => checkTaskIDStatus(taskID, taskIDFinished), 2000);
+		}else if (data.task.status === 'FAILED'){
+			swal({title:data.task.status})
+		}else{
+			taskIDFinished(taskID)//case FINISHED
+		}
+	}
+
+	let gpkg_import = function (name, dir, transactionId) {
+		s.currentRepo.then(e =>
+ 			e.geopackage.import(
+				{
+					format: 'gpkg',
+	     		fileUpload: `${dir}`,
+	     		transactionId: `${transactionId}`
+				},
+				{
+					interchange: openGPKG(dir, 'geogig_audited_tables'),
+	     		message: `${name}`,
+					layer: 'ACRE'
+				}
+			).then(taskID => { checkTaskIDStatus(taskID.task.id, (e) => {
+				console.log(e);
+				swal({title:'AAAAAAAAA',html:' BBBBBBBBB'})
+			})})
+		)
 	}
 
 	s.NewCommit = () => {
-		//Necessary method due to issue ->github.com/locationtech/geogig/issues/309
-		ping.checkServerisOnAndKillProcess();
 		swal({
-			title: 'New Commit',
-			input: 'text',
-			showCancelButton: true,
-			confirmButtonText: 'Submit',
-			showLoaderOnConfirm: true,
-			preConfirm:  comment => {
-				return new Promise((resolve, reject) => {
-					if (!comment) {
-						reject('the field is empty!')
-					} else {
-						resolve(Commit.new.call(s.Repository(), comment));
-					}
-				})
-			},
-			allowOutsideClick: false
-		}).then(q => {
-			if(q.match(/Nothing to commit after /)){
-				swal({type: 'error',title:`log: <h5> ${q}</h5>`});
-			}else{
-				swal({type:'success',title:'Repository success!',html:`log:<h5>${q}</h5>`})
-			}
+  title: 'Send commit text',
+	input: 'text',
+  showCancelButton: true,
+  confirmButtonText: 'Submit',
+  showLoaderOnConfirm: true,
+  preConfirm: (commitText) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        if (commitText === '') {
+          swal.showValidationError('Plase send commit text')
+        }
+        resolve()
+      }, 2000)
+    })
+  },
+  allowOutsideClick: () => !swal.isLoading()
+}).then((commitText) => {
+  if (commitText) {
+		addGPKG().then(currentGPKG => {
+			gpkg_import(commitText , currentGPKG, s.currentTransactionId)
+		}).catch(e => {
+			swal({title:'ERROR',html:' Caminho vazio'})
+		})
+    // swal({type: 'success',title: 'Ajax request finished!',html: 'Submitted email: ' + result})
+  }
+})
 
-		}).catch(q => {swal({type: 'error',title:`log: <h5> ${q}</h5>`});})
+
 	}
 
-	s.analyze = () => {
-		if (s.Repository().shpfile.filter(elem => elem.activate) > [] ){
-			s.working = true;
-			ping.checkServerisOnAndKillProcess().then(q => {
-				Geogig.analyze.call(s.Repository()).then(q => {
-					s.$apply(()=> s.working = false)
-					swal({type:'success',title:'',html:`log:<h5>${q}</h5>`})
-				})
-			}).catch(q => console.log(q));
-		}else{
-			console.log('nada Selecionado');
-			toaster.pop({
-				type: 'error',title: 'SHP is not selected', showCloseButton: true
-			});
-
-		}
-
+	s.endTransaction = () => {
+		s.currentRepo.then(repo => {
+			repo.endTransaction({transactionId: s.currentTransactionId})
+			.then(log => console.log(log))
+		})
 	};
-	s.add = () => {
-		ping.checkServerisOnAndKillProcess().then(q => {
-			s.$apply(()=> s.working = true)			
-			Geogig.add.call(s.Repository()).then(q => {
-				s.$apply(()=> s.working = false)
-				swal({type:'success',title:'',html:`log:<h5>${q[0]}</h5>`})
+
+	let commit = (comment) => {
+		s.currentRepo.then(repo => {
+			repo.commit({transactionId: s.currentTransactionId},{message: 'wwww', all: true})
+			.then(log => console.log(log))
+		})
+	}
+
+	s.gpkg_download = () => {
+		s.currentRepo.then(repo => {
+			repo.geopackage.export({format: 'gpkg'},{interchange: true})
+			.then(taskID => {
+				checkTaskIDStatus(taskID.task.id, (taskID) => baixar_shp(taskID))
 			})
-		}).catch(q => console.log(q))
+		})
+
+		// swal({
+		// 	title: 'New Shapefile',
+		// 	input: 'text',
+		// 	showCancelButton: true,
+		// 	confirmButtonText: 'Submit',
+		// 	showLoaderOnConfirm: true,
+		// 	preConfirm:  layerName => {
+		// 		return new Promise((resolve, reject) => {
+		// 			if (!layerName) {
+		// 				reject('the field is empty!')
+		// 			} else {
+		// 				resolve()
+		// 			}
+		// 		})
+		// 	},
+		// 	allowOutsideClick: false
+		// }).then(q => {
+		// 		swal({title:'Importando geopackage',html:`log:<h5>${q}</h5>`})
+		// })
+    //
+		// // s.currentRepo.then(repo => {
+		// // 		repo.add({transactionId: s.currentTransactionId }).then(e => {console.log(e)})
+		// // })
 	};
 	s.push = () => {
 		Geogig.push.call(s.Repository()).then(e => {
@@ -98,58 +136,30 @@ function detailRepositoryLocalCtrl($location, toaster){
 		}).catch(e => console.log(e));
 	};
 
-	s.publicarRepo = function (id){
-		/*repo.initRemote(s.currentRepoData().nome, (data,url)=>{
-			if (data.response.error){
-				console.log("ERROR");
-			}else{
-				console.log("publicado com sucesso");
-				const tmp = s.mydb;
-				tmp.infoRepositorios.local[id].remote = url;
-				tmp.infoRepositorios.local[id].origin.de = 'remote'
-				db.set(tmp);
-				repo.copy_to_folder(s.currentRepoData().nome);
 
-			}
-		});*/
-	}
-	s.baixar_shp = function (key, repository){
-		const {dialog} = require('electron').remote;
+
+	let baixar_shp = function (taskID){
 		dialog.showOpenDialog({
 	  		properties: [ 'openFile', 'openDirectory'] }, function (filename) {
-	  			let currentRepository = s.Repository();
-	    		let newLocal = `${filename.toString()}\\${repository.name}.shp`;
-	    		currentRepository.shpfile[key].shpfile = newLocal;
-	    		db.updateshpFile.call(currentRepository)
-	    		ping.checkServerisOnAndKillProcess().then(q => {
-					s.Repository().exportShapefile(newLocal, repository.name).then(e =>
-	    				swal({type:'success',title:'',html:`log:<h5>${e}</h5>`})
-	    			)
-				}).catch(q => console.log(q))
+					downloadGKPG(`http://localhost:8182/tasks/${taskID}/download`, filename+'\\dane.gpkg')
 	  		}
 		);
 	}
-	s.dialog = function(){
-		// if (s.Repository().shpfile.length >= 1){
-		// 	swal({type: 'error',title:`<h5>Sorry, we currently only support one shp per repository.
-		// 		<br>In the next version will be added support for multiple shapefiles per repository..</h5>`});
-		// }else{
-			const {dialog} = require('electron').remote;
-			dialog.showOpenDialog(
-			{
+	let addGPKG = () =>
+		new Promise((resolve, reject) => {
+			dialog.showOpenDialog({
 				defaultPath: 'c:/',
-				filters: [
-				{ name: 'All Files', extensions: ['*'] },
-				{ name: 'Shapefile', extensions: ['shp'] }
-				],
+				filters: [{name:'All Files', extensions:['*']},{name:'geopackage', extensions:['gpkg']}],
 				properties: ['openFile']
-			},
-			fileName => {
-				fileName === undefined ? false : s.NewShp(fileName[0]), s.localShp = fileName[0];
+				},
+				function (fileName) {
+					if(fileName === undefined){
+						reject()
+					}else{
+						resolve(fileName[0])
+					}
 			})
-		}
-
-
+		})
 }
 angular
 .module('geogig-desktop')

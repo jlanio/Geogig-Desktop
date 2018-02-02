@@ -1,11 +1,11 @@
 <style>
     /* Additional styles for body sk-spinner */
     .sk-body-loading:after {
-        content: ''; background-color: rgba(0,0,0,0.5);
+        content: ''; background-color: rgba(0,0,0,0.5); 
         position: absolute; top: 0; left: 0; right: 0; bottom: 0;
     }
     #spinner.sk-body-loading > .sk-spinner {
-        display: block; position: absolute;
+        display: block; position: absolute; 
         top: 40%; left: 0; right: 0;z-index: 2110;
     }
     #spinner .sk-spinner {
@@ -35,7 +35,7 @@
         <div class="col-lg-12">
             <div class="text-center">
                 <div class="btn-group text-center">
-                    <button  type="button" ui-sref="main.map" class="btn btn-primary "
+                    <button  type="button" ui-sref="main.map" class="btn btn-primary " 
                     ng-click='differenceCommit()'>{{ 'DIFFERENCE' | translate }}</button>
                     <button type="button" class="btn btn-primary disabled">{{ 'ANALYZE' | translate }}</button>
                     <button type="button" class="btn btn-primary disabled">{{ 'DOWNLOAD' | translate }}</button>
@@ -56,7 +56,7 @@
                             <span class="vertical-date">
                                 {{commit.author.email}}<br/>
                                 <label>
-                                    <input icheck type="checkbox" ng-model="commit.activate" type="checkbox" value="{{commit.id}}"  
+                                    <input ng-model="commit.activate" type="checkbox" value="{{commit.id}}"  
                                     ng-change="checkChanged(commit);" ng-disabled="checked==limit && !commit.activate"/>
                                     <small> ID:{{commit.id}}</small>
                                 </label>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>   
         </div>
     </div>
-</div>
+</div> 

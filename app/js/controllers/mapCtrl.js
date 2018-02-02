@@ -1,5 +1,5 @@
 function leafletCtrl(){
-
+ 	
     angular.extend(s, {
         geogigMap: {
             lat: 0,

@@ -1,5 +1,9 @@
 function dashboardRemoteCtrl($uibModal, $http, toaster){
 
+
+    s.remoteConexaoLoad = LocalStorage.get('ConnectRemote');
+
+    console.log(s.remoteConexaoLoad);
     s.newConnectionRemote = function (size) {
         var modalInstance = $uibModal.open({
             templateUrl: 'views/modal.html',
@@ -9,25 +13,25 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
         });
     };
     function get (serverAddress, id){
-        $http.get(`${serverAddress}`).success(data => {
-            Geogig.updateRemoteRepositories(id, data);
-                toaster.pop({
-                    type: 'success',
-                    title: serverAddress,
-                    body: `${data.repos.repo.length} existing repositories`,
-                    showCloseButton: true
-                });
-        }).error(data=>{
-            toaster.pop({
-                type: 'error',
-                title: 'Servidor Offline',
-                body: serverAddress,
-                showCloseButton: true
-            });
-        })
+      console.log(serverAddress, id);
+        // $http.get(`${serverAddress}repos.json`).success(data => {
+        //   toaster.pop({
+        //       type: 'success',
+        //       title: serverAddress,
+        //       body: `${data.repos.repo.length} existing repositories`,
+        //       showCloseButton: true
+        //   });
+        // }).error(data=>{
+        //     toaster.pop({
+        //         type: 'error',
+        //         title: 'Servidor Offline',
+        //         body: serverAddress,
+        //         showCloseButton: true
+        //     });
+        // })
     }
     s.remoteUpdateRepos = () => {
-        s.mydb.infoRepositorios.conectedIn.forEach((conexao, id) => get(conexao.serverAddress, id));
+        // s.mydb.infoRepositorios.conectedIn.forEach((conexao, id) => get(conexao.serverAddress, id));
     }
     s.deleteConexaoRemote = (idFordelete) => {
         swal({
@@ -41,9 +45,8 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
             cancelButtonText: 'No, cancel!',
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: 'btn btn-danger',
-            buttonsStyling: true
+            buttonsStyling: false
         }).then(() => {
-            db.removeConexaoRemote(idFordelete)
             swal('Deleted!', 'Your conexao has been deleted.','success')
         }, (dismiss) => {
         if (dismiss === 'cancel')

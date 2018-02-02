@@ -1,35 +1,3 @@
-<style>
-    /* Additional styles for body sk-spinner */
-    .sk-body-loading:after {
-        content: ''; background-color: rgba(0,0,0,0.5);
-        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    }
-    #spinner.sk-body-loading > .sk-spinner {
-        display: block; position: absolute;
-        top: 40%; left: 0; right: 0;z-index: 2110;
-    }
-    #spinner .sk-spinner {
-        display: none;
-    }
-
-    .sk-body-loading {
-        position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 2100;
-    }
-    .adx {
-        background: #2f4050;
-        color: #FFFFFF;
-    }
-</style>
-<div id="spinner" ng-class="working ? 'sk-body-loading' : 'sk-body'">
-    <div class="sk-spinner sk-spinner-wave">
-        <div class="sk-rect1"></div>
-        <div class="sk-rect2"></div>
-        <div class="sk-rect3"></div>
-        <div class="sk-rect4"></div>
-        <div class="sk-rect5"></div>
-    </div>
-</div>
-
 <div  class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-12 animated fadeInRight">
@@ -48,7 +16,7 @@
                 </a>
             </div>
             <div class="mail-box-header">
-                <div ng-show="Repository().type == 'remote'" class="pull-right tooltip-demo" >
+                <div ng-show="'remote' == 'remote'" class="pull-right tooltip-demo" >
                     <a ng-click="pull()"  class="btn btn-white btn-sm">
                         <i class="fa fa-cloud-download"></i> {{ 'PULL' | translate }}
                     </a>
@@ -56,41 +24,41 @@
                         <i class="fa fa-cloud-upload"></i>  {{ 'PUSH' | translate }}
                     </a>
                 </div>
-                <h2>{{Repository().name}}</h2>
+                <h2>{{ currentRepoName }} </h2> <h6> {{ currentUri.uri }} </h6>
             </div>
             <div class="mail-box">
                 <div class="mail-attachment">
                     <p>
-                        <span><i class="fa fa-paperclip"></i> {{ 'LAYERS' | translate }} - </span>
-                        <a href="">{{ 'DOWNLOAD_ALL' | translate }}</a>
+                      <!-- <span><i class="fa fa-paperclip"></i> {{ 'LAYERS' | translate }} - </span>
+                      <a href="">{{ 'DOWNLOAD_ALL' | translate }}</a> -->
                     </p>
                     <div class="attachment">
-                        <div class="file-box">
-                            <div class="file" ng-click="dialog(currentRepoData())">
+                        <!-- <div class="file-box" ng-if="!currentGPKG">
+                            <div class="file" ng-click="addGPKG()">
                                 <a href="">
                                 <span class="corner"></span>
                                     <div class="icon">
                                         <i class="fa fa-plus-square"></i>
                                     </div>
                                     <div class="file-name">
-                                        <strong> {{ 'ADD_NEW_LAYER' | translate }}</strong>
+                                        <strong> {{ 'ADD_GEOPACKAGE' | translate }}</strong>
                                     </div>
                                 </a>
                             </div>
-                        </div>
-                        <div class="file-box"  ng-repeat="(key, value) in Repository().shpfile ">
+                        </div> -->
+                        <div class="file-box"  ng-repeat="(key, value) in currentlsTree ">
                             <div class="file" ng-click="baixar_shp(key, value)">
                                 <a href="">
-                                    <input icheck type="checkbox" ng-model="value.activate">
+                                  <input icheck type="checkbox" ng-model="value.activate">
                                     <span class="corner"></span>
 
                                     <div class="icon" >
                                         <i class="fa fa-file-archive-o"></i>
                                     </div>
                                     <div class="file-name">
-                                        <small>{{value.name}}</small>
+                                        <small>{{value.path}}</small>
                                         <br/>
-                                        <small>{{value.shpfile}}</small>
+                                        <small>{{value}}</small>
                                     </div>
                                 </a>
                             </div>
@@ -99,26 +67,18 @@
                     </div>
                 </div>
                 <div class="mail-body text-right tooltip-demo">
-                    <a ng-click="analyze()" class="btn btn-sm btn-white">
-                        <i class="fa fa-exchange"></i> {{ 'ANALYZE' | translate }}
-                    </a>
-                    <a ng-click="add()" class="btn btn-sm btn-white">
-                        <i class="fa fa-plus"></i> {{ 'ADD' | translate }}
-                    </a>
-                    <a  ng-click="NewCommit()" class="btn btn-sm btn-white">
-                        <i class="fa fa-cubes"></i> {{ 'COMMIT' | translate }}
-                    </a>
+                  <a ng-click="gpkg_download()" class="btn btn-sm btn-white">
+                        <i class="fa fa-plus"></i> {{ 'DOWNLOAD_ALL' | translate }}
+                  </a>
+                  <a  ng-click="NewCommit()" class="btn btn-sm btn-white">
+                      <i class="fa fa-cubes"></i> {{ 'COMMIT' | translate }}
+                  </a>
+                  <a ng-click="endTransaction()" class="btn btn-sm btn-white">
+                        <i class="fa fa-plus"></i> Fechar Transaction
+                  </a>
                 </div>
                 <div class="clearfix"></div>
             </div>
         </div>
     </div>
-<!-- <script>
-$(document).ready(function(){
-  $('input').iCheck({
-    checkboxClass: 'icheckbox_square-green',
-    radioClass: 'iradio_square-green',
-    increaseArea: '20%' // optional
-  });
-});
-</script> -->
+</div>

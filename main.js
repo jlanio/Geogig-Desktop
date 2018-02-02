@@ -4,6 +4,7 @@ const BrowserWindow = electron.BrowserWindow
 const path = require('path')
 const url = require('url')
 
+
 // this should be placed at top of main.js to handle setup events quickly
 if (handleSquirrelEvent(app)) {
     // squirrel event handled and app will exit in 1000ms, so don't do anything else
@@ -11,7 +12,7 @@ if (handleSquirrelEvent(app)) {
 }
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 1224, height: 600, resizable: false/*, frame: false*/})
+  mainWindow = new BrowserWindow({width: 1224, height: 600, resizable: true/*, frame: false*/})
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'app/index.html'),
     protocol: 'file:',
@@ -45,6 +46,7 @@ function handleSquirrelEvent(application) {
     const rootAtomFolder = path.resolve(appFolder, '..');
     const updateDotExe = path.resolve(path.join(rootAtomFolder, 'Update.exe'));
     const exeName = path.basename(process.execPath);
+    console.log(exeName);
     const spawn = function(command, args) {
         let spawnedProcess, error;
 

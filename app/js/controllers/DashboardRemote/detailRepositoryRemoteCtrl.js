@@ -1,30 +1,34 @@
 function detailRepositoryRemoteCtrl($uibModal, toaster, $http){
 
-    s.clone = (name, repoAddress) => {
-      s.geogig.repo({uri: repoAddress, name: name+'.remote'})
-      .clone.then(e => {
-        swal({
-  				type: 'success',
-  				title: `Repository  success!`,
-  				html: `log: <h5> ${e}</h5>`
-  			})
+  let load = new Promise (function(resolve, reject){
+    storage.get(s.currentRemoteKey, (error, data) => resolve(data))
+  })
+  load.then(remote => {
+    s.$apply(() =>  s.remote = remote)
+  })
 
-        setTimeout(() => {
-          s.geogigServe.repos.findOne({name: name+'.remote'})
-            .then(e => {
-          		e.remote({remoteURL: repoAddress, remoteName: 'origin'})
-          			.then(d =>{
+  s.clone = (name, repoAddress) => {
+    let rebuildRepoAddress = repoAddress.replace('.json', '')
+    s.geogig.repo({uri: rebuildRepoAddress, name: name+'_remote'})
+    .clone.then(e => {
+      console.log(e);
+      swal({
+				type: 'success',
+				title: `Repository  success!`,
+				html: `log: <h5> ${e}</h5>`
+			})
 
-          				console.log(d);
-          			})
-          	})
-        }, 4000);
-
-
-
-
-
-    	})
+      // setTimeout(() => {
+      //   s.geogigServe.repos.findOne({name: name+'_remote'})
+      //     .then(e => {
+      //   		e.remote({remoteURL: repoAddress, remoteName: 'origin'})
+      //   			.then(d =>{
+      //
+      //   				console.log(d);
+      //   			})
+      //   	})
+      // }, 4000);
+  	})
 	}
 
 

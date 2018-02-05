@@ -32,16 +32,16 @@
 
     <table class="table table-hover table-mail">
         <tbody>
-            <tr class="read" ng-repeat=" (key, value) in remoteConexaoLoad.conexao ">
+            <tr class="read" ng-repeat=" (key, value) in repos ">
                 <td class="check-mail">
                     <input icheck type="checkbox" ng-model="check3">
                 </td>
-                <td class="mail-ontact"><a ng-click="selectServeRemote(key)" >{{value.remote.name}}</a>
-                    <span class="label label-danger pull-right">{{value.remote.origin}}</span></td>
-                    <td class="mail-subject"><a ui-sref="main.email_view">{{value.remote.url}}</a></td>
+                <td class="mail-ontact"><a ng-click="selectServeRemote(key)" >{{key}}</a>
+                    <span class="label label-danger pull-right">{{value.origin}}</span></td>
+                    <td class="mail-subject"><a ui-sref="main.email_view">{{value.url}}</a></td>
                     <td class=""></td>
                     <td class="text-right mail-date">
-                    <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash" ng-click="deleteConexaoRemote(key)"><i  class="fa fa-trash-o"></i></button>
+                      <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash" ng-click="deleteConexaoRemote(key)"><i  class="fa fa-trash-o"></i></button>
                     </td>
                 </tr>
             </tbody>

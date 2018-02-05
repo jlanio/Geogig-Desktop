@@ -28,8 +28,8 @@ function detailRepositoryLocalCtrl($location){
 	}
 
 	let gpkg_import = function (name, dir, transactionId) {
-		s.currentRepo.then(e =>
- 			e.geopackage.import(
+		s.currentRepo.then(repo =>
+ 			repo.geopackage.import(
 				{
 					format: 'gpkg',
 	     		fileUpload: `${dir}`,
@@ -37,59 +37,57 @@ function detailRepositoryLocalCtrl($location){
 				},
 				{
 					interchange: openGPKG(dir, 'geogig_audited_tables'),
-	     		message: `${name}`,
-					layer: 'ACRE'
+	     		message: `${name}`
 				}
-			).then(taskID => { checkTaskIDStatus(taskID.task.id, (e) => {
-				console.log(e);
-				swal({title:'AAAAAAAAA',html:' BBBBBBBBB'})
-			})})
+			).then(taskID => {
+					checkTaskIDStatus(taskID.task.id, (e) => {
+						swal({title:'AAAAAAAAA',html:' BBBBBBBBB'})
+						// downloadGKPG(`http://localhost:8182/tasks/${taskID}/download`, dir)
+					}
+				)}
+			)
 		)
 	}
 
 	s.NewCommit = () => {
 		swal({
-  title: 'Send commit text',
-	input: 'text',
-  showCancelButton: true,
-  confirmButtonText: 'Submit',
-  showLoaderOnConfirm: true,
-  preConfirm: (commitText) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        if (commitText === '') {
-          swal.showValidationError('Plase send commit text')
-        }
-        resolve()
-      }, 2000)
-    })
-  },
-  allowOutsideClick: () => !swal.isLoading()
-}).then((commitText) => {
-  if (commitText) {
-		addGPKG().then(currentGPKG => {
-			gpkg_import(commitText , currentGPKG, s.currentTransactionId)
-		}).catch(e => {
-			swal({title:'ERROR',html:' Caminho vazio'})
+		  title: 'Send commit text',
+			input: 'text',
+		  showCancelButton: true,
+		  confirmButtonText: 'Submit',
+		  showLoaderOnConfirm: true,
+		  preConfirm: (commitText) => {
+		    return new Promise((resolve) => {
+		      setTimeout(() => {
+		        if (commitText === '') {
+		          swal.showValidationError('Plase send commit text')
+		        }
+		        resolve()
+		      }, 2000)
+		    })
+		  },
+		  allowOutsideClick: () => !swal.isLoading()
+		}).then((commitText) => {
+		  if (commitText) {
+				getLocalSave().then(currentGPKG => {
+					gpkg_import(commitText , currentGPKG, s.currentTransactionId)
+				}).catch(e => {
+					swal({title:'ERROR',html:' Caminho vazio'})
+				})
+		    // swal({type: 'success',title: 'Ajax request finished!',html: 'Submitted email: ' + result})
+		  }
 		})
-    // swal({type: 'success',title: 'Ajax request finished!',html: 'Submitted email: ' + result})
-  }
-})
-
-
 	}
 
 	s.endTransaction = () => {
 		s.currentRepo.then(repo => {
-			repo.endTransaction({transactionId: s.currentTransactionId})
-			.then(log => console.log(log))
+			repo.endTransaction({transactionId: s.currentTransactionId}).then(log => console.log(log))
 		})
 	};
 
 	let commit = (comment) => {
 		s.currentRepo.then(repo => {
-			repo.commit({transactionId: s.currentTransactionId},{message: 'wwww', all: true})
-			.then(log => console.log(log))
+			repo.commit({transactionId: s.currentTransactionId},{message: 'wwww', all: true}).then(log => console.log(log))
 		})
 	}
 
@@ -145,7 +143,7 @@ function detailRepositoryLocalCtrl($location){
 	  		}
 		);
 	}
-	let addGPKG = () =>
+	let getLocalSave = () =>
 		new Promise((resolve, reject) => {
 			dialog.showOpenDialog({
 				defaultPath: 'c:/',

@@ -17,22 +17,18 @@ function dashboardLocalCtrl(){
 						reject('the field is empty!')
 					} else {
 						s.NameRepo = NameRepo;
-						resolve(s.geogig.repo({name: NameRepo}).init)
+						resolve(s.geogigServe.repos.init({name: NameRepo}))
 					}
 				})
 			},
 			allowOutsideClick: false
 		}).then(q => {
 			commitInit();
-			swal({
-				type: 'success',
-				title: `Repository  success!`,
-				html: `log: <h5> ${q}</h5>`
-			})
+			swal({type: 'success',title: 'Started successfully'})
 		})
 	}
 
-	s.deleteRepository = (idFordelete) => {
+	s.deleteRepository = (NameRepo) => {
 		swal({
 			title: 'Your repository will be deleted, do you want to continue?',
 			text: "You won't be able to revert this!",
@@ -46,8 +42,9 @@ function dashboardLocalCtrl(){
 			cancelButtonClass: 'btn btn-danger',
 			buttonsStyling: false
 		}).then(() => {
-			db.removeLocalRepository(idFordelete)
-			swal('Deleted!', 'Your repository has been deleted.','success')
+			s.geogigServe.repos.delete({name: NameRepo}).then(e => {
+				swal('Deleted!', 'Your repository has been deleted.','success')
+			})
 		}, (dismiss) => {
 		if (dismiss === 'cancel')
 			swal('Cancelled','Your repository is safe :)','error')

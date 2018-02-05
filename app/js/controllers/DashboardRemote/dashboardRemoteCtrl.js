@@ -1,17 +1,19 @@
 function dashboardRemoteCtrl($uibModal, $http, toaster){
 
-
-    s.remoteConexaoLoad = LocalStorage.get('ConnectRemote');
-
-    console.log(s.remoteConexaoLoad);
-    s.newConnectionRemote = function (size) {
-        var modalInstance = $uibModal.open({
-            templateUrl: 'views/modal.html',
-            size: size,
-            controller: ModalInstanceCtrl,
-            windowClass: "animated flipInY"
-        });
-    };
+  let load = new Promise (function(resolve, reject){
+    storage.getAll((error, data) => resolve(data))
+  })
+  load.then(repos => {
+    s.$apply(() =>  s.repos = repos)
+  })
+  s.newConnectionRemote = function (size) {
+    var modalInstance = $uibModal.open({
+        templateUrl: 'views/modal.html',
+        size: size,
+        controller: ModalInstanceCtrl,
+        windowClass: "animated flipInY"
+    });
+  };
     function get (serverAddress, id){
       console.log(serverAddress, id);
         // $http.get(`${serverAddress}repos.json`).success(data => {
@@ -33,7 +35,7 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
     s.remoteUpdateRepos = () => {
         // s.mydb.infoRepositorios.conectedIn.forEach((conexao, id) => get(conexao.serverAddress, id));
     }
-    s.deleteConexaoRemote = (idFordelete) => {
+    s.deleteConexaoRemote = (key) => {
         swal({
             title: 'Your conexao will be deleted, do you want to continue?',
             text: "You won't be able to revert this!",
@@ -47,10 +49,11 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
             cancelButtonClass: 'btn btn-danger',
             buttonsStyling: false
         }).then(() => {
-            swal('Deleted!', 'Your conexao has been deleted.','success')
+          storage.remove(key)
+          swal('Deleted!', 'Your conexao has been deleted.','success')
         }, (dismiss) => {
         if (dismiss === 'cancel')
-            swal('Cancelled','Your conexao is safe :)','error')
+          swal('Cancelled','Your conexao is safe :)','error')
         })
     }
 }

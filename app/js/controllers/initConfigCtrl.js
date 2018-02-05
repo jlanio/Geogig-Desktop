@@ -1,4 +1,5 @@
 const geogigJS = require('./../geogig-js/main')
+const storage = require('electron-json-storage')
 const {dialog} = require('electron').remote;
 
 const configGEO = JSON.parse(window.localStorage.getItem('configUser'));
@@ -21,8 +22,8 @@ function initConfigCtrl($scope, $location, $translate){
     s.currentRepo = s.geogigServe.repos.findOne({name: `${selectedName}`})
 	}
 
-	s.selectServeRemote = (selectedFild) => {
-		LocalStorage.set('serveRemoteAtivo', selectedFild);
+	s.selectServeRemote = (key) => {
+		s.currentRemoteKey = key
 		$location.path('/main/view_remoto');
 	};
 	s.currentServeRemoteId = () => LocalStorage.get('serveRemoteAtivo');
@@ -30,6 +31,7 @@ function initConfigCtrl($scope, $location, $translate){
   s.checkTask =  'asdasdasdasd';
 
 }
+
 function config ($translate, $location, toaster){
 	s.saveConfig = (config) => {
 		$translate.use(config.language);

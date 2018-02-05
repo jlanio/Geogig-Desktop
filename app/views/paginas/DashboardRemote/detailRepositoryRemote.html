@@ -9,8 +9,8 @@
                     </h3>
                     <h5>
                         <span class="font-noraml">
-                            Adress : {{currentRepoRemoteData().serverAddress}}
-                            <br>Name : {{currentRepoRemoteData().name}}
+                            Adress : {{remote.url}}
+                            <br>Name : {{remote.name}}
                         </span>
                     </h5>
                 </div>
@@ -19,7 +19,7 @@
 
         <div class="mail-tools tooltip-demo m-t-md" >
             <div class="btn-group pull-right">
-                <span class="label label-info pull-right">{{currentRepoRemoteData().repos.repo.length}} -  REPOSITORY
+                <span class="label label-info pull-right">{{remote.repos.repo.length}} -  REPOSITORY
                 </span>
             </div>
         </div>
@@ -27,7 +27,7 @@
     <div class="mail-box">
         <table class="table table-hover table-mail">
             <tbody>
-                <tr class="read" ng-repeat=" (key, value) in currentRepoRemoteData().repos.repo">
+                <tr class="read" ng-repeat=" (key, value) in remote.repos.repo">
                     <td class="check-mail">
                         <!-- <input icheck type="checkbox" ng-model="check3"> -->
                     </td>

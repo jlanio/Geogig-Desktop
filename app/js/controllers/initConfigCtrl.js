@@ -2,47 +2,39 @@ const geogigJS = require('./../geogig-js/main')
 const storage = require('electron-json-storage')
 const {dialog} = require('electron').remote;
 
-const configGEO = JSON.parse(window.localStorage.getItem('configUser'));
+const geogig = function () {
+  let config = JSON.parse(window.localStorage.getItem('configUser'));
 
-const geogig = new geogigJS({
-  bin: configGEO.bin_geogig,
-  cwd: configGEO.patch_geogig
-});
+  return new geogigJS({
+    bin: config.bin_geogig,
+    cwd: config.patch_geogig
+  });
+}
+
 function initConfigCtrl($scope, $location, $translate){
 	s = $scope
-  s.geogig = geogig
-  s.geogigServe = geogig.serve.connect({uri: 'http://localhost:8182'})
-	//Seting config user after start app
+  //Seting config user after start app
 	let configUser = LocalStorage.get('configUser');
-	!configUser ? $location.path('/main/config_user') : $translate.use(configUser.language);
 	//End Seting config user
-
-	s.selectRepo = (selectedName) => {
-    s.currentRepoName = selectedName
-    s.currentRepo = s.geogigServe.repos.findOne({name: `${selectedName}`})
-	}
-
-	s.selectServeRemote = (key) => {
-		s.currentRemoteKey = key
-		$location.path('/main/view_remoto');
-	};
-	s.currentServeRemoteId = () => LocalStorage.get('serveRemoteAtivo');
-
-  s.checkTask =  'asdasdasdasd';
-
+  if(configUser){
+    $translate.use(configUser.language)
+    s.geogig = geogig()
+    s.geogigServe = s.geogig.serve.connect({uri: 'http://localhost:8182'})
+  }else{
+    $location.path('/main/config_user')
+  }
 }
 
 function config ($translate, $location, toaster){
+  s.getConfig = () => LocalStorage.get('configUser');
+
 	s.saveConfig = (config) => {
 		$translate.use(config.language);
 		LocalStorage.set('configUser', config);
-		toaster.success({ body:"Configuration saved successfully."});
-        // Utils.geogig(['config', '--global','user.name', config.username]).then(
-        //     Utils.geogig(['config', '--global','user.email', config.email])
-        // ).catch(()=> 'error')
+    s.geogig.config({user: config.username, email: config.email}).config
+		toaster.success({ body:"Configuration saved successfully."})
 		$location.path('/main/local');
 	}
-	s.getConfig = () => LocalStorage.get('configUser');
 }
 
 angular

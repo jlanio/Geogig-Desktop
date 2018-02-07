@@ -1,4 +1,4 @@
-function dashboardRemoteCtrl($uibModal, $http, toaster){
+function dashboardRemoteCtrl($uibModal, $http, toaster,$location ){
 
   let load = new Promise (function(resolve, reject){
     storage.getAll((error, data) => resolve(data))
@@ -6,6 +6,10 @@ function dashboardRemoteCtrl($uibModal, $http, toaster){
   load.then(repos => {
     s.$apply(() =>  s.repos = repos)
   })
+  s.selectServeRemote = (key) => {
+		s.currentRemoteKey = key
+		$location.path('/main/view_remoto');
+	};
   s.newConnectionRemote = function (size) {
     var modalInstance = $uibModal.open({
         templateUrl: 'views/modal.html',

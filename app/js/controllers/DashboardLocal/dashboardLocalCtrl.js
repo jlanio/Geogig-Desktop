@@ -1,10 +1,19 @@
 function dashboardLocalCtrl(){
 
-	s.geogigServe.repos.findAll().then(repos => {
-		s.$apply(() => s.repos = repos)
-	})
+	let load = () => {
+		s.geogigServe.repos.findAll().then(repos => {
+			s.$apply(() => s.repos = repos)
+		})
+	}
+	load()
+
+	s.selectRepo = (selectedName) => {
+    s.currentRepoName = selectedName;
+    s.currentRepo = s.geogigServe.repos.findOne({name: `${selectedName}`})
+	}
 
 	s.NewRepo = () => {
+		load()
 		swal({
 			title: 'New Repository',
 			input: 'text',
@@ -23,6 +32,7 @@ function dashboardLocalCtrl(){
 			},
 			allowOutsideClick: false
 		}).then(q => {
+			load()
 			commitInit();
 			swal({type: 'success',title: 'Started successfully'})
 		})
@@ -43,6 +53,7 @@ function dashboardLocalCtrl(){
 			buttonsStyling: false
 		}).then(() => {
 			s.geogigServe.repos.delete({name: NameRepo}).then(e => {
+				load()
 				swal('Deleted!', 'Your repository has been deleted.','success')
 			})
 		}, (dismiss) => {
@@ -53,16 +64,18 @@ function dashboardLocalCtrl(){
 
 	let commitInit = function () {
 		s.geogigServe.repos.findOne({ name: s.NameRepo}).then(repo =>
-			 {
 				repo.beginTransaction().then(data => {
 					let id = data.Transaction.ID;
 					let endTransaction = () => repo.endTransaction({transactionId: id},{cancel: false})
-					repo.commit(
-						{transactionId: id},{message: 'Inicial Commit', all: true}
-					).then(log => endTransaction())
+					repo.commit
+						(
+							{transactionId: id},
+							{
+								message: 'Inicial Commit',
+								all: true
+							}
+						).then(log => endTransaction())
 				})
-
-			}
 		)
 	}
 }

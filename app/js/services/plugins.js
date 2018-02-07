@@ -62,10 +62,8 @@ function ModalInstanceCtrl ($scope, $http, $uibModalInstance, toaster) {
             console.log('type is not defined');
         }
         $http.get(url).success(function(data){
-          storage.set(remote.name , {url: url, type: remote.origin} , (error, data) => {
-            console.log(data);
-          })
-            toaster.success(remote.titulo + ' added successfully!', 'We found '+ data.repos.repo.length +' repositories')
+          storage.set(remote.name , {url: url, type: remote.origin} , (error, data) => {})
+            toaster.success(remote.origin + ' added successfully!', 'We found '+ data.repos.repo.length +' repositories')
         }).error(function(){
             toaster.pop({
                 type: 'error',

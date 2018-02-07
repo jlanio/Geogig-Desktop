@@ -10,7 +10,7 @@ function detailRepositoryRemoteCtrl($uibModal, toaster, $http){
   s.clone = (name, repoAddress) => {
     let rebuildRepoAddress = repoAddress.replace('.json', '')
 
-    s.geogig.repo({uri: rebuildRepoAddress, name: name+'_remote'})
+    s.geogig.repo({uri: rebuildRepoAddress, name: name + '_remote'})
     .clone.then(e => {
       swal({
 				type: 'success',

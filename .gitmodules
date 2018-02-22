@@ -1,6 +1,3 @@
-[submodule "app/js"]
-	path = app/js
-	url = https://github.com/jlanio/geogig-js
-[submodule "app/js/geogig-js"]
-	path = app/js/geogig-js
+[submodule "geogig-js"]
+	path = geogig-js
 	url = https://github.com/jlanio/geogig-js

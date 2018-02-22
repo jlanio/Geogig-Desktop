@@ -13,7 +13,6 @@ function dashboardLocalCtrl(){
 	}
 
 	s.NewRepo = () => {
-		load()
 		swal({
 			title: 'New Repository',
 			input: 'text',
